@@ -3,92 +3,139 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>你的公司名 - 专业B2B供应商</title>
+  <title>你的品牌名 - 专业B2B供应商</title>
   <style>
+    /* 基础样式重置 */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.6; }
-    header { background: #1a1a2e; color: #fff; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-    header h1 { font-size: 1.4rem; }
-    nav a { color: #ccc; margin-left: 1.5rem; text-decoration: none; font-size: 0.95rem; }
-    nav a:hover { color: #fff; }
-    .hero { background: linear-gradient(135deg, #1a1a2e, #16213e); color: #fff; padding: 5rem 2rem; text-align: center; }
-    .hero h2 { font-size: 2rem; margin-bottom: 1rem; }
-    .hero p { color: #aaa; max-width: 600px; margin: 0 auto; }
-    section { padding: 4rem 2rem; max-width: 1100px; margin: 0 auto; }
-    section h3 { font-size: 1.5rem; margin-bottom: 2rem; border-left: 4px solid #e94560; padding-left: 1rem; }
-    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-    .product-card { border: 1px solid #eee; border-radius: 8px; padding: 1.5rem; transition: box-shadow 0.2s; }
-    .product-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-    .product-card h4 { margin-bottom: 0.5rem; color: #1a1a2e; }
-    .product-card p { color: #666; font-size: 0.9rem; }
-    .news-list { list-style: none; }
-    .news-list li { padding: 1rem 0; border-bottom: 1px solid #eee; }
-    .news-list li:last-child { border-bottom: none; }
-    .news-list .date { color: #999; font-size: 0.85rem; }
-    .news-list a { color: #1a1a2e; text-decoration: none; font-weight: 500; }
-    .news-list a:hover { color: #e94560; }
-    .contact-form { max-width: 500px; }
-    .contact-form input, .contact-form textarea { width: 100%; padding: 0.75rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; }
-    .contact-form textarea { height: 120px; resize: vertical; }
-    .contact-form button { background: #e94560; color: #fff; border: none; padding: 0.75rem 2rem; border-radius: 6px; cursor: pointer; font-size: 1rem; }
-    .contact-form button:hover { background: #c73550; }
-    footer { background: #1a1a2e; color: #888; text-align: center; padding: 2rem; font-size: 0.9rem; }
+    a { text-decoration: none; }
+    
+    /* 顶部导航栏（吸顶） */
+    header { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); box-shadow: 0 2px 10px rgba(0,0,0,0.05); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+    header .logo { font-size: 1.5rem; font-weight: bold; color: #0f172a; letter-spacing: 1px; }
+    nav a { margin-left: 2rem; color: #475569; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
+    nav a:hover, nav a.active { color: #0ea5e9; }
+
+    /* 大屏背景区 (Hero Section) */
+    .hero { min-height: 100vh; background: linear-gradient(rgba(15,23,42,0.7), rgba(15,23,42,0.7)), url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover; display: flex; align-items: center; padding: 0 8%; }
+    .hero-content { max-width: 600px; color: #fff; }
+    .hero-content h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 1.5rem; font-weight: 700; }
+    .hero-content p { font-size: 1.1rem; color: #cbd5e1; margin-bottom: 2rem; }
+    .hero-content ul { list-style: none; margin-bottom: 2.5rem; }
+    .hero-content ul li { font-size: 1rem; margin-bottom: 0.8rem; color: #f1f5f9; display: flex; align-items: center; }
+    .hero-content ul li::before { content: "✓"; color: #0ea5e9; font-weight: bold; margin-right: 10px; font-size: 1.2rem; }
+    .btn { display: inline-block; padding: 1rem 2.5rem; background: #0ea5e9; color: #fff; border-radius: 4px; font-size: 1rem; font-weight: 600; transition: 0.3s; }
+    .btn:hover { background: #0284c7; transform: translateY(-2px); }
+
+    /* 通用区块样式 */
+    section { padding: 6rem 8%; }
+    .section-title { text-align: center; margin-bottom: 3rem; }
+    .section-title h2 { font-size: 2rem; color: #0f172a; }
+    .section-title span { color: #0ea5e9; }
+    .section-title p { color: #64748b; margin-top: 0.5rem; }
+
+    /* 新闻动态 */
+    #news { background: #f8fafc; }
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .news-card { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: 0.3s; border: 1px solid #e2e8f0; }
+    .news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    .news-card .date { font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.5rem; }
+    .news-card h4 { font-size: 1.1rem; margin-bottom: 0.8rem; color: #0f172a; }
+    .news-card p { font-size: 0.9rem; color: #64748b; margin-bottom: 1rem; }
+    .news-card a { color: #0ea5e9; font-weight: 500; font-size: 0.9rem; }
+
+    /* 产品预览 */
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+    .product-card { text-align: center; }
+    .product-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem; }
+    .product-card h4 { font-size: 1.1rem; color: #0f172a; margin-bottom: 0.5rem; }
+    .product-card p { font-size: 0.9rem; color: #64748b; }
+
+    /* 页脚 */
+    footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 3rem 8%; font-size: 0.9rem; }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>你的公司名</h1>
+  <div class="logo">你的品牌名</div>
   <nav>
-    <a href="#products">产品</a>
-    <a href="#news">新闻</a>
-    <a href="#contact">联系我们</a>
+    <a href="index.html" class="active">首页</a>
+    <a href="products.html">产品展示</a>
+    <a href="contact.html">联系我们</a>
   </nav>
 </header>
 
+<!-- 大屏区域 -->
 <div class="hero">
-  <h2>专业B2B供应商</h2>
-  <p>我们为全球客户提供优质产品与服务，欢迎垂询合作。</p>
+  <div class="hero-content">
+    <h1>可靠的全球B2B供应商</h1>
+    <p>我们致力于为客户提供高品质的产品和一站式采购解决方案，助力您的业务增长。</p>
+    <ul>
+      <li>10年+ 行业制造与出口经验</li>
+      <li>严格的质量控制体系，100% 检验</li>
+      <li>支持 OEM/ODM，快速响应定制需求</li>
+      <li>专业的海外销售团队，无障碍沟通</li>
+    </ul>
+    <a href="contact.html" class="btn">立即询盘</a>
+  </div>
 </div>
 
-<section id="products">
-  <h3>产品展示</h3>
-  <div class="products">
-    <div class="product-card">
-      <h4>产品 A</h4>
-      <p>产品A的简短描述，突出核心卖点和优势。</p>
+<!-- 新闻动态 -->
+<section id="news">
+  <div class="section-title">
+    <h2>新闻<span>动态</span></h2>
+    <p>了解我们的最新动态和行业资讯</p>
+  </div>
+  <div class="news-grid">
+    <div class="news-card">
+      <div class="date">2026-09-16</div>
+      <h4>公司参加2026年秋季广交会</h4>
+      <p>我们将在本次广交会展示最新研发的系列产品，欢迎莅临展位洽谈。</p>
+      <a href="#">阅读更多 →</a>
     </div>
-    <div class="product-card">
-      <h4>产品 B</h4>
-      <p>产品B的简短描述，突出核心卖点和优势。</p>
+    <div class="news-card">
+      <div class="date">2026-09-01</div>
+      <h4>新产品线正式投产</h4>
+      <p>为满足市场需求，我们的第3条自动化生产线正式投入生产，产能提升50%。</p>
+      <a href="#">阅读更多 →</a>
     </div>
-    <div class="product-card">
-      <h4>产品 C</h4>
-      <p>产品C的简短描述，突出核心卖点和优势。</p>
+    <div class="news-card">
+      <div class="date">2026-08-15</div>
+      <h4>通过ISO9001质量体系认证</h4>
+      <p>公司顺利通过年度审核，确保每一件出厂产品都符合国际标准。</p>
+      <a href="#">阅读更多 →</a>
     </div>
   </div>
 </section>
 
-<section id="news">
-  <h3>新闻动态</h3>
-  <ul class="news-list" id="news-list">
-    <li><span class="date">2026-09-16</span> <a href="#">公司参加2026年秋季广交会</a></li>
-    <li><span class="date">2026-09-01</span> <a href="#">新产品线正式投产</a></li>
-  </ul>
-</section>
-
-<section id="contact">
-  <h3>联系我们</h3>
-  <form class="contact-form" action="https://formspree.io/f/你的表单ID" method="POST">
-    <input type="text" name="name" placeholder="您的姓名" required>
-    <input type="email" name="email" placeholder="您的邮箱" required>
-    <textarea name="message" placeholder="请描述您的需求" required></textarea>
-    <button type="submit">提交</button>
-  </form>
+<!-- 产品预览 -->
+<section id="products">
+  <div class="section-title">
+    <h2>热销<span>产品</span></h2>
+    <p>我们提供全系列的行业解决方案</p>
+  </div>
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=500&q=80" alt="产品A">
+      <h4>工业设备 A</h4>
+      <p>高精度、耐用，适用于各种工业场景。</p>
+    </div>
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=500&q=80" alt="产品B">
+      <h4>工业设备 B</h4>
+      <p>高效节能，降低您的长期运营成本。</p>
+    </div>
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=500&q=80" alt="产品C">
+      <h4>工业设备 C</h4>
+      <p>模块化设计，方便维护与升级。</p>
+    </div>
+  </div>
 </section>
 
 <footer>
-  <p>&copy; 2026 你的公司名. All rights reserved.</p>
+  <p>&copy; 2026 你的品牌名. All rights reserved.</p>
 </footer>
 
 </body>
