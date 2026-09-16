@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>产品展示 - 你的品牌名</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.6; }
+    a { text-decoration: none; }
+    header { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); box-shadow: 0 2px 10px rgba(0,0,0,0.05); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; }
+    header .logo { font-size: 1.5rem; font-weight: bold; color: #0f172a; }
+    nav a { margin-left: 2rem; color: #475569; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
+    nav a:hover, nav a.active { color: #0ea5e9; }
+    
+    section { padding: 8rem 8% 6rem; }
+    .section-title { text-align: center; margin-bottom: 3rem; }
+    .section-title h2 { font-size: 2rem; color: #0f172a; }
+    .section-title p { color: #64748b; }
+    
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
+    .product-card { border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; transition: 0.3s; }
+    .product-card:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+    .product-card img { width: 100%; height: 250px; object-fit: cover; }
+    .product-info { padding: 1.5rem; }
+    .product-info h4 { font-size: 1.2rem; color: #0f172a; margin-bottom: 0.5rem; }
+    .product-info p { font-size: 0.9rem; color: #64748b; margin-bottom: 1rem; }
+    .product-info a { display: inline-block; color: #0ea5e9; font-weight: 500; }
+    
+    footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 3rem 8%; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">你的品牌名</div>
+  <nav>
+    <a href="index.html">首页</a>
+    <a href="products.html" class="active">产品展示</a>
+    <a href="contact.html">联系我们</a>
+  </nav>
+</header>
+
+<section>
+  <div class="section-title">
+    <h2>产品展示</h2>
+    <p>我们提供全系列的行业解决方案，支持定制</p>
+  </div>
+  <div class="product-grid">
+    <!-- 复制这个卡片，就能增加产品 -->
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=500&q=80" alt="产品A">
+      <div class="product-info">
+        <h4>工业设备 A</h4>
+        <p>高精度、耐用，适用于各种工业场景。可根据客户需求定制。</p>
+        <a href="contact.html">获取报价 →</a>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=500&q=80" alt="产品B">
+      <div class="product-info">
+        <h4>工业设备 B</h4>
+        <p>高效节能，降低您的长期运营成本。已通过多项国际认证。</p>
+        <a href="contact.html">获取报价 →</a>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=500&q=80" alt="产品C">
+      <div class="product-info">
+        <h4>工业设备 C</h4>
+        <p>模块化设计，方便维护与升级。适用于复杂工业环境。</p>
+        <a href="contact.html">获取报价 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 你的品牌名. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
