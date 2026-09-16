@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>联系我们 - 你的品牌名</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.6; }
+    a { text-decoration: none; }
+    header { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); box-shadow: 0 2px 10px rgba(0,0,0,0.05); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; }
+    header .logo { font-size: 1.5rem; font-weight: bold; color: #0f172a; }
+    nav a { margin-left: 2rem; color: #475569; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
+    nav a:hover, nav a.active { color: #0ea5e9; }
+    
+    section { padding: 8rem 8% 6rem; max-width: 1200px; margin: 0 auto; display: flex; gap: 4rem; flex-wrap: wrap; }
+    .contact-info { flex: 1; min-width: 300px; }
+    .contact-info h2 { font-size: 2rem; color: #0f172a; margin-bottom: 2rem; }
+    .info-item { margin-bottom: 1.5rem; }
+    .info-item strong { display: block; color: #0f172a; font-size: 1.1rem; margin-bottom: 0.3rem; }
+    .info-item span { color: #64748b; }
+    
+    .contact-form { flex: 1.5; min-width: 400px; background: #f8fafc; padding: 3rem; border-radius: 12px; border: 1px solid #e2e8f0; }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #0f172a; }
+    .form-group input, .form-group textarea { width: 100%; padding: 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; font-family: inherit; }
+    .form-group textarea { height: 150px; resize: vertical; }
+    .form-group button { background: #0ea5e9; color: #fff; border: none; padding: 1rem 3rem; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s; }
+    .form-group button:hover { background: #0284c7; }
+    
+    footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 3rem 8%; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">你的品牌名</div>
+  <nav>
+    <a href="index.html">首页</a>
+    <a href="products.html">产品展示</a>
+    <a href="contact.html" class="active">联系我们</a>
+  </nav>
+</header>
+
+<section>
+  <div class="contact-info">
+    <h2>联系我们</h2>
+    <div class="info-item">
+      <strong>📧 电子邮箱</strong>
+      <span>你的邮箱@example.com</span>
+    </div>
+    <div class="info-item">
+      <strong>📞 联系电话</strong>
+      <span>+86 123 4567 8910</span>
+    </div>
+    <div class="info-item">
+      <strong>📍 公司地址</strong>
+      <span>中国 广东省 深圳市 某某区某某路 123 号</span>
+    </div>
+    <div class="info-item">
+      <strong>🕒 工作时间</strong>
+      <span>周一至周五 9:00 - 18:00 (北京时间)</span>
+    </div>
+  </div>
+
+  <div class="contact-form">
+    <h3 style="margin-bottom: 1.5rem; color: #0f172a;">发送询盘</h3>
+    <form action="https://formspree.io/f/你的表单ID" method="POST">
+      <div class="form-group">
+        <label>您的姓名 *</label>
+        <input type="text" name="name" placeholder="请输入您的姓名" required>
+      </div>
+      <div class="form-group">
+        <label>您的邮箱 *</label>
+        <input type="email" name="email" placeholder="请输入您的邮箱" required>
+      </div>
+      <div class="form-group">
+        <label>公司名称</label>
+        <input type="text" name="company" placeholder="请输入您的公司名称">
+      </div>
+      <div class="form-group">
+        <label>需求描述 *</label>
+        <textarea name="message" placeholder="请详细描述您的采购需求或定制要求..." required></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit">提交询盘</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 你的品牌名. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
