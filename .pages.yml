@@ -1,0 +1,26 @@
+media:
+  - name: "uploads"
+    label: "图片"
+    input: "images/uploads"
+    output: "/images/uploads"
+    categories: [image]
+    extensions: [jpg, jpeg, png, gif, webp, svg]
+    rename: safe
+
+content:
+  - name: "news"
+    label: "新闻动态"
+    type: "collection"
+    path: "content/news"
+    create: true
+    delete: true
+    fields:
+      - name: "title"
+        label: "标题"
+        type: string
+      - name: "date"
+        label: "日期"
+        type: date
+      - name: "body"
+        label: "正文"
+        type: markdown
