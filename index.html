@@ -151,6 +151,9 @@
 <!-- 引入 Markdown 解析库 -->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
+  // 全局数组，用来存放新闻数据
+  let newsArticles = [];
+
   async function loadNews() {
     try {
       const repo = 'kehu-1/kehu-1-website';
@@ -158,6 +161,7 @@
       const files = await res.json();
       const container = document.getElementById('news-container');
       container.innerHTML = ''; 
+      newsArticles = []; // 清空数组
 
       if (!Array.isArray(files) || files.length === 0) {
         container.innerHTML = '<p style="text-align:center;color:#999;width:100%;">暂无新闻动态。</p>';
@@ -167,7 +171,8 @@
       files.sort((a, b) => b.name.localeCompare(a.name));
       const latestFiles = files.slice(0, 3); // 首页只显示最新的3篇
 
-      for (const file of latestFiles) {
+      for (let i = 0; i < latestFiles.length; i++) {
+        const file = latestFiles[i];
         const rawRes = await fetch(file.download_url);
         const text = await rawRes.text();
         const parts = text.split('---');
@@ -181,21 +186,23 @@
 
         // 将 Markdown 转换为 HTML
         const htmlBody = marked.parse(bodyContent);
-
-        // 提取纯文本摘要（去掉了 HTML 标签，截取前 80 个字）
         const plainText = htmlBody.replace(/<[^>]+>/g, '').trim();
         const summary = plainText.length > 80 ? plainText.substring(0, 80) + '...' : plainText;
 
-        // 转义单引号和反引号，防止弹窗报错
-        const safeTitle = title.replace(/'/g, "\\'");
-        const safeBody = htmlBody.replace(/`/g, '\\`').replace(/\$/g, '\\$');
+        // 把文章数据存到数组里
+        newsArticles.push({
+          title: title,
+          date: date,
+          body: htmlBody
+        });
 
+        // 按钮只传索引号 i，彻底避免特殊字符导致按钮失效
         const cardHtml = `
           <div class="news-card">
             <div class="date">${date}</div>
             <h4>${title}</h4>
             <p style="color:#64748b; margin-top:10px;">${summary}</p>
-            <button class="read-more-btn" onclick="openArticle('${safeTitle}', '${date}', \`${safeBody}\`)">阅读全文 →</button>
+            <button class="read-more-btn" onclick="openArticle(${i})">阅读全文 →</button>
           </div>
         `;
         container.insertAdjacentHTML('beforeend', cardHtml);
@@ -206,11 +213,14 @@
     }
   }
 
-  // 打开弹窗展示全文
-  function openArticle(title, date, body) {
-    document.getElementById('modal-title').innerText = title;
-    document.getElementById('modal-date').innerText = date;
-    document.getElementById('modal-body').innerHTML = body;
+  // 通过索引号打开对应的文章
+  function openArticle(index) {
+    const article = newsArticles[index];
+    if (!article) return;
+    
+    document.getElementById('modal-title').innerText = article.title;
+    document.getElementById('modal-date').innerText = article.date;
+    document.getElementById('modal-body').innerHTML = article.body;
     document.getElementById('news-modal').style.display = 'flex';
   }
 
