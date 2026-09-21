@@ -11,10 +11,10 @@
     a { text-decoration: none; }
     
     /* 顶部导航栏（吸顶） */
-    header { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); box-shadow: 0 2px 10px rgba(0,0,0,0.05); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
-    header .logo { font-size: 1.5rem; font-weight: bold; color: #0f172a; letter-spacing: 1px; }
-    nav a { margin-left: 2rem; color: #475569; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
-    nav a:hover, nav a.active { color: #0ea5e9; }
+    header { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.85); /* 半透明深色，颜色为 #0f172a 的 85% 不透明度 */ backdrop-filter: blur(12px); /* 毛玻璃效果，让后面内容模糊 */ box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+header .logo { font-size: 1.5rem; font-weight: bold; color: #ffffff; letter-spacing: 1px; }
+nav a { margin-left: 2rem; color: #cbd5e1; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
+nav a:hover, nav a.active { color: #0ea5e9; }
 
     /* 大屏背景区 (Hero Section) */
     .hero { min-height: 100vh; background: linear-gradient(rgba(15,23,42,0.7), rgba(15,23,42,0.7)), url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover; display: flex; align-items: center; padding: 0 8%; }
