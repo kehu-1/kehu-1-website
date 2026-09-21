@@ -23,4 +23,12 @@ content:
         type: date
       - name: "body"
         label: "正文"
-        type: markdown
+        type: "rich-text"    # 已改为富文本模式
+        options:
+          media:
+            name: "uploads"
+            input: "images/uploads"
+            output: "/images/uploads"
+            categories: [image]
+            extensions: [jpg, jpeg, png, gif, webp, svg]
+            rename: safe
