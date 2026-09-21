@@ -48,6 +48,41 @@
     footer { background: #0a0f1c; color: #94a3b8; text-align: center; padding: 3rem 8%; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); }
 
     @media (max-width: 768px) { .section-title h2 { font-size: 2rem; } }
+     /* 右下角悬浮联系按钮 */
+    .floating-contact {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: rgba(15, 23, 42, 0.85); /* 磨砂深色 */
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+      z-index: 9999;
+      transition: 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .floating-contact:hover {
+      background: #0ea5e9; /* 悬浮变蓝 */
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(14, 165, 233, 0.4);
+    }
+    /* 手机端稍微缩小一点，避免遮挡 */
+    @media (max-width: 768px) {
+      .floating-contact {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        padding: 0.7rem 1.2rem;
+        font-size: 0.85rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -151,6 +186,8 @@
     document.getElementById('product-modal').style.display = 'none';
   }
 </script>
-
+<a href="contact.html" class="floating-contact">
+  ✉️ 联系我询价
+</a>
 </body>
 </html>
