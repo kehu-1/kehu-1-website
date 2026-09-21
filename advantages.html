@@ -5,53 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>生产优势 - 你的品牌名</title>
   <style>
-    /* 基础样式重置 */
+    /* ===== 基础样式 ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.7; background: #fff; }
-    a { text-decoration: none; }
+    a { text-decoration: none; transition: 0.3s; }
     
-    /* 顶部导航栏（吸顶） */
-    header { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); box-shadow: 0 2px 10px rgba(0,0,0,0.05); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+    /* ===== 顶部导航栏 ===== */
+    header { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); box-shadow: 0 2px 10px rgba(0,0,0,0.05); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; }
     header .logo { font-size: 1.5rem; font-weight: bold; color: #0f172a; letter-spacing: 1px; }
-    nav a { margin-left: 2rem; color: #475569; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
+    nav a { margin-left: 2rem; color: #475569; font-weight: 500; font-size: 0.95rem; }
     nav a:hover, nav a.active { color: #0ea5e9; }
 
-    /* 区块通用样式 */
-    section { padding: 8rem 8% 6rem; }
-    .section-title { text-align: center; margin-bottom: 4rem; }
-    .section-title h2 { font-size: 2.2rem; color: #0f172a; margin-bottom: 0.5rem; }
-    .section-title span { color: #0ea5e9; }
+    /* ===== 大图 Hero 区 ===== */
+    .page-hero { min-height: 70vh; background: linear-gradient(rgba(15,23,42,0.75), rgba(15,23,42,0.75)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 5%; margin-top: 60px; }
+    .page-hero h1 { font-size: 3.5rem; color: #fff; margin-bottom: 1rem; letter-spacing: 1px; }
+    .page-hero p { color: #cbd5e1; font-size: 1.2rem; max-width: 600px; margin-bottom: 2rem; }
+    
+    /* ===== 核心数据区（数据背书） ===== */
+    .stats-section { display: flex; flex-wrap: wrap; justify-content: space-around; background: #fff; padding: 4rem 5%; box-shadow: 0 10px 30px rgba(0,0,0,0.03); position: relative; z-index: 10; margin-top: -3rem; border-radius: 12px; max-width: 1100px; margin-left: auto; margin-right: auto; }
+    .stat-item { text-align: center; padding: 1rem; min-width: 150px; }
+    .stat-item .num { font-size: 2.5rem; font-weight: 800; color: #0ea5e9; line-height: 1; margin-bottom: 0.5rem; }
+    .stat-item .label { color: #64748b; font-size: 0.95rem; }
+
+    /* ===== Z字形生产流程区 ===== */
+    .process-section { padding: 6rem 8%; background: #f8fafc; }
+    .section-title { text-align: center; margin-bottom: 5rem; }
+    .section-title h2 { font-size: 2.5rem; color: #0f172a; margin-bottom: 1rem; }
+    .section-title h2 span { color: #0ea5e9; }
     .section-title p { color: #64748b; font-size: 1.1rem; }
 
-    /* 生产流程区域 */
-    #process { background: #f8fafc; }
-    .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
-    .process-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: 0.3s; border: 1px solid #e2e8f0; position: relative; }
-    .process-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.06); }
-    .process-card img { width: 100%; height: 180px; object-fit: cover; }
-    .process-content { padding: 2rem; }
-    .process-number { position: absolute; top: 1rem; left: 1rem; background: #0ea5e9; color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; box-shadow: 0 4px 10px rgba(14,165,233,0.4); }
-    .process-content h4 { font-size: 1.15rem; color: #0f172a; margin-bottom: 0.5rem; }
-    .process-content p { font-size: 0.95rem; color: #64748b; }
+    .zigzag-row { display: flex; align-items: center; gap: 4rem; margin-bottom: 6rem; }
+    .zigzag-row:last-child { margin-bottom: 0; }
+    .zigzag-row.reverse { flex-direction: row-reverse; }
+    
+    .zigzag-text { flex: 1; }
+    .zigzag-text .step { font-size: 0.9rem; font-weight: 700; color: #0ea5e9; letter-spacing: 2px; margin-bottom: 0.5rem; display: block; }
+    .zigzag-text h3 { font-size: 2rem; color: #0f172a; margin-bottom: 1rem; line-height: 1.3; }
+    .zigzag-text p { color: #475569; font-size: 1.05rem; margin-bottom: 1.5rem; }
+    .zigzag-text ul { list-style: none; }
+    .zigzag-text ul li { margin-bottom: 0.5rem; color: #334155; display: flex; align-items: center; }
+    .zigzag-text ul li::before { content: "✓"; color: #0ea5e9; font-weight: bold; margin-right: 10px; }
 
-    /* 全球合作伙伴区域 */
-    #partners { background: #0f172a; color: #fff; }
-    #partners .section-title h2 { color: #fff; }
-    #partners .section-title p { color: #94a3b8; }
-    .partners-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; justify-items: center; }
-    .partner-item { background: rgba(255,255,255,0.05); width: 100%; padding: 2rem 1rem; text-align: center; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
-    .partner-item:hover { background: rgba(14,165,233,0.15); border-color: #0ea5e9; transform: translateY(-3px); }
-    .partner-item h5 { font-size: 1rem; color: #f1f5f9; margin-bottom: 0.3rem; }
-    .partner-item p { font-size: 0.85rem; color: #94a3b8; }
+    .zigzag-image { flex: 1.2; position: relative; }
+    .zigzag-image img { width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); display: block; }
+    
+    /* 图片装饰小元素 */
+    .zigzag-image::after { content: ""; position: absolute; width: 100px; height: 100px; background: #0ea5e9; border-radius: 50%; opacity: 0.1; z-index: -1; top: -20px; right: -20px; }
+    .zigzag-row.reverse .zigzag-image::after { left: -20px; right: auto; }
 
-    /* 行动呼吁 */
-    .cta { text-align: center; background: #0ea5e9; padding: 5rem 2rem; }
-    .cta h3 { font-size: 2rem; color: #fff; margin-bottom: 1.5rem; }
-    .cta .btn { background: #fff; color: #0ea5e9; padding: 1rem 3rem; border-radius: 6px; font-size: 1.1rem; font-weight: 600; display: inline-block; transition: 0.3s; }
-    .cta .btn:hover { background: #f1f5f9; transform: translateY(-2px); }
+    /* ===== 全球合作伙伴（深色科技风） ===== */
+    .partners-section { background: #0f172a; color: #fff; padding: 6rem 8%; position: relative; overflow: hidden; }
+    .partners-section::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(14,165,233,0.1) 0%, transparent 60%); }
+    .partners-section .section-title h2 { color: #fff; }
+    .partners-section .section-title p { color: #94a3b8; }
+    
+    .map-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; position: relative; z-index: 2; }
+    .map-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 2rem; transition: 0.3s; }
+    .map-card:hover { background: rgba(14,165,233,0.1); border-color: rgba(14,165,233,0.5); transform: translateY(-5px); }
+    .map-card .region { font-size: 1.2rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.5rem; }
+    .map-card .countries { color: #94a3b8; font-size: 0.9rem; line-height: 1.8; }
 
-    /* 页脚 */
-    footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 3rem 8%; font-size: 0.9rem; }
+    /* ===== 页脚 ===== */
+    footer { background: #0a0f1c; color: #94a3b8; text-align: center; padding: 3rem 8%; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); }
+
+    /* ===== 响应式适配（手机端） ===== */
+    @media (max-width: 900px) {
+      .page-hero h1 { font-size: 2.5rem; }
+      .zigzag-row { flex-direction: column !important; gap: 2rem; margin-bottom: 4rem; }
+      .zigzag-image img { width: 100%; }
+      .stats-section { flex-direction: column; gap: 2rem; margin: 2rem 5%; }
+      .stat-item { border-bottom: 1px solid #e2e8f0; padding-bottom: 1.5rem; }
+      .stat-item:last-child { border-bottom: none; }
+    }
   </style>
 </head>
 <body>
@@ -66,91 +91,142 @@
   </nav>
 </header>
 
-<!-- 介绍 -->
-<section style="margin-top: 5rem;">
-  <div class="section-title">
-    <h2>我们的<span>生产优势</span></h2>
-    <p>从原材料到成品，精益求精，服务于全球客户</p>
-  </div>
-</section>
+<!-- Hero 大图区 -->
+<div class="page-hero">
+  <h1>制造实力与全球布局</h1>
+  <p>从源头采购到全球交付，我们以严格的标准和先进的技术，为全球客户提供卓越品质。</p>
+</div>
 
-<!-- 生产流程 -->
-<section id="process" style="padding-top: 0;">
-  <div class="process-grid">
-    <div class="process-card">
-      <div class="process-number">1</div>
-      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="原料检验">
-      <div class="process-content">
-        <h4>原材料采购与检验</h4>
-        <p>严格筛选全球优质供应商，所有原材料入库前均经过多重理化指标检测，从源头保证产品质量。</p>
-      </div>
+<!-- 核心数据区 -->
+<div class="stats-section">
+  <div class="stat-item">
+    <div class="num">15+</div>
+    <div class="label">年行业经验</div>
+  </div>
+  <div class="stat-item">
+    <div class="num">50,000<span style="font-size:1.5rem;">m²</span></div>
+    <div class="label">现代化生产基地</div>
+  </div>
+  <div class="stat-item">
+    <div class="num">100%</div>
+    <div class="label">全检出厂合格率</div>
+  </div>
+  <div class="stat-item">
+    <div class="num">30+</div>
+    <div class="label">产品出口国家</div>
+  </div>
+</div>
+
+<!-- Z字形生产流程区 -->
+<div class="process-section">
+  <div class="section-title">
+    <h2>精益生产<span>全过程</span></h2>
+    <p>从一块原材料到交付到您手中的成品，每一步都严格把控</p>
+  </div>
+
+  <!-- 流程 1 -->
+  <div class="zigzag-row">
+    <div class="zigzag-text">
+      <span class="step">STEP 01</span>
+      <h3>源头把控：原材料检验</h3>
+      <p>我们建立了严格的供应商筛选体系，所有原材料入库前必须经过理化指标的多重检测。</p>
+      <ul>
+        <li>全球优质供应商战略合作</li>
+        <li>光谱分析仪等精密仪器检测</li>
+        <li>确保源头零缺陷</li>
+      </ul>
     </div>
-    <div class="process-card">
-      <div class="process-number">2</div>
+    <div class="zigzag-image">
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="原材料检验">
+    </div>
+  </div>
+
+  <!-- 流程 2 -->
+  <div class="zigzag-row reverse">
+    <div class="zigzag-text">
+      <span class="step">STEP 02</span>
+      <h3>精密加工：自动化生产</h3>
+      <p>引进国际领先的数控加工中心和自动化流水线，在保证产能的同时，实现极高的精度一致性。</p>
+      <ul>
+        <li>全新自动化数控设备</li>
+        <li>恒温恒湿无尘车间</li>
+        <li>支持复杂定制化生产</li>
+      </ul>
+    </div>
+    <div class="zigzag-image">
       <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" alt="精密加工">
-      <div class="process-content">
-        <h4>精密加工与生产</h4>
-        <p>引进国际领先的自动化生产设备，采用标准化作业流程，确保每一道工序的精准与高效。</p>
-      </div>
     </div>
-    <div class="process-card">
-      <div class="process-number">3</div>
+  </div>
+
+  <!-- 流程 3 -->
+  <div class="zigzag-row">
+    <div class="zigzag-text">
+      <span class="step">STEP 03</span>
+      <h3>质量防线：100% 全检</h3>
+      <p>设立独立于生产部门的质量控制中心，实施首件检验、巡检、成品全检的三级质量把关体系。</p>
+      <ul>
+        <li>独立质检团队严格把关</li>
+        <li>100% 全尺寸精密测量</li>
+        <li>出具专业权威检测报告</li>
+      </ul>
+    </div>
+    <div class="zigzag-image">
       <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=800&q=80" alt="质量检测">
-      <div class="process-content">
-        <h4>严格质量检测</h4>
-        <p>设立独立质检中心，实施100%全检制度，并出具权威检测报告，确保产品符合国际标准。</p>
-      </div>
-    </div>
-    <div class="process-card">
-      <div class="process-number">4</div>
-      <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="全球发货">
-      <div class="process-content">
-        <h4>包装与全球物流</h4>
-        <p>采用定制化防护包装，与全球知名物流企业深度合作，确保产品安全、准时送达世界各地。</p>
-      </div>
     </div>
   </div>
-</section>
 
-<!-- 全球合作伙伴 -->
-<section id="partners">
+  <!-- 流程 4 -->
+  <div class="zigzag-row reverse">
+    <div class="zigzag-text">
+      <span class="step">STEP 04</span>
+      <h3>安全交付：全球物流</h3>
+      <p>采用高强度的定制化防护包装，并与全球顶级物流承运商合作，确保货物安全、准时地送达客户手中。</p>
+      <ul>
+        <li>防潮防震定制化包装</li>
+        <li>专业报关与国际货代团队</li>
+        <li>全程追踪物流信息</li>
+      </ul>
+    </div>
+    <div class="zigzag-image">
+      <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="全球物流">
+    </div>
+  </div>
+
+</div>
+
+<!-- 全球合作伙伴区 -->
+<div class="partners-section">
   <div class="section-title">
-    <h2>全球<span>合作伙伴</span></h2>
-    <p>我们已与全球多个国家和地区的企业建立了长期稳定的合作关系</p>
+    <h2>全球合作伙伴</h2>
+    <p>我们的产品已服务于全球 30 多个国家和地区的客户</p>
   </div>
-  <div class="partners-grid">
-    <div class="partner-item">
-      <h5>北美地区</h5>
-      <p>美国、加拿大</p>
+  <div class="map-grid">
+    <div class="map-card">
+      <div class="region">北美地区</div>
+      <div class="countries">美国、加拿大、墨西哥</div>
     </div>
-    <div class="partner-item">
-      <h5>欧洲地区</h5>
-      <p>德国、英国、法国</p>
+    <div class="map-card">
+      <div class="region">欧洲地区</div>
+      <div class="countries">德国、英国、法国、意大利</div>
     </div>
-    <div class="partner-item">
-      <h5>亚太地区</h5>
-      <p>日本、韩国、澳大利亚</p>
+    <div class="map-card">
+      <div class="region">亚太地区</div>
+      <div class="countries">日本、韩国、澳大利亚、新加坡</div>
     </div>
-    <div class="partner-item">
-      <h5>中东地区</h5>
-      <p>阿联酋、沙特阿拉伯</p>
+    <div class="map-card">
+      <div class="region">中东地区</div>
+      <div class="countries">阿联酋、沙特阿拉伯、以色列</div>
     </div>
-    <div class="partner-item">
-      <h5>南美地区</h5>
-      <p>巴西、阿根廷</p>
+    <div class="map-card">
+      <div class="region">南美地区</div>
+      <div class="countries">巴西、阿根廷、智利</div>
     </div>
-    <div class="partner-item">
-      <h5>非洲地区</h5>
-      <p>南非、埃及</p>
+    <div class="map-card">
+      <div class="region">非洲地区</div>
+      <div class="countries">南非、埃及、尼日利亚</div>
     </div>
   </div>
-</section>
-
-<!-- 行动呼吁 -->
-<section class="cta">
-  <h3>准备好与全球领先的供应商合作了吗？</h3>
-  <a href="contact.html" class="btn">立即联系我们</a>
-</section>
+</div>
 
 <footer>
   <p>&copy; 2026 你的品牌名. All rights reserved.</p>
