@@ -10,50 +10,18 @@
     body { font-family: -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.7; background: #fff; }
     a { text-decoration: none; transition: 0.3s; }
     
-    /* ===== 顶部导航栏 ===== */
-    /* 顶部导航栏（半透明深色玻璃质感） */
-    header { 
-      position: fixed; 
-      top: 0; 
-      width: 100%; 
-      background: rgba(15, 23, 42, 0.75); /* #0f172a 深色，0.75 透明度 */
-      backdrop-filter: blur(12px);        /* 核心：毛玻璃模糊效果 */
-      -webkit-backdrop-filter: blur(12px);/* 适配 Safari */
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); 
-      z-index: 1000; 
-      padding: 1rem 4%; 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      transition: 0.3s;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* 微弱的底边高光线，增加层次 */
-    }
-    
-    header .logo { 
-      font-size: 1.5rem; 
-      font-weight: bold; 
-      color: #ffffff; /* 品牌文字改成纯白色 */
-      letter-spacing: 1px; 
-    }
-    
-    nav a { 
-      margin-left: 2rem; 
-      color: #cbd5e1; /* 未激活的菜单文字改成浅灰色 */
-      font-weight: 500; 
-      font-size: 0.95rem; 
-      transition: 0.3s; 
-    }
-    
-    nav a:hover, nav a.active { 
-      color: #0ea5e9; /* 鼠标悬停和当前页高亮为你的品牌蓝 */
-    }
+    /* ===== 顶部导航栏（半透明深色玻璃质感） ===== */
+    header { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+    header .logo { font-size: 1.5rem; font-weight: bold; color: #ffffff; letter-spacing: 1px; }
+    nav a { margin-left: 2rem; color: #cbd5e1; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
+    nav a:hover, nav a.active { color: #0ea5e9; }
 
     /* ===== 大图 Hero 区 ===== */
     .page-hero { min-height: 70vh; background: linear-gradient(rgba(15,23,42,0.75), rgba(15,23,42,0.75)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 5%; margin-top: 60px; }
     .page-hero h1 { font-size: 3.5rem; color: #fff; margin-bottom: 1rem; letter-spacing: 1px; }
     .page-hero p { color: #cbd5e1; font-size: 1.2rem; max-width: 600px; margin-bottom: 2rem; }
     
-    /* ===== 核心数据区（数据背书） ===== */
+    /* ===== 核心数据区 ===== */
     .stats-section { display: flex; flex-wrap: wrap; justify-content: space-around; background: #fff; padding: 4rem 5%; box-shadow: 0 10px 30px rgba(0,0,0,0.03); position: relative; z-index: 10; margin-top: -3rem; border-radius: 12px; max-width: 1100px; margin-left: auto; margin-right: auto; }
     .stat-item { text-align: center; padding: 1rem; min-width: 150px; }
     .stat-item .num { font-size: 2.5rem; font-weight: 800; color: #0ea5e9; line-height: 1; margin-bottom: 0.5rem; }
@@ -80,27 +48,34 @@
 
     .zigzag-image { flex: 1.2; position: relative; }
     .zigzag-image img { width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); display: block; }
-    
-    /* 图片装饰小元素 */
     .zigzag-image::after { content: ""; position: absolute; width: 100px; height: 100px; background: #0ea5e9; border-radius: 50%; opacity: 0.1; z-index: -1; top: -20px; right: -20px; }
     .zigzag-row.reverse .zigzag-image::after { left: -20px; right: auto; }
 
-    /* ===== 全球合作伙伴（深色科技风） ===== */
-    .partners-section { background: #0f172a; color: #fff; padding: 6rem 8%; position: relative; overflow: hidden; }
-    .partners-section::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(14,165,233,0.1) 0%, transparent 60%); }
+    /* ===== 全球合作伙伴（地球背景+深色科技风） ===== */
+    .partners-section { 
+      background: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.9)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover; 
+      color: #fff; 
+      padding: 8rem 8%; 
+      position: relative; 
+      overflow: hidden; 
+    }
+    /* 增加一点科幻感的光晕 */
+    .partners-section::before { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 70%); }
     .partners-section .section-title h2 { color: #fff; }
     .partners-section .section-title p { color: #94a3b8; }
     
+    /* 毛玻璃卡片 */
     .map-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; position: relative; z-index: 2; }
-    .map-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 2rem; transition: 0.3s; }
-    .map-card:hover { background: rgba(14,165,233,0.1); border-color: rgba(14,165,233,0.5); transform: translateY(-5px); }
-    .map-card .region { font-size: 1.2rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.5rem; }
+    .map-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 2rem; transition: 0.3s; }
+    .map-card:hover { background: rgba(14,165,233,0.15); border-color: rgba(14,165,233,0.6); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+    .map-card .region { font-size: 1.2rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.5rem; display: flex; align-items: center; }
+    .map-card .region::before { content: "🌐"; margin-right: 8px; font-size: 1rem; }
     .map-card .countries { color: #94a3b8; font-size: 0.9rem; line-height: 1.8; }
 
     /* ===== 页脚 ===== */
     footer { background: #0a0f1c; color: #94a3b8; text-align: center; padding: 3rem 8%; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); }
 
-    /* ===== 响应式适配（手机端） ===== */
+    /* ===== 响应式适配 ===== */
     @media (max-width: 900px) {
       .page-hero h1 { font-size: 2.5rem; }
       .zigzag-row { flex-direction: column !important; gap: 2rem; margin-bottom: 4rem; }
@@ -123,13 +98,11 @@
   </nav>
 </header>
 
-<!-- Hero 大图区 -->
 <div class="page-hero">
   <h1>制造实力与全球布局</h1>
   <p>从源头采购到全球交付，我们以严格的标准和先进的技术，为全球客户提供卓越品质。</p>
 </div>
 
-<!-- 核心数据区 -->
 <div class="stats-section">
   <div class="stat-item">
     <div class="num">15+</div>
@@ -149,14 +122,12 @@
   </div>
 </div>
 
-<!-- Z字形生产流程区 -->
 <div class="process-section">
   <div class="section-title">
     <h2>精益生产<span>全过程</span></h2>
     <p>从一块原材料到交付到您手中的成品，每一步都严格把控</p>
   </div>
 
-  <!-- 流程 1 -->
   <div class="zigzag-row">
     <div class="zigzag-text">
       <span class="step">STEP 01</span>
@@ -173,7 +144,6 @@
     </div>
   </div>
 
-  <!-- 流程 2 -->
   <div class="zigzag-row reverse">
     <div class="zigzag-text">
       <span class="step">STEP 02</span>
@@ -190,7 +160,6 @@
     </div>
   </div>
 
-  <!-- 流程 3 -->
   <div class="zigzag-row">
     <div class="zigzag-text">
       <span class="step">STEP 03</span>
@@ -207,7 +176,6 @@
     </div>
   </div>
 
-  <!-- 流程 4 -->
   <div class="zigzag-row reverse">
     <div class="zigzag-text">
       <span class="step">STEP 04</span>
@@ -226,7 +194,7 @@
 
 </div>
 
-<!-- 全球合作伙伴区 -->
+<!-- 全球合作伙伴区（带地球背景） -->
 <div class="partners-section">
   <div class="section-title">
     <h2>全球合作伙伴</h2>
