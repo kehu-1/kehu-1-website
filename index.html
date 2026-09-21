@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>你的品牌名 - 专业B2B供应商</title>
   <style>
-    /* 基础样式重置 */
+    /* ===== 基础样式 ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.6; }
     a { text-decoration: none; transition: 0.3s; }
 
-    /* 顶部导航栏（半透明深色磨砂玻璃） */
-    header { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
-    header .logo { font-size: 1.5rem; font-weight: bold; color: #ffffff; letter-spacing: 1px; }
+    /* ===== 顶部导航栏 ===== */
+    header { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+    header .logo { font-size: 1.5rem; font-weight: bold; color: #ffffff; }
     nav a { margin-left: 2rem; color: #cbd5e1; font-weight: 500; font-size: 0.95rem; }
     nav a:hover, nav a.active { color: #0ea5e9; }
 
-    /* 大屏Hero区 */
+    /* ===== 大屏Hero区 ===== */
     .hero { min-height: 100vh; background: linear-gradient(rgba(15,23,42,0.7), rgba(15,23,42,0.7)), url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover; display: flex; align-items: center; padding: 0 8%; }
     .hero-content { max-width: 600px; color: #fff; }
     .hero-content h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 1.5rem; font-weight: 700; }
@@ -27,17 +27,16 @@
     .btn { display: inline-block; padding: 1rem 2.5rem; background: #0ea5e9; color: #fff; border-radius: 4px; font-size: 1rem; font-weight: 600; }
     .btn:hover { background: #0284c7; transform: translateY(-2px); }
 
-    /* 通用区块 */
-    section { padding: 7rem 8%; }
+    /* ===== 通用区块标题 ===== */
     .section-title { text-align: center; margin-bottom: 4rem; }
     .section-title h2 { font-size: 2.2rem; color: #0f172a; }
     .section-title span { color: #0ea5e9; }
     .section-title p { color: #64748b; margin-top: 0.5rem; font-size: 1.1rem; }
 
-    /* 新闻动态 */
-    #news { background: #f8fafc; }
-    .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-    .news-card { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; display: flex; flex-direction: column; }
+    /* ===== 新闻动态 ===== */
+    #news { background: #f8fafc; padding: 7rem 8%; }
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+    .news-card { background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; display: flex; flex-direction: column; transition: 0.3s; }
     .news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
     .news-card .date { font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.5rem; }
     .news-card h4 { font-size: 1.1rem; margin-bottom: 0.8rem; color: #0f172a; }
@@ -46,22 +45,22 @@
     .read-more-btn:hover { text-decoration: underline; }
     .news-card img { max-width: 100%; height: auto; border-radius: 6px; margin-top: 10px; }
 
-    /* 合作品牌墙 */
-    #brands { background: #fff; padding-top: 0; }
-    .brands-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; align-items: center; justify-items: center; opacity: 0.7; }
-    .brand-item { font-size: 1.3rem; font-weight: 700; color: #94a3b8; letter-spacing: 1px; border: 1px solid #e2e8f0; padding: 1.5rem 2rem; border-radius: 8px; text-align: center; width: 100%; transition: 0.3s; }
-    .brand-item:hover { color: #0ea5e9; border-color: #0ea5e9; opacity: 1; background: #f8fafc; }
+    /* ===== 合作品牌墙（全新设计） ===== */
+    #brands { background: #fff; padding: 8rem 8%; }
+    .brands-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 3rem 2rem; justify-items: center; align-items: center; max-width: 1000px; margin: 0 auto; }
+    .brand-item { font-size: 1.1rem; font-weight: 700; color: #cbd5e1; letter-spacing: 2px; padding: 2rem 1rem; border-radius: 8px; text-align: center; width: 100%; transition: 0.3s ease; }
+    .brand-item:hover { color: #0ea5e9; background: #f8fafc; transform: scale(1.05); }
 
-    /* 国际认证区 */
-    #certifications { background: #f8fafc; }
-    .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
-    .cert-card { background: #fff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; text-align: center; transition: 0.3s; }
-    .cert-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-    .cert-card .cert-icon { font-size: 2.5rem; color: #0ea5e9; margin-bottom: 1rem; }
-    .cert-card h4 { font-size: 1.1rem; color: #0f172a; margin-bottom: 0.5rem; }
-    .cert-card p { font-size: 0.9rem; color: #64748b; }
+    /* ===== 国际认证区（全新设计） ===== */
+    #certifications { background: #f8fafc; padding: 8rem 8%; }
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto; }
+    .cert-card { background: #fff; padding: 2.5rem 2rem; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center; transition: 0.4s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+    .cert-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.06); border-color: #0ea5e9; }
+    .cert-icon { font-size: 2rem; margin-bottom: 1.5rem; display: inline-flex; align-items: center; justify-content: center; width: 70px; height: 70px; background: rgba(14, 165, 233, 0.1); color: #0ea5e9; border-radius: 50%; }
+    .cert-card h4 { font-size: 1.2rem; color: #0f172a; margin-bottom: 0.8rem; font-weight: 700; }
+    .cert-card p { font-size: 0.95rem; color: #64748b; line-height: 1.6; }
 
-    /* 高级4列页脚 */
+    /* ===== 高级4列页脚 ===== */
     footer { background: #0f172a; color: #94a3b8; padding: 4rem 8% 2rem; font-size: 0.9rem; }
     .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto 3rem; }
     .footer-col h5 { color: #fff; font-size: 1.1rem; margin-bottom: 1.2rem; }
@@ -69,7 +68,7 @@
     .footer-col a:hover { color: #0ea5e9; }
     .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
 
-    /* 弹窗样式 */
+    /* ===== 弹窗样式 ===== */
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; }
     .modal-content { background: #fff; padding: 2rem; border-radius: 8px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; }
     .modal-close { position: absolute; top: 1rem; right: 1.5rem; font-size: 1.5rem; cursor: pointer; color: #666; }
@@ -77,7 +76,7 @@
     .modal-content h4 { font-size: 1.5rem; margin-bottom: 0.5rem; color: #0f172a; }
     .modal-content .date { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem; }
 
-    /* 响应式 */
+    /* ===== 响应式 ===== */
     @media (max-width: 900px) {
       .hero-content h1 { font-size: 2.5rem; }
       .footer-grid { grid-template-columns: 1fr; }
@@ -122,7 +121,7 @@
   </div>
 </section>
 
-<!-- 合作品牌墙（替换原来的产品区） -->
+<!-- 合作品牌墙（全新设计） -->
 <section id="brands">
   <div class="section-title">
     <h2>合作<span>品牌</span></h2>
@@ -138,7 +137,7 @@
   </div>
 </section>
 
-<!-- 国际认证区 -->
+<!-- 国际认证区（全新设计） -->
 <section id="certifications">
   <div class="section-title">
     <h2>国际<span>认证</span></h2>
