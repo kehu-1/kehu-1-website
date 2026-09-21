@@ -87,27 +87,73 @@
     <h2>新闻<span>动态</span></h2>
     <p>了解我们的最新动态和行业资讯</p>
   </div>
-  <div class="news-grid">
-    <div class="news-card">
-      <div class="date">2026-09-16</div>
-      <h4>公司参加2026年秋季广交会</h4>
-      <p>我们将在本次广交会展示最新研发的系列产品，欢迎莅临展位洽谈。</p>
-      <a href="#">阅读更多 →</a>
-    </div>
-    <div class="news-card">
-      <div class="date">2026-09-01</div>
-      <h4>新产品线正式投产</h4>
-      <p>为满足市场需求，我们的第3条自动化生产线正式投入生产，产能提升50%。</p>
-      <a href="#">阅读更多 →</a>
-    </div>
-    <div class="news-card">
-      <div class="date">2026-08-15</div>
-      <h4>通过ISO9001质量体系认证</h4>
-      <p>公司顺利通过年度审核，确保每一件出厂产品都符合国际标准。</p>
-      <a href="#">阅读更多 →</a>
-    </div>
+  
+  <!-- 这里会被 JS 自动填入新闻卡片 -->
+  <div class="news-grid" id="news-container">
+    <p style="text-align:center; color:#999; width:100%;">正在加载新闻...</p>
   </div>
 </section>
+
+<!-- 引入 Markdown 解析库 -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  async function loadNews() {
+    try {
+      // 自动从 GitHub 拉取 content/news 文件夹里的内容
+      const repo = 'kehu-1/kehu-1-website';
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/news`);
+      const files = await res.json();
+      const container = document.getElementById('news-container');
+      container.innerHTML = ''; // 清空“加载中”的提示
+
+      if (!Array.isArray(files) || files.length === 0) {
+        container.innerHTML = '<p style="text-align:center;color:#999;width:100%;">暂无新闻动态。</p>';
+        return;
+      }
+
+      // 按文件名倒序（最新的排在最前）
+      files.sort((a, b) => b.name.localeCompare(a.name));
+      
+      // 只显示最新的 3 条新闻
+      const latestFiles = files.slice(0, 3);
+
+      for (const file of latestFiles) {
+        const rawRes = await fetch(file.download_url);
+        const text = await rawRes.text();
+        
+        // 解析 Markdown 文件 (分离 frontmatter 和正文)
+        const parts = text.split('---');
+        const frontmatter = parts[1] || '';
+        const bodyContent = parts.slice(2).join('---').trim();
+
+        // 提取标题和日期
+        const titleMatch = frontmatter.match(/title:\s*(.*)/);
+        const dateMatch = frontmatter.match(/date:\s*(.*)/);
+        const title = titleMatch ? titleMatch[1].trim() : '无标题';
+        const date = dateMatch ? dateMatch[1].trim() : '';
+
+        // 把 Markdown 正文转为 HTML (marked 库自动处理图片)
+        const htmlBody = marked.parse(bodyContent);
+
+        // 生成新闻卡片
+        const cardHtml = `
+          <div class="news-card">
+            <div class="date">${date}</div>
+            <h4>${title}</h4>
+            <div style="color:#64748b; margin-top:10px;">${htmlBody}</div>
+          </div>
+        `;
+        container.insertAdjacentHTML('beforeend', cardHtml);
+      }
+    } catch (error) {
+      console.error('加载新闻失败:', error);
+      document.getElementById('news-container').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;">加载新闻时出错，请刷新重试。</p>';
+    }
+  }
+  
+  // 页面加载时自动执行
+  loadNews();
+</script>
 
 <!-- 产品预览 -->
 <section id="products">
