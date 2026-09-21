@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生产优势 - 你的品牌名</title>
+  <style>
+    /* 基础样式重置 */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.7; background: #fff; }
+    a { text-decoration: none; }
+    
+    /* 顶部导航栏（吸顶） */
+    header { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); box-shadow: 0 2px 10px rgba(0,0,0,0.05); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+    header .logo { font-size: 1.5rem; font-weight: bold; color: #0f172a; letter-spacing: 1px; }
+    nav a { margin-left: 2rem; color: #475569; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
+    nav a:hover, nav a.active { color: #0ea5e9; }
+
+    /* 区块通用样式 */
+    section { padding: 8rem 8% 6rem; }
+    .section-title { text-align: center; margin-bottom: 4rem; }
+    .section-title h2 { font-size: 2.2rem; color: #0f172a; margin-bottom: 0.5rem; }
+    .section-title span { color: #0ea5e9; }
+    .section-title p { color: #64748b; font-size: 1.1rem; }
+
+    /* 生产流程区域 */
+    #process { background: #f8fafc; }
+    .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
+    .process-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: 0.3s; border: 1px solid #e2e8f0; position: relative; }
+    .process-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.06); }
+    .process-card img { width: 100%; height: 180px; object-fit: cover; }
+    .process-content { padding: 2rem; }
+    .process-number { position: absolute; top: 1rem; left: 1rem; background: #0ea5e9; color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; box-shadow: 0 4px 10px rgba(14,165,233,0.4); }
+    .process-content h4 { font-size: 1.15rem; color: #0f172a; margin-bottom: 0.5rem; }
+    .process-content p { font-size: 0.95rem; color: #64748b; }
+
+    /* 全球合作伙伴区域 */
+    #partners { background: #0f172a; color: #fff; }
+    #partners .section-title h2 { color: #fff; }
+    #partners .section-title p { color: #94a3b8; }
+    .partners-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; justify-items: center; }
+    .partner-item { background: rgba(255,255,255,0.05); width: 100%; padding: 2rem 1rem; text-align: center; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
+    .partner-item:hover { background: rgba(14,165,233,0.15); border-color: #0ea5e9; transform: translateY(-3px); }
+    .partner-item h5 { font-size: 1rem; color: #f1f5f9; margin-bottom: 0.3rem; }
+    .partner-item p { font-size: 0.85rem; color: #94a3b8; }
+
+    /* 行动呼吁 */
+    .cta { text-align: center; background: #0ea5e9; padding: 5rem 2rem; }
+    .cta h3 { font-size: 2rem; color: #fff; margin-bottom: 1.5rem; }
+    .cta .btn { background: #fff; color: #0ea5e9; padding: 1rem 3rem; border-radius: 6px; font-size: 1.1rem; font-weight: 600; display: inline-block; transition: 0.3s; }
+    .cta .btn:hover { background: #f1f5f9; transform: translateY(-2px); }
+
+    /* 页脚 */
+    footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 3rem 8%; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">你的品牌名</div>
+  <nav>
+    <a href="index.html">首页</a>
+    <a href="products.html">产品展示</a>
+    <a href="advantages.html" class="active">生产优势</a>
+    <a href="contact.html">联系我们</a>
+  </nav>
+</header>
+
+<!-- 介绍 -->
+<section style="margin-top: 5rem;">
+  <div class="section-title">
+    <h2>我们的<span>生产优势</span></h2>
+    <p>从原材料到成品，精益求精，服务于全球客户</p>
+  </div>
+</section>
+
+<!-- 生产流程 -->
+<section id="process" style="padding-top: 0;">
+  <div class="process-grid">
+    <div class="process-card">
+      <div class="process-number">1</div>
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="原料检验">
+      <div class="process-content">
+        <h4>原材料采购与检验</h4>
+        <p>严格筛选全球优质供应商，所有原材料入库前均经过多重理化指标检测，从源头保证产品质量。</p>
+      </div>
+    </div>
+    <div class="process-card">
+      <div class="process-number">2</div>
+      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" alt="精密加工">
+      <div class="process-content">
+        <h4>精密加工与生产</h4>
+        <p>引进国际领先的自动化生产设备，采用标准化作业流程，确保每一道工序的精准与高效。</p>
+      </div>
+    </div>
+    <div class="process-card">
+      <div class="process-number">3</div>
+      <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=800&q=80" alt="质量检测">
+      <div class="process-content">
+        <h4>严格质量检测</h4>
+        <p>设立独立质检中心，实施100%全检制度，并出具权威检测报告，确保产品符合国际标准。</p>
+      </div>
+    </div>
+    <div class="process-card">
+      <div class="process-number">4</div>
+      <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="全球发货">
+      <div class="process-content">
+        <h4>包装与全球物流</h4>
+        <p>采用定制化防护包装，与全球知名物流企业深度合作，确保产品安全、准时送达世界各地。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 全球合作伙伴 -->
+<section id="partners">
+  <div class="section-title">
+    <h2>全球<span>合作伙伴</span></h2>
+    <p>我们已与全球多个国家和地区的企业建立了长期稳定的合作关系</p>
+  </div>
+  <div class="partners-grid">
+    <div class="partner-item">
+      <h5>北美地区</h5>
+      <p>美国、加拿大</p>
+    </div>
+    <div class="partner-item">
+      <h5>欧洲地区</h5>
+      <p>德国、英国、法国</p>
+    </div>
+    <div class="partner-item">
+      <h5>亚太地区</h5>
+      <p>日本、韩国、澳大利亚</p>
+    </div>
+    <div class="partner-item">
+      <h5>中东地区</h5>
+      <p>阿联酋、沙特阿拉伯</p>
+    </div>
+    <div class="partner-item">
+      <h5>南美地区</h5>
+      <p>巴西、阿根廷</p>
+    </div>
+    <div class="partner-item">
+      <h5>非洲地区</h5>
+      <p>南非、埃及</p>
+    </div>
+  </div>
+</section>
+
+<!-- 行动呼吁 -->
+<section class="cta">
+  <h3>准备好与全球领先的供应商合作了吗？</h3>
+  <a href="contact.html" class="btn">立即联系我们</a>
+</section>
+
+<footer>
+  <p>&copy; 2026 你的品牌名. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
