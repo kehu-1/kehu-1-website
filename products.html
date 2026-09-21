@@ -6,28 +6,48 @@
   <title>产品展示 - 你的品牌名</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.6; }
-    a { text-decoration: none; }
-    header { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.10); box-shadow: 0 2px 10px rgba(0,0,0,0); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; }
-    header .logo { font-size: 1.5rem; font-weight: bold; color: #0f172a; }
-    nav a { margin-left: 2rem; color: #475569; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
+    body { font-family: -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.6; background: #f8fafc; }
+    a { text-decoration: none; transition: 0.3s; }
+
+    /* 深色磨砂导航 */
+    header { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    header .logo { font-size: 1.5rem; font-weight: bold; color: #ffffff; }
+    nav a { margin-left: 2rem; color: #cbd5e1; font-weight: 500; font-size: 0.95rem; }
     nav a:hover, nav a.active { color: #0ea5e9; }
-    
-    section { padding: 8rem 8% 6rem; }
-    .section-title { text-align: center; margin-bottom: 3rem; }
-    .section-title h2 { font-size: 2rem; color: #0f172a; }
-    .section-title p { color: #64748b; }
-    
-    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
-    .product-card { border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; transition: 0.3s; }
-    .product-card:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
-    .product-card img { width: 100%; height: 250px; object-fit: cover; }
-    .product-info { padding: 1.5rem; }
+
+    /* 内容区 */
+    section { padding: 10rem 8% 6rem; max-width: 1200px; margin: 0 auto; }
+    .section-title { text-align: center; margin-bottom: 5rem; }
+    .section-title h2 { font-size: 2.5rem; color: #0f172a; }
+    .section-title h2 span { color: #0ea5e9; }
+    .section-title p { color: #64748b; font-size: 1.1rem; }
+
+    /* 分类标题 */
+    .category-title { font-size: 1.8rem; color: #0f172a; margin: 4rem 0 2rem; border-left: 4px solid #0ea5e9; padding-left: 1rem; }
+
+    /* 产品网格 */
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .product-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; transition: 0.3s; }
+    .product-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.06); }
+    .product-card img { width: 100%; height: 220px; object-fit: cover; }
+    .product-info { padding: 1.5rem; display: flex; flex-direction: column; }
     .product-info h4 { font-size: 1.2rem; color: #0f172a; margin-bottom: 0.5rem; }
-    .product-info p { font-size: 0.9rem; color: #64748b; margin-bottom: 1rem; }
-    .product-info a { display: inline-block; color: #0ea5e9; font-weight: 500; }
-    
-    footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 3rem 8%; font-size: 0.9rem; }
+    .product-info p { font-size: 0.9rem; color: #64748b; margin-bottom: 1.2rem; flex-grow: 1; }
+    .learn-more-btn { background: #0ea5e9; color: #fff; border: none; padding: 0.8rem 1.5rem; border-radius: 6px; cursor: pointer; font-weight: 500; font-size: 0.9rem; text-align: center; transition: 0.3s; }
+    .learn-more-btn:hover { background: #0284c7; }
+
+    /* 模态框 */
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; }
+    .modal-content { background: #fff; padding: 2.5rem; border-radius: 12px; max-width: 700px; width: 90%; max-height: 85vh; overflow-y: auto; position: relative; }
+    .modal-close { position: absolute; top: 1rem; right: 1.5rem; font-size: 1.8rem; cursor: pointer; color: #666; line-height: 1; }
+    .modal-close:hover { color: #000; }
+    .modal-content img { max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 1.5rem; }
+    .modal-content h4 { font-size: 1.8rem; color: #0f172a; margin-bottom: 1rem; }
+    .modal-content p { color: #475569; margin-bottom: 1rem; line-height: 1.8; }
+
+    footer { background: #0a0f1c; color: #94a3b8; text-align: center; padding: 3rem 8%; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); }
+
+    @media (max-width: 768px) { .section-title h2 { font-size: 2rem; } }
   </style>
 </head>
 <body>
@@ -44,41 +64,93 @@
 
 <section>
   <div class="section-title">
-    <h2>产品展示</h2>
-    <p>我们提供全系列的行业解决方案，支持定制</p>
+    <h2>产品<span>展示</span></h2>
+    <p>我们提供三大类核心产品，支持定制化生产</p>
   </div>
+
+  <!-- 分类 1 -->
+  <h3 class="category-title">类别一：核心工业设备</h3>
   <div class="product-grid">
-    <!-- 复制这个卡片，就能增加产品 -->
     <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=500&q=80" alt="产品A">
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=500&q=80" alt="工业设备 A">
       <div class="product-info">
         <h4>工业设备 A</h4>
-        <p>高精度、耐用，适用于各种工业场景。可根据客户需求定制。</p>
-        <a href="contact.html">获取报价 →</a>
+        <p>高精度、耐用，适用于各种工业场景。支持深度定制。</p>
+        <button class="learn-more-btn" onclick="openProduct('工业设备 A', 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80', '这是工业设备 A 的详细说明。它采用高强度合金材料制造，具有极高的耐用性和稳定性。广泛应用于汽车制造、航空航天等精密加工领域。支持各类非标定制，可根据客户图纸进行生产。')">了解更多 →</button>
       </div>
     </div>
     <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=500&q=80" alt="产品B">
+      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=500&q=80" alt="工业设备 B">
       <div class="product-info">
         <h4>工业设备 B</h4>
-        <p>高效节能，降低您的长期运营成本。已通过多项国际认证。</p>
-        <a href="contact.html">获取报价 →</a>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=500&q=80" alt="产品C">
-      <div class="product-info">
-        <h4>工业设备 C</h4>
-        <p>模块化设计，方便维护与升级。适用于复杂工业环境。</p>
-        <a href="contact.html">获取报价 →</a>
+        <p>高效节能，降低您的长期运营成本。已通过多项认证。</p>
+        <button class="learn-more-btn" onclick="openProduct('工业设备 B', 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80', '工业设备 B 是新一代节能产品。采用先进的变频控制技术，相比传统机型节能30%以上。非常适合需要长时间连续运行的产线环境。')">了解更多 →</button>
       </div>
     </div>
   </div>
+
+  <!-- 分类 2 -->
+  <h3 class="category-title">类别二：精密加工配件</h3>
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=500&q=80" alt="精密配件 C">
+      <div class="product-info">
+        <h4>精密配件 C</h4>
+        <p>模块化设计，方便维护与升级。适用于复杂工业环境。</p>
+        <button class="learn-more-btn" onclick="openProduct('精密配件 C', 'https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=800&q=80', '精密配件 C 采用模块化架构，维修更换极其方便。所有接口均遵循国际标准，具备优异的抗腐蚀和抗磨损性能。')">了解更多 →</button>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=500&q=80" alt="精密配件 D">
+      <div class="product-info">
+        <h4>精密配件 D</h4>
+        <p>高硬度材料，超长使用寿命。接受 OEM/ODM 订单。</p>
+        <button class="learn-more-btn" onclick="openProduct('精密配件 D', 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80', '精密配件 D 专为极端工况设计，采用特殊热处理工艺，硬度达到 HRC60 以上。是重工机械的理想选择。')">了解更多 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 分类 3 -->
+  <h3 class="category-title">类别三：定制化解决方案</h3>
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=500&q=80" alt="定制方案 E">
+      <div class="product-info">
+        <h4>定制方案 E</h4>
+        <p>根据客户图纸与需求，提供从设计到量产的一站式服务。</p>
+        <button class="learn-more-btn" onclick="openProduct('定制方案 E', 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80', '我们拥有一支经验丰富的工程师团队，可以根据客户提供的图纸、样品或想法，进行逆向工程和正向设计。提供从原型打样到批量生产的全流程服务。')">了解更多 →</button>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <footer>
   <p>&copy; 2026 你的品牌名. All rights reserved.</p>
 </footer>
+
+<!-- 产品详情弹窗 -->
+<div id="product-modal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeProductModal()">&times;</span>
+    <img id="pm-img" src="" alt="产品大图">
+    <h4 id="pm-title"></h4>
+    <p id="pm-desc"></p>
+    <a href="contact.html" class="btn" style="display:inline-block; padding:0.8rem 2rem; background:#0ea5e9; color:#fff; border-radius:6px; margin-top:1rem;">获取报价 →</a>
+  </div>
+</div>
+
+<script>
+  function openProduct(title, imgSrc, desc) {
+    document.getElementById('pm-title').innerText = title;
+    document.getElementById('pm-img').src = imgSrc;
+    document.getElementById('pm-desc').innerText = desc;
+    document.getElementById('product-modal').style.display = 'flex';
+  }
+  function closeProductModal() {
+    document.getElementById('product-modal').style.display = 'none';
+  }
+</script>
 
 </body>
 </html>
