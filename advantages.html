@@ -5,29 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>生产优势 - 你的品牌名</title>
   <style>
-    /* ===== 基础样式 ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.7; background: #fff; }
     a { text-decoration: none; transition: 0.3s; }
-    
-    /* ===== 顶部导航栏（半透明深色玻璃质感） ===== */
-    header { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
-    header .logo { font-size: 1.5rem; font-weight: bold; color: #ffffff; letter-spacing: 1px; }
-    nav a { margin-left: 2rem; color: #cbd5e1; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
+
+    header { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    header .logo { font-size: 1.5rem; font-weight: bold; color: #ffffff; }
+    nav a { margin-left: 2rem; color: #cbd5e1; font-weight: 500; font-size: 0.95rem; }
     nav a:hover, nav a.active { color: #0ea5e9; }
 
-    /* ===== 大图 Hero 区 ===== */
     .page-hero { min-height: 70vh; background: linear-gradient(rgba(15,23,42,0.75), rgba(15,23,42,0.75)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 5%; margin-top: 60px; }
     .page-hero h1 { font-size: 3.5rem; color: #fff; margin-bottom: 1rem; letter-spacing: 1px; }
-    .page-hero p { color: #cbd5e1; font-size: 1.2rem; max-width: 600px; margin-bottom: 2rem; }
-    
-    /* ===== 核心数据区 ===== */
+    .page-hero p { color: #cbd5e1; font-size: 1.2rem; max-width: 600px; }
+
     .stats-section { display: flex; flex-wrap: wrap; justify-content: space-around; background: #fff; padding: 4rem 5%; box-shadow: 0 10px 30px rgba(0,0,0,0.03); position: relative; z-index: 10; margin-top: -3rem; border-radius: 12px; max-width: 1100px; margin-left: auto; margin-right: auto; }
     .stat-item { text-align: center; padding: 1rem; min-width: 150px; }
     .stat-item .num { font-size: 2.5rem; font-weight: 800; color: #0ea5e9; line-height: 1; margin-bottom: 0.5rem; }
     .stat-item .label { color: #64748b; font-size: 0.95rem; }
 
-    /* ===== Z字形生产流程区 ===== */
     .process-section { padding: 6rem 8%; background: #f8fafc; }
     .section-title { text-align: center; margin-bottom: 5rem; }
     .section-title h2 { font-size: 2.5rem; color: #0f172a; margin-bottom: 1rem; }
@@ -37,7 +32,6 @@
     .zigzag-row { display: flex; align-items: center; gap: 4rem; margin-bottom: 6rem; }
     .zigzag-row:last-child { margin-bottom: 0; }
     .zigzag-row.reverse { flex-direction: row-reverse; }
-    
     .zigzag-text { flex: 1; }
     .zigzag-text .step { font-size: 0.9rem; font-weight: 700; color: #0ea5e9; letter-spacing: 2px; margin-bottom: 0.5rem; display: block; }
     .zigzag-text h3 { font-size: 2rem; color: #0f172a; margin-bottom: 1rem; line-height: 1.3; }
@@ -45,41 +39,28 @@
     .zigzag-text ul { list-style: none; }
     .zigzag-text ul li { margin-bottom: 0.5rem; color: #334155; display: flex; align-items: center; }
     .zigzag-text ul li::before { content: "✓"; color: #0ea5e9; font-weight: bold; margin-right: 10px; }
-
     .zigzag-image { flex: 1.2; position: relative; }
     .zigzag-image img { width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); display: block; }
-    .zigzag-image::after { content: ""; position: absolute; width: 100px; height: 100px; background: #0ea5e9; border-radius: 50%; opacity: 0.1; z-index: -1; top: -20px; right: -20px; }
-    .zigzag-row.reverse .zigzag-image::after { left: -20px; right: auto; }
+    
+    /* 新增的图片说明水印样式 */
+    .photo-caption { position: absolute; bottom: 1rem; left: 1rem; background: rgba(15,23,42,0.7); backdrop-filter: blur(6px); color: #fff; padding: 0.4rem 1rem; border-radius: 30px; font-size: 0.8rem; letter-spacing: 1px; }
 
-    /* ===== 全球合作伙伴（地球背景+深色科技风） ===== */
-    .partners-section { 
-      background: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.9)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover; 
-      color: #fff; 
-      padding: 8rem 8%; 
-      position: relative; 
-      overflow: hidden; 
-    }
-    /* 增加一点科幻感的光晕 */
+    /* 合作伙伴区（地球背景） */
+    .partners-section { background: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.9)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover; color: #fff; padding: 8rem 8%; position: relative; overflow: hidden; }
     .partners-section::before { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 70%); }
     .partners-section .section-title h2 { color: #fff; }
     .partners-section .section-title p { color: #94a3b8; }
-    
-    /* 毛玻璃卡片 */
     .map-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; position: relative; z-index: 2; }
-    .map-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 2rem; transition: 0.3s; }
-    .map-card:hover { background: rgba(14,165,233,0.15); border-color: rgba(14,165,233,0.6); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
-    .map-card .region { font-size: 1.2rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.5rem; display: flex; align-items: center; }
-    .map-card .region::before { content: "🌐"; margin-right: 8px; font-size: 1rem; }
+    .map-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 2rem; transition: 0.3s; }
+    .map-card:hover { background: rgba(14,165,233,0.15); border-color: rgba(14,165,233,0.6); transform: translateY(-5px); }
+    .map-card .region { font-size: 1.2rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.5rem; }
     .map-card .countries { color: #94a3b8; font-size: 0.9rem; line-height: 1.8; }
 
-    /* ===== 页脚 ===== */
     footer { background: #0a0f1c; color: #94a3b8; text-align: center; padding: 3rem 8%; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); }
 
-    /* ===== 响应式适配 ===== */
     @media (max-width: 900px) {
       .page-hero h1 { font-size: 2.5rem; }
       .zigzag-row { flex-direction: column !important; gap: 2rem; margin-bottom: 4rem; }
-      .zigzag-image img { width: 100%; }
       .stats-section { flex-direction: column; gap: 2rem; margin: 2rem 5%; }
       .stat-item { border-bottom: 1px solid #e2e8f0; padding-bottom: 1.5rem; }
       .stat-item:last-child { border-bottom: none; }
@@ -104,22 +85,10 @@
 </div>
 
 <div class="stats-section">
-  <div class="stat-item">
-    <div class="num">15+</div>
-    <div class="label">年行业经验</div>
-  </div>
-  <div class="stat-item">
-    <div class="num">50,000<span style="font-size:1.5rem;">m²</span></div>
-    <div class="label">现代化生产基地</div>
-  </div>
-  <div class="stat-item">
-    <div class="num">100%</div>
-    <div class="label">全检出厂合格率</div>
-  </div>
-  <div class="stat-item">
-    <div class="num">30+</div>
-    <div class="label">产品出口国家</div>
-  </div>
+  <div class="stat-item"><div class="num">15+</div><div class="label">年行业经验</div></div>
+  <div class="stat-item"><div class="num">50,000<span style="font-size:1.5rem;">m²</span></div><div class="label">现代化生产基地</div></div>
+  <div class="stat-item"><div class="num">100%</div><div class="label">全检出厂合格率</div></div>
+  <div class="stat-item"><div class="num">30+</div><div class="label">产品出口国家</div></div>
 </div>
 
 <div class="process-section">
@@ -128,103 +97,91 @@
     <p>从一块原材料到交付到您手中的成品，每一步都严格把控</p>
   </div>
 
+  <!-- 流程1 -->
   <div class="zigzag-row">
     <div class="zigzag-text">
       <span class="step">STEP 01</span>
       <h3>源头把控：原材料检验</h3>
       <p>我们建立了严格的供应商筛选体系，所有原材料入库前必须经过理化指标的多重检测。</p>
-      <ul>
-        <li>全球优质供应商战略合作</li>
-        <li>光谱分析仪等精密仪器检测</li>
-        <li>确保源头零缺陷</li>
-      </ul>
+      <ul><li>全球优质供应商战略合作</li><li>光谱分析仪等精密仪器检测</li><li>确保源头零缺陷</li></ul>
     </div>
     <div class="zigzag-image">
       <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="原材料检验">
+      <div class="photo-caption">2026年客户走访工厂生产线实景照片</div>
     </div>
   </div>
 
+  <!-- 流程2 -->
   <div class="zigzag-row reverse">
     <div class="zigzag-text">
       <span class="step">STEP 02</span>
       <h3>精密加工：自动化生产</h3>
       <p>引进国际领先的数控加工中心和自动化流水线，在保证产能的同时，实现极高的精度一致性。</p>
-      <ul>
-        <li>全新自动化数控设备</li>
-        <li>恒温恒湿无尘车间</li>
-        <li>支持复杂定制化生产</li>
-      </ul>
+      <ul><li>全新自动化数控设备</li><li>恒温恒湿无尘车间</li><li>支持复杂定制化生产</li></ul>
     </div>
     <div class="zigzag-image">
       <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" alt="精密加工">
+      <div class="photo-caption">2026年客户走访工厂生产线实景照片</div>
     </div>
   </div>
 
+  <!-- 流程3 -->
   <div class="zigzag-row">
     <div class="zigzag-text">
       <span class="step">STEP 03</span>
       <h3>质量防线：100% 全检</h3>
       <p>设立独立于生产部门的质量控制中心，实施首件检验、巡检、成品全检的三级质量把关体系。</p>
-      <ul>
-        <li>独立质检团队严格把关</li>
-        <li>100% 全尺寸精密测量</li>
-        <li>出具专业权威检测报告</li>
-      </ul>
+      <ul><li>独立质检团队严格把关</li><li>100% 全尺寸精密测量</li><li>出具专业权威检测报告</li></ul>
     </div>
     <div class="zigzag-image">
       <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=800&q=80" alt="质量检测">
+      <div class="photo-caption">2026年客户走访工厂生产线实景照片</div>
     </div>
   </div>
 
+  <!-- 流程4 -->
   <div class="zigzag-row reverse">
     <div class="zigzag-text">
       <span class="step">STEP 04</span>
       <h3>安全交付：全球物流</h3>
       <p>采用高强度的定制化防护包装，并与全球顶级物流承运商合作，确保货物安全、准时地送达客户手中。</p>
-      <ul>
-        <li>防潮防震定制化包装</li>
-        <li>专业报关与国际货代团队</li>
-        <li>全程追踪物流信息</li>
-      </ul>
+      <ul><li>防潮防震定制化包装</li><li>专业报关与国际货代团队</li><li>全程追踪物流信息</li></ul>
     </div>
     <div class="zigzag-image">
       <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="全球物流">
+      <div class="photo-caption">2026年客户走访工厂生产线实景照片</div>
+    </div>
+  </div>
+
+  <!-- 新增流程5 -->
+  <div class="zigzag-row">
+    <div class="zigzag-text">
+      <span class="step">STEP 05</span>
+      <h3>持续研发与售后支持</h3>
+      <p>我们不仅提供产品，更提供持续的优化与支持。专业技术团队随时响应，解决客户的后顾之忧。</p>
+      <ul><li>年度研发投入占比超 8%</li><li>7x24小时海外技术支持</li><li>产品全生命周期跟踪服务</li></ul>
+    </div>
+    <div class="zigzag-image">
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="研发与支持">
+      <div class="photo-caption">2026年客户走访工厂生产线实景照片</div>
     </div>
   </div>
 
 </div>
 
-<!-- 全球合作伙伴区（带地球背景） -->
+<!-- 合作伙伴区 -->
 <div class="partners-section">
   <div class="section-title">
     <h2>全球合作伙伴</h2>
     <p>我们的产品已服务于全球 30 多个国家和地区的客户</p>
   </div>
   <div class="map-grid">
-    <div class="map-card">
-      <div class="region">北美地区</div>
-      <div class="countries">美国、加拿大、墨西哥</div>
-    </div>
-    <div class="map-card">
-      <div class="region">欧洲地区</div>
-      <div class="countries">德国、英国、法国、意大利</div>
-    </div>
-    <div class="map-card">
-      <div class="region">亚太地区</div>
-      <div class="countries">日本、韩国、澳大利亚、新加坡</div>
-    </div>
-    <div class="map-card">
-      <div class="region">中东地区</div>
-      <div class="countries">阿联酋、沙特阿拉伯、以色列</div>
-    </div>
-    <div class="map-card">
-      <div class="region">南美地区</div>
-      <div class="countries">巴西、阿根廷、智利</div>
-    </div>
-    <div class="map-card">
-      <div class="region">非洲地区</div>
-      <div class="countries">南非、埃及、尼日利亚</div>
-    </div>
+    <div class="map-card"><div class="region">北美地区</div><div class="countries">美国、加拿大、墨西哥</div></div>
+    <div class="map-card"><div class="region">欧洲地区</div><div class="countries">德国、英国、法国、意大利</div></div>
+    <div class="map-card"><div class="region">亚太地区</div><div class="countries">日本、韩国、澳大利亚、新加坡</div></div>
+    <div class="map-card"><div class="region">中东地区</div><div class="countries">阿联酋、沙特阿拉伯、以色列</div></div>
+    <div class="map-card"><div class="region">南美地区</div><div class="countries">巴西、阿根廷、智利</div></div>
+    <div class="map-card"><div class="region">非洲地区</div><div class="countries">南非、埃及、尼日利亚</div></div>
   </div>
 </div>
 
