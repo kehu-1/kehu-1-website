@@ -8,15 +8,15 @@
     /* 基础样式重置 */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.6; }
-    a { text-decoration: none; }
-    
-    /* 顶部导航栏（吸顶） */
-    header { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.10); /* 半透明深色，颜色为 #0f172a 的 85% 不透明度 */ backdrop-filter: blur(12px); /* 毛玻璃效果，让后面内容模糊 */ box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
-header .logo { font-size: 1.5rem; font-weight: bold; color: #ffffff; letter-spacing: 1px; }
-nav a { margin-left: 2rem; color: #cbd5e1; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
-nav a:hover, nav a.active { color: #0ea5e9; }
+    a { text-decoration: none; transition: 0.3s; }
 
-    /* 大屏背景区 (Hero Section) */
+    /* 顶部导航栏（半透明深色磨砂玻璃） */
+    header { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+    header .logo { font-size: 1.5rem; font-weight: bold; color: #ffffff; letter-spacing: 1px; }
+    nav a { margin-left: 2rem; color: #cbd5e1; font-weight: 500; font-size: 0.95rem; }
+    nav a:hover, nav a.active { color: #0ea5e9; }
+
+    /* 大屏Hero区 */
     .hero { min-height: 100vh; background: linear-gradient(rgba(15,23,42,0.7), rgba(15,23,42,0.7)), url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover; display: flex; align-items: center; padding: 0 8%; }
     .hero-content { max-width: 600px; color: #fff; }
     .hero-content h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 1.5rem; font-weight: 700; }
@@ -24,50 +24,64 @@ nav a:hover, nav a.active { color: #0ea5e9; }
     .hero-content ul { list-style: none; margin-bottom: 2.5rem; }
     .hero-content ul li { font-size: 1rem; margin-bottom: 0.8rem; color: #f1f5f9; display: flex; align-items: center; }
     .hero-content ul li::before { content: "✓"; color: #0ea5e9; font-weight: bold; margin-right: 10px; font-size: 1.2rem; }
-    .btn { display: inline-block; padding: 1rem 2.5rem; background: #0ea5e9; color: #fff; border-radius: 4px; font-size: 1rem; font-weight: 600; transition: 0.3s; }
+    .btn { display: inline-block; padding: 1rem 2.5rem; background: #0ea5e9; color: #fff; border-radius: 4px; font-size: 1rem; font-weight: 600; }
     .btn:hover { background: #0284c7; transform: translateY(-2px); }
 
-    /* 通用区块样式 */
-    section { padding: 6rem 8%; }
-    .section-title { text-align: center; margin-bottom: 3rem; }
-    .section-title h2 { font-size: 2rem; color: #0f172a; }
+    /* 通用区块 */
+    section { padding: 7rem 8%; }
+    .section-title { text-align: center; margin-bottom: 4rem; }
+    .section-title h2 { font-size: 2.2rem; color: #0f172a; }
     .section-title span { color: #0ea5e9; }
-    .section-title p { color: #64748b; margin-top: 0.5rem; }
+    .section-title p { color: #64748b; margin-top: 0.5rem; font-size: 1.1rem; }
 
     /* 新闻动态 */
     #news { background: #f8fafc; }
     .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-    .news-card { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: 0.3s; border: 1px solid #e2e8f0; display: flex; flex-direction: column; }
+    .news-card { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; display: flex; flex-direction: column; }
     .news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
     .news-card .date { font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.5rem; }
     .news-card h4 { font-size: 1.1rem; margin-bottom: 0.8rem; color: #0f172a; }
     .news-card p { font-size: 0.9rem; color: #64748b; margin-bottom: 1rem; flex-grow: 1; }
-    
-    /* 新闻卡片里的图片不超出边界 */
-    .news-card img { max-width: 100%; height: auto; border-radius: 6px; margin-top: 10px; }
-    
-    /* 阅读全文按钮样式 */
     .read-more-btn { display: inline-block; margin-top: auto; color: #0ea5e9; cursor: pointer; font-weight: 500; font-size: 0.9rem; background: none; border: none; padding: 0; text-align: left; }
     .read-more-btn:hover { text-decoration: underline; }
-    
-    /* 弹窗（模态框）样式 */
+    .news-card img { max-width: 100%; height: auto; border-radius: 6px; margin-top: 10px; }
+
+    /* 合作品牌墙 */
+    #brands { background: #fff; padding-top: 0; }
+    .brands-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; align-items: center; justify-items: center; opacity: 0.7; }
+    .brand-item { font-size: 1.3rem; font-weight: 700; color: #94a3b8; letter-spacing: 1px; border: 1px solid #e2e8f0; padding: 1.5rem 2rem; border-radius: 8px; text-align: center; width: 100%; transition: 0.3s; }
+    .brand-item:hover { color: #0ea5e9; border-color: #0ea5e9; opacity: 1; background: #f8fafc; }
+
+    /* 国际认证区 */
+    #certifications { background: #f8fafc; }
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
+    .cert-card { background: #fff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; text-align: center; transition: 0.3s; }
+    .cert-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    .cert-card .cert-icon { font-size: 2.5rem; color: #0ea5e9; margin-bottom: 1rem; }
+    .cert-card h4 { font-size: 1.1rem; color: #0f172a; margin-bottom: 0.5rem; }
+    .cert-card p { font-size: 0.9rem; color: #64748b; }
+
+    /* 高级4列页脚 */
+    footer { background: #0f172a; color: #94a3b8; padding: 4rem 8% 2rem; font-size: 0.9rem; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto 3rem; }
+    .footer-col h5 { color: #fff; font-size: 1.1rem; margin-bottom: 1.2rem; }
+    .footer-col p, .footer-col a { color: #94a3b8; line-height: 2; display: block; }
+    .footer-col a:hover { color: #0ea5e9; }
+    .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
+
+    /* 弹窗样式 */
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; }
     .modal-content { background: #fff; padding: 2rem; border-radius: 8px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; }
     .modal-close { position: absolute; top: 1rem; right: 1.5rem; font-size: 1.5rem; cursor: pointer; color: #666; }
-    .modal-close:hover { color: #000; }
     .modal-content img { max-width: 100%; height: auto; border-radius: 6px; margin-top: 10px; }
     .modal-content h4 { font-size: 1.5rem; margin-bottom: 0.5rem; color: #0f172a; }
     .modal-content .date { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem; }
 
-    /* 产品预览 */
-    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-    .product-card { text-align: center; }
-    .product-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem; }
-    .product-card h4 { font-size: 1.1rem; color: #0f172a; margin-bottom: 0.5rem; }
-    .product-card p { font-size: 0.9rem; color: #64748b; }
-
-    /* 页脚 */
-    footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 3rem 8%; font-size: 0.9rem; }
+    /* 响应式 */
+    @media (max-width: 900px) {
+      .hero-content h1 { font-size: 2.5rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -82,13 +96,13 @@ nav a:hover, nav a.active { color: #0ea5e9; }
   </nav>
 </header>
 
-<!-- 大屏区域 -->
+<!-- Hero -->
 <div class="hero">
   <div class="hero-content">
     <h1>可靠的全球B2B供应商</h1>
     <p>我们致力于为客户提供高品质的产品和一站式采购解决方案，助力您的业务增长。</p>
     <ul>
-      <li>10年+ 行业制造与出口经验</li>
+      <li>15年+ 行业制造与出口经验</li>
       <li>严格的质量控制体系，100% 检验</li>
       <li>支持 OEM/ODM，快速响应定制需求</li>
       <li>专业的海外销售团队，无障碍沟通</li>
@@ -103,43 +117,91 @@ nav a:hover, nav a.active { color: #0ea5e9; }
     <h2>新闻<span>动态</span></h2>
     <p>了解我们的最新动态和行业资讯</p>
   </div>
-  
-  <!-- 这里会被 JS 自动填入新闻卡片 -->
   <div class="news-grid" id="news-container">
     <p style="text-align:center; color:#999; width:100%;">正在加载新闻...</p>
   </div>
 </section>
 
-<!-- 产品预览 -->
-<section id="products">
+<!-- 合作品牌墙（替换原来的产品区） -->
+<section id="brands">
   <div class="section-title">
-    <h2>热销<span>产品</span></h2>
-    <p>我们提供全系列的行业解决方案</p>
+    <h2>合作<span>品牌</span></h2>
+    <p>我们与全球多家知名企业建立了长期战略合作关系</p>
   </div>
-  <div class="product-grid">
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=500&q=80" alt="产品A">
-      <h4>工业设备 A</h4>
-      <p>高精度、耐用，适用于各种工业场景。</p>
+  <div class="brands-grid">
+    <div class="brand-item">GLOBAL TRADE</div>
+    <div class="brand-item">INDUSTRIX</div>
+    <div class="brand-item">TECHNOCORP</div>
+    <div class="brand-item">PRIMEMFG</div>
+    <div class="brand-item">EUROSUPPLY</div>
+    <div class="brand-item">PACIFIC CO.</div>
+  </div>
+</section>
+
+<!-- 国际认证区 -->
+<section id="certifications">
+  <div class="section-title">
+    <h2>国际<span>认证</span></h2>
+    <p>我们的产品符合严格的国际标准，拥有多项权威认证</p>
+  </div>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <div class="cert-icon">🏆</div>
+      <h4>ISO 9001</h4>
+      <p>国际质量管理体系认证</p>
     </div>
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=500&q=80" alt="产品B">
-      <h4>工业设备 B</h4>
-      <p>高效节能，降低您的长期运营成本。</p>
+    <div class="cert-card">
+      <div class="cert-icon">✅</div>
+      <h4>CE 认证</h4>
+      <p>欧盟安全合格标志</p>
     </div>
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=500&q=80" alt="产品C">
-      <h4>工业设备 C</h4>
-      <p>模块化设计，方便维护与升级。</p>
+    <div class="cert-card">
+      <div class="cert-icon">🌿</div>
+      <h4>RoHS 合规</h4>
+      <p>欧盟环保指令认证</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🛡️</div>
+      <h4>REACH 合规</h4>
+      <p>欧盟化学品法规认证</p>
     </div>
   </div>
 </section>
 
+<!-- 高级4列页脚 -->
 <footer>
-  <p>&copy; 2026 你的品牌名. All rights reserved.</p>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h5>你的品牌名</h5>
+      <p>专业的全球B2B供应商，致力于为全球客户提供高品质产品和一站式采购解决方案。</p>
+    </div>
+    <div class="footer-col">
+      <h5>快速导航</h5>
+      <a href="index.html">首页</a>
+      <a href="products.html">产品展示</a>
+      <a href="advantages.html">生产优势</a>
+      <a href="contact.html">联系我们</a>
+    </div>
+    <div class="footer-col">
+      <h5>联系我们</h5>
+      <p>📧 你的邮箱@example.com</p>
+      <p>📞 +86 123 4567 8910</p>
+      <p>📍 中国 广东省 深圳市 某某区</p>
+    </div>
+    <div class="footer-col">
+      <h5>关注我们</h5>
+      <a href="#">LinkedIn</a>
+      <a href="#">WhatsApp</a>
+      <a href="#">WeChat</a>
+      <a href="#">YouTube</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 你的品牌名. All rights reserved. | <a href="#" style="display:inline; color:#94a3b8;">隐私政策</a></p>
+  </div>
 </footer>
 
-<!-- 新闻阅读弹窗 -->
+<!-- 新闻弹窗 -->
 <div id="news-modal" class="modal">
   <div class="modal-content">
     <span class="modal-close" onclick="closeModal()">&times;</span>
@@ -149,29 +211,20 @@ nav a:hover, nav a.active { color: #0ea5e9; }
   </div>
 </div>
 
-<!-- 引入 Markdown 解析库 -->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
-  // 全局数组，用来存放新闻数据
   let newsArticles = [];
-
   async function loadNews() {
     try {
       const repo = 'kehu-1/kehu-1-website';
       const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/news`);
       const files = await res.json();
       const container = document.getElementById('news-container');
-      container.innerHTML = ''; 
-      newsArticles = []; // 清空数组
-
-      if (!Array.isArray(files) || files.length === 0) {
-        container.innerHTML = '<p style="text-align:center;color:#999;width:100%;">暂无新闻动态。</p>';
-        return;
-      }
-
+      container.innerHTML = '';
+      newsArticles = [];
+      if (!Array.isArray(files) || files.length === 0) { container.innerHTML = '<p style="text-align:center;color:#999;width:100%;">暂无新闻动态。</p>'; return; }
       files.sort((a, b) => b.name.localeCompare(a.name));
-      const latestFiles = files.slice(0, 3); // 首页只显示最新的3篇
-
+      const latestFiles = files.slice(0, 3);
       for (let i = 0; i < latestFiles.length; i++) {
         const file = latestFiles[i];
         const rawRes = await fetch(file.download_url);
@@ -179,57 +232,27 @@ nav a:hover, nav a.active { color: #0ea5e9; }
         const parts = text.split('---');
         const frontmatter = parts[1] || '';
         const bodyContent = parts.slice(2).join('---').trim();
-
         const titleMatch = frontmatter.match(/title:\s*(.*)/);
         const dateMatch = frontmatter.match(/date:\s*(.*)/);
         const title = titleMatch ? titleMatch[1].trim() : '无标题';
         const date = dateMatch ? dateMatch[1].trim() : '';
-
-        // 将 Markdown 转换为 HTML
         const htmlBody = marked.parse(bodyContent);
         const plainText = htmlBody.replace(/<[^>]+>/g, '').trim();
         const summary = plainText.length > 80 ? plainText.substring(0, 80) + '...' : plainText;
-
-        // 把文章数据存到数组里
-        newsArticles.push({
-          title: title,
-          date: date,
-          body: htmlBody
-        });
-
-        // 按钮只传索引号 i，彻底避免特殊字符导致按钮失效
-        const cardHtml = `
-          <div class="news-card">
-            <div class="date">${date}</div>
-            <h4>${title}</h4>
-            <p style="color:#64748b; margin-top:10px;">${summary}</p>
-            <button class="read-more-btn" onclick="openArticle(${i})">阅读全文 →</button>
-          </div>
-        `;
+        newsArticles.push({ title, date, body: htmlBody });
+        const cardHtml = `<div class="news-card"><div class="date">${date}</div><h4>${title}</h4><p style="color:#64748b; margin-top:10px;">${summary}</p><button class="read-more-btn" onclick="openArticle(${i})">阅读全文 →</button></div>`;
         container.insertAdjacentHTML('beforeend', cardHtml);
       }
-    } catch (error) {
-      console.error('加载新闻失败:', error);
-      document.getElementById('news-container').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;">加载新闻时出错，请刷新重试。</p>';
-    }
+    } catch (e) { console.error(e); document.getElementById('news-container').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;">加载新闻失败，请刷新。</p>'; }
   }
-
-  // 通过索引号打开对应的文章
   function openArticle(index) {
-    const article = newsArticles[index];
-    if (!article) return;
-    
+    const article = newsArticles[index]; if (!article) return;
     document.getElementById('modal-title').innerText = article.title;
     document.getElementById('modal-date').innerText = article.date;
     document.getElementById('modal-body').innerHTML = article.body;
     document.getElementById('news-modal').style.display = 'flex';
   }
-
-  // 关闭弹窗
-  function closeModal() {
-    document.getElementById('news-modal').style.display = 'none';
-  }
-
+  function closeModal() { document.getElementById('news-modal').style.display = 'none'; }
   loadNews();
 </script>
 
