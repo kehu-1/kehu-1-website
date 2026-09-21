@@ -37,12 +37,27 @@
     /* 新闻动态 */
     #news { background: #f8fafc; }
     .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-    .news-card { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: 0.3s; border: 1px solid #e2e8f0; }
+    .news-card { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: 0.3s; border: 1px solid #e2e8f0; display: flex; flex-direction: column; }
     .news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
     .news-card .date { font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.5rem; }
     .news-card h4 { font-size: 1.1rem; margin-bottom: 0.8rem; color: #0f172a; }
-    .news-card p { font-size: 0.9rem; color: #64748b; margin-bottom: 1rem; }
-    .news-card a { color: #0ea5e9; font-weight: 500; font-size: 0.9rem; }
+    .news-card p { font-size: 0.9rem; color: #64748b; margin-bottom: 1rem; flex-grow: 1; }
+    
+    /* 新闻卡片里的图片不超出边界 */
+    .news-card img { max-width: 100%; height: auto; border-radius: 6px; margin-top: 10px; }
+    
+    /* 阅读全文按钮样式 */
+    .read-more-btn { display: inline-block; margin-top: auto; color: #0ea5e9; cursor: pointer; font-weight: 500; font-size: 0.9rem; background: none; border: none; padding: 0; text-align: left; }
+    .read-more-btn:hover { text-decoration: underline; }
+    
+    /* 弹窗（模态框）样式 */
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; }
+    .modal-content { background: #fff; padding: 2rem; border-radius: 8px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; }
+    .modal-close { position: absolute; top: 1rem; right: 1.5rem; font-size: 1.5rem; cursor: pointer; color: #666; }
+    .modal-close:hover { color: #000; }
+    .modal-content img { max-width: 100%; height: auto; border-radius: 6px; margin-top: 10px; }
+    .modal-content h4 { font-size: 1.5rem; margin-bottom: 0.5rem; color: #0f172a; }
+    .modal-content .date { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem; }
 
     /* 产品预览 */
     .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
@@ -94,67 +109,6 @@
   </div>
 </section>
 
-<!-- 引入 Markdown 解析库 -->
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script>
-  async function loadNews() {
-    try {
-      // 自动从 GitHub 拉取 content/news 文件夹里的内容
-      const repo = 'kehu-1/kehu-1-website';
-      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/news`);
-      const files = await res.json();
-      const container = document.getElementById('news-container');
-      container.innerHTML = ''; // 清空“加载中”的提示
-
-      if (!Array.isArray(files) || files.length === 0) {
-        container.innerHTML = '<p style="text-align:center;color:#999;width:100%;">暂无新闻动态。</p>';
-        return;
-      }
-
-      // 按文件名倒序（最新的排在最前）
-      files.sort((a, b) => b.name.localeCompare(a.name));
-      
-      // 只显示最新的 3 条新闻
-      const latestFiles = files.slice(0, 3);
-
-      for (const file of latestFiles) {
-        const rawRes = await fetch(file.download_url);
-        const text = await rawRes.text();
-        
-        // 解析 Markdown 文件 (分离 frontmatter 和正文)
-        const parts = text.split('---');
-        const frontmatter = parts[1] || '';
-        const bodyContent = parts.slice(2).join('---').trim();
-
-        // 提取标题和日期
-        const titleMatch = frontmatter.match(/title:\s*(.*)/);
-        const dateMatch = frontmatter.match(/date:\s*(.*)/);
-        const title = titleMatch ? titleMatch[1].trim() : '无标题';
-        const date = dateMatch ? dateMatch[1].trim() : '';
-
-        // 把 Markdown 正文转为 HTML (marked 库自动处理图片)
-        const htmlBody = marked.parse(bodyContent);
-
-        // 生成新闻卡片
-        const cardHtml = `
-          <div class="news-card">
-            <div class="date">${date}</div>
-            <h4>${title}</h4>
-            <div style="color:#64748b; margin-top:10px;">${htmlBody}</div>
-          </div>
-        `;
-        container.insertAdjacentHTML('beforeend', cardHtml);
-      }
-    } catch (error) {
-      console.error('加载新闻失败:', error);
-      document.getElementById('news-container').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;">加载新闻时出错，请刷新重试。</p>';
-    }
-  }
-  
-  // 页面加载时自动执行
-  loadNews();
-</script>
-
 <!-- 产品预览 -->
 <section id="products">
   <div class="section-title">
@@ -183,6 +137,90 @@
 <footer>
   <p>&copy; 2026 你的品牌名. All rights reserved.</p>
 </footer>
+
+<!-- 新闻阅读弹窗 -->
+<div id="news-modal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal()">&times;</span>
+    <h4 id="modal-title"></h4>
+    <div id="modal-date" class="date"></div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- 引入 Markdown 解析库 -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  async function loadNews() {
+    try {
+      const repo = 'kehu-1/kehu-1-website';
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/news`);
+      const files = await res.json();
+      const container = document.getElementById('news-container');
+      container.innerHTML = ''; 
+
+      if (!Array.isArray(files) || files.length === 0) {
+        container.innerHTML = '<p style="text-align:center;color:#999;width:100%;">暂无新闻动态。</p>';
+        return;
+      }
+
+      files.sort((a, b) => b.name.localeCompare(a.name));
+      const latestFiles = files.slice(0, 3); // 首页只显示最新的3篇
+
+      for (const file of latestFiles) {
+        const rawRes = await fetch(file.download_url);
+        const text = await rawRes.text();
+        const parts = text.split('---');
+        const frontmatter = parts[1] || '';
+        const bodyContent = parts.slice(2).join('---').trim();
+
+        const titleMatch = frontmatter.match(/title:\s*(.*)/);
+        const dateMatch = frontmatter.match(/date:\s*(.*)/);
+        const title = titleMatch ? titleMatch[1].trim() : '无标题';
+        const date = dateMatch ? dateMatch[1].trim() : '';
+
+        // 将 Markdown 转换为 HTML
+        const htmlBody = marked.parse(bodyContent);
+
+        // 提取纯文本摘要（去掉了 HTML 标签，截取前 80 个字）
+        const plainText = htmlBody.replace(/<[^>]+>/g, '').trim();
+        const summary = plainText.length > 80 ? plainText.substring(0, 80) + '...' : plainText;
+
+        // 转义单引号和反引号，防止弹窗报错
+        const safeTitle = title.replace(/'/g, "\\'");
+        const safeBody = htmlBody.replace(/`/g, '\\`').replace(/\$/g, '\\$');
+
+        const cardHtml = `
+          <div class="news-card">
+            <div class="date">${date}</div>
+            <h4>${title}</h4>
+            <p style="color:#64748b; margin-top:10px;">${summary}</p>
+            <button class="read-more-btn" onclick="openArticle('${safeTitle}', '${date}', \`${safeBody}\`)">阅读全文 →</button>
+          </div>
+        `;
+        container.insertAdjacentHTML('beforeend', cardHtml);
+      }
+    } catch (error) {
+      console.error('加载新闻失败:', error);
+      document.getElementById('news-container').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;">加载新闻时出错，请刷新重试。</p>';
+    }
+  }
+
+  // 打开弹窗展示全文
+  function openArticle(title, date, body) {
+    document.getElementById('modal-title').innerText = title;
+    document.getElementById('modal-date').innerText = date;
+    document.getElementById('modal-body').innerHTML = body;
+    document.getElementById('news-modal').style.display = 'flex';
+  }
+
+  // 关闭弹窗
+  function closeModal() {
+    document.getElementById('news-modal').style.display = 'none';
+  }
+
+  loadNews();
+</script>
 
 </body>
 </html>
