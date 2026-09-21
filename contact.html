@@ -5,34 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>联系我们 - 你的品牌名</title>
   <style>
+    /* 基础样式重置 */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.6; }
+    body { font-family: -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.6; background: #f8fafc; }
     a { text-decoration: none; }
-    header { /* 顶部导航栏（吸顶） */
-header { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.85); /* 半透明深色，颜色为 #0f172a 的 85% 不透明度 */ backdrop-filter: blur(12px); /* 毛玻璃效果，让后面内容模糊 */ box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
-header .logo { font-size: 1.5rem; font-weight: bold; color: #ffffff; letter-spacing: 1px; }
-nav a { margin-left: 2rem; color: #cbd5e1; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
-nav a:hover, nav a.active { color: #0ea5e9; }
-    header .logo { font-size: 1.5rem; font-weight: bold; color: #0f172a; }
-    nav a { margin-left: 2rem; color: #475569; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
+
+    /* 顶部导航栏（半透明深色玻璃质感） */
+    header { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+    header .logo { font-size: 1.5rem; font-weight: bold; color: #ffffff; letter-spacing: 1px; }
+    nav a { margin-left: 2rem; color: #cbd5e1; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
     nav a:hover, nav a.active { color: #0ea5e9; }
+
+    /* 内容区域 */
+    section { padding: 10rem 8% 6rem; max-width: 1200px; margin: 0 auto; display: flex; gap: 4rem; flex-wrap: wrap; }
     
-    section { padding: 8rem 8% 6rem; max-width: 1200px; margin: 0 auto; display: flex; gap: 4rem; flex-wrap: wrap; }
+    /* 左侧信息 */
     .contact-info { flex: 1; min-width: 300px; }
     .contact-info h2 { font-size: 2rem; color: #0f172a; margin-bottom: 2rem; }
     .info-item { margin-bottom: 1.5rem; }
     .info-item strong { display: block; color: #0f172a; font-size: 1.1rem; margin-bottom: 0.3rem; }
-    .info-item span { color: #64748b; }
-    
-    .contact-form { flex: 1.5; min-width: 400px; background: #f8fafc; padding: 3rem; border-radius: 12px; border: 1px solid #e2e8f0; }
+    .info-item span { color: #64748b; font-size: 1rem; }
+
+    /* 右侧表单 */
+    .contact-form { flex: 1.5; min-width: 400px; background: #fff; padding: 3rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+    .contact-form h3 { margin-bottom: 1.5rem; color: #0f172a; font-size: 1.5rem; }
     .form-group { margin-bottom: 1.5rem; }
     .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #0f172a; }
-    .form-group input, .form-group textarea { width: 100%; padding: 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; font-family: inherit; }
+    .form-group input, .form-group textarea { width: 100%; padding: 1rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem; font-family: inherit; transition: 0.3s; background: #f8fafc; }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #0ea5e9; background: #fff; box-shadow: 0 0 0 3px rgba(14,165,233,0.1); }
     .form-group textarea { height: 150px; resize: vertical; }
-    .form-group button { background: #0ea5e9; color: #fff; border: none; padding: 1rem 3rem; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s; }
-    .form-group button:hover { background: #0284c7; }
-    
-    footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 3rem 8%; font-size: 0.9rem; }
+    .form-group button { background: #0ea5e9; color: #fff; border: none; padding: 1rem 3rem; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s; width: 100%; }
+    .form-group button:hover { background: #0284c7; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(14,165,233,0.2); }
+
+    /* 页脚 */
+    footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 3rem 8%; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); }
+
+    /* 手机端适配 */
+    @media (max-width: 768px) {
+      section { flex-direction: column; gap: 3rem; }
+      .contact-form { min-width: 100%; padding: 2rem; }
+    }
   </style>
 </head>
 <body>
@@ -48,6 +60,7 @@ nav a:hover, nav a.active { color: #0ea5e9; }
 </header>
 
 <section>
+  <!-- 左侧：联系信息 -->
   <div class="contact-info">
     <h2>联系我们</h2>
     <div class="info-item">
@@ -68,8 +81,9 @@ nav a:hover, nav a.active { color: #0ea5e9; }
     </div>
   </div>
 
+  <!-- 右侧：询盘表单 -->
   <div class="contact-form">
-    <h3 style="margin-bottom: 1.5rem; color: #0f172a;">发送询盘</h3>
+    <h3>发送询盘</h3>
     <form action="https://formsubmit.co/1823614640@qq.com" method="POST">
       <div class="form-group">
         <label>您的姓名 *</label>
