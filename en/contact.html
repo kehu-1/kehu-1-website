@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Your Brand</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.6; background: #f8fafc; }
+    a { text-decoration: none; transition: 0.3s; }
+    header { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    header .logo { font-size: 1.5rem; font-weight: bold; color: #ffffff; }
+    nav a { margin-left: 2rem; color: #cbd5e1; font-weight: 500; font-size: 0.95rem; }
+    nav a:hover, nav a.active { color: #0ea5e9; }
+    section { padding: 10rem 8% 6rem; max-width: 1200px; margin: 0 auto; display: flex; gap: 4rem; flex-wrap: wrap; }
+    .contact-info { flex: 1; min-width: 300px; }
+    .contact-info h2 { font-size: 2rem; color: #0f172a; margin-bottom: 2rem; }
+    .info-item { margin-bottom: 1.5rem; }
+    .info-item strong { display: block; color: #0f172a; font-size: 1.1rem; margin-bottom: 0.3rem; }
+    .info-item span { color: #64748b; font-size: 1rem; }
+    .contact-form { flex: 1.5; min-width: 400px; background: #fff; padding: 3rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+    .contact-form h3 { margin-bottom: 1.5rem; color: #0f172a; font-size: 1.5rem; }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #0f172a; }
+    .form-group input, .form-group textarea { width: 100%; padding: 1rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem; font-family: inherit; transition: 0.3s; background: #f8fafc; }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #0ea5e9; background: #fff; box-shadow: 0 0 0 3px rgba(14,165,233,0.1); }
+    .form-group textarea { height: 150px; resize: vertical; }
+    .form-group button { background: #0ea5e9; color: #fff; border: none; padding: 1rem 3rem; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s; width: 100%; }
+    .form-group button:hover { background: #0284c7; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(14,165,233,0.2); }
+    footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 3rem 8%; font-size: 0.9rem; }
+    .floating-contact { position: fixed; bottom: 2rem; right: 2rem; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); color: #fff; padding: 0.8rem 1.5rem; border-radius: 50px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 0.5rem; font-weight: 500; font-size: 0.95rem; z-index: 9999; transition: 0.3s ease; border: 1px solid rgba(255,255,255,0.1); }
+    .floating-contact:hover { background: #0ea5e9; transform: translateY(-5px); }
+    @media (max-width: 768px) { section { flex-direction: column; gap: 3rem; } .contact-form { min-width: 100%; padding: 2rem; } .floating-contact { bottom: 1.5rem; right: 1.5rem; padding: 0.7rem 1.2rem; font-size: 0.85rem; } }
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo">Your Brand</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="advantages.html">Advantages</a>
+    <a href="contact.html" class="active">Get a Quote</a>
+    <a href="../index.html" style="color: #0ea5e9;">中文</a>
+  </nav>
+</header>
+<section>
+  <div class="contact-info">
+    <h2>Contact Us</h2>
+    <div class="info-item"><strong>📧 Email</strong><span>your-email@example.com</span></div>
+    <div class="info-item"><strong>📞 Phone</strong><span>+86 123 4567 8910</span></div>
+    <div class="info-item"><strong>📍 Address</strong><span>Shenzhen, Guangdong, China</span></div>
+    <div class="info-item"><strong>🕒 Working Hours</strong><span>Mon-Fri 9:00 - 18:00 (Beijing Time)</span></div>
+  </div>
+  <div class="contact-form">
+    <h3>Send an Inquiry</h3>
+    <form action="https://formsubmit.co/1823614640@qq.com" method="POST">
+      <div class="form-group"><label>Your Name *</label><input type="text" name="name" placeholder="Enter your name" required></div>
+      <div class="form-group"><label>Your Email *</label><input type="email" name="email" placeholder="Enter your email" required></div>
+      <div class="form-group"><label>Company Name</label><input type="text" name="company" placeholder="Enter your company name"></div>
+      <div class="form-group"><label>Message *</label><textarea name="message" placeholder="Please describe your procurement needs or customization requirements..." required></textarea></div>
+      <div class="form-group"><button type="submit">Submit Inquiry</button></div>
+    </form>
+  </div>
+</section>
+<footer><p>&copy; 2026 Your Brand. All rights reserved.</p></footer>
+<a href="contact.html" class="floating-contact">✉️ Get a Quote</a>
+</body>
+</html>
