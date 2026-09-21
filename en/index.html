@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Brand - Reliable B2B Supplier</title>
+  <link rel="alternate" hreflang="zh" href="https://你的域名.com/index.html" />
+  <link rel="alternate" hreflang="en" href="https://你的域名.com/en/index.html" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.6; }
+    a { text-decoration: none; transition: 0.3s; }
+    header { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+    header .logo { font-size: 1.5rem; font-weight: bold; color: #ffffff; }
+    nav a { margin-left: 2rem; color: #cbd5e1; font-weight: 500; font-size: 0.95rem; }
+    nav a:hover, nav a.active { color: #0ea5e9; }
+    .hero { min-height: 100vh; background: linear-gradient(rgba(15,23,42,0.7), rgba(15,23,42,0.7)), url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover; display: flex; align-items: center; padding: 0 8%; }
+    .hero-content { max-width: 600px; color: #fff; }
+    .hero-content h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 1.5rem; font-weight: 700; }
+    .hero-content p { font-size: 1.1rem; color: #cbd5e1; margin-bottom: 2rem; }
+    .hero-content ul { list-style: none; margin-bottom: 2.5rem; }
+    .hero-content ul li { font-size: 1rem; margin-bottom: 0.8rem; color: #f1f5f9; display: flex; align-items: center; }
+    .hero-content ul li::before { content: "✓"; color: #0ea5e9; font-weight: bold; margin-right: 10px; font-size: 1.2rem; }
+    .btn { display: inline-block; padding: 1rem 2.5rem; background: #0ea5e9; color: #fff; border-radius: 4px; font-size: 1rem; font-weight: 600; }
+    .btn:hover { background: #0284c7; transform: translateY(-2px); }
+    .section-title { text-align: center; margin-bottom: 4rem; }
+    .section-title h2 { font-size: 2.2rem; color: #0f172a; }
+    .section-title span { color: #0ea5e9; }
+    .section-title p { color: #64748b; margin-top: 0.5rem; font-size: 1.1rem; }
+    #news { background: #f8fafc; padding: 7rem 8%; }
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+    .news-card { background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; display: flex; flex-direction: column; transition: 0.3s; }
+    .news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    .news-card .date { font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.5rem; }
+    .news-card h4 { font-size: 1.1rem; margin-bottom: 0.8rem; color: #0f172a; }
+    .news-card p { font-size: 0.9rem; color: #64748b; margin-bottom: 1rem; flex-grow: 1; }
+    .read-more-btn { display: inline-block; margin-top: auto; color: #0ea5e9; cursor: pointer; font-weight: 500; font-size: 0.9rem; background: none; border: none; padding: 0; text-align: left; }
+    .read-more-btn:hover { text-decoration: underline; }
+    #brands { background: #fff; padding: 8rem 8%; }
+    .brands-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 3rem 2rem; justify-items: center; align-items: center; max-width: 1000px; margin: 0 auto; }
+    .brand-item { font-size: 1.1rem; font-weight: 700; color: #cbd5e1; letter-spacing: 2px; padding: 2rem 1rem; border-radius: 8px; text-align: center; width: 100%; transition: 0.3s ease; }
+    .brand-item:hover { color: #0ea5e9; background: #f8fafc; transform: scale(1.05); }
+    #certifications { background: #f8fafc; padding: 8rem 8%; }
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto; }
+    .cert-card { background: #fff; padding: 2.5rem 2rem; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center; transition: 0.4s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+    .cert-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.06); border-color: #0ea5e9; }
+    .cert-icon { font-size: 2rem; margin-bottom: 1.5rem; display: inline-flex; align-items: center; justify-content: center; width: 70px; height: 70px; background: rgba(14, 165, 233, 0.1); color: #0ea5e9; border-radius: 50%; }
+    .cert-card h4 { font-size: 1.2rem; color: #0f172a; margin-bottom: 0.8rem; font-weight: 700; }
+    .cert-card p { font-size: 0.95rem; color: #64748b; line-height: 1.6; }
+    footer { background: #0f172a; color: #94a3b8; padding: 4rem 8% 2rem; font-size: 0.9rem; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto 3rem; }
+    .footer-col h5 { color: #fff; font-size: 1.1rem; margin-bottom: 1.2rem; }
+    .footer-col p, .footer-col a { color: #94a3b8; line-height: 2; display: block; }
+    .footer-col a:hover { color: #0ea5e9; }
+    .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; }
+    .modal-content { background: #fff; padding: 2rem; border-radius: 8px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; }
+    .modal-close { position: absolute; top: 1rem; right: 1.5rem; font-size: 1.5rem; cursor: pointer; color: #666; }
+    .modal-content img { max-width: 100%; height: auto; border-radius: 6px; margin-top: 10px; }
+    .modal-content h4 { font-size: 1.5rem; margin-bottom: 0.5rem; color: #0f172a; }
+    .modal-content .date { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .floating-contact { position: fixed; bottom: 2rem; right: 2rem; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); color: #fff; padding: 0.8rem 1.5rem; border-radius: 50px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); display: flex; align-items: center; gap: 0.5rem; font-weight: 500; font-size: 0.95rem; z-index: 9999; transition: 0.3s ease; border: 1px solid rgba(255,255,255,0.1); }
+    .floating-contact:hover { background: #0ea5e9; transform: translateY(-5px); box-shadow: 0 15px 30px rgba(14, 165, 233, 0.4); }
+    @media (max-width: 768px) { .floating-contact { bottom: 1.5rem; right: 1.5rem; padding: 0.7rem 1.2rem; font-size: 0.85rem; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Your Brand</div>
+  <nav>
+    <a href="index.html" class="active">Home</a>
+    <a href="products.html">Products</a>
+    <a href="advantages.html">Advantages</a>
+    <a href="contact.html">Contact</a>
+    <a href="../index.html" style="color: #0ea5e9;">中文</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="hero-content">
+    <h1>Reliable Global B2B Supplier</h1>
+    <p>We are dedicated to providing high-quality products and one-stop procurement solutions to help your business grow.</p>
+    <ul>
+      <li>15+ Years Industry Experience</li>
+      <li>Strict Quality Control, 100% Inspection</li>
+      <li>OEM/ODM Supported, Rapid Customization</li>
+      <li>Professional Overseas Sales Team, Seamless Communication</li>
+    </ul>
+    <a href="contact.html" class="btn">Inquire Now</a>
+  </div>
+</div>
+
+<section id="news">
+  <div class="section-title">
+    <h2>News & <span>Updates</span></h2>
+    <p>Stay informed about our latest developments and industry insights</p>
+  </div>
+  <div class="news-grid" id="news-container">
+    <p style="text-align:center; color:#999; width:100%;">Loading news...</p>
+  </div>
+</section>
+
+<section id="brands">
+  <div class="section-title">
+    <h2>Our <span>Partners</span></h2>
+    <p>We have established long-term strategic partnerships with renowned enterprises worldwide</p>
+  </div>
+  <div class="brands-grid">
+    <div class="brand-item">GLOBAL TRADE</div>
+    <div class="brand-item">INDUSTRIX</div>
+    <div class="brand-item">TECHNOCORP</div>
+    <div class="brand-item">PRIMEMFG</div>
+    <div class="brand-item">EUROSUPPLY</div>
+    <div class="brand-item">PACIFIC CO.</div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="section-title">
+    <h2><span>Certifications</span></h2>
+    <p>Our products meet strict international standards and hold multiple authoritative certifications</p>
+  </div>
+  <div class="cert-grid">
+    <div class="cert-card"><div class="cert-icon">🏆</div><h4>ISO 9001</h4><p>International Quality Management System Certification</p></div>
+    <div class="cert-card"><div class="cert-icon">✅</div><h4>CE Certified</h4><p>European Union Safety Conformity Mark</p></div>
+    <div class="cert-card"><div class="cert-icon">🌿</div><h4>RoHS Compliant</h4><p>EU Environmental Directive Certification</p></div>
+    <div class="cert-card"><div class="cert-icon">🛡️</div><h4>REACH Compliant</h4><p>EU Chemicals Regulation Certification</p></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col"><h5>Your Brand</h5><p>Professional global B2B supplier, dedicated to providing high-quality products and one-stop procurement solutions worldwide.</p></div>
+    <div class="footer-col"><h5>Quick Links</h5><a href="index.html">Home</a><a href="products.html">Products</a><a href="advantages.html">Advantages</a><a href="contact.html">Contact</a></div>
+    <div class="footer-col"><h5>Contact Us</h5><p>📧 your-email@example.com</p><p>📞 +86 123 4567 8910</p><p>📍 Shenzhen, Guangdong, China</p></div>
+    <div class="footer-col"><h5>Follow Us</h5><a href="#">LinkedIn</a><a href="#">WhatsApp</a><a href="#">WeChat</a><a href="#">YouTube</a></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 Your Brand. All rights reserved. | <a href="#" style="display:inline; color:#94a3b8;">Privacy Policy</a></p></div>
+</footer>
+
+<div id="news-modal" class="modal"><div class="modal-content"><span class="modal-close" onclick="closeModal()">&times;</span><h4 id="modal-title"></h4><div id="modal-date" class="date"></div><div id="modal-body"></div></div></div>
+
+<a href="contact.html" class="floating-contact">✉️ Contact Us</a>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  let newsArticles = [];
+  async function loadNews() {
+    try {
+      const repo = 'kehu-1/kehu-1-website';
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/news`);
+      const files = await res.json();
+      const container = document.getElementById('news-container');
+      container.innerHTML = ''; newsArticles = [];
+      if (!Array.isArray(files) || files.length === 0) { container.innerHTML = '<p style="text-align:center;color:#999;width:100%;">No news yet.</p>'; return; }
+      files.sort((a, b) => b.name.localeCompare(a.name));
+      const latestFiles = files.slice(0, 3);
+      for (let i = 0; i < latestFiles.length; i++) {
+        const file = latestFiles[i];
+        const rawRes = await fetch(file.download_url);
+        const text = await rawRes.text();
+        const parts = text.split('---');
+        const frontmatter = parts[1] || '';
+        const bodyContent = parts.slice(2).join('---').trim();
+        const titleMatch = frontmatter.match(/title:\s*(.*)/);
+        const dateMatch = frontmatter.match(/date:\s*(.*)/);
+        const title = titleMatch ? titleMatch[1].trim() : 'Untitled';
+        const date = dateMatch ? dateMatch[1].trim() : '';
+        const htmlBody = marked.parse(bodyContent);
+        const plainText = htmlBody.replace(/<[^>]+>/g, '').trim();
+        const summary = plainText.length > 80 ? plainText.substring(0, 80) + '...' : plainText;
+        newsArticles.push({ title, date, body: htmlBody });
+        const cardHtml = `<div class="news-card"><div class="date">${date}</div><h4>${title}</h4><p style="color:#64748b; margin-top:10px;">${summary}</p><button class="read-more-btn" onclick="openArticle(${i})">Read More →</button></div>`;
+        container.insertAdjacentHTML('beforeend', cardHtml);
+      }
+    } catch (e) { console.error(e); container.innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;">Failed to load news, please refresh.</p>'; }
+  }
+  function openArticle(index) { const article = newsArticles[index]; if (!article) return; document.getElementById('modal-title').innerText = article.title; document.getElementById('modal-date').innerText = article.date; document.getElementById('modal-body').innerHTML = article.body; document.getElementById('news-modal').style.display = 'flex'; }
+  function closeModal() { document.getElementById('news-modal').style.display = 'none'; }
+  loadNews();
+</script>
+
+</body>
+</html>
