@@ -19,11 +19,11 @@
     body { font-family: 'Inter', -apple-system, "Segoe UI", sans-serif; color: var(--text-main); line-height: 1.6; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* ===== 核心：精准对齐容器（2.7cm 宽幅设定） ===== */
-    .header-container, .section-container {
-      max-width: 1720px; /* 对应约 2.7cm 留白 */
+    /* ===== 核心：统一对齐容器（解决边距太窄问题） ===== */
+    .header-container, .section-container, .footer-inner, .news-grid, .vision-inner, .top-news-inner {
+      max-width: 1400px; /* 减小最大宽度，从而增大两侧的留白 */
       margin: 0 auto;    
-      padding: 0 1rem;   /* 进一步收紧内边距 */
+      padding: 0 2rem;   /* 适度的安全边距 */
       width: 100%;
     }
 
@@ -37,7 +37,7 @@
     .header-bottom { border-top: 1px solid rgba(255,255,255,0.05); }
     .header-bottom .nav-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
     
-    /* 【核心对齐修复】：让第一个导航项“首页”向右偏移，与“人工智能”对齐 */
+    /* 【精准对齐】：第一个导航项“首页”向右偏移 1.5rem，以对齐“人工智能”的文字位置 */
     .header-bottom nav a { color: #CBD5E1; font-size: 1rem; margin-right: 3rem; font-weight: 500; }
     .header-bottom nav a:first-child { margin-left: 1.5rem; } 
     .header-bottom nav a:hover, .header-bottom nav a.active { color: var(--tech-green); }
@@ -65,7 +65,7 @@
 
     /* ===== 轮播图下方新闻条 ===== */
     .top-news-section { background: #fff; border-bottom: 1px solid #E5E7EB; padding: 1rem 0; }
-    .top-news-inner { max-width: 1720px; margin: 0 auto; padding: 0 1rem; display: flex; align-items: center; gap: 2rem; }
+    .top-news-inner { display: flex; align-items: center; gap: 2rem; }
     .top-news-inner img { width: 120px; height: 75px; object-fit: cover; }
     .top-news-text { flex: 1; }
     .top-news-text h4 { font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.2rem; }
@@ -143,7 +143,7 @@
     .news-block .section-title { text-align: center; margin-bottom: 4rem; }
     .news-block .section-title h2 { font-size: 2.2rem; font-weight: 800; color: var(--text-main); }
     .news-block .section-title p { color: var(--text-muted); margin-top: 0.5rem; }
-    .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; max-width: 1720px; margin: 0 auto; }
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; margin: 0 auto; }
     .news-card { display: flex; flex-direction: column; transition: 0.3s; cursor: pointer; background: transparent; }
     .news-card img { width: 100%; height: 280px; object-fit: cover; margin-bottom: 1.5rem; }
     .news-card .category { font-size: 0.85rem; font-weight: 700; color: var(--tech-green); text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 1px; }
@@ -154,7 +154,7 @@
 
     /* ===== 愿景大标题 ===== */
     .vision-section { padding: 8rem 0; background: #F8FAFC; }
-    .vision-inner { max-width: 1720px; margin: 0 auto; padding: 0 1rem; display: flex; gap: 5rem; align-items: center; }
+    .vision-inner { margin: 0 auto; display: flex; gap: 5rem; align-items: center; }
     .vision-left { flex: 1.2; }
     .vision-left h2 { font-size: 3rem; font-weight: 800; color: var(--text-main); line-height: 1.2; letter-spacing: -1px; }
     .vision-right { flex: 1; }
@@ -190,7 +190,6 @@
 
     /* ===== 页脚与悬浮按钮 ===== */
     footer { background: var(--dark-bg); color: #9CA3AF; padding: 4rem 0 2rem; font-size: 0.9rem; }
-    .footer-inner { max-width: 1720px; margin: 0 auto; padding: 0 1rem; }
     .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
     .footer-col h5 { color: #fff; font-size: 1.1rem; margin-bottom: 1.2rem; }
     .footer-col p, .footer-col a { color: #9CA3AF; line-height: 2; display: block; }
@@ -216,7 +215,7 @@
       .news-modal-image { padding: 1rem; flex: 0 0 40vh; }
       .news-modal-text { padding: 2rem 1.5rem; }
       .news-modal-text h2 { font-size: 1.8rem; }
-      .vision-inner { flex-direction: column; gap: 2rem; padding: 4rem 2rem; }
+      .vision-inner { flex-direction: column; gap: 2rem; }
       .vision-left h2 { font-size: 2rem; }
       .vision-right img { height: 250px; }
       .slider-section .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
