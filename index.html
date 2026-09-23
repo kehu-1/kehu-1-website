@@ -11,14 +11,14 @@
     body { font-family: 'Inter', -apple-system, "Segoe UI", sans-serif; color: #111827; line-height: 1.6; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* ===== 西门子风格双层导航栏（黑白灰底色） ===== */
+    /* ===== 西门子风格双层导航栏（黑白灰底色，去掉白杠） ===== */
     header { position: fixed; top: 0; width: 100%; background: #111827; z-index: 1000; display: flex; flex-direction: column; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
     .header-top { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; }
     .header-top .logo { font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
     .header-top .tools { display: flex; align-items: center; gap: 1.5rem; color: #fff; font-size: 0.9rem; }
     .header-top .tools a { color: #9ca3af; }
     .header-top .tools a:hover { color: #CCFF00; }
-    .header-bottom { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; border-top: 1px solid rgba(255,255,255,0.05); }
+    .header-bottom { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; }
     .header-bottom nav a { color: #9ca3af; font-size: 1rem; margin-right: 2.5rem; font-weight: 500; }
     .header-bottom nav a:hover, .header-bottom nav a.active { color: #CCFF00; }
 
@@ -36,20 +36,29 @@
     .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: 0.3s; }
     .dot.active { background: #CCFF00; transform: scale(1.2); }
 
-    /* ===== 客户故事区（中间放大+左右粘性跟随） ===== */
+    /* ===== 轮播图下方新闻条（图三排版，最新一条，带滑块） ===== */
+    .top-news-section { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 2rem 5%; }
+    .top-news-slider { max-width: 1400px; margin: 0 auto; position: relative; overflow: hidden; }
+    .top-news-track { display: flex; transition: transform 0.5s ease; }
+    .top-news-slide { flex: 0 0 100%; display: flex; align-items: center; gap: 2rem; }
+    .top-news-slide img { width: 120px; height: 80px; object-fit: cover; border-radius: 4px; }
+    .top-news-slide .text { flex: 1; }
+    .top-news-slide .text h4 { font-size: 1.25rem; font-weight: 700; color: #111827; margin-bottom: 0.3rem; }
+    .top-news-slide .text p { font-size: 0.95rem; color: #4b5563; margin: 0; }
+    .top-news-slide .btn-outline { padding: 0.8rem 1.5rem; border: 2px solid #111827; color: #111827; font-weight: 700; white-space: nowrap; background: transparent; cursor: pointer; transition: 0.3s; }
+    .top-news-slide .btn-outline:hover { background: #111827; color: #CCFF00; }
+
+    /* ===== 客户故事区（中间放大+左右粘性跟随+阅读链接） ===== */
     .story-section { display: grid; grid-template-columns: 240px 1fr 320px; gap: 3rem; padding: 6rem 5%; max-width: 1600px; margin: 0 auto; align-items: start; }
-    
-    /* 左侧选项：粘性跟随 */
     .story-tabs { display: flex; flex-direction: column; gap: 0.5rem; position: sticky; top: 120px; }
     .story-tab { padding: 1.2rem 1.5rem; font-size: 1.1rem; font-weight: 500; color: #6b7280; cursor: pointer; transition: 0.3s; border-left: 3px solid transparent; }
     .story-tab:hover { color: #111827; background: #f3f4f6; }
     .story-tab.active { color: #111827; background: #ecfccb; border-left-color: #CCFF00; font-weight: 700; }
-
-    /* 中间大图：放大到 650px 高度 */
-    .story-main { display: flex; align-items: flex-start; justify-content: center; overflow: hidden; }
+    .story-main { display: flex; flex-direction: column; overflow: hidden; }
     .story-main img { width: 100%; height: 650px; object-fit: cover; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-
-    /* 右侧卡片：粘性跟随 */
+    /* 新增：阅读客户故事链接 */
+    .story-link { display: inline-block; margin-top: 1rem; color: #111827; font-weight: 700; font-size: 0.95rem; border-bottom: 2px solid #CCFF00; padding-bottom: 2px; width: fit-content; }
+    .story-link:hover { color: #CCFF00; }
     .story-side { display: flex; flex-direction: column; gap: 2rem; position: sticky; top: 120px; }
     .story-card { background: #111827; color: #fff; padding: 2.5rem; border-radius: 4px; }
     .story-card h4 { font-size: 1.4rem; margin-bottom: 1rem; font-weight: 700; }
@@ -66,15 +75,12 @@
     .slider-section .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
     .slider-section .section-header h2 { font-size: 2.2rem; font-weight: 800; color: #111827; }
     .slider-section .section-header p { color: #6b7280; font-size: 1.1rem; }
-    
-    /* 胶囊滑动控制条 */
     .slider-controls-capsule { display: flex; align-items: center; justify-content: center; gap: 1rem; background: #e5e7eb; padding: 0.6rem 1.5rem; border-radius: 50px; }
     .slider-controls-capsule button { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #6b7280; transition: 0.3s; line-height: 1; }
     .slider-controls-capsule button:hover { color: #111827; }
     .slider-dots { display: flex; gap: 0.5rem; align-items: center; }
     .slider-dot { width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; transition: 0.3s; }
     .slider-dot.active { width: 24px; border-radius: 4px; background: #111827; }
-
     .slider-container { position: relative; width: 100%; overflow: hidden; }
     .slider-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); gap: 2rem; }
     .slider-card { flex: 0 0 calc((100% - 4rem) / 3); background: #fff; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.03); display: flex; flex-direction: column; }
@@ -85,24 +91,11 @@
     .slider-card-info .link { color: #111827; font-weight: 600; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
     .slider-card-info .link:hover { color: #CCFF00; }
 
-    /* ===== 新闻区块 ===== */
+    /* ===== 新闻区块（下方网格区） ===== */
     .news-block { padding: 6rem 5%; background: #fff; }
     .news-block .section-title { text-align: center; margin-bottom: 4rem; }
     .news-block .section-title h2 { font-size: 2.2rem; font-weight: 800; color: #111827; }
     .news-block .section-title p { color: #6b7280; margin-top: 0.5rem; }
-    
-    .recent-news-bar { background: #f9fafb; border: 1px solid #e5e7eb; padding: 1.5rem 2rem; display: flex; align-items: center; border-radius: 4px; margin-bottom: 4rem; }
-    .recent-news-track { display: flex; gap: 3rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; flex: 1; padding-right: 2rem; }
-    .recent-news-track::-webkit-scrollbar { display: none; }
-    .recent-news-item { flex: 0 0 450px; scroll-snap-align: start; display: flex; align-items: center; gap: 1.5rem; cursor: pointer; }
-    .recent-news-item img { width: 100px; height: 70px; object-fit: cover; border-radius: 4px; }
-    .recent-news-item .info h5 { font-size: 1rem; font-weight: 700; color: #111827; margin-bottom: 0.3rem; }
-    .recent-news-item .info p { font-size: 0.85rem; color: #6b7280; }
-    .recent-news-item .info .date { font-size: 0.75rem; color: #9ca3af; }
-    .recent-news-nav { display: flex; gap: 0.5rem; }
-    .recent-news-nav button { background: #fff; border: 1px solid #d1d5db; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; color: #6b7280; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
-    .recent-news-nav button:hover { background: #111827; color: #CCFF00; border-color: #111827; }
-
     .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
     .news-card { background: #fff; padding: 2rem; border-radius: 4px; border: 1px solid #e5e7eb; display: flex; flex-direction: column; transition: 0.3s; cursor: pointer; }
     .news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-color: #CCFF00; }
@@ -172,7 +165,6 @@
       .news-modal-image { padding: 1rem; flex: 0 0 40vh; }
       .news-modal-text { padding: 2rem 1.5rem; }
       .news-modal-text h2 { font-size: 1.8rem; }
-      .recent-news-item { flex: 0 0 300px; }
       .vision-section { flex-direction: column; gap: 2rem; padding: 4rem 5%; }
       .vision-left h2 { font-size: 2rem; }
       .slider-section .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
@@ -225,9 +217,24 @@
   </div>
 </div>
 
-<!-- 2. 客户故事区（中间大图放大，左右粘性跟随） -->
+<!-- 2. 轮播图下方新闻条（图三排版，最新一条，带滑块） -->
+<div class="top-news-section">
+  <div class="top-news-slider">
+    <div class="top-news-track" id="top-news-track">
+      <!-- 由 JS 动态生成 -->
+    </div>
+    <div style="display:flex; justify-content:flex-end; margin-top:1rem;">
+      <div class="slider-controls-capsule" id="top-news-controls">
+        <button onclick="slideTrack('top-news-track', -1, 'top-news-controls')">‹</button>
+        <div class="slider-dots" id="top-news-dots"></div>
+        <button onclick="slideTrack('top-news-track', 1, 'top-news-controls')">›</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. 客户故事区（中间放大+左右粘性跟随+阅读链接） -->
 <div class="story-section">
-  <!-- 左侧粘性选项卡 -->
   <div class="story-tabs">
     <div class="story-tab active" onclick="switchStory(0)">人工智能</div>
     <div class="story-tab" onclick="switchStory(1)">数字孪生</div>
@@ -235,11 +242,11 @@
     <div class="story-tab" onclick="switchStory(3)">软件定义自动化</div>
     <div class="story-tab" onclick="switchStory(4)">可持续性</div>
   </div>
-  <!-- 中间大图 -->
   <div class="story-main">
     <img id="story-image" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Story Image">
+    <!-- 新增：阅读客户故事导航 -->
+    <a href="#" class="story-link" id="story-link">阅读客户故事 →</a>
   </div>
-  <!-- 右侧粘性卡片 -->
   <div class="story-side">
     <div class="story-card">
       <h4>客户故事</h4>
@@ -254,7 +261,7 @@
   </div>
 </div>
 
-<!-- 3. 产品滑动区 -->
+<!-- 4. 产品滑动区 -->
 <div class="slider-section gray-bg">
   <div class="section-header">
     <div>
@@ -295,7 +302,7 @@
   </div>
 </div>
 
-<!-- 4. 解决方案滑动区 -->
+<!-- 5. 解决方案滑动区 -->
 <div class="slider-section">
   <div class="section-header">
     <div>
@@ -336,27 +343,18 @@
   </div>
 </div>
 
-<!-- 5. 新闻区块 -->
+<!-- 6. 新闻区块（下方网格区） -->
 <div class="news-block">
   <div class="section-title">
     <h2>新闻动态</h2>
     <p>了解我们的最新动态和行业资讯</p>
   </div>
-  
-  <div class="recent-news-bar">
-    <div class="recent-news-track" id="recent-track"></div>
-    <div class="recent-news-nav">
-      <button onclick="scrollRecent(-1)">‹</button>
-      <button onclick="scrollRecent(1)">›</button>
-    </div>
-  </div>
-
   <div class="news-grid" id="news-container">
     <p style="text-align:center; color:#999; width:100%;">正在加载新闻...</p>
   </div>
 </div>
 
-<!-- 6. 愿景大标题 -->
+<!-- 7. 愿景大标题 -->
 <div class="vision-section">
   <div class="vision-left">
     <h2>我们旨在通过业务活动解决社会问题，实现可持续发展</h2>
@@ -367,7 +365,7 @@
   </div>
 </div>
 
-<!-- 7. 社交媒体区 -->
+<!-- 8. 社交媒体区 -->
 <div class="social-section">
   <div class="section-header" style="margin-bottom: 2rem;">
     <h2 style="font-size: 2.2rem; font-weight: 800; color: #111827; margin-bottom: 0.5rem;">社交媒体</h2>
@@ -380,7 +378,6 @@
     <div class="social-tab"><span>▶️</span> YouTube</div>
     <div class="social-tab"><span>🎵</span> TikTok</div>
   </div>
-  
   <div class="slider-container social-slider-wrapper">
     <div class="social-track" id="social-track">
       <div class="social-card">
@@ -472,16 +469,18 @@
   const sliderStates = {
     'product-track': { current: 0, total: 0 },
     'solution-track': { current: 0, total: 0 },
-    'social-track': { current: 0, total: 0 }
+    'social-track': { current: 0, total: 0 },
+    'top-news-track': { current: 0, total: 0 }
   };
 
   function initSlider(trackId, dotsId) {
     const track = document.getElementById(trackId);
-    const container = track.parentElement;
-    const cards = track.querySelectorAll('.slider-card, .social-card');
+    const cards = track.querySelectorAll('.slider-card, .social-card, .top-news-slide');
     const dotsContainer = document.getElementById(dotsId);
     
-    const pageSize = 3;
+    let pageSize = 3;
+    if (trackId === 'top-news-track') pageSize = 1; // 新闻条每次只显示1个
+    
     const totalPages = Math.ceil(cards.length / pageSize);
     sliderStates[trackId].total = totalPages;
     
@@ -497,8 +496,9 @@
   function goToPage(trackId, pageIndex) {
     const track = document.getElementById(trackId);
     const container = track.parentElement;
-    const cards = track.querySelectorAll('.slider-card, .social-card');
-    const pageSize = 3;
+    const cards = track.querySelectorAll('.slider-card, .social-card, .top-news-slide');
+    let pageSize = 3;
+    if (trackId === 'top-news-track') pageSize = 1;
     
     if (pageIndex < 0) pageIndex = 0;
     if (pageIndex >= Math.ceil(cards.length / pageSize)) pageIndex = Math.ceil(cards.length / pageSize) - 1;
@@ -507,27 +507,18 @@
     track.style.transform = `translateX(-${scrollAmount}px)`;
     
     sliderStates[trackId].current = pageIndex;
-    const dots = document.getElementById(trackId.replace('-track', '-dots')).children;
-    for (let i = 0; i < dots.length; i++) {
-      dots[i].classList.toggle('active', i === pageIndex);
+    const dotsId = trackId.replace('-track', '-dots');
+    const dots = document.getElementById(dotsId)?.children;
+    if (dots) {
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].classList.toggle('active', i === pageIndex);
+      }
     }
   }
 
   function slideTrack(trackId, direction, controlsId) {
     const state = sliderStates[trackId];
     goToPage(trackId, state.current + direction);
-  }
-
-  window.addEventListener('load', () => {
-    initSlider('product-track', 'product-dots');
-    initSlider('solution-track', 'solution-dots');
-    initSlider('social-track', 'social-dots');
-  });
-
-  // 小框最近新闻滑动逻辑
-  function scrollRecent(direction) {
-    const track = document.getElementById('recent-track');
-    track.scrollBy({ left: direction * 480, behavior: 'smooth' });
   }
 
   // 新闻加载逻辑
@@ -538,12 +529,12 @@
       const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/news`);
       const files = await res.json();
       const container = document.getElementById('news-container');
-      const recentTrack = document.getElementById('recent-track');
-      container.innerHTML = ''; recentTrack.innerHTML = ''; newsArticles = [];
+      const topTrack = document.getElementById('top-news-track');
+      container.innerHTML = ''; topTrack.innerHTML = ''; newsArticles = [];
       
       if (!Array.isArray(files) || files.length === 0) { 
         container.innerHTML = '<p style="text-align:center;color:#999;width:100%;">暂无新闻动态。</p>'; 
-        recentTrack.innerHTML = '<p style="color:#999;">暂无最近新闻</p>';
+        topTrack.innerHTML = '<p style="color:#999;padding:1rem;">暂无最近新闻</p>';
         return; 
       }
       
@@ -574,6 +565,7 @@
         const summary = plainText.length > 80 ? plainText.substring(0, 80) + '...' : plainText;
         newsArticles.push({ title, date, body: htmlBody, img: coverImg });
 
+        // 渲染下方新闻网格卡片
         const cardHtml = `
           <div class="news-card" onclick="openNewsModal(${i})">
             <div class="date">${date}</div>
@@ -584,22 +576,26 @@
         `;
         container.insertAdjacentHTML('beforeend', cardHtml);
 
-        const recentItemHtml = `
-          <div class="recent-news-item" onclick="openNewsModal(${i})">
+        // 渲染轮播图下方的新闻条（图三排版）
+        const topSlideHtml = `
+          <div class="top-news-slide" onclick="openNewsModal(${i})" style="cursor:pointer;">
             <img src="${coverImg}" alt="${title}">
-            <div class="info">
-              <h5>${title}</h5>
-              <p>${summary.substring(0, 40)}...</p>
-              <span class="date">${date}</span>
+            <div class="text">
+              <h4>${title}</h4>
+              <p>${summary}</p>
             </div>
+            <button class="btn-outline">阅读更多 →</button>
           </div>
         `;
-        recentTrack.insertAdjacentHTML('beforeend', recentItemHtml);
+        topTrack.insertAdjacentHTML('beforeend', topSlideHtml);
       }
+      
+      // 初始化轮播图下方的新闻滑块
+      initSlider('top-news-track', 'top-news-dots');
+      
     } catch (e) { 
       console.error(e); 
       document.getElementById('news-container').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;">加载新闻失败，请刷新。</p>'; 
-      document.getElementById('recent-track').innerHTML = '<p style="color:#e74c39;">加载失败</p>';
     }
   }
 
@@ -618,7 +614,13 @@
     document.body.style.overflow = 'auto';
   }
 
-  loadNews();
+  // 初始化所有滑动区（页面加载完成后）
+  window.addEventListener('load', () => {
+    initSlider('product-track', 'product-dots');
+    initSlider('solution-track', 'solution-dots');
+    initSlider('social-track', 'social-dots');
+    loadNews();
+  });
 </script>
 </body>
 </html>
