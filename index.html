@@ -11,7 +11,7 @@
     body { font-family: 'Inter', -apple-system, "Segoe UI", sans-serif; color: #111827; line-height: 1.6; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* ===== 西门子风格双层导航栏（黑白灰底色，去掉白杠） ===== */
+    /* ===== 西门子风格双层导航栏 ===== */
     header { position: fixed; top: 0; width: 100%; background: #111827; z-index: 1000; display: flex; flex-direction: column; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
     .header-top { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; }
     .header-top .logo { font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
@@ -22,11 +22,11 @@
     .header-bottom nav a { color: #9ca3af; font-size: 1rem; margin-right: 2.5rem; font-weight: 500; }
     .header-bottom nav a:hover, .header-bottom nav a.active { color: #CCFF00; }
 
-    /* ===== 主轮播图 ===== */
-    .hero { position: relative; height: 80vh; margin-top: 104px; overflow: hidden; background: #111827; }
+    /* ===== 主轮播图（高度加大，占满屏幕） ===== */
+    .hero { position: relative; height: calc(100vh - 104px); margin-top: 104px; overflow: hidden; background: #111827; }
     .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s; display: flex; align-items: center; padding: 0 8%; }
     .slide.active { opacity: 1; z-index: 1; }
-    .slide::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(17,24,39,0.7), rgba(17,24,39,0.7)); z-index: 1; }
+    .slide::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(17,24,39,0.75), rgba(17,24,39,0.75)); z-index: 1; }
     .slide-content { position: relative; z-index: 2; max-width: 700px; color: #fff; }
     .slide-content h1 { font-size: 4rem; line-height: 1.1; font-weight: 800; margin-bottom: 1rem; letter-spacing: -1px; }
     .slide-content p { font-size: 1.2rem; font-weight: 300; color: #d1d5db; margin-bottom: 2.5rem; }
@@ -36,19 +36,17 @@
     .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: 0.3s; }
     .dot.active { background: #CCFF00; transform: scale(1.2); }
 
-    /* ===== 轮播图下方新闻条（图三排版，最新一条，带滑块） ===== */
-    .top-news-section { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 2rem 5%; }
-    .top-news-slider { max-width: 1400px; margin: 0 auto; position: relative; overflow: hidden; }
-    .top-news-track { display: flex; transition: transform 0.5s ease; }
-    .top-news-slide { flex: 0 0 100%; display: flex; align-items: center; gap: 2rem; }
-    .top-news-slide img { width: 120px; height: 80px; object-fit: cover; border-radius: 4px; }
-    .top-news-slide .text { flex: 1; }
-    .top-news-slide .text h4 { font-size: 1.25rem; font-weight: 700; color: #111827; margin-bottom: 0.3rem; }
-    .top-news-slide .text p { font-size: 0.95rem; color: #4b5563; margin: 0; }
-    .top-news-slide .btn-outline { padding: 0.8rem 1.5rem; border: 2px solid #111827; color: #111827; font-weight: 700; white-space: nowrap; background: transparent; cursor: pointer; transition: 0.3s; }
-    .top-news-slide .btn-outline:hover { background: #111827; color: #CCFF00; }
+    /* ===== 轮播图下方新闻条（静态显示最新一篇，无滑动） ===== */
+    .top-news-section { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 2rem 5%; display: flex; align-items: center; justify-content: center; }
+    .top-news-inner { max-width: 1400px; width: 100%; display: flex; align-items: center; gap: 2rem; }
+    .top-news-inner img { width: 120px; height: 80px; object-fit: cover; border-radius: 4px; }
+    .top-news-text { flex: 1; }
+    .top-news-text h4 { font-size: 1.25rem; font-weight: 700; color: #111827; margin-bottom: 0.3rem; }
+    .top-news-text p { font-size: 0.95rem; color: #4b5563; margin: 0; }
+    .btn-outline { padding: 0.8rem 1.5rem; border: 2px solid #111827; color: #111827; font-weight: 700; white-space: nowrap; background: transparent; cursor: pointer; transition: 0.3s; }
+    .btn-outline:hover { background: #111827; color: #CCFF00; }
 
-    /* ===== 客户故事区（中间放大+左右粘性跟随+阅读链接） ===== */
+    /* ===== 客户故事区 ===== */
     .story-section { display: grid; grid-template-columns: 240px 1fr 320px; gap: 3rem; padding: 6rem 5%; max-width: 1600px; margin: 0 auto; align-items: start; }
     .story-tabs { display: flex; flex-direction: column; gap: 0.5rem; position: sticky; top: 120px; }
     .story-tab { padding: 1.2rem 1.5rem; font-size: 1.1rem; font-weight: 500; color: #6b7280; cursor: pointer; transition: 0.3s; border-left: 3px solid transparent; }
@@ -56,7 +54,6 @@
     .story-tab.active { color: #111827; background: #ecfccb; border-left-color: #CCFF00; font-weight: 700; }
     .story-main { display: flex; flex-direction: column; overflow: hidden; }
     .story-main img { width: 100%; height: 650px; object-fit: cover; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-    /* 新增：阅读客户故事链接 */
     .story-link { display: inline-block; margin-top: 1rem; color: #111827; font-weight: 700; font-size: 0.95rem; border-bottom: 2px solid #CCFF00; padding-bottom: 2px; width: fit-content; }
     .story-link:hover { color: #CCFF00; }
     .story-side { display: flex; flex-direction: column; gap: 2rem; position: sticky; top: 120px; }
@@ -169,6 +166,9 @@
       .vision-left h2 { font-size: 2rem; }
       .slider-section .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
       .slider-controls-capsule { display: none; }
+      .top-news-inner { flex-direction: column; text-align: center; gap: 1rem; }
+      .top-news-inner img { width: 100%; height: 200px; }
+      .top-news-inner .btn-outline { width: 100%; }
     }
   </style>
 </head>
@@ -195,7 +195,7 @@
   </div>
 </header>
 
-<!-- 1. 主轮播图 -->
+<!-- 1. 主轮播图（保留左右滑动，面积像图二一样大） -->
 <div class="hero">
   <div class="slide active" style="background: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;">
     <div class="slide-content">
@@ -217,23 +217,15 @@
   </div>
 </div>
 
-<!-- 2. 轮播图下方新闻条（图三排版，最新一条，带滑块） -->
+<!-- 2. 轮播图下方新闻条（静态最新一篇，无滑动） -->
 <div class="top-news-section">
-  <div class="top-news-slider">
-    <div class="top-news-track" id="top-news-track">
-      <!-- 由 JS 动态生成 -->
-    </div>
-    <div style="display:flex; justify-content:flex-end; margin-top:1rem;">
-      <div class="slider-controls-capsule" id="top-news-controls">
-        <button onclick="slideTrack('top-news-track', -1, 'top-news-controls')">‹</button>
-        <div class="slider-dots" id="top-news-dots"></div>
-        <button onclick="slideTrack('top-news-track', 1, 'top-news-controls')">›</button>
-      </div>
-    </div>
+  <div class="top-news-inner" id="latest-news-container">
+    <!-- 由 JS 动态填充最新一篇 -->
+    <p style="color:#999; text-align:center; width:100%;">正在加载最新新闻...</p>
   </div>
 </div>
 
-<!-- 3. 客户故事区（中间放大+左右粘性跟随+阅读链接） -->
+<!-- 3. 客户故事区 -->
 <div class="story-section">
   <div class="story-tabs">
     <div class="story-tab active" onclick="switchStory(0)">人工智能</div>
@@ -244,7 +236,6 @@
   </div>
   <div class="story-main">
     <img id="story-image" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Story Image">
-    <!-- 新增：阅读客户故事导航 -->
     <a href="#" class="story-link" id="story-link">阅读客户故事 →</a>
   </div>
   <div class="story-side">
@@ -465,22 +456,19 @@
     document.getElementById('story-focus').innerText = storyData[index].focus;
   }
 
-  // 通用滑动逻辑（带胶囊控制条）
+  // 通用滑动逻辑（带胶囊控制条，用于产品和社交媒体区域）
   const sliderStates = {
     'product-track': { current: 0, total: 0 },
     'solution-track': { current: 0, total: 0 },
-    'social-track': { current: 0, total: 0 },
-    'top-news-track': { current: 0, total: 0 }
+    'social-track': { current: 0, total: 0 }
   };
 
   function initSlider(trackId, dotsId) {
     const track = document.getElementById(trackId);
-    const cards = track.querySelectorAll('.slider-card, .social-card, .top-news-slide');
+    const cards = track.querySelectorAll('.slider-card, .social-card');
     const dotsContainer = document.getElementById(dotsId);
     
-    let pageSize = 3;
-    if (trackId === 'top-news-track') pageSize = 1; // 新闻条每次只显示1个
-    
+    const pageSize = 3;
     const totalPages = Math.ceil(cards.length / pageSize);
     sliderStates[trackId].total = totalPages;
     
@@ -496,9 +484,8 @@
   function goToPage(trackId, pageIndex) {
     const track = document.getElementById(trackId);
     const container = track.parentElement;
-    const cards = track.querySelectorAll('.slider-card, .social-card, .top-news-slide');
-    let pageSize = 3;
-    if (trackId === 'top-news-track') pageSize = 1;
+    const cards = track.querySelectorAll('.slider-card, .social-card');
+    const pageSize = 3;
     
     if (pageIndex < 0) pageIndex = 0;
     if (pageIndex >= Math.ceil(cards.length / pageSize)) pageIndex = Math.ceil(cards.length / pageSize) - 1;
@@ -521,7 +508,7 @@
     goToPage(trackId, state.current + direction);
   }
 
-  // 新闻加载逻辑
+  // 新闻加载逻辑（只提取最新一篇用于顶部展示，其余用于下方网格）
   let newsArticles = [];
   async function loadNews() {
     try {
@@ -529,12 +516,12 @@
       const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/news`);
       const files = await res.json();
       const container = document.getElementById('news-container');
-      const topTrack = document.getElementById('top-news-track');
-      container.innerHTML = ''; topTrack.innerHTML = ''; newsArticles = [];
+      const latestContainer = document.getElementById('latest-news-container');
+      container.innerHTML = ''; newsArticles = [];
       
       if (!Array.isArray(files) || files.length === 0) { 
         container.innerHTML = '<p style="text-align:center;color:#999;width:100%;">暂无新闻动态。</p>'; 
-        topTrack.innerHTML = '<p style="color:#999;padding:1rem;">暂无最近新闻</p>';
+        latestContainer.innerHTML = '<p style="color:#999;text-align:center;width:100%;">暂无最新新闻</p>';
         return; 
       }
       
@@ -576,26 +563,24 @@
         `;
         container.insertAdjacentHTML('beforeend', cardHtml);
 
-        // 渲染轮播图下方的新闻条（图三排版）
-        const topSlideHtml = `
-          <div class="top-news-slide" onclick="openNewsModal(${i})" style="cursor:pointer;">
+        // 渲染顶部最新新闻（只渲染第一条）
+        if (i === 0) {
+          const latestHtml = `
             <img src="${coverImg}" alt="${title}">
-            <div class="text">
+            <div class="top-news-text">
               <h4>${title}</h4>
               <p>${summary}</p>
             </div>
-            <button class="btn-outline">阅读更多 →</button>
-          </div>
-        `;
-        topTrack.insertAdjacentHTML('beforeend', topSlideHtml);
+            <button class="btn-outline" onclick="openNewsModal(0)">阅读更多 →</button>
+          `;
+          latestContainer.innerHTML = latestHtml;
+        }
       }
-      
-      // 初始化轮播图下方的新闻滑块
-      initSlider('top-news-track', 'top-news-dots');
       
     } catch (e) { 
       console.error(e); 
       document.getElementById('news-container').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;">加载新闻失败，请刷新。</p>'; 
+      document.getElementById('latest-news-container').innerHTML = '<p style="color:#e74c39;text-align:center;width:100%;">加载失败</p>';
     }
   }
 
