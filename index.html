@@ -19,11 +19,11 @@
     body { font-family: 'Inter', -apple-system, "Segoe UI", sans-serif; color: var(--text-main); line-height: 1.6; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* ===== 全局内容容器（保证导航栏与内容对齐） ===== */
+    /* ===== 核心：统一对齐容器（图一改图二的关键） ===== */
     .header-container, .section-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 5%;
+      max-width: 1280px; /* 西门子标准内容宽度 */
+      margin: 0 auto;    /* 居中对齐 */
+      padding: 0 2rem;   /* 两侧留出安全边距 */
       width: 100%;
     }
 
@@ -61,7 +61,7 @@
 
     /* ===== 轮播图下方新闻条 ===== */
     .top-news-section { background: #fff; border-bottom: 1px solid #E5E7EB; padding: 1rem 0; }
-    .top-news-inner { max-width: 1400px; margin: 0 auto; padding: 0 5%; display: flex; align-items: center; gap: 2rem; }
+    .top-news-inner { max-width: 1280px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; gap: 2rem; }
     .top-news-inner img { width: 120px; height: 75px; object-fit: cover; }
     .top-news-text { flex: 1; }
     .top-news-text h4 { font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.2rem; }
@@ -73,7 +73,6 @@
     .story-section { padding: 6rem 0; }
     .story-grid { display: grid; grid-template-columns: 240px 1fr 320px; gap: 3rem; align-items: start; }
     .story-tabs { display: flex; flex-direction: column; position: sticky; top: 140px; }
-    /* 图二：框高低收窄 */
     .story-tab { padding: 0.8rem 1.5rem; font-size: 1.1rem; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: 0.3s; border-left: 2px solid #E5E7EB; }
     .story-tab:hover { color: var(--text-main); background: #F3F4F6; }
     .story-tab.active { color: var(--text-main); background: var(--tech-green-light); border-left-color: var(--tech-green); font-weight: 700; }
@@ -101,7 +100,6 @@
     .slider-section .section-header h2 { font-size: 2.2rem; font-weight: 800; color: var(--text-main); }
     .slider-section .section-header p { color: var(--text-muted); font-size: 1.1rem; }
     
-    /* 图五、图六：增加小标签和按钮 */
     .section-label { font-size: 0.9rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem; display: block; text-transform: uppercase; }
     .market-btn { display: inline-block; padding: 0.8rem 2rem; border: 2px solid var(--text-main); color: var(--text-main); font-weight: 700; margin-top: 1.5rem; transition: 0.3s; }
     .market-btn:hover { background: var(--text-main); color: var(--tech-green); }
@@ -115,7 +113,7 @@
     .slider-container { position: relative; width: 100%; overflow: hidden; }
     .slider-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); gap: 2rem; }
     
-    /* 产品卡片（图三改图四：白底图文，图片在上，文字在下） */
+    /* 产品卡片（白底图文） */
     .slider-card { flex: 0 0 calc((100% - 4rem) / 3); background: #fff; display: flex; flex-direction: column; transition: 0.3s; }
     .slider-card img { width: 100%; height: 260px; object-fit: cover; }
     .slider-card-info { padding: 2.5rem 2rem; flex-grow: 1; display: flex; flex-direction: column; background: #fff; }
@@ -124,7 +122,7 @@
     .slider-card-info .link { color: var(--text-main); font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
     .slider-card-info .link:hover { color: var(--tech-green); }
 
-    /* 解决方案卡片（保持悬浮文字） */
+    /* 解决方案卡片（悬浮文字） */
     .solution-card { position: relative; flex: 0 0 calc((100% - 4rem) / 3); height: 480px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 3rem 2rem; color: #fff; }
     .solution-card img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; transition: transform 0.6s ease; }
     .solution-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(transparent 20%, rgba(0,0,0,0.85) 100%); z-index: 2; }
@@ -139,7 +137,7 @@
     .news-block .section-title { text-align: center; margin-bottom: 4rem; }
     .news-block .section-title h2 { font-size: 2.2rem; font-weight: 800; color: var(--text-main); }
     .news-block .section-title p { color: var(--text-muted); margin-top: 0.5rem; }
-    .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; max-width: 1400px; margin: 0 auto; }
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; max-width: 1280px; margin: 0 auto; }
     .news-card { display: flex; flex-direction: column; transition: 0.3s; cursor: pointer; background: transparent; }
     .news-card img { width: 100%; height: 280px; object-fit: cover; margin-bottom: 1.5rem; }
     .news-card .category { font-size: 0.85rem; font-weight: 700; color: var(--tech-green); text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 1px; }
@@ -150,7 +148,7 @@
 
     /* ===== 愿景大标题 ===== */
     .vision-section { padding: 8rem 0; background: #F8FAFC; }
-    .vision-inner { max-width: 1400px; margin: 0 auto; padding: 0 5%; display: flex; gap: 5rem; align-items: center; }
+    .vision-inner { max-width: 1280px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 5rem; align-items: center; }
     .vision-left { flex: 1.2; }
     .vision-left h2 { font-size: 3rem; font-weight: 800; color: var(--text-main); line-height: 1.2; letter-spacing: -1px; }
     .vision-right { flex: 1; }
@@ -186,7 +184,7 @@
 
     /* ===== 页脚与悬浮按钮 ===== */
     footer { background: var(--dark-bg); color: #9CA3AF; padding: 4rem 0 2rem; font-size: 0.9rem; }
-    .footer-inner { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
+    .footer-inner { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
     .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
     .footer-col h5 { color: #fff; font-size: 1.1rem; margin-bottom: 1.2rem; }
     .footer-col p, .footer-col a { color: #9CA3AF; line-height: 2; display: block; }
@@ -211,7 +209,7 @@
       .news-modal-image { padding: 1rem; flex: 0 0 40vh; }
       .news-modal-text { padding: 2rem 1.5rem; }
       .news-modal-text h2 { font-size: 1.8rem; }
-      .vision-inner { flex-direction: column; gap: 2rem; padding: 4rem 5%; }
+      .vision-inner { flex-direction: column; gap: 2rem; padding: 4rem 2rem; }
       .vision-left h2 { font-size: 2rem; }
       .vision-right img { height: 250px; }
       .slider-section .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
@@ -224,7 +222,7 @@
 </head>
 <body>
 
-<!-- 导航栏（图一：内容对齐） -->
+<!-- 导航栏（图一改图二：统一使用 header-container 对齐） -->
 <header>
   <div class="header-container header-top">
     <div class="logo">你的品牌名</div>
@@ -250,7 +248,7 @@
   </div>
 </header>
 
-<!-- 1. 主轮播图 -->
+<!-- 1. 主轮播图（内容限制在 section-container 内） -->
 <div class="hero">
   <div class="slide active" style="background: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;">
     <div class="section-container slide-content">
@@ -276,14 +274,14 @@
   </div>
 </div>
 
-<!-- 2. 轮播图下方新闻条 -->
+<!-- 2. 轮播图下方新闻条（限制在 1280px 内） -->
 <div class="top-news-section">
   <div class="top-news-inner" id="latest-news-container">
     <p style="color:#999; text-align:center; width:100%;">正在加载最新新闻...</p>
   </div>
 </div>
 
-<!-- 3. 客户故事区 -->
+<!-- 3. 客户故事区（限制在 section-container 内） -->
 <div class="story-section">
   <div class="section-container story-grid">
     <div class="story-tabs">
@@ -312,12 +310,11 @@
   </div>
 </div>
 
-<!-- 4. 产品滑动区（图三改图四：白底图文，图片在上） -->
+<!-- 4. 产品滑动区（限制在 section-container 内） -->
 <div class="slider-section gray-bg">
   <div class="section-container">
     <div class="section-header">
       <div>
-        <!-- 图六变图五：增加小标签“市场”和带边框的“前往市场”按钮 -->
         <span class="section-label">市场</span>
         <h2>发现产品和服务</h2>
         <p>探索各种模块化且互操作的产品、服务和解决方案</p>
@@ -326,7 +323,6 @@
     </div>
     <div class="slider-container">
       <div class="slider-track" id="product-track">
-        <!-- 产品卡片改为白底图文模式 -->
         <div class="slider-card">
           <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Product 1">
           <div class="slider-card-info"><h4>Xcelerator 平台</h4><p>助力企业实现数字化转型，从设计到运营全面优化。</p><a href="products.html" class="link">了解更多 →</a></div>
@@ -355,7 +351,7 @@
   </div>
 </div>
 
-<!-- 5. 解决方案滑动区（保持悬浮文字） -->
+<!-- 5. 解决方案滑动区（限制在 section-container 内） -->
 <div class="slider-section">
   <div class="section-container">
     <div class="section-header">
@@ -366,7 +362,6 @@
     </div>
     <div class="slider-container">
       <div class="slider-track" id="solution-track">
-        <!-- 解决方案使用 solution-card 类 -->
         <div class="solution-card">
           <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Solution 1">
           <div class="sol-content">
@@ -411,7 +406,7 @@
   </div>
 </div>
 
-<!-- 6. 新闻区块（保持上次修改的图七排版） -->
+<!-- 6. 新闻区块（限制在 section-container 内） -->
 <div class="news-block">
   <div class="section-container">
     <div class="section-title">
@@ -424,7 +419,7 @@
   </div>
 </div>
 
-<!-- 7. 愿景大标题 -->
+<!-- 7. 愿景大标题（限制在 1280px 内） -->
 <div class="vision-section">
   <div class="vision-inner">
     <div class="vision-left">
@@ -436,7 +431,7 @@
   </div>
 </div>
 
-<!-- 8. 社交媒体区 -->
+<!-- 8. 社交媒体区（限制在 section-container 内） -->
 <div class="social-section">
   <div class="section-container">
     <div class="section-header" style="margin-bottom: 2rem;">
@@ -500,7 +495,7 @@
   </div>
 </div>
 
-<!-- 页脚 -->
+<!-- 页脚（限制在 1280px 内） -->
 <footer>
   <div class="footer-inner">
     <div class="footer-grid">
@@ -636,7 +631,6 @@
         const summary = plainText.length > 80 ? plainText.substring(0, 80) + '...' : plainText;
         newsArticles.push({ title, date, body: htmlBody, img: coverImg });
 
-        // 新闻卡片（图七排版）
         const cardHtml = `
           <div class="news-card" onclick="openNewsModal(${i})">
             <img src="${coverImg}" alt="${title}">
@@ -683,7 +677,6 @@
     document.body.style.overflow = 'auto';
   }
 
-  // 初始化所有滑动区（页面加载完成后）
   window.addEventListener('load', () => {
     initSlider('product-track', 'product-dots');
     initSlider('solution-track', 'solution-dots');
