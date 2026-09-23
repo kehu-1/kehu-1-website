@@ -8,7 +8,7 @@
     /* ===== 基础字体与全局变量 ===== */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap');
     :root {
-      --tech-green: #00FFB9;       /* 西门子科技绿 */
+      --tech-green: #00FFB9;       /* 科技绿 */
       --tech-green-hover: #00E6A6; 
       --tech-green-light: #E6FFF7;  /* 高亮浅绿 */
       --dark-bg: #0F172A;          /* 深色背景 */
@@ -27,7 +27,7 @@
       width: 100%;
     }
 
-    /* ===== 西门子双层导航栏（图九对齐） ===== */
+    /* ===== 西门子双层导航栏 ===== */
     header { position: fixed; top: 0; width: 100%; background: var(--dark-bg); z-index: 1000; }
     .header-top { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; }
     .header-top .logo { font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
@@ -52,14 +52,14 @@
     .btn { display: inline-block; padding: 1rem 3rem; background: var(--tech-green); color: #000; font-weight: 700; transition: 0.3s; border: none; cursor: pointer; font-size: 1rem; }
     .btn:hover { background: var(--tech-green-hover); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,255,185,0.2); }
     
-    /* 胶囊指示器（图二） */
+    /* 胶囊指示器 */
     .hero-indicator-wrapper { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 10; }
     .hero-indicator { display: flex; align-items: center; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(8px); border-radius: 50px; padding: 0.5rem 1rem; gap: 0.8rem; }
     .hero-indicator .play-btn { background: #fff; color: var(--dark-bg); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; }
     .hero-indicator .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
     .hero-indicator .dot.active { width: 28px; border-radius: 4px; background: #fff; }
 
-    /* ===== 轮播图下方新闻条（图三，上下变窄） ===== */
+    /* ===== 轮播图下方新闻条 ===== */
     .top-news-section { background: #fff; border-bottom: 1px solid #E5E7EB; padding: 1rem 0; }
     .top-news-inner { max-width: 1400px; margin: 0 auto; padding: 0 5%; display: flex; align-items: center; gap: 2rem; }
     .top-news-inner img { width: 120px; height: 75px; object-fit: cover; }
@@ -69,12 +69,12 @@
     .btn-outline { padding: 0.6rem 1.5rem; border: 2px solid var(--text-main); color: var(--text-main); font-weight: 700; white-space: nowrap; background: transparent; cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
     .btn-outline:hover { background: var(--text-main); color: var(--tech-green); }
 
-    /* ===== 客户故事区（图一图二左侧菜单线条） ===== */
+    /* ===== 客户故事区 ===== */
     .story-section { padding: 6rem 0; }
     .story-grid { display: grid; grid-template-columns: 240px 1fr 320px; gap: 3rem; align-items: start; }
     .story-tabs { display: flex; flex-direction: column; position: sticky; top: 140px; }
-    /* 图一图二的线条：左侧一条很细的竖线 */
-    .story-tab { padding: 1.2rem 1.5rem; font-size: 1.1rem; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: 0.3s; border-left: 2px solid #E5E7EB; }
+    /* 图二：框高低收窄 */
+    .story-tab { padding: 0.8rem 1.5rem; font-size: 1.1rem; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: 0.3s; border-left: 2px solid #E5E7EB; }
     .story-tab:hover { color: var(--text-main); background: #F3F4F6; }
     .story-tab.active { color: var(--text-main); background: var(--tech-green-light); border-left-color: var(--tech-green); font-weight: 700; }
     
@@ -94,12 +94,18 @@
     .story-card.light .link { color: var(--text-main); }
     .story-card.light .link:hover { color: var(--tech-green); }
 
-    /* ===== 通用横滑区块（图三图四：卡片悬浮文字+变长） ===== */
+    /* ===== 通用横滑区块 ===== */
     .slider-section { padding: 6rem 0; background: #fff; overflow: hidden; }
     .slider-section.gray-bg { background: #F8FAFC; }
     .slider-section .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
     .slider-section .section-header h2 { font-size: 2.2rem; font-weight: 800; color: var(--text-main); }
     .slider-section .section-header p { color: var(--text-muted); font-size: 1.1rem; }
+    
+    /* 图五、图六：增加小标签和按钮 */
+    .section-label { font-size: 0.9rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem; display: block; text-transform: uppercase; }
+    .market-btn { display: inline-block; padding: 0.8rem 2rem; border: 2px solid var(--text-main); color: var(--text-main); font-weight: 700; margin-top: 1.5rem; transition: 0.3s; }
+    .market-btn:hover { background: var(--text-main); color: var(--tech-green); }
+
     .slider-controls-capsule { display: flex; align-items: center; justify-content: center; gap: 1rem; background: #E5E7EB; padding: 0.6rem 1.5rem; border-radius: 50px; }
     .slider-controls-capsule button { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); transition: 0.3s; line-height: 1; }
     .slider-controls-capsule button:hover { color: var(--text-main); }
@@ -109,26 +115,33 @@
     .slider-container { position: relative; width: 100%; overflow: hidden; }
     .slider-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); gap: 2rem; }
     
-    /* 产品卡片（图三图四：全部改为背景图+文字悬浮，图片拉长） */
-    .slider-card { position: relative; flex: 0 0 calc((100% - 4rem) / 3); height: 520px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 3rem 2rem; color: #fff; }
-    .slider-card img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; transition: transform 0.6s ease; }
-    .slider-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(transparent 20%, rgba(0,0,0,0.85) 100%); z-index: 2; }
-    .slider-card:hover img { transform: scale(1.05); }
-    .slider-card .slider-card-info { position: relative; z-index: 3; }
-    .slider-card .slider-card-info h4 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.8rem; }
-    .slider-card .slider-card-info p { font-size: 1rem; color: #CBD5E1; margin-bottom: 1.5rem; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-    .slider-card .slider-card-info .link { color: var(--tech-green); font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    /* 产品卡片（图三改图四：白底图文，图片在上，文字在下） */
+    .slider-card { flex: 0 0 calc((100% - 4rem) / 3); background: #fff; display: flex; flex-direction: column; transition: 0.3s; }
+    .slider-card img { width: 100%; height: 260px; object-fit: cover; }
+    .slider-card-info { padding: 2.5rem 2rem; flex-grow: 1; display: flex; flex-direction: column; background: #fff; }
+    .slider-card-info h4 { font-size: 1.4rem; font-weight: 700; color: var(--text-main); margin-bottom: 1rem; }
+    .slider-card-info p { font-size: 1rem; color: var(--text-muted); margin-bottom: 2rem; flex-grow: 1; line-height: 1.7; }
+    .slider-card-info .link { color: var(--text-main); font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .slider-card-info .link:hover { color: var(--tech-green); }
 
-    /* ===== 新闻网格区（图五图六图七：去掉白底，图片拉长） ===== */
+    /* 解决方案卡片（保持悬浮文字） */
+    .solution-card { position: relative; flex: 0 0 calc((100% - 4rem) / 3); height: 480px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 3rem 2rem; color: #fff; }
+    .solution-card img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; transition: transform 0.6s ease; }
+    .solution-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(transparent 20%, rgba(0,0,0,0.85) 100%); z-index: 2; }
+    .solution-card:hover img { transform: scale(1.05); }
+    .solution-card .sol-content { position: relative; z-index: 3; }
+    .solution-card .sol-content h4 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.8rem; }
+    .solution-card .sol-content p { font-size: 1rem; color: #CBD5E1; margin-bottom: 1.5rem; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .solution-card .sol-content .link { color: var(--tech-green); font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+
+    /* ===== 新闻网格区 ===== */
     .news-block { padding: 6rem 0; background: #fff; }
     .news-block .section-title { text-align: center; margin-bottom: 4rem; }
     .news-block .section-title h2 { font-size: 2.2rem; font-weight: 800; color: var(--text-main); }
     .news-block .section-title p { color: var(--text-muted); margin-top: 0.5rem; }
     .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; max-width: 1400px; margin: 0 auto; }
-    
-    /* 新闻卡片（完全模仿图七：无白底，有大图，有分类标签） */
     .news-card { display: flex; flex-direction: column; transition: 0.3s; cursor: pointer; background: transparent; }
-    .news-card img { width: 100%; height: 280px; object-fit: cover; margin-bottom: 1.5rem; } /* 图片拉长 */
+    .news-card img { width: 100%; height: 280px; object-fit: cover; margin-bottom: 1.5rem; }
     .news-card .category { font-size: 0.85rem; font-weight: 700; color: var(--tech-green); text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 1px; }
     .news-card h4 { font-size: 1.4rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem; line-height: 1.4; }
     .news-card p { font-size: 1rem; color: var(--text-muted); margin-bottom: 1.5rem; flex-grow: 1; line-height: 1.7; }
@@ -192,7 +205,7 @@
       .story-tab { white-space: nowrap; border-left: none; border-bottom: 3px solid transparent; }
       .story-tab.active { border-left: none; border-bottom-color: var(--tech-green); }
       .story-main img { height: 400px; }
-      .slider-card { flex: 0 0 100%; }
+      .slider-card, .solution-card { flex: 0 0 100%; }
       .social-card { flex: 0 0 100%; }
       .news-modal-content { flex-direction: column; }
       .news-modal-image { padding: 1rem; flex: 0 0 40vh; }
@@ -211,7 +224,7 @@
 </head>
 <body>
 
-<!-- 导航栏（图九：内容对齐） -->
+<!-- 导航栏（图一：内容对齐） -->
 <header>
   <div class="header-container header-top">
     <div class="logo">你的品牌名</div>
@@ -263,7 +276,7 @@
   </div>
 </div>
 
-<!-- 2. 轮播图下方新闻条（图三，上下变窄） -->
+<!-- 2. 轮播图下方新闻条 -->
 <div class="top-news-section">
   <div class="top-news-inner" id="latest-news-container">
     <p style="color:#999; text-align:center; width:100%;">正在加载最新新闻...</p>
@@ -299,18 +312,21 @@
   </div>
 </div>
 
-<!-- 4. 产品滑动区（图三图四：文字悬浮+图片拉长） -->
+<!-- 4. 产品滑动区（图三改图四：白底图文，图片在上） -->
 <div class="slider-section gray-bg">
-  <div class="section-container slider-section">
+  <div class="section-container">
     <div class="section-header">
       <div>
+        <!-- 图六变图五：增加小标签“市场”和带边框的“前往市场”按钮 -->
+        <span class="section-label">市场</span>
         <h2>发现产品和服务</h2>
         <p>探索各种模块化且互操作的产品、服务和解决方案</p>
+        <a href="products.html" class="market-btn">前往市场</a>
       </div>
     </div>
     <div class="slider-container">
       <div class="slider-track" id="product-track">
-        <!-- 统一使用 slider-card 类，并在内部包裹 info -->
+        <!-- 产品卡片改为白底图文模式 -->
         <div class="slider-card">
           <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Product 1">
           <div class="slider-card-info"><h4>Xcelerator 平台</h4><p>助力企业实现数字化转型，从设计到运营全面优化。</p><a href="products.html" class="link">了解更多 →</a></div>
@@ -339,9 +355,9 @@
   </div>
 </div>
 
-<!-- 5. 解决方案滑动区（图八：背景图+文字悬浮） -->
+<!-- 5. 解决方案滑动区（保持悬浮文字） -->
 <div class="slider-section">
-  <div class="section-container slider-section">
+  <div class="section-container">
     <div class="section-header">
       <div>
         <h2>解决方案与行业应用</h2>
@@ -350,22 +366,38 @@
     </div>
     <div class="slider-container">
       <div class="slider-track" id="solution-track">
-        <!-- 复用 slider-card 类 -->
-        <div class="slider-card">
+        <!-- 解决方案使用 solution-card 类 -->
+        <div class="solution-card">
           <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Solution 1">
-          <div class="slider-card-info"><h4>汽车制造</h4><p>高度自动化的生产线，提升产能与质量。</p><a href="products.html" class="link">了解更多 →</a></div>
+          <div class="sol-content">
+            <h4>汽车制造</h4>
+            <p>高度自动化的生产线，提升产能与质量。</p>
+            <a href="products.html" class="link">了解更多 →</a>
+          </div>
         </div>
-        <div class="slider-card">
+        <div class="solution-card">
           <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" alt="Solution 2">
-          <div class="slider-card-info"><h4>航空航天</h4><p>精密零部件加工，满足严苛的行业标准。</p><a href="products.html" class="link">了解更多 →</a></div>
+          <div class="sol-content">
+            <h4>航空航天</h4>
+            <p>精密零部件加工，满足严苛的行业标准。</p>
+            <a href="products.html" class="link">了解更多 →</a>
+          </div>
         </div>
-        <div class="slider-card">
+        <div class="solution-card">
           <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=800&q=80" alt="Solution 3">
-          <div class="slider-card-info"><h4>新能源</h4><p>提供电池、风电等新能源领域的核心部件。</p><a href="products.html" class="link">了解更多 →</a></div>
+          <div class="sol-content">
+            <h4>新能源</h4>
+            <p>提供电池、风电等新能源领域的核心部件。</p>
+            <a href="products.html" class="link">了解更多 →</a>
+          </div>
         </div>
-        <div class="slider-card">
+        <div class="solution-card">
           <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Solution 4">
-          <div class="slider-card-info"><h4>食品与饮料</h4><p>卫生级设备与自动化包装解决方案。</p><a href="products.html" class="link">了解更多 →</a></div>
+          <div class="sol-content">
+            <h4>食品与饮料</h4>
+            <p>卫生级设备与自动化包装解决方案。</p>
+            <a href="products.html" class="link">了解更多 →</a>
+          </div>
         </div>
       </div>
     </div>
@@ -379,7 +411,7 @@
   </div>
 </div>
 
-<!-- 6. 新闻区块（图五图六图七：图片拉长，去掉白底，排版跟图七） -->
+<!-- 6. 新闻区块（保持上次修改的图七排版） -->
 <div class="news-block">
   <div class="section-container">
     <div class="section-title">
@@ -518,7 +550,7 @@
 
   function initSlider(trackId, dotsId) {
     const track = document.getElementById(trackId);
-    const cards = track.querySelectorAll('.slider-card, .social-card');
+    const cards = track.querySelectorAll('.slider-card, .solution-card, .social-card');
     const dotsContainer = document.getElementById(dotsId);
     
     const pageSize = 3;
@@ -537,7 +569,7 @@
   function goToPage(trackId, pageIndex) {
     const track = document.getElementById(trackId);
     const container = track.parentElement;
-    const cards = track.querySelectorAll('.slider-card, .social-card');
+    const cards = track.querySelectorAll('.slider-card, .solution-card, .social-card');
     const pageSize = 3;
     
     if (pageIndex < 0) pageIndex = 0;
@@ -561,7 +593,7 @@
     goToPage(trackId, state.current + direction);
   }
 
-  // 新闻加载逻辑（图五图六图七：优化排版，去掉白底）
+  // 新闻加载逻辑
   let newsArticles = [];
   async function loadNews() {
     try {
@@ -598,15 +630,13 @@
         const imgMatch = htmlBody.match(/<img[^>]+src="([^">]+)"/);
         const coverImg = imgMatch ? imgMatch[1] : 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80';
         
-        // 移除正文中的所有图片
         htmlBody = htmlBody.replace(/<img[^>]*>/g, '');
         
         const plainText = htmlBody.replace(/<[^>]+>/g, '').trim();
         const summary = plainText.length > 80 ? plainText.substring(0, 80) + '...' : plainText;
         newsArticles.push({ title, date, body: htmlBody, img: coverImg });
 
-        // 渲染下方新闻卡片（图七排版：图片 -> 日期/分类 -> 大标题 -> 摘要 -> 阅读更多）
-        // 这里把日期当作分类标签，排在标题上方
+        // 新闻卡片（图七排版）
         const cardHtml = `
           <div class="news-card" onclick="openNewsModal(${i})">
             <img src="${coverImg}" alt="${title}">
@@ -618,7 +648,6 @@
         `;
         container.insertAdjacentHTML('beforeend', cardHtml);
 
-        // 渲染顶部最新新闻（只渲染第一条）
         if (i === 0) {
           const latestHtml = `
             <img src="${coverImg}" alt="${title}">
