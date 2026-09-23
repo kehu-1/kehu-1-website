@@ -20,9 +20,9 @@
     body { font-family: 'Inter', -apple-system, "Segoe UI", sans-serif; color: var(--text-main); line-height: 1.6; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* ===== 核心：统一对齐容器 ===== */
+    /* ===== 核心：统一对齐容器（宽度改为 1340px） ===== */
     .header-container, .section-container, .footer-inner, .news-grid, .vision-inner, .top-news-inner {
-      max-width: 1400px; 
+      max-width: 1340px; /* 【修改点1】：从 1400px 改为 1340px */
       margin: 0 auto;    
       padding: 0 2rem;   
       width: 100%;
@@ -76,10 +76,9 @@
 
     /* ===== 客户故事区 ===== */
     .story-section { padding: 4rem 0; } 
-    /* 【本次调整】：左侧列加宽到 300px，纵向更扁平 */
     .story-grid { display: grid; grid-template-columns: 300px 1fr 340px; gap: 1rem; align-items: start; } 
     
-    /* 【左侧选择栏】：横向加宽（由 grid 控制），纵向缩窄（内边距压缩到 0.3rem） */
+    /* 【左侧选择栏】：横向加宽（由 grid 控制），纵向缩窄 */
     .story-tabs { display: flex; flex-direction: column; position: sticky; top: 140px; border-left: 2px solid #E5E7EB; }
     .story-tab { padding: 0.3rem 0; padding-left: 1.5rem; font-size: 1.15rem; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: 0.3s; }
     .story-tab:hover { color: var(--text-main); background: #F3F4F6; }
@@ -92,8 +91,8 @@
     .story-link { display: inline-block; margin-top: 1.5rem; color: var(--text-main); font-weight: 700; font-size: 1rem; border-bottom: 2px solid var(--tech-green); padding-bottom: 2px; width: fit-content; }
     .story-link:hover { color: var(--tech-green); }
     
-    /* 右侧卡片保持放大状态 */
-    .story-side { display: flex; flex-direction: column; gap: 1rem; position: sticky; top: 140px; } 
+    /* 【右侧卡片】：去掉 sticky，使其随页面滚动 */
+    .story-side { display: flex; flex-direction: column; gap: 1rem; } /* 【修改点2】：去掉了 position: sticky; top: 140px; */
     .story-card { background: var(--dark-bg); color: #fff; padding: 2.2rem; } 
     .story-card h4 { font-size: 1.4rem; margin-bottom: 1rem; font-weight: 700; } 
     .story-card p { color: #CBD5E1; font-size: 0.95rem; margin-bottom: 1.8rem; line-height: 1.8; } 
