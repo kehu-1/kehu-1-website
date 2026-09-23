@@ -36,7 +36,7 @@
     .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: 0.3s; }
     .dot.active { background: #00FFB9; transform: scale(1.2); }
 
-    /* ===== 客户故事区（垂直选项卡） ===== */
+    /* ===== 客户故事区 ===== */
     .story-section { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 3rem; padding: 6rem 5%; max-width: 1400px; margin: 0 auto; }
     .story-tabs { display: flex; flex-direction: column; gap: 0.5rem; border-right: 1px solid #e2e8f0; padding-right: 1.5rem; }
     .story-tab { padding: 1.2rem 1.5rem; font-size: 1.1rem; font-weight: 500; color: #64748b; cursor: pointer; transition: 0.3s; border-left: 3px solid transparent; }
@@ -50,15 +50,19 @@
     .story-card p { color: #cbd5e1; font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.8; }
     .story-card .link { color: #00FFB9; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
 
-    /* ===== 通用横滑区块（一次展示3个大框，点击翻页） ===== */
+    /* ===== 通用横滑区块 ===== */
     .slider-section { padding: 6rem 5%; background: #f8fafc; overflow: hidden; }
     .slider-section .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
     .slider-section .section-header h2 { font-size: 2.2rem; font-weight: 800; color: #0f172a; }
     .slider-section .section-header p { color: #64748b; font-size: 1.1rem; }
     
-    .slider-controls { display: flex; gap: 1rem; }
-    .slider-controls button { background: #fff; border: 1px solid #cbd5e1; color: #0f172a; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
-    .slider-controls button:hover { background: #001E3C; color: #00FFB9; border-color: #001E3C; }
+    /* 西门子风格胶囊滑动控制条 */
+    .slider-controls-capsule { display: flex; align-items: center; justify-content: center; gap: 1rem; background: #e2e8f0; padding: 0.6rem 1.5rem; border-radius: 50px; }
+    .slider-controls-capsule button { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748b; transition: 0.3s; line-height: 1; }
+    .slider-controls-capsule button:hover { color: #0f172a; }
+    .slider-dots { display: flex; gap: 0.5rem; align-items: center; }
+    .slider-dot { width: 8px; height: 8px; border-radius: 50%; background: #cbd5e1; transition: 0.3s; }
+    .slider-dot.active { width: 24px; border-radius: 4px; background: #001E3C; }
 
     .slider-container { position: relative; width: 100%; overflow: hidden; }
     .slider-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); gap: 2rem; }
@@ -69,13 +73,12 @@
     .slider-card-info p { font-size: 1rem; color: #64748b; margin-bottom: 2rem; flex-grow: 1; line-height: 1.7; }
     .slider-card-info .link { color: #0ea5e9; font-weight: 600; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
 
-    /* ===== 新闻区块（含小框和主区域） ===== */
+    /* ===== 新闻区块 ===== */
     .news-block { padding: 6rem 5%; background: #fff; }
     .news-block .section-title { text-align: center; margin-bottom: 4rem; }
     .news-block .section-title h2 { font-size: 2.2rem; font-weight: 800; color: #0f172a; }
     .news-block .section-title p { color: #64748b; margin-top: 0.5rem; }
     
-    /* 小框最近新闻滑动 */
     .recent-news-bar { background: #f8fafc; border: 1px solid #e2e8f0; padding: 1.5rem 2rem; display: flex; align-items: center; border-radius: 4px; margin-bottom: 4rem; }
     .recent-news-track { display: flex; gap: 3rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; flex: 1; padding-right: 2rem; }
     .recent-news-track::-webkit-scrollbar { display: none; }
@@ -95,7 +98,7 @@
     .news-card h4 { font-size: 1.1rem; margin-bottom: 0.8rem; color: #0f172a; font-weight: 700; }
     .news-card p { font-size: 0.9rem; color: #64748b; margin-bottom: 1rem; flex-grow: 1; }
 
-    /* ===== 愿景大标题（横排版） ===== */
+    /* ===== 愿景大标题 ===== */
     .vision-section { padding: 8rem 5%; max-width: 1400px; margin: 0 auto; display: flex; gap: 5rem; align-items: flex-start; background: #f8fafc; }
     .vision-left { flex: 1.2; border-left: 4px solid #0ea5e9; padding-left: 2.5rem; }
     .vision-left h2 { font-size: 3rem; font-weight: 800; color: #0f172a; line-height: 1.2; letter-spacing: -1px; }
@@ -103,7 +106,7 @@
     .vision-right p { font-size: 1.2rem; color: #475569; font-weight: 300; line-height: 1.8; }
     .vision-right .link { display: inline-flex; align-items: center; gap: 0.5rem; color: #0ea5e9; font-weight: 700; margin-top: 2rem; border-bottom: 2px solid #0ea5e9; padding-bottom: 0.2rem; }
 
-    /* ===== 社交媒体区（横向滑动） ===== */
+    /* ===== 社交媒体区 ===== */
     .social-section { padding: 6rem 5%; background: #fff; }
     .social-tabs { display: flex; gap: 2rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 3rem; flex-wrap: wrap; }
     .social-tab { font-size: 1rem; font-weight: 500; color: #64748b; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid transparent; }
@@ -130,7 +133,6 @@
     .news-modal-text h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
     .news-modal-text .date { color: #94a3b8; margin-bottom: 2rem; font-size: 1rem; }
     .news-modal-text .body { font-size: 1.1rem; line-height: 1.8; color: #cbd5e1; }
-    .news-modal-text .body img { max-width: 100%; height: auto; border-radius: 6px; margin-top: 1.5rem; }
 
     /* ===== 页脚与悬浮按钮 ===== */
     footer { background: #001E3C; color: #94a3b8; padding: 4rem 5% 2rem; font-size: 0.9rem; }
@@ -160,6 +162,7 @@
       .vision-section { flex-direction: column; gap: 2rem; padding: 4rem 5%; }
       .vision-left h2 { font-size: 2rem; }
       .slider-section .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .slider-controls-capsule { display: none; } /* 手机端隐藏胶囊滑动条，采用触摸滑动 */
     }
   </style>
 </head>
@@ -208,7 +211,7 @@
   </div>
 </div>
 
-<!-- 2. 客户故事区（垂直选项卡） -->
+<!-- 2. 客户故事区 -->
 <div class="story-section">
   <div class="story-tabs">
     <div class="story-tab active" onclick="switchStory(0)">人工智能</div>
@@ -234,16 +237,12 @@
   </div>
 </div>
 
-<!-- 3. 产品滑动区（每次3个大框，点击翻页） -->
+<!-- 3. 产品滑动区（带胶囊控制条） -->
 <div class="slider-section">
   <div class="section-header">
     <div>
       <h2>发现产品和服务</h2>
       <p>探索各种模块化且互操作的产品、服务和解决方案</p>
-    </div>
-    <div class="slider-controls">
-      <button onclick="slideTrack('product-track', -1)">‹</button>
-      <button onclick="slideTrack('product-track', 1)">›</button>
     </div>
   </div>
   <div class="slider-container">
@@ -270,18 +269,21 @@
       </div>
     </div>
   </div>
+  <div style="display:flex; justify-content:center; margin-top:2rem;">
+    <div class="slider-controls-capsule" id="product-controls">
+      <button onclick="slideTrack('product-track', -1, 'product-controls')">‹</button>
+      <div class="slider-dots" id="product-dots"></div>
+      <button onclick="slideTrack('product-track', 1, 'product-controls')">›</button>
+    </div>
+  </div>
 </div>
 
-<!-- 4. 解决方案滑动区（每次3个大框，点击翻页） -->
+<!-- 4. 解决方案滑动区（带胶囊控制条） -->
 <div class="slider-section" style="background: #fff; border-top: 1px solid #e2e8f0;">
   <div class="section-header">
     <div>
       <h2>解决方案与行业应用</h2>
       <p>面向不同行业的定制化解决方案，助力业务增长</p>
-    </div>
-    <div class="slider-controls">
-      <button onclick="slideTrack('solution-track', -1)">‹</button>
-      <button onclick="slideTrack('solution-track', 1)">›</button>
     </div>
   </div>
   <div class="slider-container">
@@ -308,20 +310,24 @@
       </div>
     </div>
   </div>
+  <div style="display:flex; justify-content:center; margin-top:2rem;">
+    <div class="slider-controls-capsule" id="solution-controls">
+      <button onclick="slideTrack('solution-track', -1, 'solution-controls')">‹</button>
+      <div class="slider-dots" id="solution-dots"></div>
+      <button onclick="slideTrack('solution-track', 1, 'solution-controls')">›</button>
+    </div>
+  </div>
 </div>
 
-<!-- 5. 新闻区块（小框 + 主区域） -->
+<!-- 5. 新闻区块 -->
 <div class="news-block">
   <div class="section-title">
     <h2>新闻动态</h2>
     <p>了解我们的最新动态和行业资讯</p>
   </div>
   
-  <!-- 小框最近新闻（滑动） -->
   <div class="recent-news-bar">
-    <div class="recent-news-track" id="recent-track">
-      <!-- 由 JS 动态填充 -->
-    </div>
+    <div class="recent-news-track" id="recent-track"></div>
     <div class="recent-news-nav">
       <button onclick="scrollRecent(-1)">‹</button>
       <button onclick="scrollRecent(1)">›</button>
@@ -333,7 +339,7 @@
   </div>
 </div>
 
-<!-- 6. 愿景大标题（横排版） -->
+<!-- 6. 愿景大标题 -->
 <div class="vision-section">
   <div class="vision-left">
     <h2>我们旨在通过业务活动解决社会问题，实现可持续发展</h2>
@@ -344,7 +350,7 @@
   </div>
 </div>
 
-<!-- 7. 社交媒体区（横向滑动） -->
+<!-- 7. 社交媒体区（带胶囊控制条） -->
 <div class="social-section">
   <div class="section-header" style="margin-bottom: 2rem;">
     <h2 style="font-size: 2.2rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">社交媒体</h2>
@@ -382,9 +388,12 @@
       </div>
     </div>
   </div>
-  <div class="slider-controls" style="margin-top: 1.5rem; justify-content: flex-end;">
-    <button onclick="slideTrack('social-track', -1)">‹</button>
-    <button onclick="slideTrack('social-track', 1)">›</button>
+  <div style="display:flex; justify-content:center; margin-top:2rem;">
+    <div class="slider-controls-capsule" id="social-controls">
+      <button onclick="slideTrack('social-track', -1, 'social-controls')">‹</button>
+      <div class="slider-dots" id="social-dots"></div>
+      <button onclick="slideTrack('social-track', 1, 'social-controls')">›</button>
+    </div>
   </div>
 </div>
 
@@ -442,20 +451,67 @@
     document.getElementById('story-focus').innerText = storyData[index].focus;
   }
 
-  // 通用滑动翻页逻辑（每次点一下，滑动一个视口宽度）
-  function slideTrack(trackId, direction) {
+  // 通用滑动逻辑（带胶囊控制条）
+  const sliderStates = {
+    'product-track': { current: 0, total: 0 },
+    'solution-track': { current: 0, total: 0 },
+    'social-track': { current: 0, total: 0 }
+  };
+
+  function initSlider(trackId, dotsId) {
     const track = document.getElementById(trackId);
     const container = track.parentElement;
-    const scrollAmount = container.clientWidth; // 每次滑动一页
-    const maxScrollLeft = track.scrollWidth - container.clientWidth;
-    let newScrollLeft = track.scrollLeft + direction * scrollAmount;
+    const cards = track.querySelectorAll('.slider-card, .social-card');
+    const dotsContainer = document.getElementById(dotsId);
     
-    // 边界限制
-    if (newScrollLeft < 0) newScrollLeft = 0;
-    if (newScrollLeft > maxScrollLeft) newScrollLeft = maxScrollLeft;
+    // 计算总页数（每页3个）
+    const pageSize = 3;
+    const totalPages = Math.ceil(cards.length / pageSize);
+    sliderStates[trackId].total = totalPages;
     
-    track.scrollTo({ left: newScrollLeft, behavior: 'smooth' });
+    // 生成圆点
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < totalPages; i++) {
+      const dot = document.createElement('span');
+      dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+      dot.onclick = () => goToPage(trackId, i);
+      dotsContainer.appendChild(dot);
+    }
   }
+
+  function goToPage(trackId, pageIndex) {
+    const track = document.getElementById(trackId);
+    const container = track.parentElement;
+    const cards = track.querySelectorAll('.slider-card, .social-card');
+    const pageSize = 3;
+    
+    // 限制页码
+    if (pageIndex < 0) pageIndex = 0;
+    if (pageIndex >= Math.ceil(cards.length / pageSize)) pageIndex = Math.ceil(cards.length / pageSize) - 1;
+    
+    // 计算滚动位置
+    const scrollAmount = pageIndex * container.clientWidth;
+    track.style.transform = `translateX(-${scrollAmount}px)`;
+    
+    // 更新圆点
+    sliderStates[trackId].current = pageIndex;
+    const dots = document.getElementById(trackId.replace('-track', '-dots')).children;
+    for (let i = 0; i < dots.length; i++) {
+      dots[i].classList.toggle('active', i === pageIndex);
+    }
+  }
+
+  function slideTrack(trackId, direction, controlsId) {
+    const state = sliderStates[trackId];
+    goToPage(trackId, state.current + direction);
+  }
+
+  // 初始化所有滑动区
+  window.addEventListener('load', () => {
+    initSlider('product-track', 'product-dots');
+    initSlider('solution-track', 'solution-dots');
+    initSlider('social-track', 'social-dots');
+  });
 
   // 小框最近新闻滑动逻辑
   function scrollRecent(direction) {
@@ -463,7 +519,7 @@
     track.scrollBy({ left: direction * 480, behavior: 'smooth' });
   }
 
-  // 新闻加载逻辑（包含小框和主区域）
+  // 新闻加载逻辑
   let newsArticles = [];
   async function loadNews() {
     try {
@@ -489,21 +545,26 @@
         const text = await rawRes.text();
         const parts = text.split('---');
         const frontmatter = parts[1] || '';
-        const bodyContent = parts.slice(2).join('---').trim();
+        let bodyContent = parts.slice(2).join('---').trim(); // 注意这里改成了 let
+        
         const titleMatch = frontmatter.match(/title:\s*(.*)/);
         const dateMatch = frontmatter.match(/date:\s*(.*)/);
         const title = titleMatch ? titleMatch[1].trim() : '无标题';
         const date = dateMatch ? dateMatch[1].trim() : '';
-        const htmlBody = marked.parse(bodyContent);
+        let htmlBody = marked.parse(bodyContent);
         
+        // 提取封面图
         const imgMatch = htmlBody.match(/<img[^>]+src="([^">]+)"/);
         const coverImg = imgMatch ? imgMatch[1] : 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80';
+        
+        // 移除正文中的所有图片，避免右侧文字区出现图片
+        htmlBody = htmlBody.replace(/<img[^>]*>/g, '');
         
         const plainText = htmlBody.replace(/<[^>]+>/g, '').trim();
         const summary = plainText.length > 80 ? plainText.substring(0, 80) + '...' : plainText;
         newsArticles.push({ title, date, body: htmlBody, img: coverImg });
 
-        // 1. 渲染主区域新闻卡片
+        // 渲染主区域卡片
         const cardHtml = `
           <div class="news-card" onclick="openNewsModal(${i})">
             <div class="date">${date}</div>
@@ -514,7 +575,7 @@
         `;
         container.insertAdjacentHTML('beforeend', cardHtml);
 
-        // 2. 渲染小框最近新闻（滑动）
+        // 渲染小框最近新闻
         const recentItemHtml = `
           <div class="recent-news-item" onclick="openNewsModal(${i})">
             <img src="${coverImg}" alt="${title}">
@@ -538,8 +599,8 @@
     const article = newsArticles[index]; if (!article) return;
     document.getElementById('news-modal-title').innerText = article.title;
     document.getElementById('news-modal-date').innerText = article.date;
-    document.getElementById('news-modal-body').innerHTML = article.body;
-    document.getElementById('news-modal-img').src = article.img;
+    document.getElementById('news-modal-body').innerHTML = article.body; // 此时 body 里已经剔除了图片
+    document.getElementById('news-modal-img').src = article.img; // 单独显示封面图
     document.getElementById('news-modal').style.display = 'flex';
     document.body.style.overflow = 'hidden';
   }
