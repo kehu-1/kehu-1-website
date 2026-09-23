@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>你的品牌名 - 专业B2B供应商</title>
   <style>
-    /* ===== 基础字体与重置（引入西门子同款Inter字体） ===== */
+    /* ===== 基础字体与重置 ===== */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap');
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.6; background: #fff; }
@@ -13,12 +13,12 @@
 
     /* ===== 西门子双层导航栏 ===== */
     header { position: fixed; top: 0; width: 100%; background: #001E3C; z-index: 1000; display: flex; flex-direction: column; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
-    .header-top { display: flex; justify-content: space-between; align-items: center; padding: 1rem 4%; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .header-top { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; border-bottom: 1px solid rgba(255,255,255,0.1); }
     .header-top .logo { font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
     .header-top .tools { display: flex; align-items: center; gap: 1.5rem; color: #fff; font-size: 0.9rem; }
     .header-top .tools a { color: #cbd5e1; }
     .header-top .tools a:hover { color: #00FFB9; }
-    .header-bottom { display: flex; justify-content: space-between; align-items: center; padding: 1rem 4%; }
+    .header-bottom { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; }
     .header-bottom nav a { color: #cbd5e1; font-size: 1rem; margin-right: 2.5rem; font-weight: 500; }
     .header-bottom nav a:hover, .header-bottom nav a.active { color: #00FFB9; }
 
@@ -36,69 +36,88 @@
     .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: 0.3s; }
     .dot.active { background: #00FFB9; transform: scale(1.2); }
 
-    /* ===== 图五：轮播图下方的“最近新闻”滑动小框 ===== */
-    .recent-news-bar { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 1.5rem 8%; display: flex; align-items: center; overflow: hidden; position: relative; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+    /* ===== 客户故事区（垂直选项卡） ===== */
+    .story-section { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 3rem; padding: 6rem 5%; max-width: 1400px; margin: 0 auto; }
+    .story-tabs { display: flex; flex-direction: column; gap: 0.5rem; border-right: 1px solid #e2e8f0; padding-right: 1.5rem; }
+    .story-tab { padding: 1.2rem 1.5rem; font-size: 1.1rem; font-weight: 500; color: #64748b; cursor: pointer; transition: 0.3s; border-left: 3px solid transparent; }
+    .story-tab:hover { color: #0f172a; background: #f8fafc; }
+    .story-tab.active { color: #0f172a; background: #e0f2fe; border-left-color: #0ea5e9; font-weight: 700; }
+    .story-main { display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .story-main img { width: 100%; height: 420px; object-fit: cover; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+    .story-side { display: flex; flex-direction: column; gap: 2rem; }
+    .story-card { background: #001E3C; color: #fff; padding: 2.5rem; border-radius: 4px; }
+    .story-card h4 { font-size: 1.4rem; margin-bottom: 1rem; font-weight: 700; }
+    .story-card p { color: #cbd5e1; font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.8; }
+    .story-card .link { color: #00FFB9; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+
+    /* ===== 通用横滑区块（一次展示3个大框，点击翻页） ===== */
+    .slider-section { padding: 6rem 5%; background: #f8fafc; overflow: hidden; }
+    .slider-section .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+    .slider-section .section-header h2 { font-size: 2.2rem; font-weight: 800; color: #0f172a; }
+    .slider-section .section-header p { color: #64748b; font-size: 1.1rem; }
+    
+    .slider-controls { display: flex; gap: 1rem; }
+    .slider-controls button { background: #fff; border: 1px solid #cbd5e1; color: #0f172a; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
+    .slider-controls button:hover { background: #001E3C; color: #00FFB9; border-color: #001E3C; }
+
+    .slider-container { position: relative; width: 100%; overflow: hidden; }
+    .slider-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); gap: 2rem; }
+    .slider-card { flex: 0 0 calc((100% - 4rem) / 3); background: #fff; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.03); display: flex; flex-direction: column; }
+    .slider-card img { width: 100%; height: 260px; object-fit: cover; }
+    .slider-card-info { padding: 2.5rem 2rem; flex-grow: 1; display: flex; flex-direction: column; }
+    .slider-card-info h4 { font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-bottom: 1rem; }
+    .slider-card-info p { font-size: 1rem; color: #64748b; margin-bottom: 2rem; flex-grow: 1; line-height: 1.7; }
+    .slider-card-info .link { color: #0ea5e9; font-weight: 600; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+
+    /* ===== 新闻区块（含小框和主区域） ===== */
+    .news-block { padding: 6rem 5%; background: #fff; }
+    .news-block .section-title { text-align: center; margin-bottom: 4rem; }
+    .news-block .section-title h2 { font-size: 2.2rem; font-weight: 800; color: #0f172a; }
+    .news-block .section-title p { color: #64748b; margin-top: 0.5rem; }
+    
+    /* 小框最近新闻滑动 */
+    .recent-news-bar { background: #f8fafc; border: 1px solid #e2e8f0; padding: 1.5rem 2rem; display: flex; align-items: center; border-radius: 4px; margin-bottom: 4rem; }
     .recent-news-track { display: flex; gap: 3rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; flex: 1; padding-right: 2rem; }
     .recent-news-track::-webkit-scrollbar { display: none; }
-    .recent-news-item { flex: 0 0 400px; scroll-snap-align: start; display: flex; align-items: center; gap: 1.5rem; cursor: pointer; }
-    .recent-news-item img { width: 80px; height: 60px; object-fit: cover; border-radius: 4px; }
-    .recent-news-item .info h5 { font-size: 0.95rem; font-weight: 700; color: #0f172a; margin-bottom: 0.2rem; }
-    .recent-news-item .info p { font-size: 0.8rem; color: #64748b; }
+    .recent-news-item { flex: 0 0 450px; scroll-snap-align: start; display: flex; align-items: center; gap: 1.5rem; cursor: pointer; }
+    .recent-news-item img { width: 100px; height: 70px; object-fit: cover; border-radius: 4px; }
+    .recent-news-item .info h5 { font-size: 1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.3rem; }
+    .recent-news-item .info p { font-size: 0.85rem; color: #64748b; }
     .recent-news-item .info .date { font-size: 0.75rem; color: #94a3b8; }
     .recent-news-nav { display: flex; gap: 0.5rem; }
-    .recent-news-nav button { background: #f1f5f9; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; color: #64748b; transition: 0.3s; }
-    .recent-news-nav button:hover { background: #001E3C; color: #fff; }
+    .recent-news-nav button { background: #fff; border: 1px solid #cbd5e1; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; color: #64748b; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
+    .recent-news-nav button:hover { background: #001E3C; color: #00FFB9; border-color: #001E3C; }
 
-    /* ===== 图一：愿景大标题 ===== */
-    .vision-section { padding: 8rem 8%; max-width: 1400px; margin: 0 auto; display: flex; gap: 4rem; align-items: flex-start; }
-    .vision-left { flex: 1; border-left: 4px solid #0ea5e9; padding-left: 2rem; }
-    .vision-left h2 { font-size: 3rem; font-weight: 800; color: #0f172a; line-height: 1.2; letter-spacing: -1px; }
-    .vision-right { flex: 1; padding-top: 1rem; }
-    .vision-right p { font-size: 1.2rem; color: #475569; font-weight: 300; line-height: 1.8; }
-    .vision-right .link { display: inline-flex; align-items: center; gap: 0.5rem; color: #0ea5e9; font-weight: 700; margin-top: 2rem; border-bottom: 2px solid #0ea5e9; padding-bottom: 0.2rem; }
-
-    /* ===== 图三图四：产品与服务滑动卡片区 ===== */
-    .scroll-section { padding: 6rem 8%; background: #f8fafc; }
-    .scroll-section .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
-    .scroll-section .section-header h2 { font-size: 2.2rem; font-weight: 800; color: #0f172a; }
-    .scroll-section .section-header p { color: #64748b; font-size: 1.1rem; }
-    .scroll-container { display: flex; gap: 2rem; overflow-x: auto; padding-bottom: 2rem; scroll-snap-type: x mandatory; scroll-behavior: smooth; }
-    .scroll-container::-webkit-scrollbar { height: 6px; }
-    .scroll-container::-webkit-scrollbar-track { background: #e2e8f0; }
-    .scroll-container::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 3px; }
-    .scroll-card { flex: 0 0 360px; scroll-snap-align: start; background: #fff; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.03); transition: 0.3s; display: flex; flex-direction: column; }
-    .scroll-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
-    .scroll-card img { width: 100%; height: 200px; object-fit: cover; }
-    .scroll-card-info { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; }
-    .scroll-card-info h4 { font-size: 1.2rem; font-weight: 700; color: #0f172a; margin-bottom: 0.8rem; }
-    .scroll-card-info p { font-size: 0.95rem; color: #64748b; margin-bottom: 1.5rem; flex-grow: 1; }
-    .scroll-card-info .link { color: #0ea5e9; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
-
-    /* ===== 图二：社交媒体区 ===== */
-    .social-section { padding: 6rem 8%; background: #fff; }
-    .social-tabs { display: flex; gap: 1.5rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 3rem; flex-wrap: wrap; }
-    .social-tab { font-size: 1rem; font-weight: 500; color: #64748b; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid transparent; }
-    .social-tab.active { color: #0ea5e9; border-bottom-color: #0ea5e9; font-weight: 700; }
-    .social-container { display: flex; gap: 2rem; overflow-x: auto; padding-bottom: 2rem; }
-    .social-container::-webkit-scrollbar { height: 6px; }
-    .social-container::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-    .social-card { flex: 0 0 320px; border: 1px solid #e2e8f0; border-radius: 4px; padding: 1.5rem; display: flex; flex-direction: column; }
-    .social-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-    .social-card .header .date { font-size: 0.85rem; color: #94a3b8; }
-    .social-card .header .icon { font-size: 1.2rem; color: #0ea5e9; }
-    .social-card .content { font-size: 0.95rem; color: #334155; margin-bottom: 1.5rem; flex-grow: 1; }
-    .social-card .content a { color: #0ea5e9; font-weight: 600; }
-    .social-card .img-box { width: 100%; height: 180px; overflow: hidden; border-radius: 4px; }
-    .social-card .img-box img { width: 100%; height: 100%; object-fit: cover; }
-
-    /* ===== 常规新闻动态区 ===== */
-    #news { background: #f8fafc; padding: 6rem 8%; }
     .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
     .news-card { background: #fff; padding: 2rem; border-radius: 4px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; transition: 0.3s; cursor: pointer; }
     .news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-color: #0ea5e9; }
     .news-card .date { font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.5rem; }
     .news-card h4 { font-size: 1.1rem; margin-bottom: 0.8rem; color: #0f172a; font-weight: 700; }
     .news-card p { font-size: 0.9rem; color: #64748b; margin-bottom: 1rem; flex-grow: 1; }
+
+    /* ===== 愿景大标题（横排版） ===== */
+    .vision-section { padding: 8rem 5%; max-width: 1400px; margin: 0 auto; display: flex; gap: 5rem; align-items: flex-start; background: #f8fafc; }
+    .vision-left { flex: 1.2; border-left: 4px solid #0ea5e9; padding-left: 2.5rem; }
+    .vision-left h2 { font-size: 3rem; font-weight: 800; color: #0f172a; line-height: 1.2; letter-spacing: -1px; }
+    .vision-right { flex: 1; padding-top: 1rem; }
+    .vision-right p { font-size: 1.2rem; color: #475569; font-weight: 300; line-height: 1.8; }
+    .vision-right .link { display: inline-flex; align-items: center; gap: 0.5rem; color: #0ea5e9; font-weight: 700; margin-top: 2rem; border-bottom: 2px solid #0ea5e9; padding-bottom: 0.2rem; }
+
+    /* ===== 社交媒体区（横向滑动） ===== */
+    .social-section { padding: 6rem 5%; background: #fff; }
+    .social-tabs { display: flex; gap: 2rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 3rem; flex-wrap: wrap; }
+    .social-tab { font-size: 1rem; font-weight: 500; color: #64748b; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid transparent; }
+    .social-tab.active { color: #0ea5e9; border-bottom-color: #0ea5e9; font-weight: 700; }
+    .social-slider-wrapper { overflow: hidden; }
+    .social-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); gap: 2rem; }
+    .social-card { flex: 0 0 calc((100% - 4rem) / 3); border: 1px solid #e2e8f0; border-radius: 4px; padding: 2rem; display: flex; flex-direction: column; background: #fff; }
+    .social-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .social-card .header .date { font-size: 0.9rem; color: #94a3b8; }
+    .social-card .header .icon { font-size: 1.5rem; color: #0ea5e9; }
+    .social-card .content { font-size: 1rem; color: #334155; margin-bottom: 2rem; flex-grow: 1; line-height: 1.7; }
+    .social-card .content a { color: #0ea5e9; font-weight: 600; }
+    .social-card .img-box { width: 100%; height: 220px; overflow: hidden; border-radius: 4px; }
+    .social-card .img-box img { width: 100%; height: 100%; object-fit: cover; }
 
     /* ===== 全屏新闻阅读弹窗（左图右文） ===== */
     .news-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px); z-index: 3000; justify-content: center; align-items: center; }
@@ -114,7 +133,7 @@
     .news-modal-text .body img { max-width: 100%; height: auto; border-radius: 6px; margin-top: 1.5rem; }
 
     /* ===== 页脚与悬浮按钮 ===== */
-    footer { background: #001E3C; color: #94a3b8; padding: 4rem 8% 2rem; font-size: 0.9rem; }
+    footer { background: #001E3C; color: #94a3b8; padding: 4rem 5% 2rem; font-size: 0.9rem; }
     .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto 3rem; }
     .footer-col h5 { color: #fff; font-size: 1.1rem; margin-bottom: 1.2rem; }
     .footer-col p, .footer-col a { color: #94a3b8; line-height: 2; display: block; }
@@ -127,14 +146,20 @@
       .header-top { flex-direction: column; gap: 1rem; }
       .header-bottom nav a { margin-right: 1rem; font-size: 0.9rem; }
       .slide-content h1 { font-size: 2.5rem; }
-      .vision-section { flex-direction: column; gap: 2rem; padding: 4rem 8%; }
-      .vision-left h2 { font-size: 2rem; }
-      .scroll-section .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .story-section { grid-template-columns: 1fr; gap: 2rem; }
+      .story-tabs { flex-direction: row; overflow-x: auto; border-right: none; padding-right: 0; border-bottom: 1px solid #e2e8f0; }
+      .story-tab { white-space: nowrap; border-left: none; border-bottom: 3px solid transparent; }
+      .story-tab.active { border-left: none; border-bottom-color: #0ea5e9; }
+      .slider-card { flex: 0 0 100%; }
+      .social-card { flex: 0 0 100%; }
       .news-modal-content { flex-direction: column; }
       .news-modal-image { padding: 1rem; flex: 0 0 40vh; }
       .news-modal-text { padding: 2rem 1.5rem; }
       .news-modal-text h2 { font-size: 1.8rem; }
       .recent-news-item { flex: 0 0 300px; }
+      .vision-section { flex-direction: column; gap: 2rem; padding: 4rem 5%; }
+      .vision-left h2 { font-size: 2rem; }
+      .slider-section .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
     }
   </style>
 </head>
@@ -161,7 +186,7 @@
   </div>
 </header>
 
-<!-- 主轮播图 -->
+<!-- 1. 主轮播图 -->
 <div class="hero">
   <div class="slide active" style="background: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;">
     <div class="slide-content">
@@ -183,18 +208,132 @@
   </div>
 </div>
 
-<!-- 图五：轮播图下方小框最近新闻（滑动） -->
-<div class="recent-news-bar">
-  <div class="recent-news-track" id="recent-track">
-    <!-- 由 JS 动态填充 -->
+<!-- 2. 客户故事区（垂直选项卡） -->
+<div class="story-section">
+  <div class="story-tabs">
+    <div class="story-tab active" onclick="switchStory(0)">人工智能</div>
+    <div class="story-tab" onclick="switchStory(1)">数字孪生</div>
+    <div class="story-tab" onclick="switchStory(2)">数字化制造</div>
+    <div class="story-tab" onclick="switchStory(3)">软件定义自动化</div>
+    <div class="story-tab" onclick="switchStory(4)">可持续性</div>
   </div>
-  <div class="recent-news-nav">
-    <button onclick="scrollRecent(-1)">‹</button>
-    <button onclick="scrollRecent(1)">›</button>
+  <div class="story-main">
+    <img id="story-image" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Story Image">
+  </div>
+  <div class="story-side">
+    <div class="story-card">
+      <h4>客户故事</h4>
+      <p id="story-title">家族农场的人工智能帮助机器人采摘草莓</p>
+      <a href="#" class="link">阅读更多 →</a>
+    </div>
+    <div class="story-card" style="background: #f1f5f9; color: #0f172a;">
+      <h4 style="color: #0f172a;">产品聚焦</h4>
+      <p id="story-focus" style="color: #475569;">TIA门户的Eigen工程代理</p>
+      <a href="#" class="link" style="color: #0ea5e9;">了解更多 →</a>
+    </div>
   </div>
 </div>
 
-<!-- 图一：愿景大标题横排版 -->
+<!-- 3. 产品滑动区（每次3个大框，点击翻页） -->
+<div class="slider-section">
+  <div class="section-header">
+    <div>
+      <h2>发现产品和服务</h2>
+      <p>探索各种模块化且互操作的产品、服务和解决方案</p>
+    </div>
+    <div class="slider-controls">
+      <button onclick="slideTrack('product-track', -1)">‹</button>
+      <button onclick="slideTrack('product-track', 1)">›</button>
+    </div>
+  </div>
+  <div class="slider-container">
+    <div class="slider-track" id="product-track">
+      <div class="slider-card">
+        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="Product 1">
+        <div class="slider-card-info"><h4>Xcelerator 平台</h4><p>助力企业实现数字化转型，从设计到运营全面优化。</p><a href="products.html" class="link">了解更多 →</a></div>
+      </div>
+      <div class="slider-card">
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="Product 2">
+        <div class="slider-card-info"><h4>电气化 X 阶段</h4><p>构建智能电网和电气化解决方案，实现可持续能源。</p><a href="products.html" class="link">了解更多 →</a></div>
+      </div>
+      <div class="slider-card">
+        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Product 3">
+        <div class="slider-card-info"><h4>FEMAP 仿真</h4><p>高级有限元分析软件，帮助工程师预测产品性能。</p><a href="products.html" class="link">了解更多 →</a></div>
+      </div>
+      <div class="slider-card">
+        <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=600&q=80" alt="Product 4">
+        <div class="slider-card-info"><h4>工业边缘计算</h4><p>在边缘侧处理数据，降低延迟，提高生产效率。</p><a href="products.html" class="link">了解更多 →</a></div>
+      </div>
+      <div class="slider-card">
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="Product 5">
+        <div class="slider-card-info"><h4>数字孪生技术</h4><p>通过虚拟仿真优化物理世界的生产流程。</p><a href="products.html" class="link">了解更多 →</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. 解决方案滑动区（每次3个大框，点击翻页） -->
+<div class="slider-section" style="background: #fff; border-top: 1px solid #e2e8f0;">
+  <div class="section-header">
+    <div>
+      <h2>解决方案与行业应用</h2>
+      <p>面向不同行业的定制化解决方案，助力业务增长</p>
+    </div>
+    <div class="slider-controls">
+      <button onclick="slideTrack('solution-track', -1)">‹</button>
+      <button onclick="slideTrack('solution-track', 1)">›</button>
+    </div>
+  </div>
+  <div class="slider-container">
+    <div class="slider-track" id="solution-track">
+      <div class="slider-card">
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="Solution 1">
+        <div class="slider-card-info"><h4>汽车制造</h4><p>高度自动化的生产线，提升产能与质量。</p><a href="products.html" class="link">了解更多 →</a></div>
+      </div>
+      <div class="slider-card">
+        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Solution 2">
+        <div class="slider-card-info"><h4>航空航天</h4><p>精密零部件加工，满足严苛的行业标准。</p><a href="products.html" class="link">了解更多 →</a></div>
+      </div>
+      <div class="slider-card">
+        <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=600&q=80" alt="Solution 3">
+        <div class="slider-card-info"><h4>新能源</h4><p>提供电池、风电等新能源领域的核心部件。</p><a href="products.html" class="link">了解更多 →</a></div>
+      </div>
+      <div class="slider-card">
+        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="Solution 4">
+        <div class="slider-card-info"><h4>食品与饮料</h4><p>卫生级设备与自动化包装解决方案。</p><a href="products.html" class="link">了解更多 →</a></div>
+      </div>
+      <div class="slider-card">
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="Solution 5">
+        <div class="slider-card-info"><h4>石油化工</h4><p>耐高温高压的工业泵阀与密封件。</p><a href="products.html" class="link">了解更多 →</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 5. 新闻区块（小框 + 主区域） -->
+<div class="news-block">
+  <div class="section-title">
+    <h2>新闻动态</h2>
+    <p>了解我们的最新动态和行业资讯</p>
+  </div>
+  
+  <!-- 小框最近新闻（滑动） -->
+  <div class="recent-news-bar">
+    <div class="recent-news-track" id="recent-track">
+      <!-- 由 JS 动态填充 -->
+    </div>
+    <div class="recent-news-nav">
+      <button onclick="scrollRecent(-1)">‹</button>
+      <button onclick="scrollRecent(1)">›</button>
+    </div>
+  </div>
+
+  <div class="news-grid" id="news-container">
+    <p style="text-align:center; color:#999; width:100%;">正在加载新闻...</p>
+  </div>
+</div>
+
+<!-- 6. 愿景大标题（横排版） -->
 <div class="vision-section">
   <div class="vision-left">
     <h2>我们旨在通过业务活动解决社会问题，实现可持续发展</h2>
@@ -205,94 +344,7 @@
   </div>
 </div>
 
-<!-- 图三图四：产品与服务滑动区（上下两组） -->
-<div class="scroll-section">
-  <div class="section-header">
-    <div>
-      <h2>发现产品和服务</h2>
-      <p>探索各种模块化且互操作的产品、服务和解决方案</p>
-    </div>
-  </div>
-  <div class="scroll-container">
-    <div class="scroll-card">
-      <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="Product 1">
-      <div class="scroll-card-info">
-        <h4>Xcelerator 平台</h4>
-        <p>助力企业实现数字化转型，从设计到运营全面优化。</p>
-        <a href="products.html" class="link">了解更多 →</a>
-      </div>
-    </div>
-    <div class="scroll-card">
-      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="Product 2">
-      <div class="scroll-card-info">
-        <h4>电气化 X 阶段</h4>
-        <p>构建智能电网和电气化解决方案，实现可持续能源。</p>
-        <a href="products.html" class="link">了解更多 →</a>
-      </div>
-    </div>
-    <div class="scroll-card">
-      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Product 3">
-      <div class="scroll-card-info">
-        <h4>FEMAP 仿真</h4>
-        <p>高级有限元分析软件，帮助工程师预测产品性能。</p>
-        <a href="products.html" class="link">了解更多 →</a>
-      </div>
-    </div>
-    <div class="scroll-card">
-      <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=600&q=80" alt="Product 4">
-      <div class="scroll-card-info">
-        <h4>工业边缘计算</h4>
-        <p>在边缘侧处理数据，降低延迟，提高生产效率。</p>
-        <a href="products.html" class="link">了解更多 →</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="scroll-section" style="background: #fff; border-top: 1px solid #e2e8f0;">
-  <div class="section-header">
-    <div>
-      <h2>解决方案与行业应用</h2>
-      <p>面向不同行业的定制化解决方案，助力业务增长</p>
-    </div>
-  </div>
-  <div class="scroll-container">
-    <div class="scroll-card">
-      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="Solution 1">
-      <div class="scroll-card-info">
-        <h4>汽车制造</h4>
-        <p>高度自动化的生产线，提升产能与质量。</p>
-        <a href="products.html" class="link">了解更多 →</a>
-      </div>
-    </div>
-    <div class="scroll-card">
-      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Solution 2">
-      <div class="scroll-card-info">
-        <h4>航空航天</h4>
-        <p>精密零部件加工，满足严苛的行业标准。</p>
-        <a href="products.html" class="link">了解更多 →</a>
-      </div>
-    </div>
-    <div class="scroll-card">
-      <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=600&q=80" alt="Solution 3">
-      <div class="scroll-card-info">
-        <h4>新能源</h4>
-        <p>提供电池、风电等新能源领域的核心部件。</p>
-        <a href="products.html" class="link">了解更多 →</a>
-      </div>
-    </div>
-    <div class="scroll-card">
-      <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="Solution 4">
-      <div class="scroll-card-info">
-        <h4>食品与饮料</h4>
-        <p>卫生级设备与自动化包装解决方案。</p>
-        <a href="products.html" class="link">了解更多 →</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 图二：社交媒体区 -->
+<!-- 7. 社交媒体区（横向滑动） -->
 <div class="social-section">
   <div class="section-header" style="margin-bottom: 2rem;">
     <h2 style="font-size: 2.2rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">社交媒体</h2>
@@ -305,35 +357,36 @@
     <div class="social-tab"><span>▶️</span> YouTube</div>
     <div class="social-tab"><span>🎵</span> TikTok</div>
   </div>
-  <div class="social-container">
-    <div class="social-card">
-      <div class="header"><span class="date">Sep 21, 2026</span><span class="icon">📷</span></div>
-      <div class="content">Advancing smart mobility through collaboration 🤝... <a href="#">See more</a></div>
-      <div class="img-box"><img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=600&q=80" alt="Social 1"></div>
+  
+  <div class="slider-container social-slider-wrapper">
+    <div class="social-track" id="social-track">
+      <div class="social-card">
+        <div class="header"><span class="date">Sep 21, 2026</span><span class="icon">📷</span></div>
+        <div class="content">Advancing smart mobility through collaboration 🤝... <a href="#">See more</a></div>
+        <div class="img-box"><img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=600&q=80" alt="Social 1"></div>
+      </div>
+      <div class="social-card">
+        <div class="header"><span class="date">Sep 18, 2026</span><span class="icon">💼</span></div>
+        <div class="content">Mitsubishi Electric's MELSEC iQ-R Series safety programmable controller has obtained an EU type examination certificate... <a href="#">See more</a></div>
+        <div class="img-box"><img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Social 2"></div>
+      </div>
+      <div class="social-card">
+        <div class="header"><span class="date">Sep 18, 2026</span><span class="icon">💼</span></div>
+        <div class="content">Mitsubishi Electric is launching two R&D projects selected by Japan's NEDO under its initiative to accelerate... <a href="#">See more</a></div>
+        <div class="img-box"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="Social 3"></div>
+      </div>
+      <div class="social-card">
+        <div class="header"><span class="date">Sep 15, 2026</span><span class="icon">📘</span></div>
+        <div class="content">Our new factory automation line is now operational, increasing capacity by 40%. <a href="#">See more</a></div>
+        <div class="img-box"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="Social 4"></div>
+      </div>
     </div>
-    <div class="social-card">
-      <div class="header"><span class="date">Sep 18, 2026</span><span class="icon">💼</span></div>
-      <div class="content">Mitsubishi Electric's MELSEC iQ-R Series safety programmable controller has obtained an EU type examination certificate... <a href="#">See more</a></div>
-      <div class="img-box"><img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Social 2"></div>
-    </div>
-    <div class="social-card">
-      <div class="header"><span class="date">Sep 18, 2026</span><span class="icon">💼</span></div>
-      <div class="content">Mitsubishi Electric is launching two R&D projects selected by Japan's NEDO under its initiative to accelerate... <a href="#">See more</a></div>
-      <div class="img-box"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="Social 3"></div>
-    </div>
+  </div>
+  <div class="slider-controls" style="margin-top: 1.5rem; justify-content: flex-end;">
+    <button onclick="slideTrack('social-track', -1)">‹</button>
+    <button onclick="slideTrack('social-track', 1)">›</button>
   </div>
 </div>
-
-<!-- 新闻动态区 -->
-<section id="news">
-  <div class="section-title" style="text-align: center; margin-bottom: 4rem;">
-    <h2 style="font-size: 2.2rem; font-weight: 800; color: #0f172a;">新闻<span style="color: #0ea5e9;">动态</span></h2>
-    <p style="color: #64748b; margin-top: 0.5rem;">了解我们的最新动态和行业资讯</p>
-  </div>
-  <div class="news-grid" id="news-container">
-    <p style="text-align:center; color:#999; width:100%;">正在加载新闻...</p>
-  </div>
-</section>
 
 <!-- 全屏新闻阅读弹窗 -->
 <div id="news-modal" class="news-modal">
@@ -365,7 +418,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
-  // 轮播逻辑
+  // 主轮播逻辑
   let currentSlide = 0; const slides = document.querySelectorAll('.slide'); const dots = document.querySelectorAll('.dot'); let slideInterval;
   function showSlide(index) { slides.forEach(s => s.classList.remove('active')); dots.forEach(d => d.classList.remove('active')); slides[index].classList.add('active'); dots[index].classList.add('active'); currentSlide = index; }
   function goToSlide(index) { showSlide(index); resetInterval(); }
@@ -373,10 +426,41 @@
   function resetInterval() { clearInterval(slideInterval); autoPlay(); }
   autoPlay();
 
-  // 图五：小框最近新闻滑动逻辑
+  // 客户故事选项卡逻辑
+  const storyData = [
+    { img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80', title: '家族农场的人工智能帮助机器人采摘草莓', focus: 'TIA门户的Eigen工程代理' },
+    { img: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80', title: '数字孪生技术优化生产流程', focus: 'Simcenter 仿真软件' },
+    { img: 'https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=800&q=80', title: '数字化制造推动工业升级', focus: 'NX 一体化设计平台' },
+    { img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80', title: '软件定义自动化提高灵活性', focus: 'Simatic 自动化系统' },
+    { img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80', title: '可持续性驱动绿色制造', focus: '碳足迹管理方案' }
+  ];
+  function switchStory(index) {
+    document.querySelectorAll('.story-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.story-tab')[index].classList.add('active');
+    document.getElementById('story-image').src = storyData[index].img;
+    document.getElementById('story-title').innerText = storyData[index].title;
+    document.getElementById('story-focus').innerText = storyData[index].focus;
+  }
+
+  // 通用滑动翻页逻辑（每次点一下，滑动一个视口宽度）
+  function slideTrack(trackId, direction) {
+    const track = document.getElementById(trackId);
+    const container = track.parentElement;
+    const scrollAmount = container.clientWidth; // 每次滑动一页
+    const maxScrollLeft = track.scrollWidth - container.clientWidth;
+    let newScrollLeft = track.scrollLeft + direction * scrollAmount;
+    
+    // 边界限制
+    if (newScrollLeft < 0) newScrollLeft = 0;
+    if (newScrollLeft > maxScrollLeft) newScrollLeft = maxScrollLeft;
+    
+    track.scrollTo({ left: newScrollLeft, behavior: 'smooth' });
+  }
+
+  // 小框最近新闻滑动逻辑
   function scrollRecent(direction) {
     const track = document.getElementById('recent-track');
-    track.scrollBy({ left: direction * 420, behavior: 'smooth' });
+    track.scrollBy({ left: direction * 480, behavior: 'smooth' });
   }
 
   // 新闻加载逻辑（包含小框和主区域）
@@ -397,7 +481,7 @@
       }
       
       files.sort((a, b) => b.name.localeCompare(a.name));
-      const latestFiles = files.slice(0, 6); // 获取最新6条
+      const latestFiles = files.slice(0, 6);
       
       for (let i = 0; i < latestFiles.length; i++) {
         const file = latestFiles[i];
