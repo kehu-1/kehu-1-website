@@ -5,151 +5,278 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>你的品牌名 - 专业B2B供应商</title>
   <style>
-    /* ===== 基础样式 ===== */
+    /* ===== 基础字体与重置 ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap');
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.6; }
+    body { font-family: 'Inter', -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.6; background: #fff; }
     a { text-decoration: none; transition: 0.3s; }
 
-    /* ===== 顶部导航栏 ===== */
-    header { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
-    header .logo { font-size: 1.5rem; font-weight: bold; color: #ffffff; }
-    nav a { margin-left: 2rem; color: #cbd5e1; font-weight: 500; font-size: 0.95rem; }
-    nav a:hover, nav a.active { color: #0ea5e9; }
+    /* ===== 西门子风格导航栏（深色双层） ===== */
+    header { position: fixed; top: 0; width: 100%; background: #001E3C; z-index: 1000; display: flex; flex-direction: column; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+    .header-top { display: flex; justify-content: space-between; align-items: center; padding: 1rem 4%; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .header-top .logo { font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
+    .header-top .tools { display: flex; align-items: center; gap: 1.5rem; color: #fff; font-size: 0.9rem; }
+    .header-top .tools a { color: #cbd5e1; display: flex; align-items: center; gap: 0.3rem; }
+    .header-top .tools a:hover { color: #fff; }
+    .header-bottom { display: flex; justify-content: space-between; align-items: center; padding: 1rem 4%; }
+    .header-bottom nav a { color: #cbd5e1; font-size: 1rem; margin-right: 2.5rem; font-weight: 500; }
+    .header-bottom nav a:hover, .header-bottom nav a.active { color: #00FFB9; }
 
-    /* ===== 大屏Hero区 ===== */
-    .hero { min-height: 100vh; background: linear-gradient(rgba(15,23,42,0.7), rgba(15,23,42,0.7)), url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover; display: flex; align-items: center; padding: 0 8%; }
-    .hero-content { max-width: 600px; color: #fff; }
-    .hero-content h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 1.5rem; font-weight: 700; }
-    .hero-content p { font-size: 1.1rem; color: #cbd5e1; margin-bottom: 2rem; }
-    .hero-content ul { list-style: none; margin-bottom: 2.5rem; }
-    .hero-content ul li { font-size: 1rem; margin-bottom: 0.8rem; color: #f1f5f9; display: flex; align-items: center; }
-    .hero-content ul li::before { content: "✓"; color: #0ea5e9; font-weight: bold; margin-right: 10px; font-size: 1.2rem; }
-    .btn { display: inline-block; padding: 1rem 2.5rem; background: #0ea5e9; color: #fff; border-radius: 4px; font-size: 1rem; font-weight: 600; }
-    .btn:hover { background: #0284c7; transform: translateY(-2px); }
+    /* ===== 主视觉区（保留轮播） ===== */
+    .hero { position: relative; height: 90vh; margin-top: 104px; overflow: hidden; background: #0f172a; }
+    .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s; display: flex; align-items: center; padding: 0 8%; }
+    .slide.active { opacity: 1; z-index: 1; }
+    .slide::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(15,23,42,0.7), rgba(15,23,42,0.7)); z-index: 1; }
+    .slide-content { position: relative; z-index: 2; max-width: 700px; color: #fff; }
+    .slide-content h1 { font-size: 4rem; line-height: 1.1; font-weight: 800; margin-bottom: 1rem; letter-spacing: -1px; }
+    .slide-content p { font-size: 1.2rem; font-weight: 300; color: #cbd5e1; margin-bottom: 2.5rem; }
+    .btn { display: inline-block; padding: 1rem 3rem; background: #00FFB9; color: #001E3C; font-weight: 700; transition: 0.3s; border: none; cursor: pointer; }
+    .btn:hover { background: #00e6a6; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,255,185,0.2); }
+    .carousel-dots { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.8rem; z-index: 10; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: 0.3s; }
+    .dot.active { background: #00FFB9; transform: scale(1.2); }
 
-    /* ===== 通用区块标题 ===== */
-    .section-title { text-align: center; margin-bottom: 4rem; }
-    .section-title h2 { font-size: 2.2rem; color: #0f172a; }
-    .section-title span { color: #0ea5e9; }
-    .section-title p { color: #64748b; margin-top: 0.5rem; font-size: 1.1rem; }
+    /* ===== 产品故事区（垂直选项卡） ===== */
+    .story-section { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 2rem; padding: 6rem 8%; max-width: 1400px; margin: 0 auto; }
+    .story-tabs { display: flex; flex-direction: column; gap: 0.5rem; border-right: 1px solid #e2e8f0; padding-right: 1rem; }
+    .story-tab { padding: 1rem 1.5rem; font-size: 1.1rem; font-weight: 500; color: #64748b; cursor: pointer; transition: 0.3s; border-left: 3px solid transparent; }
+    .story-tab:hover { color: #0f172a; background: #f8fafc; }
+    .story-tab.active { color: #0f172a; background: #e0f2fe; border-left-color: #0ea5e9; font-weight: 700; }
+    .story-main { display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .story-main img { width: 100%; height: 400px; object-fit: cover; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+    .story-side { display: flex; flex-direction: column; gap: 2rem; }
+    .story-card { background: #001E3C; color: #fff; padding: 2.5rem; border-radius: 4px; }
+    .story-card h4 { font-size: 1.4rem; margin-bottom: 1rem; font-weight: 700; }
+    .story-card p { color: #cbd5e1; font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.8; }
+    .story-card .link { color: #00FFB9; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+    
+    /* ===== 横向滑动产品区 ===== */
+    .scroll-section { padding: 4rem 8%; max-width: 1400px; margin: 0 auto; }
+    .scroll-section .section-title { margin-bottom: 2rem; text-align: left; }
+    .scroll-section .section-title h2 { font-size: 2rem; color: #0f172a; font-weight: 800; }
+    .scroll-section .section-title p { color: #64748b; margin-top: 0.5rem; }
+    .scroll-container { display: flex; gap: 2rem; overflow-x: auto; padding-bottom: 1.5rem; scroll-snap-type: x mandatory; scroll-behavior: smooth; }
+    .scroll-container::-webkit-scrollbar { height: 8px; }
+    .scroll-container::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+    .scroll-container::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    .scroll-card { flex: 0 0 350px; scroll-snap-align: start; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; }
+    .scroll-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+    .scroll-card img { width: 100%; height: 200px; object-fit: cover; }
+    .scroll-card-info { padding: 1.5rem; background: #fff; border: 1px solid #e2e8f0; border-top: none; }
+    .scroll-card-info h4 { font-size: 1.1rem; color: #0f172a; font-weight: 700; margin-bottom: 0.5rem; }
+    .scroll-card-info p { font-size: 0.9rem; color: #64748b; margin-bottom: 1rem; }
+    .scroll-card-info a { color: #0ea5e9; font-weight: 500; font-size: 0.9rem; }
 
-    /* ===== 新闻动态 ===== */
-    #news { background: #f8fafc; padding: 7rem 8%; }
+    /* ===== 新闻动态区 ===== */
+    #news { background: #f8fafc; padding: 6rem 8%; }
     .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
-    .news-card { background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; display: flex; flex-direction: column; transition: 0.3s; }
-    .news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    .news-card { background: #fff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; transition: 0.3s; cursor: pointer; }
+    .news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-color: #0ea5e9; }
     .news-card .date { font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.5rem; }
     .news-card h4 { font-size: 1.1rem; margin-bottom: 0.8rem; color: #0f172a; }
     .news-card p { font-size: 0.9rem; color: #64748b; margin-bottom: 1rem; flex-grow: 1; }
-    .read-more-btn { display: inline-block; margin-top: auto; color: #0ea5e9; cursor: pointer; font-weight: 500; font-size: 0.9rem; background: none; border: none; padding: 0; text-align: left; }
-    .read-more-btn:hover { text-decoration: underline; }
-    .news-card img { max-width: 100%; height: auto; border-radius: 6px; margin-top: 10px; }
 
-    /* ===== 合作品牌墙（全新设计） ===== */
-    #brands { background: #fff; padding: 8rem 8%; }
-    .brands-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 3rem 2rem; justify-items: center; align-items: center; max-width: 1000px; margin: 0 auto; }
-    .brand-item { font-size: 1.1rem; font-weight: 700; color: #cbd5e1; letter-spacing: 2px; padding: 2rem 1rem; border-radius: 8px; text-align: center; width: 100%; transition: 0.3s ease; }
-    .brand-item:hover { color: #0ea5e9; background: #f8fafc; transform: scale(1.05); }
+    /* ===== 全屏新闻阅读弹窗（左图右文） ===== */
+    .news-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px); z-index: 3000; justify-content: center; align-items: center; }
+    .news-modal-content { position: relative; width: 100%; height: 100%; display: flex; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+    .news-modal-close { position: absolute; top: 2rem; right: 2rem; font-size: 2.5rem; color: #fff; cursor: pointer; z-index: 10; line-height: 1; }
+    .news-modal-close:hover { color: #00FFB9; }
+    .news-modal-image { flex: 1; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 4rem; background: rgba(0,0,0,0.2); }
+    .news-modal-image img { width: 100%; height: 80vh; object-fit: contain; }
+    .news-modal-text { flex: 1; padding: 6rem 4rem; overflow-y: auto; color: #fff; }
+    .news-modal-text h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+    .news-modal-text .date { color: #94a3b8; margin-bottom: 2rem; font-size: 1rem; }
+    .news-modal-text .body { font-size: 1.1rem; line-height: 1.8; color: #cbd5e1; }
+    .news-modal-text .body img { max-width: 100%; height: auto; border-radius: 6px; margin-top: 1.5rem; }
 
-    /* ===== 国际认证区（全新设计） ===== */
-    #certifications { background: #f8fafc; padding: 8rem 8%; }
-    .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto; }
-    .cert-card { background: #fff; padding: 2.5rem 2rem; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center; transition: 0.4s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
-    .cert-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.06); border-color: #0ea5e9; }
-    .cert-icon { font-size: 2rem; margin-bottom: 1.5rem; display: inline-flex; align-items: center; justify-content: center; width: 70px; height: 70px; background: rgba(14, 165, 233, 0.1); color: #0ea5e9; border-radius: 50%; }
-    .cert-card h4 { font-size: 1.2rem; color: #0f172a; margin-bottom: 0.8rem; font-weight: 700; }
-    .cert-card p { font-size: 0.95rem; color: #64748b; line-height: 1.6; }
-
-    /* ===== 高级4列页脚 ===== */
-    footer { background: #0f172a; color: #94a3b8; padding: 4rem 8% 2rem; font-size: 0.9rem; }
+    /* ===== 页脚 ===== */
+    footer { background: #001E3C; color: #94a3b8; padding: 4rem 8% 2rem; font-size: 0.9rem; }
     .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto 3rem; }
     .footer-col h5 { color: #fff; font-size: 1.1rem; margin-bottom: 1.2rem; }
     .footer-col p, .footer-col a { color: #94a3b8; line-height: 2; display: block; }
-    .footer-col a:hover { color: #0ea5e9; }
+    .footer-col a:hover { color: #00FFB9; }
     .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
 
-    /* ===== 弹窗样式 ===== */
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; }
-    .modal-content { background: #fff; padding: 2rem; border-radius: 8px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; }
-    .modal-close { position: absolute; top: 1rem; right: 1.5rem; font-size: 1.5rem; cursor: pointer; color: #666; }
-    .modal-content img { max-width: 100%; height: auto; border-radius: 6px; margin-top: 10px; }
-    .modal-content h4 { font-size: 1.5rem; margin-bottom: 0.5rem; color: #0f172a; }
-    .modal-content .date { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem; }
+    /* ===== 悬浮联系按钮 ===== */
+    .floating-contact { position: fixed; bottom: 2rem; right: 2rem; background: #00FFB9; color: #001E3C; padding: 1rem 1.8rem; border-radius: 4px; font-weight: 700; box-shadow: 0 10px 25px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 0.5rem; z-index: 9999; transition: 0.3s; border: none; }
+    .floating-contact:hover { background: #00e6a6; transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,255,185,0.4); }
 
-    /* ===== 响应式 ===== */
     @media (max-width: 900px) {
-      .hero-content h1 { font-size: 2.5rem; }
-      .footer-grid { grid-template-columns: 1fr; }
-    }
-     /* 右下角悬浮联系按钮 */
-    .floating-contact {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: rgba(15, 23, 42, 0.85); /* 磨砂深色 */
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      color: #fff;
-      padding: 0.8rem 1.5rem;
-      border-radius: 50px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 500;
-      font-size: 0.95rem;
-      z-index: 9999;
-      transition: 0.3s ease;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .floating-contact:hover {
-      background: #0ea5e9; /* 悬浮变蓝 */
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(14, 165, 233, 0.4);
-    }
-    /* 手机端稍微缩小一点，避免遮挡 */
-    @media (max-width: 768px) {
-      .floating-contact {
-        bottom: 1.5rem;
-        right: 1.5rem;
-        padding: 0.7rem 1.2rem;
-        font-size: 0.85rem;
-      }
+      .header-top { flex-direction: column; gap: 1rem; }
+      .header-bottom nav a { margin-right: 1rem; font-size: 0.9rem; }
+      .slide-content h1 { font-size: 2.5rem; }
+      .story-section { grid-template-columns: 1fr; gap: 2rem; }
+      .story-tabs { flex-direction: row; overflow-x: auto; border-right: none; padding-right: 0; border-bottom: 1px solid #e2e8f0; }
+      .story-tab { white-space: nowrap; border-left: none; border-bottom: 3px solid transparent; }
+      .story-tab.active { border-left: none; border-bottom-color: #0ea5e9; }
+      .news-modal-content { flex-direction: column; }
+      .news-modal-image { padding: 1rem; flex: 0 0 40vh; }
+      .news-modal-text { padding: 2rem 1.5rem; }
+      .news-modal-text h2 { font-size: 1.8rem; }
     }
   </style>
 </head>
 <body>
 
+<!-- 导航栏（西门子双层风格） -->
 <header>
-  <div class="logo">你的品牌名</div>
-  <nav>
-    <a href="index.html" class="active">首页</a>
-    <a href="products.html">产品展示</a>
-    <a href="advantages.html">生产优势</a>
-    <a href="contact.html">联系我们</a>
-    <a href="en/index.html" style="color: #0ea5e9;">English</a>
-  </nav>
+  <div class="header-top">
+    <div class="logo">你的品牌名</div>
+    <div class="tools">
+      <a href="#">🌐 全球</a>
+      <a href="#">支持与社区</a>
+      <a href="#">👤 登录</a>
+    </div>
+  </div>
+  <div class="header-bottom">
+    <nav>
+      <a href="index.html" class="active">首页</a>
+      <a href="products.html">产品展示</a>
+      <a href="advantages.html">生产优势</a>
+      <a href="contact.html">联系我询价</a>
+      <a href="en/index.html" style="color: #00FFB9;">English</a>
+    </nav>
+  </div>
 </header>
 
-<!-- Hero -->
+<!-- 轮播图 -->
 <div class="hero">
-  <div class="hero-content">
-    <h1>可靠的全球B2B供应商</h1>
-    <p>我们致力于为客户提供高品质的产品和一站式采购解决方案，助力您的业务增长。</p>
-    <ul>
-      <li>15年+ 行业制造与出口经验</li>
-      <li>严格的质量控制体系，100% 检验</li>
-      <li>支持 OEM/ODM，快速响应定制需求</li>
-      <li>专业的海外销售团队，无障碍沟通</li>
-    </ul>
-    <a href="contact.html" class="btn">立即询盘</a>
+  <div class="slide active" style="background: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;">
+    <div class="slide-content">
+      <h1>可靠的全球B2B供应商</h1>
+      <p>我们致力于为客户提供高品质的产品和一站式采购解决方案，助力您的业务增长。</p>
+      <a href="contact.html" class="btn">立即询盘</a>
+    </div>
+  </div>
+  <div class="slide" style="background: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;">
+    <div class="slide-content">
+      <h1>严格的质量控制体系</h1>
+      <p>从原料采购到成品出货，100% 全检制度确保每一件产品都符合国际标准。</p>
+      <a href="advantages.html" class="btn">了解生产优势</a>
+    </div>
+  </div>
+  <button class="carousel-btn prev" onclick="changeSlide(-1)">‹</button>
+  <button class="carousel-btn next" onclick="changeSlide(1)">›</button>
+  <div class="carousel-dots">
+    <span class="dot active" onclick="goToSlide(0)"></span>
+    <span class="dot" onclick="goToSlide(1)"></span>
+  </div>
+</div>
+
+<!-- 产品故事区（垂直选项卡） -->
+<div class="story-section">
+  <div class="story-tabs">
+    <div class="story-tab active" onclick="switchStory(0)">人工智能</div>
+    <div class="story-tab" onclick="switchStory(1)">数字孪生</div>
+    <div class="story-tab" onclick="switchStory(2)">数字化制造</div>
+    <div class="story-tab" onclick="switchStory(3)">软件定义自动化</div>
+    <div class="story-tab" onclick="switchStory(4)">可持续性</div>
+  </div>
+  <div class="story-main">
+    <img id="story-image" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Story Image">
+  </div>
+  <div class="story-side">
+    <div class="story-card">
+      <h4>客户故事</h4>
+      <p id="story-title">家族农场的人工智能帮助机器人采摘草莓</p>
+      <a href="#" class="link">阅读更多 →</a>
+    </div>
+    <div class="story-card" style="background: #f1f5f9; color: #0f172a;">
+      <h4 style="color: #0f172a;">产品聚焦</h4>
+      <p id="story-focus" style="color: #475569;">TIA门户的Eigen工程代理</p>
+      <a href="#" class="link" style="color: #0ea5e9;">了解更多 →</a>
+    </div>
+  </div>
+</div>
+
+<!-- 横向滑动产品区 1 -->
+<div class="scroll-section">
+  <div class="section-title">
+    <h2>发现产品和服务</h2>
+    <p>探索各种模块化且互操作的产品、服务和解决方案</p>
+  </div>
+  <div class="scroll-container">
+    <div class="scroll-card">
+      <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="Product 1">
+      <div class="scroll-card-info">
+        <h4>Xcelerator 平台</h4>
+        <p>助力企业实现数字化转型，从设计到运营全面优化。</p>
+        <a href="products.html">了解更多 →</a>
+      </div>
+    </div>
+    <div class="scroll-card">
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="Product 2">
+      <div class="scroll-card-info">
+        <h4>电气化 X 阶段</h4>
+        <p>构建智能电网和电气化解决方案，实现可持续能源。</p>
+        <a href="products.html">了解更多 →</a>
+      </div>
+    </div>
+    <div class="scroll-card">
+      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Product 3">
+      <div class="scroll-card-info">
+        <h4>FEMAP</h4>
+        <p>高级有限元分析软件，帮助工程师预测产品性能。</p>
+        <a href="products.html">了解更多 →</a>
+      </div>
+    </div>
+    <div class="scroll-card">
+      <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=600&q=80" alt="Product 4">
+      <div class="scroll-card-info">
+        <h4>工业边缘计算</h4>
+        <p>在边缘侧处理数据，降低延迟，提高生产效率。</p>
+        <a href="products.html">了解更多 →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 横向滑动产品区 2 -->
+<div class="scroll-section" style="background: #f8fafc;">
+  <div class="section-title">
+    <h2>解决方案与行业应用</h2>
+    <p>面向不同行业的定制化解决方案，助力业务增长</p>
+  </div>
+  <div class="scroll-container">
+    <div class="scroll-card">
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="Solution 1">
+      <div class="scroll-card-info">
+        <h4>汽车制造</h4>
+        <p>高度自动化的生产线，提升产能与质量。</p>
+        <a href="products.html">了解更多 →</a>
+      </div>
+    </div>
+    <div class="scroll-card">
+      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Solution 2">
+      <div class="scroll-card-info">
+        <h4>航空航天</h4>
+        <p>精密零部件加工，满足严苛的行业标准。</p>
+        <a href="products.html">了解更多 →</a>
+      </div>
+    </div>
+    <div class="scroll-card">
+      <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=600&q=80" alt="Solution 3">
+      <div class="scroll-card-info">
+        <h4>新能源</h4>
+        <p>提供电池、风电等新能源领域的核心部件。</p>
+        <a href="products.html">了解更多 →</a>
+      </div>
+    </div>
+    <div class="scroll-card">
+      <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="Solution 4">
+      <div class="scroll-card-info">
+        <h4>食品与饮料</h4>
+        <p>卫生级设备与自动化包装解决方案。</p>
+        <a href="products.html">了解更多 →</a>
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- 新闻动态 -->
 <section id="news">
-  <div class="section-title">
-    <h2>新闻<span>动态</span></h2>
+  <div class="section-title" style="text-align: center; margin-bottom: 4rem;">
+    <h2>新闻<span style="color: #0ea5e9;">动态</span></h2>
     <p>了解我们的最新动态和行业资讯</p>
   </div>
   <div class="news-grid" id="news-container">
@@ -157,97 +284,61 @@
   </div>
 </section>
 
-<!-- 合作品牌墙（全新设计） -->
-<section id="brands">
-  <div class="section-title">
-    <h2>合作<span>品牌</span></h2>
-    <p>我们与全球多家知名企业建立了长期战略合作关系</p>
-  </div>
-  <div class="brands-grid">
-    <div class="brand-item">GLOBAL TRADE</div>
-    <div class="brand-item">INDUSTRIX</div>
-    <div class="brand-item">TECHNOCORP</div>
-    <div class="brand-item">PRIMEMFG</div>
-    <div class="brand-item">EUROSUPPLY</div>
-    <div class="brand-item">PACIFIC CO.</div>
-  </div>
-</section>
-
-<!-- 国际认证区（全新设计） -->
-<section id="certifications">
-  <div class="section-title">
-    <h2>国际<span>认证</span></h2>
-    <p>我们的产品符合严格的国际标准，拥有多项权威认证</p>
-  </div>
-  <div class="cert-grid">
-    <div class="cert-card">
-      <div class="cert-icon">🏆</div>
-      <h4>ISO 9001</h4>
-      <p>国际质量管理体系认证</p>
+<!-- 全屏新闻阅读弹窗 -->
+<div id="news-modal" class="news-modal">
+  <div class="news-modal-content">
+    <span class="news-modal-close" onclick="closeNewsModal()">&times;</span>
+    <div class="news-modal-image">
+      <img id="news-modal-img" src="" alt="News Image">
     </div>
-    <div class="cert-card">
-      <div class="cert-icon">✅</div>
-      <h4>CE 认证</h4>
-      <p>欧盟安全合格标志</p>
+    <div class="news-modal-text">
+      <h2 id="news-modal-title"></h2>
+      <div class="date" id="news-modal-date"></div>
+      <div class="body" id="news-modal-body"></div>
     </div>
-    <div class="cert-card">
-      <div class="cert-icon">🌿</div>
-      <h4>RoHS 合规</h4>
-      <p>欧盟环保指令认证</p>
-    </div>
-    <div class="cert-card">
-      <div class="cert-icon">🛡️</div>
-      <h4>REACH 合规</h4>
-      <p>欧盟化学品法规认证</p>
-    </div>
-  </div>
-</section>
-
-<!-- 高级4列页脚 -->
-<footer>
-  <div class="footer-grid">
-    <div class="footer-col">
-      <h5>你的品牌名</h5>
-      <p>专业的全球B2B供应商，致力于为全球客户提供高品质产品和一站式采购解决方案。</p>
-    </div>
-    <div class="footer-col">
-      <h5>快速导航</h5>
-      <a href="index.html">首页</a>
-      <a href="products.html">产品展示</a>
-      <a href="advantages.html">生产优势</a>
-      <a href="contact.html">联系我们</a>
-    </div>
-    <div class="footer-col">
-      <h5>联系我们</h5>
-      <p>📧 你的邮箱@example.com</p>
-      <p>📞 +86 123 4567 8910</p>
-      <p>📍 中国 广东省 深圳市 某某区</p>
-    </div>
-    <div class="footer-col">
-      <h5>关注我们</h5>
-      <a href="#">LinkedIn</a>
-      <a href="#">WhatsApp</a>
-      <a href="#">WeChat</a>
-      <a href="#">YouTube</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2026 你的品牌名. All rights reserved. | <a href="#" style="display:inline; color:#94a3b8;">隐私政策</a></p>
-  </div>
-</footer>
-
-<!-- 新闻弹窗 -->
-<div id="news-modal" class="modal">
-  <div class="modal-content">
-    <span class="modal-close" onclick="closeModal()">&times;</span>
-    <h4 id="modal-title"></h4>
-    <div id="modal-date" class="date"></div>
-    <div id="modal-body"></div>
   </div>
 </div>
 
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col"><h5>你的品牌名</h5><p>专业的全球B2B供应商，致力于为全球客户提供高品质产品和一站式采购解决方案。</p></div>
+    <div class="footer-col"><h5>快速导航</h5><a href="index.html">首页</a><a href="products.html">产品展示</a><a href="advantages.html">生产优势</a><a href="contact.html">联系我询价</a></div>
+    <div class="footer-col"><h5>联系我们</h5><p>📧 your-email@example.com</p><p>📞 +86 123 4567 8910</p><p>📍 中国 广东省 深圳市 某某区</p></div>
+    <div class="footer-col"><h5>关注我们</h5><a href="#">LinkedIn</a><a href="#">WhatsApp</a><a href="#">WeChat</a><a href="#">YouTube</a></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 你的品牌名. All rights reserved. | <a href="#" style="display:inline; color:#94a3b8;">隐私政策</a></p></div>
+</footer>
+
+<a href="contact.html" class="floating-contact">✉️ 联系我询价</a>
+
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
+  // 轮播逻辑
+  let currentSlide = 0; const slides = document.querySelectorAll('.slide'); const dots = document.querySelectorAll('.dot'); let slideInterval;
+  function showSlide(index) { slides.forEach(s => s.classList.remove('active')); dots.forEach(d => d.classList.remove('active')); slides[index].classList.add('active'); dots[index].classList.add('active'); currentSlide = index; }
+  function changeSlide(direction) { let next = currentSlide + direction; if (next >= slides.length) next = 0; if (next < 0) next = slides.length - 1; showSlide(next); resetInterval(); }
+  function goToSlide(index) { showSlide(index); resetInterval(); }
+  function autoPlay() { slideInterval = setInterval(() => { let next = currentSlide + 1; if (next >= slides.length) next = 0; showSlide(next); }, 5000); }
+  function resetInterval() { clearInterval(slideInterval); autoPlay(); }
+  autoPlay();
+
+  // 产品故事选项卡逻辑
+  const storyData = [
+    { img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80', title: '家族农场的人工智能帮助机器人采摘草莓', focus: 'TIA门户的Eigen工程代理' },
+    { img: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80', title: '数字孪生技术优化生产流程', focus: 'Simcenter 仿真软件' },
+    { img: 'https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=800&q=80', title: '数字化制造推动工业升级', focus: 'NX 一体化设计平台' },
+    { img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80', title: '软件定义自动化提高灵活性', focus: 'Simatic 自动化系统' },
+    { img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80', title: '可持续性驱动绿色制造', focus: '碳足迹管理方案' }
+  ];
+  function switchStory(index) {
+    document.querySelectorAll('.story-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.story-tab')[index].classList.add('active');
+    document.getElementById('story-image').src = storyData[index].img;
+    document.getElementById('story-title').innerText = storyData[index].title;
+    document.getElementById('story-focus').innerText = storyData[index].focus;
+  }
+
+  // 新闻加载与弹窗逻辑
   let newsArticles = [];
   async function loadNews() {
     try {
@@ -255,11 +346,10 @@
       const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/news`);
       const files = await res.json();
       const container = document.getElementById('news-container');
-      container.innerHTML = '';
-      newsArticles = [];
+      container.innerHTML = ''; newsArticles = [];
       if (!Array.isArray(files) || files.length === 0) { container.innerHTML = '<p style="text-align:center;color:#999;width:100%;">暂无新闻动态。</p>'; return; }
       files.sort((a, b) => b.name.localeCompare(a.name));
-      const latestFiles = files.slice(0, 3);
+      const latestFiles = files.slice(0, 6);
       for (let i = 0; i < latestFiles.length; i++) {
         const file = latestFiles[i];
         const rawRes = await fetch(file.download_url);
@@ -272,28 +362,44 @@
         const title = titleMatch ? titleMatch[1].trim() : '无标题';
         const date = dateMatch ? dateMatch[1].trim() : '';
         const htmlBody = marked.parse(bodyContent);
+        
+        // 提取第一张图片作为封面
+        const imgMatch = htmlBody.match(/<img[^>]+src="([^">]+)"/);
+        const coverImg = imgMatch ? imgMatch[1] : 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80';
+        
         const plainText = htmlBody.replace(/<[^>]+>/g, '').trim();
         const summary = plainText.length > 80 ? plainText.substring(0, 80) + '...' : plainText;
-        newsArticles.push({ title, date, body: htmlBody });
-        const cardHtml = `<div class="news-card"><div class="date">${date}</div><h4>${title}</h4><p style="color:#64748b; margin-top:10px;">${summary}</p><button class="read-more-btn" onclick="openArticle(${i})">阅读全文 →</button></div>`;
+        newsArticles.push({ title, date, body: htmlBody, img: coverImg });
+        
+        const cardHtml = `
+          <div class="news-card" onclick="openNewsModal(${i})">
+            <div class="date">${date}</div>
+            <h4>${title}</h4>
+            <p style="color:#64748b; margin-top:10px;">${summary}</p>
+            <span style="color:#0ea5e9; font-weight:500; margin-top:auto; display:block;">阅读全文 →</span>
+          </div>
+        `;
         container.insertAdjacentHTML('beforeend', cardHtml);
       }
     } catch (e) { console.error(e); document.getElementById('news-container').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;">加载新闻失败，请刷新。</p>'; }
   }
-  function openArticle(index) {
+
+  function openNewsModal(index) {
     const article = newsArticles[index]; if (!article) return;
-    document.getElementById('modal-title').innerText = article.title;
-    document.getElementById('modal-date').innerText = article.date;
-    document.getElementById('modal-body').innerHTML = article.body;
+    document.getElementById('news-modal-title').innerText = article.title;
+    document.getElementById('news-modal-date').innerText = article.date;
+    document.getElementById('news-modal-body').innerHTML = article.body;
+    document.getElementById('news-modal-img').src = article.img;
     document.getElementById('news-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // 防止背景滚动
   }
-  function closeModal() { document.getElementById('news-modal').style.display = 'none'; }
+
+  function closeNewsModal() {
+    document.getElementById('news-modal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+
   loadNews();
 </script>
-
-<!-- 右下角悬浮联系客服 -->
-<a href="contact.html" class="floating-contact">
-  ✉️ 联系我询价
-</a>
 </body>
 </html>
