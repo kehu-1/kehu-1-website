@@ -19,11 +19,11 @@
     body { font-family: 'Inter', -apple-system, "Segoe UI", sans-serif; color: var(--text-main); line-height: 1.6; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* ===== 核心：统一对齐容器（图一改图二的关键） ===== */
+    /* ===== 核心：统一对齐容器（全面拓宽宽度） ===== */
     .header-container, .section-container {
-      max-width: 1280px; /* 西门子标准内容宽度 */
-      margin: 0 auto;    /* 居中对齐 */
-      padding: 0 2rem;   /* 两侧留出安全边距 */
+      max-width: 1600px; /* 加宽内容区域，大幅减少左右留白 */
+      margin: 0 auto;    
+      padding: 0 2rem;   /* 适度的安全边距 */
       width: 100%;
     }
 
@@ -36,7 +36,9 @@
     .header-top .tools a:hover { color: var(--tech-green); }
     .header-bottom { border-top: 1px solid rgba(255,255,255,0.05); }
     .header-bottom .nav-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
+    /* 调整导航栏文字，第一项去除左边距以严格对齐 */
     .header-bottom nav a { color: #CBD5E1; font-size: 1rem; margin-right: 3rem; font-weight: 500; }
+    .header-bottom nav a:first-child { margin-left: 0; }
     .header-bottom nav a:hover, .header-bottom nav a.active { color: var(--tech-green); }
     .header-bottom .search-wrapper { color: #CBD5E1; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; }
     .header-bottom .search-wrapper:hover { color: var(--tech-green); }
@@ -61,7 +63,7 @@
 
     /* ===== 轮播图下方新闻条 ===== */
     .top-news-section { background: #fff; border-bottom: 1px solid #E5E7EB; padding: 1rem 0; }
-    .top-news-inner { max-width: 1280px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; gap: 2rem; }
+    .top-news-inner { max-width: 1600px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; gap: 2rem; }
     .top-news-inner img { width: 120px; height: 75px; object-fit: cover; }
     .top-news-text { flex: 1; }
     .top-news-text h4 { font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.2rem; }
@@ -72,11 +74,14 @@
     /* ===== 客户故事区 ===== */
     .story-section { padding: 6rem 0; }
     .story-grid { display: grid; grid-template-columns: 240px 1fr 320px; gap: 3rem; align-items: start; }
-    .story-tabs { display: flex; flex-direction: column; position: sticky; top: 140px; }
-    .story-tab { padding: 0.8rem 1.5rem; font-size: 1.1rem; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: 0.3s; border-left: 2px solid #E5E7EB; }
-    .story-tab:hover { color: var(--text-main); background: #F3F4F6; }
-    .story-tab.active { color: var(--text-main); background: var(--tech-green-light); border-left-color: var(--tech-green); font-weight: 700; }
     
+    /* 对齐关键：把边框放到外层容器，让内部选项左对齐 */
+    .story-tabs { display: flex; flex-direction: column; position: sticky; top: 140px; border-left: 2px solid #E5E7EB; }
+    .story-tab { padding: 0.8rem 0; padding-left: 1.5rem; font-size: 1.1rem; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: 0.3s; }
+    .story-tab:hover { color: var(--text-main); background: #F3F4F6; }
+    /* 激活时微调 padding 和 margin 以对齐边框 */
+    .story-tab.active { color: var(--text-main); background: var(--tech-green-light); border-left: 3px solid var(--tech-green); margin-left: -2px; padding-left: calc(1.5rem - 1px); font-weight: 700; }
+
     .story-main { display: flex; flex-direction: column; overflow: hidden; }
     .story-main img { width: 100%; height: 650px; object-fit: cover; }
     .story-link { display: inline-block; margin-top: 1.5rem; color: var(--text-main); font-weight: 700; font-size: 1rem; border-bottom: 2px solid var(--tech-green); padding-bottom: 2px; width: fit-content; }
@@ -137,7 +142,7 @@
     .news-block .section-title { text-align: center; margin-bottom: 4rem; }
     .news-block .section-title h2 { font-size: 2.2rem; font-weight: 800; color: var(--text-main); }
     .news-block .section-title p { color: var(--text-muted); margin-top: 0.5rem; }
-    .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; max-width: 1280px; margin: 0 auto; }
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; max-width: 1600px; margin: 0 auto; }
     .news-card { display: flex; flex-direction: column; transition: 0.3s; cursor: pointer; background: transparent; }
     .news-card img { width: 100%; height: 280px; object-fit: cover; margin-bottom: 1.5rem; }
     .news-card .category { font-size: 0.85rem; font-weight: 700; color: var(--tech-green); text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 1px; }
@@ -148,7 +153,7 @@
 
     /* ===== 愿景大标题 ===== */
     .vision-section { padding: 8rem 0; background: #F8FAFC; }
-    .vision-inner { max-width: 1280px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 5rem; align-items: center; }
+    .vision-inner { max-width: 1600px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 5rem; align-items: center; }
     .vision-left { flex: 1.2; }
     .vision-left h2 { font-size: 3rem; font-weight: 800; color: var(--text-main); line-height: 1.2; letter-spacing: -1px; }
     .vision-right { flex: 1; }
@@ -184,7 +189,7 @@
 
     /* ===== 页脚与悬浮按钮 ===== */
     footer { background: var(--dark-bg); color: #9CA3AF; padding: 4rem 0 2rem; font-size: 0.9rem; }
-    .footer-inner { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+    .footer-inner { max-width: 1600px; margin: 0 auto; padding: 0 2rem; }
     .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
     .footer-col h5 { color: #fff; font-size: 1.1rem; margin-bottom: 1.2rem; }
     .footer-col p, .footer-col a { color: #9CA3AF; line-height: 2; display: block; }
@@ -199,9 +204,9 @@
       .header-bottom nav a { margin-right: 1rem; font-size: 0.9rem; }
       .slide-content h1 { font-size: 2.5rem; }
       .story-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .story-tabs { flex-direction: row; overflow-x: auto; padding-right: 0; border-bottom: 1px solid #E5E7EB; padding-bottom: 0.5rem; position: relative; top: 0; }
-      .story-tab { white-space: nowrap; border-left: none; border-bottom: 3px solid transparent; }
-      .story-tab.active { border-left: none; border-bottom-color: var(--tech-green); }
+      .story-tabs { flex-direction: row; overflow-x: auto; padding-right: 0; border-bottom: 1px solid #E5E7EB; padding-bottom: 0.5rem; position: relative; top: 0; border-left: none; }
+      .story-tab { white-space: nowrap; border-left: none; border-bottom: 3px solid transparent; padding: 0.5rem 1rem; }
+      .story-tab.active { border-left: none; border-bottom-color: var(--tech-green); margin-left: 0; padding-left: 1rem; }
       .story-main img { height: 400px; }
       .slider-card, .solution-card { flex: 0 0 100%; }
       .social-card { flex: 0 0 100%; }
@@ -222,7 +227,7 @@
 </head>
 <body>
 
-<!-- 导航栏（图一改图二：统一使用 header-container 对齐） -->
+<!-- 导航栏 -->
 <header>
   <div class="header-container header-top">
     <div class="logo">你的品牌名</div>
@@ -248,7 +253,7 @@
   </div>
 </header>
 
-<!-- 1. 主轮播图（内容限制在 section-container 内） -->
+<!-- 1. 主轮播图 -->
 <div class="hero">
   <div class="slide active" style="background: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;">
     <div class="section-container slide-content">
@@ -274,14 +279,14 @@
   </div>
 </div>
 
-<!-- 2. 轮播图下方新闻条（限制在 1280px 内） -->
+<!-- 2. 轮播图下方新闻条 -->
 <div class="top-news-section">
   <div class="top-news-inner" id="latest-news-container">
     <p style="color:#999; text-align:center; width:100%;">正在加载最新新闻...</p>
   </div>
 </div>
 
-<!-- 3. 客户故事区（限制在 section-container 内） -->
+<!-- 3. 客户故事区 -->
 <div class="story-section">
   <div class="section-container story-grid">
     <div class="story-tabs">
@@ -310,7 +315,7 @@
   </div>
 </div>
 
-<!-- 4. 产品滑动区（限制在 section-container 内） -->
+<!-- 4. 产品滑动区 -->
 <div class="slider-section gray-bg">
   <div class="section-container">
     <div class="section-header">
@@ -351,7 +356,7 @@
   </div>
 </div>
 
-<!-- 5. 解决方案滑动区（限制在 section-container 内） -->
+<!-- 5. 解决方案滑动区 -->
 <div class="slider-section">
   <div class="section-container">
     <div class="section-header">
@@ -406,7 +411,7 @@
   </div>
 </div>
 
-<!-- 6. 新闻区块（限制在 section-container 内） -->
+<!-- 6. 新闻区块 -->
 <div class="news-block">
   <div class="section-container">
     <div class="section-title">
@@ -419,7 +424,7 @@
   </div>
 </div>
 
-<!-- 7. 愿景大标题（限制在 1280px 内） -->
+<!-- 7. 愿景大标题 -->
 <div class="vision-section">
   <div class="vision-inner">
     <div class="vision-left">
@@ -431,7 +436,7 @@
   </div>
 </div>
 
-<!-- 8. 社交媒体区（限制在 section-container 内） -->
+<!-- 8. 社交媒体区 -->
 <div class="social-section">
   <div class="section-container">
     <div class="section-header" style="margin-bottom: 2rem;">
@@ -495,7 +500,7 @@
   </div>
 </div>
 
-<!-- 页脚（限制在 1280px 内） -->
+<!-- 页脚 -->
 <footer>
   <div class="footer-inner">
     <div class="footer-grid">
