@@ -15,25 +15,10 @@ content:
     create: true
     delete: true
     fields:
-      - name: "title"
-        label: "标题"
-        type: string
-      - name: "date"
-        label: "日期"
-        type: date
-      - name: "body"
-        label: "正文"
-        type: "rich-text"    # 已改为富文本模式
-        options:
-          media:
-            name: "uploads"
-            input: "images/uploads"
-            output: "/images/uploads"
-            categories: [image]
-            extensions: [jpg, jpeg, png, gif, webp, svg]
-            rename: safe
-            
-# 新增：社交媒体配置
+      - { name: "title", label: "标题", type: "string" }
+      - { name: "date", label: "日期", type: "date" }
+      - { name: "body", label: "正文", type: "rich-text", options: { media: { name: "uploads", input: "images/uploads", output: "/images/uploads", categories: [image], extensions: [jpg, jpeg, png, gif, webp, svg], rename: safe } } }
+
   - name: "social"
     label: "社交媒体"
     type: "file"
