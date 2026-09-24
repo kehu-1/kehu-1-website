@@ -1,0 +1,18 @@
+{
+  "posts": [
+    {
+      "date": "Sep 21, 2026",
+      "platform": "LinkedIn",
+      "content": "Advancing smart mobility through collaboration 🤝...",
+      "link": "#",
+      "img": "https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "date": "Sep 18, 2026",
+      "platform": "LinkedIn",
+      "content": "Mitsubishi Electric's MELSEC iQ-R Series safety programmable controller has obtained an EU type examination certificate...",
+      "link": "#",
+      "img": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80"
+    }
+  ]
+}
