@@ -32,3 +32,19 @@ content:
             categories: [image]
             extensions: [jpg, jpeg, png, gif, webp, svg]
             rename: safe
+            
+# 新增：社交媒体配置
+  - name: "social"
+    label: "社交媒体"
+    type: "file"
+    path: "content/social.json"
+    fields:
+      - name: "posts"
+        label: "帖子列表"
+        type: "list"
+        fields:
+          - { name: "date", label: "日期", type: "string" }
+          - { name: "platform", label: "平台 (如 LinkedIn)", type: "string" }
+          - { name: "content", label: "文案", type: "text" }
+          - { name: "link", label: "链接", type: "string" }
+          - { name: "img", label: "图片链接", type: "string" }
