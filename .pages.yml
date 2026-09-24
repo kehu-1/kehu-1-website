@@ -29,7 +29,7 @@ content:
         type: "list"
         fields:
           - { name: "date", label: "日期", type: "string" }
-          - { name: "platform", label: "平台 (如 LinkedIn)", type: "string" }
+          - { name: "platform", label: "平台", type: "select", options: ["Facebook", "Instagram", "LinkedIn"] }
           - { name: "content", label: "文案", type: "text" }
-          - { name: "link", label: "链接", type: "string" }
+          - { name: "link", label: "帖子链接", type: "string" }
           - { name: "img", label: "图片链接", type: "string" }
