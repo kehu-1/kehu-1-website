@@ -21,7 +21,7 @@
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
     /* ===== 核心：统一对齐容器（宽度 1340px） ===== */
-    .header-container, .section-container, .footer-inner, .news-grid, .vision-inner, .top-news-inner {
+    .header-container, .section-container, .footer-inner, .vision-inner, .top-news-inner {
       max-width: 1340px;
       margin: 0 auto;    
       padding: 0 2rem;   
@@ -99,7 +99,7 @@
     .story-card.light .link { color: var(--text-main); }
     .story-card.light .link:hover { color: var(--tech-green); }
 
-    /* ===== 通用横滑区块 ===== */
+    /* ===== 通用横滑区块（所有滑块共用） ===== */
     .slider-section { padding: 4rem 0; background: #fff; overflow: hidden; }
     .slider-section.gray-bg { background: #F8FAFC; }
     .slider-section .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; }
@@ -119,6 +119,7 @@
     .slider-container { position: relative; width: 100%; overflow: hidden; }
     .slider-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); gap: 1rem; } 
     
+    /* 卡片通用样式 */
     .slider-card { flex: 0 0 calc((100% - 2rem) / 3); background: #fff; display: flex; flex-direction: column; transition: 0.3s; } 
     .slider-card img { width: 100%; height: 260px; object-fit: cover; }
     .slider-card-info { padding: 2.5rem 2rem; flex-grow: 1; display: flex; flex-direction: column; background: #fff; }
@@ -127,6 +128,7 @@
     .slider-card-info .link { color: var(--text-main); font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
     .slider-card-info .link:hover { color: var(--tech-green); }
 
+    /* 解决方案卡片（悬浮文字） */
     .solution-card { position: relative; flex: 0 0 calc((100% - 2rem) / 3); height: 480px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 3rem 2rem; color: #fff; } 
     .solution-card img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; transition: transform 0.6s ease; }
     .solution-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(transparent 20%, rgba(0,0,0,0.85) 100%); z-index: 2; }
@@ -136,14 +138,15 @@
     .solution-card .sol-content p { font-size: 1rem; color: #CBD5E1; margin-bottom: 1.5rem; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     .solution-card .sol-content .link { color: var(--tech-green); font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
 
-    /* ===== 新闻网格区 ===== */
+    /* ===== 新闻滑块区（本次核心修改） ===== */
     .news-block { padding: 4rem 0; background: #fff; }
     .news-block .section-title { text-align: center; margin-bottom: 2rem; }
     .news-block .section-title h2 { font-size: 2.2rem; font-weight: 800; color: var(--text-main); }
     .news-block .section-title p { color: var(--text-muted); margin-top: 0.5rem; }
-    .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem; margin: 0 auto; } 
-    .news-card { display: flex; flex-direction: column; transition: 0.3s; cursor: pointer; background: transparent; }
-    .news-card img { width: 100%; height: 280px; object-fit: cover; margin-bottom: 1rem; }
+    
+    /* 新闻卡片样式（继承滑块卡片尺寸，但外观是新闻风格） */
+    .news-card { flex: 0 0 calc((100% - 2rem) / 3); display: flex; flex-direction: column; transition: 0.3s; cursor: pointer; background: transparent; }
+    .news-card img { width: 100%; height: 280px; object-fit: cover; margin-bottom: 1rem; border-radius: 4px; }
     .news-card .category { font-size: 0.85rem; font-weight: 700; color: var(--tech-green); text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 1px; }
     .news-card h4 { font-size: 1.4rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem; line-height: 1.4; }
     .news-card p { font-size: 1rem; color: var(--text-muted); margin-bottom: 1rem; flex-grow: 1; line-height: 1.7; }
@@ -176,14 +179,10 @@
 
     /* ===== 【核心修改】三菱风格新闻阅读弹窗 ===== */
     .news-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); z-index: 3000; justify-content: center; align-items: center; }
-    /* 弹窗整体占屏幕 90% */
     .news-modal-content { position: relative; width: 90vw; height: 90vh; display: flex; background: #fff; border-radius: 4px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); }
-    
-    /* 关闭按钮：深色 X */
     .news-modal-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 2.5rem; color: #111827; cursor: pointer; z-index: 10; line-height: 1; background: rgba(255,255,255,0.8); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
     .news-modal-close:hover { background: #111827; color: #fff; }
     
-    /* 外部左右切换新闻按钮 */
     .news-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0, 0, 0, 0.5); color: #fff; border: none; width: 50px; height: 100px; font-size: 2rem; cursor: pointer; z-index: 15; transition: 0.3s; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
     .news-nav-btn:hover { background: rgba(0, 0, 0, 0.8); }
     .news-nav-btn.prev { left: -70px; }
@@ -193,21 +192,17 @@
       .news-nav-btn.prev { left: 10px; } .news-nav-btn.next { right: 10px; }
     }
 
-    /* 左侧图片：占弹窗宽度的 70%，黑色背景，图片完整居中 */
     .news-modal-image { flex: 7; display: flex; align-items: center; justify-content: center; background: #000000; padding: 2rem; position: relative; }
     .news-modal-image img { max-width: 100%; max-height: 100%; object-fit: contain; transition: opacity 0.3s; }
     
-    /* 图片左右切换按钮 */
     .img-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.2); color: #fff; border: none; width: 40px; height: 80px; font-size: 2rem; cursor: pointer; z-index: 5; transition: 0.3s; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
     .img-nav-btn:hover { background: rgba(255, 255, 255, 0.4); }
     .img-nav-btn.prev { left: 1rem; } .img-nav-btn.next { right: 1rem; }
     
-    /* 图片底部圆点 */
     .img-indicators { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.5rem; z-index: 5; }
     .img-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.4); cursor: pointer; transition: 0.3s; }
     .img-dot.active { background: #fff; transform: scale(1.2); }
 
-    /* 右侧文本：占弹窗宽度的 30%，白底，深色文字，可上下滚动 */
     .news-modal-text { flex: 3; background: #ffffff; color: #111827; padding: 3rem; overflow-y: auto; display: flex; flex-direction: column; }
     .news-modal-text .meta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; font-size: 1rem; color: #6B7280; }
     .news-modal-text .meta-header .icon { color: #0ea5e9; font-size: 1.5rem; }
@@ -236,15 +231,16 @@
       .story-tab { white-space: nowrap; border-left: none; border-bottom: 3px solid transparent; padding: 0.5rem 1rem; }
       .story-tab.active { border-left: none; border-bottom-color: var(--border-dark-green); margin-left: 0; padding-left: 1rem; }
       .story-main img { height: 400px; }
-      .slider-card, .solution-card { flex: 0 0 100%; }
-      .social-card { flex: 0 0 100%; }
+      
+      /* 手机端滑块适配：每页只显示1个 */
+      .slider-card, .solution-card, .news-card, .social-card { flex: 0 0 100%; }
       
       /* 【手机端适配】：弹窗全屏化 */
       .news-modal-content { width: 95vw; height: 85vh; flex-direction: column; }
       .news-modal-image { flex: none; height: 45%; padding: 1rem; }
       .news-modal-text { flex: 1; padding: 2rem 1.5rem; }
       .news-modal-text h2 { font-size: 1.3rem; }
-      .news-nav-btn { display: none; } /* 手机端隐藏外部的新闻切换按钮，因为屏幕太窄 */
+      .news-nav-btn { display: none; }
       
       .vision-inner { flex-direction: column; gap: 1rem; }
       .vision-left h2 { font-size: 2rem; }
@@ -443,15 +439,26 @@
   </div>
 </div>
 
-<!-- 6. 新闻区块 -->
+<!-- 6. 新闻区块（已修改为滑动模式） -->
 <div class="news-block">
   <div class="section-container">
     <div class="section-title">
       <h2>新闻动态</h2>
       <p>了解我们的最新动态和行业资讯</p>
     </div>
-    <div class="news-grid" id="news-container">
-      <p style="text-align:center; color:#999; width:100%;">正在加载新闻...</p>
+    <!-- 新闻滑动容器 -->
+    <div class="slider-container">
+      <div class="news-track" id="news-track">
+        <p style="text-align:center; color:#999; width:100%;">正在加载新闻...</p>
+      </div>
+    </div>
+    <!-- 新闻滑动控制条 -->
+    <div style="display:flex; justify-content:center; margin-top:2rem;">
+      <div class="slider-controls-capsule" id="news-controls">
+        <button onclick="slideTrack('news-track', -1, 'news-controls')">‹</button>
+        <div class="slider-dots" id="news-dots"></div>
+        <button onclick="slideTrack('news-track', 1, 'news-controls')">›</button>
+      </div>
     </div>
   </div>
 </div>
@@ -586,12 +593,13 @@
   const sliderStates = {
     'product-track': { current: 0, total: 0 },
     'solution-track': { current: 0, total: 0 },
-    'social-track': { current: 0, total: 0 }
+    'social-track': { current: 0, total: 0 },
+    'news-track': { current: 0, total: 0 } // 新增新闻滑块状态
   };
 
   function initSlider(trackId, dotsId) {
     const track = document.getElementById(trackId);
-    const cards = track.querySelectorAll('.slider-card, .solution-card, .social-card');
+    const cards = track.querySelectorAll('.slider-card, .solution-card, .social-card, .news-card');
     const dotsContainer = document.getElementById(dotsId);
     
     const pageSize = 3;
@@ -610,7 +618,7 @@
   function goToPage(trackId, pageIndex) {
     const track = document.getElementById(trackId);
     const container = track.parentElement;
-    const cards = track.querySelectorAll('.slider-card, .solution-card, .social-card');
+    const cards = track.querySelectorAll('.slider-card, .solution-card, .social-card, .news-card');
     const pageSize = 3;
     
     if (pageIndex < 0) pageIndex = 0;
@@ -634,28 +642,28 @@
     goToPage(trackId, state.current + direction);
   }
 
-  // 新闻加载逻辑（多图提取）
+  // 新闻加载逻辑（多图提取 + 滑块初始化）
   let newsArticles = [];
-  let currentNewsIndex = 0; // 记录当前打开的新闻索引
-  let currentImageIndex = 0; // 记录当前图片索引
+  let currentNewsIndex = 0; 
+  let currentImageIndex = 0; 
 
   async function loadNews() {
     try {
       const repo = 'kehu-1/kehu-1-website';
       const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/news`);
       const files = await res.json();
-      const container = document.getElementById('news-container');
+      const track = document.getElementById('news-track');
       const latestContainer = document.getElementById('latest-news-container');
-      container.innerHTML = ''; newsArticles = [];
+      track.innerHTML = ''; newsArticles = [];
       
       if (!Array.isArray(files) || files.length === 0) { 
-        container.innerHTML = '<p style="text-align:center;color:#999;width:100%;">暂无新闻动态。</p>'; 
+        track.innerHTML = '<p style="text-align:center;color:#999;width:100%;">暂无新闻动态。</p>'; 
         latestContainer.innerHTML = '<p style="color:#999;text-align:center;width:100%;">暂无最新新闻</p>';
         return; 
       }
       
       files.sort((a, b) => b.name.localeCompare(a.name));
-      const latestFiles = files.slice(0, 6);
+      const latestFiles = files.slice(0, 6); // 最多拉取6篇，正好两页
       
       for (let i = 0; i < latestFiles.length; i++) {
         const file = latestFiles[i];
@@ -667,7 +675,7 @@
         
         const titleMatch = frontmatter.match(/title:\s*(.*)/);
         const dateMatch = frontmatter.match(/date:\s*(.*)/);
-        const title = titleMatch ? titleMatch[1].trim() : '无标题';
+        const title = titleMatch ? titleMatch[1].trim() : '未命名新闻';
         const date = dateMatch ? dateMatch[1].trim() : '';
         let htmlBody = marked.parse(bodyContent);
         
@@ -683,7 +691,7 @@
           images.push('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80');
         }
         
-        // 移除正文中的所有图片，避免右侧文字区出现图片
+        // 移除正文中的所有图片
         htmlBody = htmlBody.replace(/<img[^>]*>/g, '');
         
         const plainText = htmlBody.replace(/<[^>]+>/g, '').trim();
@@ -691,20 +699,21 @@
         
         newsArticles.push({ title, date, body: htmlBody, images });
 
+        // 渲染新闻卡片（加入 onerror 处理图片失效情况）
         const cardHtml = `
           <div class="news-card" onclick="openNewsModal(${i})">
-            <img src="${images[0]}" alt="${title}">
+            <img src="${images[0]}" onerror="this.src='https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80'" alt="${title}">
             <div class="category">${date}</div>
             <h4>${title}</h4>
             <p>${summary}</p>
             <div class="read-more">阅读全文 →</div>
           </div>
         `;
-        container.insertAdjacentHTML('beforeend', cardHtml);
+        track.insertAdjacentHTML('beforeend', cardHtml);
 
         if (i === 0) {
           const latestHtml = `
-            <img src="${images[0]}" alt="${title}">
+            <img src="${images[0]}" onerror="this.src='https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80'" alt="${title}">
             <div class="top-news-text">
               <h4>${title}</h4>
               <p>${summary}</p>
@@ -715,12 +724,13 @@
         }
       }
       
-      // 初始化外部新闻切换按钮的显示状态
+      // 【核心】渲染完成后，初始化新闻滑块
+      initSlider('news-track', 'news-dots');
       updateNewsNavButtons();
       
     } catch (e) { 
       console.error(e); 
-      document.getElementById('news-container').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;">加载新闻失败，请刷新。</p>'; 
+      document.getElementById('news-track').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;">加载新闻失败，请刷新。</p>'; 
       document.getElementById('latest-news-container').innerHTML = '<p style="color:#e74c39;text-align:center;width:100%;">加载失败</p>';
     }
   }
@@ -733,19 +743,16 @@
     
     const article = newsArticles[index];
     
-    // 更新文本内容
     document.getElementById('news-modal-date').innerText = article.date;
     document.getElementById('news-modal-title').innerText = article.title;
     document.getElementById('news-modal-body').innerHTML = article.body;
     
-    // 更新图片显示
     updateImageDisplay();
     
     document.getElementById('news-modal').style.display = 'flex';
     document.body.style.overflow = 'hidden';
   }
 
-  // 更新图片显示（根据 currentImageIndex）
   function updateImageDisplay() {
     const article = newsArticles[currentNewsIndex];
     if (!article || !article.images) return;
@@ -753,7 +760,6 @@
     const imgElement = document.getElementById('news-modal-img');
     imgElement.src = article.images[currentImageIndex];
     
-    // 更新图片切换按钮的显示状态
     const prevBtn = document.getElementById('img-prev-btn');
     const nextBtn = document.getElementById('img-next-btn');
     if (article.images.length <= 1) {
@@ -764,7 +770,6 @@
       nextBtn.style.display = 'flex';
     }
     
-    // 更新底部圆点指示器
     const indicatorsContainer = document.getElementById('img-indicators');
     indicatorsContainer.innerHTML = '';
     if (article.images.length > 1) {
@@ -777,7 +782,6 @@
     }
   }
 
-  // 切换图片
   function prevImage() {
     const article = newsArticles[currentNewsIndex];
     if (article.images.length <= 1) return;
@@ -791,7 +795,6 @@
     updateImageDisplay();
   }
 
-  // 切换新闻
   function prevNews() {
     currentNewsIndex = (currentNewsIndex - 1 + newsArticles.length) % newsArticles.length;
     openNewsModal(currentNewsIndex);
@@ -801,7 +804,6 @@
     openNewsModal(currentNewsIndex);
   }
 
-  // 更新外部新闻切换按钮的状态
   function updateNewsNavButtons() {
     const prevBtn = document.getElementById('news-prev-btn');
     const nextBtn = document.getElementById('news-next-btn');
@@ -823,7 +825,7 @@
     initSlider('product-track', 'product-dots');
     initSlider('solution-track', 'solution-dots');
     initSlider('social-track', 'social-dots');
-    loadNews();
+    loadNews(); // loadNews 内部会在成功加载后调用 initSlider('news-track', 'news-dots')
   });
 </script>
 </body>
