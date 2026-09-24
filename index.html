@@ -8,27 +8,21 @@
     /* ===== 基础字体与全局变量 ===== */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap');
     :root {
-      --tech-green: #00FFB9;       /* 科技绿 */
+      --tech-green: #00FFB9;       
       --tech-green-hover: #00E6A6; 
-      --tech-green-light: #E6FFF7;  /* 高亮浅绿 */
-      --dark-bg: #0F172A;          /* 深色背景 */
-      --text-main: #111827;        /* 主要文字 */
-      --text-muted: #6B7280;       /* 次要文字 */
-      --border-dark-green: #059669; /* 深绿色线条 */
+      --tech-green-light: #E6FFF7;  
+      --dark-bg: #0F172A;          
+      --text-main: #111827;        
+      --text-muted: #6B7280;       
+      --border-dark-green: #059669; 
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', -apple-system, "Segoe UI", sans-serif; color: var(--text-main); line-height: 1.6; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* ===== 核心：统一对齐容器（宽度 1340px） ===== */
-    .header-container, .section-container, .footer-inner, .vision-inner, .top-news-inner {
-      max-width: 1340px;
-      margin: 0 auto;    
-      padding: 0 2rem;   
-      width: 100%;
-    }
+    .header-container, .section-container, .footer-inner, .news-grid, .vision-inner, .top-news-inner { max-width: 1340px; margin: 0 auto; padding: 0 2rem; width: 100%; }
 
-    /* ===== 西门子双层导航栏 ===== */
+    /* 导航栏 */
     header { position: fixed; top: 0; width: 100%; background: var(--dark-bg); z-index: 1000; }
     .header-top { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; }
     .header-top .logo { font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
@@ -37,16 +31,13 @@
     .header-top .tools a:hover { color: var(--tech-green); }
     .header-bottom { border-top: 1px solid rgba(255,255,255,0.05); }
     .header-bottom .nav-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
-    
-    /* 【精准对齐】：第一个导航项“首页”向右偏移 1.5rem，以对齐“人工智能”的文字位置 */
     .header-bottom nav a { color: #CBD5E1; font-size: 1rem; margin-right: 1.5rem; font-weight: 500; }
     .header-bottom nav a:first-child { margin-left: 1.5rem; } 
     .header-bottom nav a:hover, .header-bottom nav a.active { color: var(--tech-green); }
-    
     .header-bottom .search-wrapper { color: #CBD5E1; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; }
     .header-bottom .search-wrapper:hover { color: var(--tech-green); }
 
-    /* ===== 主轮播图 ===== */
+    /* 轮播图 */
     .hero { position: relative; height: calc(100vh - 120px); margin-top: 120px; overflow: hidden; background: var(--dark-bg); }
     .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s; display: flex; align-items: center; }
     .slide.active { opacity: 1; z-index: 1; }
@@ -56,15 +47,13 @@
     .slide-content p { font-size: 1.2rem; font-weight: 300; color: #CBD5E1; margin-bottom: 2.5rem; }
     .btn { display: inline-block; padding: 1rem 3rem; background: var(--tech-green); color: #000; font-weight: 700; transition: 0.3s; border: none; cursor: pointer; font-size: 1rem; }
     .btn:hover { background: var(--tech-green-hover); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,255,185,0.2); }
-    
-    /* 胶囊指示器 */
     .hero-indicator-wrapper { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 10; }
     .hero-indicator { display: flex; align-items: center; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(8px); border-radius: 50px; padding: 0.5rem 1rem; gap: 0.8rem; }
     .hero-indicator .play-btn { background: #fff; color: var(--dark-bg); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; }
     .hero-indicator .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
     .hero-indicator .dot.active { width: 28px; border-radius: 4px; background: #fff; }
 
-    /* ===== 轮播图下方新闻条 ===== */
+    /* 顶部新闻条 */
     .top-news-section { background: #fff; border-bottom: 1px solid #E5E7EB; padding: 1rem 0; }
     .top-news-inner { display: flex; align-items: center; gap: 1rem; }
     .top-news-inner img { width: 120px; height: 75px; object-fit: cover; }
@@ -74,20 +63,17 @@
     .btn-outline { padding: 0.6rem 1.5rem; border: 2px solid var(--text-main); color: var(--text-main); font-weight: 700; white-space: nowrap; background: transparent; cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
     .btn-outline:hover { background: var(--text-main); color: var(--tech-green); }
 
-    /* ===== 客户故事区 ===== */
+    /* 客户故事区 */
     .story-section { padding: 4rem 0; } 
     .story-grid { display: grid; grid-template-columns: 300px 1fr 340px; gap: 1rem; align-items: start; } 
-    
     .story-tabs { display: flex; flex-direction: column; position: sticky; top: 140px; border-left: 2px solid #E5E7EB; }
     .story-tab { padding: 0.7rem 0; padding-left: 1.5rem; font-size: 1.15rem; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: 0.3s; }
     .story-tab:hover { color: var(--text-main); background: #F3F4F6; }
     .story-tab.active { color: var(--text-main); background: var(--tech-green-light); border-left: 4px solid var(--border-dark-green); margin-left: -2px; padding-left: calc(1.5rem - 2px); font-weight: 700; }
-
     .story-main { display: flex; flex-direction: column; overflow: hidden; }
     .story-main img { width: 100%; height: 480px; object-fit: cover; }
     .story-link { display: inline-block; margin-top: 1.5rem; color: var(--text-main); font-weight: 700; font-size: 1rem; border-bottom: 2px solid var(--tech-green); padding-bottom: 2px; width: fit-content; }
     .story-link:hover { color: var(--tech-green); }
-    
     .story-side { display: flex; flex-direction: column; gap: 1rem; } 
     .story-card { background: var(--dark-bg); color: #fff; padding: 2.2rem; } 
     .story-card h4 { font-size: 1.4rem; margin-bottom: 1rem; font-weight: 700; } 
@@ -99,13 +85,12 @@
     .story-card.light .link { color: var(--text-main); }
     .story-card.light .link:hover { color: var(--tech-green); }
 
-    /* ===== 通用横滑区块（所有滑块共用） ===== */
+    /* 通用滑块 */
     .slider-section { padding: 4rem 0; background: #fff; overflow: hidden; }
     .slider-section.gray-bg { background: #F8FAFC; }
     .slider-section .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; }
     .slider-section .section-header h2 { font-size: 2.2rem; font-weight: 800; color: var(--text-main); }
     .slider-section .section-header p { color: var(--text-muted); font-size: 1.1rem; }
-    
     .section-label { font-size: 0.9rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem; display: block; text-transform: uppercase; }
     .market-btn { display: inline-block; padding: 0.8rem 2rem; border: 2px solid var(--text-main); color: var(--text-main); font-weight: 700; margin-top: 1.5rem; transition: 0.3s; }
     .market-btn:hover { background: var(--text-main); color: var(--tech-green); }
@@ -118,18 +103,16 @@
     .slider-dot.active { width: 24px; border-radius: 4px; background: var(--dark-bg); }
     .slider-container { position: relative; width: 100%; overflow: hidden; }
     .slider-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); gap: 1rem; } 
-    
-    /* 卡片通用样式 */
-    .slider-card { flex: 0 0 calc((100% - 2rem) / 3); background: #fff; display: flex; flex-direction: column; transition: 0.3s; } 
+    .slider-card { flex: 0 0 calc((100% - 2rem) / 3); background: #fff; display: flex; flex-direction: column; transition: 0.3s; border-radius: 4px; overflow: hidden; border: 1px solid #E5E7EB; cursor: pointer; }
+    .slider-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
     .slider-card img { width: 100%; height: 260px; object-fit: cover; }
     .slider-card-info { padding: 2.5rem 2rem; flex-grow: 1; display: flex; flex-direction: column; background: #fff; }
-    .slider-card-info h4 { font-size: 1.4rem; font-weight: 700; color: var(--text-main); margin-bottom: 1rem; }
+    .slider-card-info h4 { font-size: 1.4rem; font-weight: 700; color: var(--text-main); margin-bottom: 1rem; line-height: 1.4; }
     .slider-card-info p { font-size: 1rem; color: var(--text-muted); margin-bottom: 2rem; flex-grow: 1; line-height: 1.7; }
     .slider-card-info .link { color: var(--text-main); font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
     .slider-card-info .link:hover { color: var(--tech-green); }
 
-    /* 解决方案卡片（悬浮文字） */
-    .solution-card { position: relative; flex: 0 0 calc((100% - 2rem) / 3); height: 480px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 3rem 2rem; color: #fff; } 
+    .solution-card { position: relative; flex: 0 0 calc((100% - 2rem) / 3); height: 480px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 3rem 2rem; color: #fff; border-radius: 4px; } 
     .solution-card img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; transition: transform 0.6s ease; }
     .solution-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(transparent 20%, rgba(0,0,0,0.85) 100%); z-index: 2; }
     .solution-card:hover img { transform: scale(1.05); }
@@ -138,22 +121,11 @@
     .solution-card .sol-content p { font-size: 1rem; color: #CBD5E1; margin-bottom: 1.5rem; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     .solution-card .sol-content .link { color: var(--tech-green); font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
 
-    /* ===== 新闻滑块区（本次核心修改） ===== */
     .news-block { padding: 4rem 0; background: #fff; }
     .news-block .section-title { text-align: center; margin-bottom: 2rem; }
     .news-block .section-title h2 { font-size: 2.2rem; font-weight: 800; color: var(--text-main); }
     .news-block .section-title p { color: var(--text-muted); margin-top: 0.5rem; }
-    
-    /* 新闻卡片样式（继承滑块卡片尺寸，但外观是新闻风格） */
-    .news-card { flex: 0 0 calc((100% - 2rem) / 3); display: flex; flex-direction: column; transition: 0.3s; cursor: pointer; background: transparent; }
-    .news-card img { width: 100%; height: 280px; object-fit: cover; margin-bottom: 1rem; border-radius: 4px; }
-    .news-card .category { font-size: 0.85rem; font-weight: 700; color: var(--tech-green); text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 1px; }
-    .news-card h4 { font-size: 1.4rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem; line-height: 1.4; }
-    .news-card p { font-size: 1rem; color: var(--text-muted); margin-bottom: 1rem; flex-grow: 1; line-height: 1.7; }
-    .news-card .read-more { color: var(--text-main); font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s; }
-    .news-card:hover .read-more { color: var(--tech-green); }
 
-    /* ===== 愿景大标题 ===== */
     .vision-section { padding: 6rem 0; background: #F8FAFC; }
     .vision-inner { margin: 0 auto; display: flex; gap: 2rem; align-items: center; }
     .vision-left { flex: 1.2; }
@@ -161,56 +133,42 @@
     .vision-right { flex: 1; }
     .vision-right img { width: 100%; height: 400px; object-fit: cover; }
 
-    /* ===== 社交媒体区 ===== */
+    /* 社媒区域 */
     .social-section { padding: 4rem 0; background: #fff; }
     .social-tabs { display: flex; gap: 1rem; border-bottom: 1px solid #E5E7EB; padding-bottom: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
     .social-tab { font-size: 1rem; font-weight: 500; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 0.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid transparent; }
     .social-tab.active { color: var(--text-main); border-bottom-color: var(--text-main); font-weight: 700; }
-    .social-slider-wrapper { overflow: hidden; }
-    .social-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); gap: 1rem; } 
-    .social-card { flex: 0 0 calc((100% - 2rem) / 3); border: 1px solid #E5E7EB; padding: 2rem; display: flex; flex-direction: column; background: #fff; } 
-    .social-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-    .social-card .header .date { font-size: 0.9rem; color: #9CA3AF; }
-    .social-card .header .icon { font-size: 1.5rem; color: var(--tech-green); }
-    .social-card .content { font-size: 1rem; color: #374151; margin-bottom: 1rem; flex-grow: 1; line-height: 1.7; }
-    .social-card .content a { color: var(--tech-green); font-weight: 600; }
-    .social-card .img-box { width: 100%; height: 220px; overflow: hidden; }
-    .social-card .img-box img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* ===== 【核心修改】三菱风格新闻阅读弹窗 ===== */
+    /* TikTok 独立区块（EmbedSocial 区域） */
+    #tiktok-container { display: none; width: 100%; min-height: 400px; background: #F8FAFC; border-radius: 4px; padding: 2rem; }
+    #tiktok-container p { text-align: center; color: #999; }
+
+    /* 弹窗（预览） */
     .news-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); z-index: 3000; justify-content: center; align-items: center; }
     .news-modal-content { position: relative; width: 90vw; height: 90vh; display: flex; background: #fff; border-radius: 4px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); }
     .news-modal-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 2.5rem; color: #111827; cursor: pointer; z-index: 10; line-height: 1; background: rgba(255,255,255,0.8); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
     .news-modal-close:hover { background: #111827; color: #fff; }
-    
     .news-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0, 0, 0, 0.5); color: #fff; border: none; width: 50px; height: 100px; font-size: 2rem; cursor: pointer; z-index: 15; transition: 0.3s; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
     .news-nav-btn:hover { background: rgba(0, 0, 0, 0.8); }
     .news-nav-btn.prev { left: -70px; }
     .news-nav-btn.next { right: -70px; }
-    @media (max-width: 900px) {
-      .news-nav-btn { width: 40px; height: 70px; font-size: 1.5rem; }
-      .news-nav-btn.prev { left: 10px; } .news-nav-btn.next { right: 10px; }
-    }
-
     .news-modal-image { flex: 7; display: flex; align-items: center; justify-content: center; background: #000000; padding: 2rem; position: relative; }
     .news-modal-image img { max-width: 100%; max-height: 100%; object-fit: contain; transition: opacity 0.3s; }
-    
     .img-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.2); color: #fff; border: none; width: 40px; height: 80px; font-size: 2rem; cursor: pointer; z-index: 5; transition: 0.3s; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
     .img-nav-btn:hover { background: rgba(255, 255, 255, 0.4); }
     .img-nav-btn.prev { left: 1rem; } .img-nav-btn.next { right: 1rem; }
-    
     .img-indicators { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.5rem; z-index: 5; }
     .img-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.4); cursor: pointer; transition: 0.3s; }
     .img-dot.active { background: #fff; transform: scale(1.2); }
-
     .news-modal-text { flex: 3; background: #ffffff; color: #111827; padding: 3rem; overflow-y: auto; display: flex; flex-direction: column; }
     .news-modal-text .meta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; font-size: 1rem; color: #6B7280; }
     .news-modal-text .meta-header .icon { color: #0ea5e9; font-size: 1.5rem; }
     .news-modal-text h2 { color: #111827; font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3; }
     .news-modal-text .body { color: #374151; font-size: 1rem; line-height: 1.8; }
     .news-modal-text .body a { color: #0ea5e9; text-decoration: underline; }
+    .news-modal-text .original-link { margin-top: 2rem; display: inline-block; padding: 0.8rem 1.5rem; background: var(--tech-green); color: #000; font-weight: 700; border-radius: 4px; text-align: center; }
 
-    /* ===== 页脚与悬浮按钮 ===== */
+    /* 页脚 */
     footer { background: var(--dark-bg); color: #9CA3AF; padding: 4rem 0 2rem; font-size: 0.9rem; }
     .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; } 
     .footer-col h5 { color: #fff; font-size: 1.1rem; margin-bottom: 1rem; }
@@ -231,17 +189,12 @@
       .story-tab { white-space: nowrap; border-left: none; border-bottom: 3px solid transparent; padding: 0.5rem 1rem; }
       .story-tab.active { border-left: none; border-bottom-color: var(--border-dark-green); margin-left: 0; padding-left: 1rem; }
       .story-main img { height: 400px; }
-      
-      /* 手机端滑块适配：每页只显示1个 */
-      .slider-card, .solution-card, .news-card, .social-card { flex: 0 0 100%; }
-      
-      /* 【手机端适配】：弹窗全屏化 */
+      .slider-card, .solution-card { flex: 0 0 100%; }
       .news-modal-content { width: 95vw; height: 85vh; flex-direction: column; }
       .news-modal-image { flex: none; height: 45%; padding: 1rem; }
       .news-modal-text { flex: 1; padding: 2rem 1.5rem; }
       .news-modal-text h2 { font-size: 1.3rem; }
       .news-nav-btn { display: none; }
-      
       .vision-inner { flex-direction: column; gap: 1rem; }
       .vision-left h2 { font-size: 2rem; }
       .vision-right img { height: 250px; }
@@ -274,9 +227,7 @@
         <a href="contact.html">联系我询价</a>
         <a href="en/index.html" style="color: var(--tech-green);">English</a>
       </nav>
-      <div class="search-wrapper">
-        🔍 搜索
-      </div>
+      <div class="search-wrapper">🔍 搜索</div>
     </div>
   </div>
 </header>
@@ -297,7 +248,6 @@
       <a href="advantages.html" class="btn">了解生产优势</a>
     </div>
   </div>
-  
   <div class="hero-indicator-wrapper">
     <div class="hero-indicator">
       <div class="play-btn">▶</div>
@@ -307,7 +257,7 @@
   </div>
 </div>
 
-<!-- 2. 轮播图下方新闻条 -->
+<!-- 2. 顶部新闻条 -->
 <div class="top-news-section">
   <div class="top-news-inner" id="latest-news-container">
     <p style="color:#999; text-align:center; width:100%;">正在加载最新新闻...</p>
@@ -397,35 +347,19 @@
       <div class="slider-track" id="solution-track">
         <div class="solution-card">
           <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Solution 1">
-          <div class="sol-content">
-            <h4>汽车制造</h4>
-            <p>高度自动化的生产线，提升产能与质量。</p>
-            <a href="products.html" class="link">了解更多 →</a>
-          </div>
+          <div class="sol-content"><h4>汽车制造</h4><p>高度自动化的生产线，提升产能与质量。</p><a href="products.html" class="link">了解更多 →</a></div>
         </div>
         <div class="solution-card">
           <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" alt="Solution 2">
-          <div class="sol-content">
-            <h4>航空航天</h4>
-            <p>精密零部件加工，满足严苛的行业标准。</p>
-            <a href="products.html" class="link">了解更多 →</a>
-          </div>
+          <div class="sol-content"><h4>航空航天</h4><p>精密零部件加工，满足严苛的行业标准。</p><a href="products.html" class="link">了解更多 →</a></div>
         </div>
         <div class="solution-card">
           <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=800&q=80" alt="Solution 3">
-          <div class="sol-content">
-            <h4>新能源</h4>
-            <p>提供电池、风电等新能源领域的核心部件。</p>
-            <a href="products.html" class="link">了解更多 →</a>
-          </div>
+          <div class="sol-content"><h4>新能源</h4><p>提供电池、风电等新能源领域的核心部件。</p><a href="products.html" class="link">了解更多 →</a></div>
         </div>
         <div class="solution-card">
           <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Solution 4">
-          <div class="sol-content">
-            <h4>食品与饮料</h4>
-            <p>卫生级设备与自动化包装解决方案。</p>
-            <a href="products.html" class="link">了解更多 →</a>
-          </div>
+          <div class="sol-content"><h4>食品与饮料</h4><p>卫生级设备与自动化包装解决方案。</p><a href="products.html" class="link">了解更多 →</a></div>
         </div>
       </div>
     </div>
@@ -439,20 +373,18 @@
   </div>
 </div>
 
-<!-- 6. 新闻区块（已修改为滑动模式） -->
+<!-- 6. 新闻动态滑动区 -->
 <div class="news-block">
   <div class="section-container">
     <div class="section-title">
       <h2>新闻动态</h2>
       <p>了解我们的最新动态和行业资讯</p>
     </div>
-    <!-- 新闻滑动容器 -->
     <div class="slider-container">
-      <div class="news-track" id="news-track">
-        <p style="text-align:center; color:#999; width:100%;">正在加载新闻...</p>
+      <div class="slider-track" id="news-track">
+        <p style="text-align:center; color:#999; width:100%; padding:2rem;">正在加载新闻...</p>
       </div>
     </div>
-    <!-- 新闻滑动控制条 -->
     <div style="display:flex; justify-content:center; margin-top:2rem;">
       <div class="slider-controls-capsule" id="news-controls">
         <button onclick="slideTrack('news-track', -1, 'news-controls')">‹</button>
@@ -466,12 +398,8 @@
 <!-- 7. 愿景大标题 -->
 <div class="vision-section">
   <div class="vision-inner">
-    <div class="vision-left">
-      <h2>我们旨在通过业务活动解决社会问题，实现可持续发展</h2>
-    </div>
-    <div class="vision-right">
-      <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=800&q=80" alt="Vision Image">
-    </div>
+    <div class="vision-left"><h2>我们旨在通过业务活动解决社会问题，实现可持续发展</h2></div>
+    <div class="vision-right"><img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=800&q=80" alt="Vision Image"></div>
   </div>
 </div>
 
@@ -481,54 +409,42 @@
     <div class="section-header" style="margin-bottom: 1rem;">
       <h2 style="font-size: 2.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.5rem;">社交媒体</h2>
     </div>
+    <!-- 标签 -->
     <div class="social-tabs">
-      <div class="social-tab active">All Posts</div>
-      <div class="social-tab"><span>📘</span> Facebook</div>
-      <div class="social-tab"><span>📷</span> Instagram</div>
-      <div class="social-tab"><span>💼</span> LinkedIn</div>
-      <div class="social-tab"><span>▶️</span> YouTube</div>
-      <div class="social-tab"><span>🎵</span> TikTok</div>
+      <div class="social-tab active" onclick="filterSocial('All')">All Posts</div>
+      <div class="social-tab" onclick="filterSocial('Facebook')">📘 Facebook</div>
+      <div class="social-tab" onclick="filterSocial('Instagram')">📷 Instagram</div>
+      <div class="social-tab" onclick="filterSocial('LinkedIn')">💼 LinkedIn</div>
+      <div class="social-tab" onclick="filterSocial('TikTok')">🎵 TikTok</div>
     </div>
     
-    <div class="slider-container social-slider-wrapper">
-      <div class="social-track" id="social-track">
-        <div class="social-card">
-          <div class="header"><span class="date">Sep 21, 2026</span><span class="icon">📷</span></div>
-          <div class="content">Advancing smart mobility through collaboration 🤝... <a href="#">See more</a></div>
-          <div class="img-box"><img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=600&q=80" alt="Social 1"></div>
+    <!-- CMS 卡片区域 -->
+    <div id="cms-social-wrapper">
+      <div class="slider-container social-slider-wrapper">
+        <div class="slider-track" id="social-track">
+          <p style="text-align:center; color:#999; width:100%; padding:2rem;">正在加载社交媒体...</p>
         </div>
-        <div class="social-card">
-          <div class="header"><span class="date">Sep 18, 2026</span><span class="icon">💼</span></div>
-          <div class="content">Mitsubishi Electric's MELSEC iQ-R Series safety programmable controller has obtained an EU type examination certificate... <a href="#">See more</a></div>
-          <div class="img-box"><img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Social 2"></div>
-        </div>
-        <div class="social-card">
-          <div class="header"><span class="date">Sep 18, 2026</span><span class="icon">💼</span></div>
-          <div class="content">Mitsubishi Electric is launching two R&D projects selected by Japan's NEDO under its initiative to accelerate... <a href="#">See more</a></div>
-          <div class="img-box"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="Social 3"></div>
-        </div>
-        <div class="social-card">
-          <div class="header"><span class="date">Sep 15, 2026</span><span class="icon">📘</span></div>
-          <div class="content">Our new factory automation line is now operational, increasing capacity by 40%. <a href="#">See more</a></div>
-          <div class="img-box"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="Social 4"></div>
+      </div>
+      <div style="display:flex; justify-content:center; margin-top:1rem;">
+        <div class="slider-controls-capsule" id="social-controls">
+          <button onclick="slideTrack('social-track', -1, 'social-controls')">‹</button>
+          <div class="slider-dots" id="social-dots"></div>
+          <button onclick="slideTrack('social-track', 1, 'social-controls')">›</button>
         </div>
       </div>
     </div>
-    <div style="display:flex; justify-content:center; margin-top:1rem;">
-      <div class="slider-controls-capsule" id="social-controls">
-        <button onclick="slideTrack('social-track', -1, 'social-controls')">‹</button>
-        <div class="slider-dots" id="social-dots"></div>
-        <button onclick="slideTrack('social-track', 1, 'social-controls')">›</button>
-      </div>
+
+    <!-- TikTok 独立区块（EmbedSocial 区域） -->
+    <div id="tiktok-container">
+      <p>此处将展示 TikTok 内容（EmbedSocial 嵌入代码）。<br>请注册 EmbedSocial 免费版，将代码粘贴到 index.html 中对应的位置。</p>
     </div>
   </div>
 </div>
 
-<!-- 全屏新闻阅读弹窗 -->
+<!-- 新闻阅读弹窗 -->
 <div id="news-modal" class="news-modal">
   <button class="news-nav-btn prev" onclick="prevNews()" id="news-prev-btn">‹</button>
   <button class="news-nav-btn next" onclick="nextNews()" id="news-next-btn">›</button>
-  
   <div class="news-modal-content">
     <span class="news-modal-close" onclick="closeNewsModal()">&times;</span>
     <div class="news-modal-image">
@@ -538,12 +454,23 @@
       <div class="img-indicators" id="img-indicators"></div>
     </div>
     <div class="news-modal-text">
-      <div class="meta-header">
-        <span id="news-modal-date"></span>
-        <span class="icon">in</span>
-      </div>
+      <div class="meta-header"><span id="news-modal-date"></span><span class="icon">in</span></div>
       <h2 id="news-modal-title"></h2>
       <div class="body" id="news-modal-body"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 社交媒体预览弹窗 -->
+<div id="social-modal" class="news-modal">
+  <div class="news-modal-content">
+    <span class="news-modal-close" onclick="closeSocialModal()">&times;</span>
+    <div class="news-modal-image"><img id="social-modal-img" src="" alt="Social Image"></div>
+    <div class="news-modal-text">
+      <div class="meta-header"><span id="social-modal-date"></span><span class="icon" id="social-modal-platform"></span></div>
+      <h2 id="social-modal-title"></h2>
+      <div class="body" id="social-modal-body"></div>
+      <a id="social-modal-link" class="original-link" href="#" target="_blank">在原平台查看 →</a>
     </div>
   </div>
 </div>
@@ -573,7 +500,7 @@
   function resetInterval() { clearInterval(slideInterval); autoPlay(); }
   autoPlay();
 
-  // 客户故事选项卡逻辑
+  // 客户故事选项卡
   const storyData = [
     { img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80', title: '家族农场的人工智能帮助机器人采摘草莓', focus: 'TIA门户的Eigen工程代理' },
     { img: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80', title: '数字孪生技术优化生产流程', focus: 'Simcenter 仿真软件' },
@@ -589,23 +516,16 @@
     document.getElementById('story-focus').innerText = storyData[index].focus;
   }
 
-  // 通用滑动逻辑（带胶囊控制条）
-  const sliderStates = {
-    'product-track': { current: 0, total: 0 },
-    'solution-track': { current: 0, total: 0 },
-    'social-track': { current: 0, total: 0 },
-    'news-track': { current: 0, total: 0 } // 新增新闻滑块状态
-  };
+  // 通用滑动逻辑
+  const sliderStates = { 'product-track': { current: 0 }, 'solution-track': { current: 0 }, 'news-track': { current: 0 }, 'social-track': { current: 0 } };
 
   function initSlider(trackId, dotsId) {
     const track = document.getElementById(trackId);
-    const cards = track.querySelectorAll('.slider-card, .solution-card, .social-card, .news-card');
+    const cards = track.querySelectorAll('.slider-card, .solution-card');
     const dotsContainer = document.getElementById(dotsId);
     
-    const pageSize = 3;
+    const pageSize = 3; 
     const totalPages = Math.ceil(cards.length / pageSize);
-    sliderStates[trackId].total = totalPages;
-    
     dotsContainer.innerHTML = '';
     for (let i = 0; i < totalPages; i++) {
       const dot = document.createElement('span');
@@ -618,34 +538,25 @@
   function goToPage(trackId, pageIndex) {
     const track = document.getElementById(trackId);
     const container = track.parentElement;
-    const cards = track.querySelectorAll('.slider-card, .solution-card, .social-card, .news-card');
+    const cards = track.querySelectorAll('.slider-card, .solution-card');
     const pageSize = 3;
     
     if (pageIndex < 0) pageIndex = 0;
     if (pageIndex >= Math.ceil(cards.length / pageSize)) pageIndex = Math.ceil(cards.length / pageSize) - 1;
     
-    const scrollAmount = pageIndex * container.clientWidth;
-    track.style.transform = `translateX(-${scrollAmount}px)`;
-    
+    track.style.transform = `translateX(-${pageIndex * container.clientWidth}px)`;
+    const dots = document.getElementById(trackId.replace('-track', '-dots')).children;
+    for (let i = 0; i < dots.length; i++) dots[i].classList.toggle('active', i === pageIndex);
     sliderStates[trackId].current = pageIndex;
-    const dotsId = trackId.replace('-track', '-dots');
-    const dots = document.getElementById(dotsId)?.children;
-    if (dots) {
-      for (let i = 0; i < dots.length; i++) {
-        dots[i].classList.toggle('active', i === pageIndex);
-      }
-    }
   }
 
-  function slideTrack(trackId, direction, controlsId) {
+  function slideTrack(trackId, direction) {
     const state = sliderStates[trackId];
     goToPage(trackId, state.current + direction);
   }
 
-  // 新闻加载逻辑（多图提取 + 滑块初始化）
-  let newsArticles = [];
-  let currentNewsIndex = 0; 
-  let currentImageIndex = 0; 
+  // 新闻加载
+  let newsArticles = []; let currentNewsIndex = 0; let currentImageIndex = 0;
 
   async function loadNews() {
     try {
@@ -657,13 +568,12 @@
       track.innerHTML = ''; newsArticles = [];
       
       if (!Array.isArray(files) || files.length === 0) { 
-        track.innerHTML = '<p style="text-align:center;color:#999;width:100%;">暂无新闻动态。</p>'; 
-        latestContainer.innerHTML = '<p style="color:#999;text-align:center;width:100%;">暂无最新新闻</p>';
-        return; 
+        track.innerHTML = '<p style="text-align:center;color:#999;width:100%;padding:2rem;">暂无新闻动态。</p>'; 
+        latestContainer.innerHTML = '<p style="color:#999;text-align:center;width:100%;">暂无最新新闻</p>'; return; 
       }
       
       files.sort((a, b) => b.name.localeCompare(a.name));
-      const latestFiles = files.slice(0, 6); // 最多拉取6篇，正好两页
+      const latestFiles = files.slice(0, 6);
       
       for (let i = 0; i < latestFiles.length; i++) {
         const file = latestFiles[i];
@@ -675,157 +585,173 @@
         
         const titleMatch = frontmatter.match(/title:\s*(.*)/);
         const dateMatch = frontmatter.match(/date:\s*(.*)/);
-        const title = titleMatch ? titleMatch[1].trim() : '未命名新闻';
+        const title = titleMatch ? titleMatch[1].trim() : '无标题';
         const date = dateMatch ? dateMatch[1].trim() : '';
         let htmlBody = marked.parse(bodyContent);
         
-        // 【多图提取逻辑】
-        const imgRegex = /<img[^>]+src="([^">]+)"/g;
-        let matches;
-        let images = [];
-        while ((matches = imgRegex.exec(htmlBody)) !== null) {
-          images.push(matches[1]);
-        }
-        // 如果没有图片，给一个默认图
-        if (images.length === 0) {
-          images.push('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80');
-        }
+        const imgRegex = /<img[^>]+src="([^">]+)"/g; let matches; let images = [];
+        while ((matches = imgRegex.exec(htmlBody)) !== null) images.push(matches[1]);
+        if (images.length === 0) images.push('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80');
         
-        // 移除正文中的所有图片
         htmlBody = htmlBody.replace(/<img[^>]*>/g, '');
-        
         const plainText = htmlBody.replace(/<[^>]+>/g, '').trim();
         const summary = plainText.length > 80 ? plainText.substring(0, 80) + '...' : plainText;
-        
         newsArticles.push({ title, date, body: htmlBody, images });
 
-        // 渲染新闻卡片（加入 onerror 处理图片失效情况）
         const cardHtml = `
-          <div class="news-card" onclick="openNewsModal(${i})">
-            <img src="${images[0]}" onerror="this.src='https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80'" alt="${title}">
-            <div class="category">${date}</div>
-            <h4>${title}</h4>
-            <p>${summary}</p>
-            <div class="read-more">阅读全文 →</div>
-          </div>
-        `;
-        track.insertAdjacentHTML('beforeend', cardHtml);
-
-        if (i === 0) {
-          const latestHtml = `
-            <img src="${images[0]}" onerror="this.src='https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80'" alt="${title}">
-            <div class="top-news-text">
-              <h4>${title}</h4>
-              <p>${summary}</p>
+          <div class="slider-card" onclick="openNewsModal(${i})">
+            <img src="${images[0]}" alt="${title}">
+            <div class="slider-card-info">
+              <div class="category" style="font-size:0.85rem; font-weight:700; color:var(--tech-green); text-transform:uppercase; margin-bottom:0.5rem; letter-spacing:1px;">${date}</div>
+              <h4>${title}</h4><p>${summary}</p><div class="link">阅读全文 →</div>
             </div>
-            <button class="btn-outline" onclick="openNewsModal(0)">阅读更多 →</button>
-          `;
-          latestContainer.innerHTML = latestHtml;
+          </div>`;
+        track.insertAdjacentHTML('beforeend', cardHtml);
+        if (i === 0) {
+          latestContainer.innerHTML = `<img src="${images[0]}" alt="${title}"><div class="top-news-text"><h4>${title}</h4><p>${summary}</p></div><button class="btn-outline" onclick="openNewsModal(0)">阅读更多 →</button>`;
         }
       }
-      
-      // 【核心】渲染完成后，初始化新闻滑块
-      initSlider('news-track', 'news-dots');
-      updateNewsNavButtons();
-      
+      initSlider('news-track', 'news-dots'); updateNewsNavButtons();
     } catch (e) { 
       console.error(e); 
-      document.getElementById('news-track').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;">加载新闻失败，请刷新。</p>'; 
+      document.getElementById('news-track').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;padding:2rem;">加载新闻失败，请刷新。</p>'; 
       document.getElementById('latest-news-container').innerHTML = '<p style="color:#e74c39;text-align:center;width:100%;">加载失败</p>';
     }
   }
 
-  // 打开新闻弹窗
+  // 社交媒体加载与筛选
+  let socialPosts = [];
+  let currentSocialPlatform = 'All';
+
+  function getPlatformIcon(platform) {
+    const icons = { 'LinkedIn': 'in', 'Facebook': 'f', 'Instagram': '📷', 'TikTok': '🎵', 'YouTube': '▶' };
+    return icons[platform] || '🔗';
+  }
+
+  async function loadSocial() {
+    try {
+      const res = await fetch('/content/social.json'); 
+      const data = await res.json();
+      socialPosts = data.posts || [];
+      if (socialPosts.length === 0) {
+        document.getElementById('social-track').innerHTML = '<p style="text-align:center;color:#999;width:100%;padding:2rem;">暂无社交媒体动态。</p>'; return;
+      }
+      filterSocial('All'); // 默认显示所有 CMS 内容
+    } catch (e) {
+      console.error('加载社交媒体失败:', e);
+      document.getElementById('social-track').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;padding:2rem;">加载社交媒体失败，请确保 /content/social.json 存在。</p>';
+    }
+  }
+
+  function filterSocial(platform) {
+    currentSocialPlatform = platform;
+    const track = document.getElementById('social-track');
+    const cmsWrapper = document.getElementById('cms-social-wrapper');
+    const tiktokWrapper = document.getElementById('tiktok-container');
+    const tabs = document.querySelectorAll('.social-tab');
+    
+    // 更新标签激活状态
+    tabs.forEach(tab => tab.classList.remove('active'));
+    if (platform === 'TikTok') tabs[4].classList.add('active');
+    else if (platform === 'Facebook') tabs[1].classList.add('active');
+    else if (platform === 'Instagram') tabs[2].classList.add('active');
+    else if (platform === 'LinkedIn') tabs[3].classList.add('active');
+    else tabs[0].classList.add('active');
+
+    // 切换显示/隐藏
+    if (platform === 'TikTok') {
+      cmsWrapper.style.display = 'none';
+      tiktokWrapper.style.display = 'block';
+      return; 
+    } else {
+      cmsWrapper.style.display = 'block';
+      tiktokWrapper.style.display = 'none';
+    }
+
+    // 过滤数据
+    let filteredPosts = socialPosts;
+    if (platform !== 'All') {
+      filteredPosts = socialPosts.filter(post => post.platform === platform);
+    }
+
+    // 排序（根据日期倒序）
+    filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    // 渲染
+    track.innerHTML = '';
+    if (filteredPosts.length === 0) {
+      track.innerHTML = '<p style="text-align:center;color:#999;width:100%;padding:2rem;">暂无该平台内容。</p>';
+      document.getElementById('social-dots').innerHTML = ''; return;
+    }
+
+    filteredPosts.forEach((post, index) => {
+      const cardHtml = `
+        <div class="slider-card" onclick="openSocialModal('${post.title || post.date}', '${post.img}', '${post.content.replace(/'/g, "\\'")}', '${post.link}', '${post.platform}')">
+          <img src="${post.img}" alt="Social Post" style="position:relative;">
+          <div class="social-platform-tag">${getPlatformIcon(post.platform)}</div>
+          <div class="slider-card-info">
+            <div style="font-size:0.85rem; font-weight:700; color:var(--text-muted); margin-bottom:0.5rem;">${post.date} · ${post.platform}</div>
+            <p style="flex-grow:1;">${post.content.substring(0, 80)}...</p>
+            <div class="link">查看详情 →</div>
+          </div>
+        </div>`;
+      track.insertAdjacentHTML('beforeend', cardHtml);
+    });
+
+    initSlider('social-track', 'social-dots');
+  }
+
+  // 弹窗逻辑
   function openNewsModal(index) {
-    if (index < 0 || index >= newsArticles.length) return;
-    currentNewsIndex = index;
-    currentImageIndex = 0;
-    
-    const article = newsArticles[index];
-    
+    const article = newsArticles[index]; if (!article) return;
+    currentNewsIndex = index; currentImageIndex = 0;
     document.getElementById('news-modal-date').innerText = article.date;
     document.getElementById('news-modal-title').innerText = article.title;
     document.getElementById('news-modal-body').innerHTML = article.body;
-    
     updateImageDisplay();
-    
     document.getElementById('news-modal').style.display = 'flex';
     document.body.style.overflow = 'hidden';
   }
 
   function updateImageDisplay() {
     const article = newsArticles[currentNewsIndex];
-    if (!article || !article.images) return;
-    
-    const imgElement = document.getElementById('news-modal-img');
-    imgElement.src = article.images[currentImageIndex];
-    
-    const prevBtn = document.getElementById('img-prev-btn');
-    const nextBtn = document.getElementById('img-next-btn');
-    if (article.images.length <= 1) {
-      prevBtn.style.display = 'none';
-      nextBtn.style.display = 'none';
-    } else {
-      prevBtn.style.display = 'flex';
-      nextBtn.style.display = 'flex';
-    }
-    
-    const indicatorsContainer = document.getElementById('img-indicators');
-    indicatorsContainer.innerHTML = '';
+    document.getElementById('news-modal-img').src = article.images[currentImageIndex];
+    document.getElementById('img-prev-btn').style.display = article.images.length > 1 ? 'flex' : 'none';
+    document.getElementById('img-next-btn').style.display = article.images.length > 1 ? 'flex' : 'none';
+    const indicators = document.getElementById('img-indicators'); indicators.innerHTML = '';
     if (article.images.length > 1) {
-      for (let i = 0; i < article.images.length; i++) {
+      article.images.forEach((_, i) => {
         const dot = document.createElement('span');
         dot.className = 'img-dot' + (i === currentImageIndex ? ' active' : '');
         dot.onclick = () => { currentImageIndex = i; updateImageDisplay(); };
-        indicatorsContainer.appendChild(dot);
-      }
+        indicators.appendChild(dot);
+      });
     }
   }
 
-  function prevImage() {
-    const article = newsArticles[currentNewsIndex];
-    if (article.images.length <= 1) return;
-    currentImageIndex = (currentImageIndex - 1 + article.images.length) % article.images.length;
-    updateImageDisplay();
-  }
-  function nextImage() {
-    const article = newsArticles[currentNewsIndex];
-    if (article.images.length <= 1) return;
-    currentImageIndex = (currentImageIndex + 1) % article.images.length;
-    updateImageDisplay();
-  }
+  function prevImage() { const a = newsArticles[currentNewsIndex]; if (a.images.length <= 1) return; currentImageIndex = (currentImageIndex - 1 + a.images.length) % a.images.length; updateImageDisplay(); }
+  function nextImage() { const a = newsArticles[currentNewsIndex]; if (a.images.length <= 1) return; currentImageIndex = (currentImageIndex + 1) % a.images.length; updateImageDisplay(); }
+  function prevNews() { currentNewsIndex = (currentNewsIndex - 1 + newsArticles.length) % newsArticles.length; openNewsModal(currentNewsIndex); }
+  function nextNews() { currentNewsIndex = (currentNewsIndex + 1) % newsArticles.length; openNewsModal(currentNewsIndex); }
+  function updateNewsNavButtons() { const p = document.getElementById('news-prev-btn'), n = document.getElementById('news-next-btn'); p.style.display = newsArticles.length > 1 ? 'flex' : 'none'; n.style.display = newsArticles.length > 1 ? 'flex' : 'none'; }
+  function closeNewsModal() { document.getElementById('news-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
-  function prevNews() {
-    currentNewsIndex = (currentNewsIndex - 1 + newsArticles.length) % newsArticles.length;
-    openNewsModal(currentNewsIndex);
+  function openSocialModal(date, img, content, link, platform) {
+    document.getElementById('social-modal-img').src = img;
+    document.getElementById('social-modal-date').innerText = date;
+    document.getElementById('social-modal-platform').innerText = getPlatformIcon(platform) + ' ' + platform;
+    document.getElementById('social-modal-title').innerText = '社交媒体帖文';
+    document.getElementById('social-modal-body').innerText = content;
+    document.getElementById('social-modal-link').href = link;
+    document.getElementById('social-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
   }
-  function nextNews() {
-    currentNewsIndex = (currentNewsIndex + 1) % newsArticles.length;
-    openNewsModal(currentNewsIndex);
-  }
-
-  function updateNewsNavButtons() {
-    const prevBtn = document.getElementById('news-prev-btn');
-    const nextBtn = document.getElementById('news-next-btn');
-    if (newsArticles.length <= 1) {
-      prevBtn.style.display = 'none';
-      nextBtn.style.display = 'none';
-    } else {
-      prevBtn.style.display = 'flex';
-      nextBtn.style.display = 'flex';
-    }
-  }
-
-  function closeNewsModal() {
-    document.getElementById('news-modal').style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
+  function closeSocialModal() { document.getElementById('social-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
   window.addEventListener('load', () => {
     initSlider('product-track', 'product-dots');
     initSlider('solution-track', 'solution-dots');
-    initSlider('social-track', 'social-dots');
-    loadNews(); // loadNews 内部会在成功加载后调用 initSlider('news-track', 'news-dots')
+    loadNews(); loadSocial(); 
   });
 </script>
 </body>
