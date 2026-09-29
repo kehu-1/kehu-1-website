@@ -54,28 +54,36 @@
       position: absolute;
       top: 100%;
       left: 0;
-      width: 100vw; /* 全屏宽度 */
+      width: 100%; /* 相对于父级 header 全宽 */
       background: var(--dark-bg); /* 深色背景 */
-      padding: 3rem 5%; /* 大内边距 */
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
       z-index: 1001;
       border-top: 1px solid rgba(255,255,255,0.08);
-      /* 多列网格布局 */
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem 4rem;
+      justify-content: center; /* 内部内容居中 */
     }
     
-    .nav-dropdown:hover .dropdown-menu { display: grid; }
+    /* 鼠标悬停时显示，并以 flex 方式布局内部内容 */
+    .nav-dropdown:hover .dropdown-menu { display: flex; }
+    
+    /* 大菜单内部内容容器 */
+    .mega-menu-content {
+      max-width: 1340px; /* 与页面主体对齐 */
+      width: 100%;
+      padding: 3rem 2rem; /* 宽松的内边距 */
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 固定4列，复刻西门子 */
+      gap: 2rem 4rem;
+    }
     
     /* 分类组样式 */
     .dropdown-menu .category-group { display: flex; flex-direction: column; }
     .dropdown-menu .category-group h4 { 
       color: #fff; 
       font-size: 1.1rem; 
+      font-weight: 700; 
       margin-bottom: 1rem; 
-      border-bottom: 1px solid rgba(255,255,255,0.15); 
+      border-bottom: 1px solid rgba(255,255,255,0.15); /* 标题下划线 */
       padding-bottom: 0.5rem;
-      font-weight: 700;
       letter-spacing: 0.5px;
     }
     .dropdown-menu .category-group a { 
@@ -88,13 +96,13 @@
     }
     .dropdown-menu .category-group a:hover { 
       color: var(--tech-green); 
-      padding-left: 0.3rem;
+      padding-left: 0.3rem; /* 悬停轻微位移 */
     }
 
     .header-bottom .search-wrapper { color: #CBD5E1; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin-left: 1rem; }
     .header-bottom .search-wrapper:hover { color: var(--tech-green); }
 
-    /* ===== 主体内容（其余板块不变） ===== */
+    /* ===== 主体内容 ===== */
     .hero { position: relative; height: calc(100vh - 120px); margin-top: 120px; overflow: hidden; background: var(--dark-bg); }
     .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s; display: flex; align-items: center; }
     .slide.active { opacity: 1; z-index: 1; }
@@ -261,6 +269,7 @@
       .top-news-inner { flex-direction: column; text-align: center; gap: 1rem; }
       .top-news-inner img { width: 100%; height: 200px; }
       .top-news-inner .btn-outline { width: 100%; }
+      .mega-menu-content { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -283,7 +292,7 @@
         <a href="products.html">产品展示</a>
         <a href="advantages.html">生产优势</a>
         
-        <!-- 【重要】链接改为 javascript:void(0)，点击不跳转，只显示大菜单 -->
+        <!-- 大菜单改造 -->
         <div class="nav-dropdown">
           <a href="javascript:void(0)">客户故事 <span style="font-size:0.8em;">▼</span></a>
           <div class="dropdown-menu" id="story-dropdown-menu">
@@ -627,216 +636,4 @@
       const latestFiles = files.slice(0, 6);
       for (let i = 0; i < latestFiles.length; i++) {
         const file = latestFiles[i];
-        const rawRes = await fetch(file.download_url);
-        const text = await rawRes.text();
-        const parts = text.split('---');
-        const frontmatter = parts[1] || '';
-        let bodyContent = parts.slice(2).join('---').trim();
-        const titleMatch = frontmatter.match(/title:\s*(.*)/);
-        const dateMatch = frontmatter.match(/date:\s*(.*)/);
-        const title = titleMatch ? titleMatch[1].trim() : '无标题';
-        const date = dateMatch ? dateMatch[1].trim() : '';
-        let htmlBody = marked.parse(bodyContent);
-        const imgRegex = /<img[^>]+src="([^">]+)"/g; let matches; let images = [];
-        while ((matches = imgRegex.exec(htmlBody)) !== null) images.push(matches[1]);
-        if (images.length === 0) images.push('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80');
-        htmlBody = htmlBody.replace(/<img[^>]*>/g, '');
-        const plainText = htmlBody.replace(/<[^>]+>/g, '').trim();
-        const summary = plainText.length > 80 ? plainText.substring(0, 80) + '...' : plainText;
-        newsArticles.push({ title, date, body: htmlBody, images });
-        const cardHtml = `
-          <div class="slider-card" onclick="openNewsModal(${i})">
-            <img src="${images[0]}" alt="${title}">
-            <div class="slider-card-info">
-              <div class="category" style="font-size:0.85rem; font-weight:700; color:var(--tech-green); text-transform:uppercase; margin-bottom:0.5rem; letter-spacing:1px;">${date}</div>
-              <h4>${title}</h4><p>${summary}</p><div class="link">阅读全文 →</div>
-            </div>
-          </div>`;
-        track.insertAdjacentHTML('beforeend', cardHtml);
-        if (i === 0) {
-          latestContainer.innerHTML = `<img src="${images[0]}" alt="${title}"><div class="top-news-text"><h4>${title}</h4><p>${summary}</p></div><button class="btn-outline" onclick="openNewsModal(0)">阅读更多 →</button>`;
-        }
-      }
-      initSlider('news-track', 'news-dots'); updateNewsNavButtons();
-    } catch (e) { 
-      console.error(e); 
-      document.getElementById('news-track').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;padding:2rem;">加载新闻失败，请刷新。</p>'; 
-      document.getElementById('latest-news-container').innerHTML = '<p style="color:#e74c39;text-align:center;width:100%;">加载失败</p>';
-    }
-  }
-
-  let socialPosts = [];
-
-  function getPlatformIcon(platform) {
-    const icons = { 'LinkedIn': 'in', 'Facebook': 'f', 'Instagram': '📷', 'TikTok': '🎵', 'YouTube': '▶' };
-    return icons[platform] || '🔗';
-  }
-
-  async function loadSocial() {
-    try {
-      const res = await fetch('/content/social.json'); 
-      const data = await res.json();
-      socialPosts = data.posts || [];
-      if (socialPosts.length === 0) {
-        document.getElementById('social-track').innerHTML = '<p style="text-align:center;color:#999;width:100%;padding:2rem;">暂无社交媒体动态。</p>'; return;
-      }
-      filterSocial('All'); 
-    } catch (e) {
-      console.error('加载社交媒体失败:', e);
-      document.getElementById('social-track').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;padding:2rem;">加载社交媒体失败，请确保 /content/social.json 存在。</p>';
-    }
-  }
-
-  function filterSocial(platform) {
-    const track = document.getElementById('social-track');
-    const tabs = document.querySelectorAll('.social-tab');
-    tabs.forEach(tab => tab.classList.remove('active'));
-    if (platform === 'Facebook') tabs[1].classList.add('active');
-    else if (platform === 'Instagram') tabs[2].classList.add('active');
-    else if (platform === 'LinkedIn') tabs[3].classList.add('active');
-    else if (platform === 'TikTok') tabs[4].classList.add('active');
-    else if (platform === 'YouTube') tabs[5].classList.add('active');
-    else tabs[0].classList.add('active');
-
-    let filteredPosts = socialPosts;
-    if (platform !== 'All') {
-      filteredPosts = socialPosts.filter(post => post.platform === platform);
-    }
-    filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
-    track.innerHTML = '';
-    if (filteredPosts.length === 0) {
-      track.innerHTML = '<p style="text-align:center;color:#999;width:100%;padding:2rem;">暂无该平台内容。</p>';
-      document.getElementById('social-dots').innerHTML = ''; return;
-    }
-    filteredPosts.forEach((post, index) => {
-      const isVideo = post.platform === 'TikTok' || post.platform === 'YouTube';
-      const cardHtml = `
-        <div class="social-card-b2b" onclick="openSocialModal('${post.title || post.date}', '${post.img}', '${post.content.replace(/'/g, "\\'")}', '${post.link}', '${post.platform}')">
-          <div class="social-card-header">
-            <span>${post.date}</span>
-            <span class="platform-icon">${getPlatformIcon(post.platform)}</span>
-          </div>
-          <div class="social-card-text">${post.content}</div>
-          <div class="social-card-img-wrapper">
-            <img src="${post.img}" alt="Social Post">
-            ${isVideo ? '<div class="social-card-play-btn">▶</div>' : ''}
-          </div>
-        </div>
-      `;
-      track.insertAdjacentHTML('beforeend', cardHtml);
-    });
-    initSlider('social-track', 'social-dots');
-  }
-
-  function openNewsModal(index) {
-    const article = newsArticles[index]; if (!article) return;
-    currentNewsIndex = index; currentImageIndex = 0;
-    document.getElementById('news-modal-date').innerText = article.date;
-    document.getElementById('news-modal-title').innerText = article.title;
-    document.getElementById('news-modal-body').innerHTML = article.body;
-    updateImageDisplay();
-    document.getElementById('news-modal').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
-
-  function updateImageDisplay() {
-    const article = newsArticles[currentNewsIndex];
-    document.getElementById('news-modal-img').src = article.images[currentImageIndex];
-    document.getElementById('img-prev-btn').style.display = article.images.length > 1 ? 'flex' : 'none';
-    document.getElementById('img-next-btn').style.display = article.images.length > 1 ? 'flex' : 'none';
-    const indicators = document.getElementById('img-indicators'); indicators.innerHTML = '';
-    if (article.images.length > 1) {
-      article.images.forEach((_, i) => {
-        const dot = document.createElement('span');
-        dot.className = 'img-dot' + (i === currentImageIndex ? ' active' : '');
-        dot.onclick = () => { currentImageIndex = i; updateImageDisplay(); };
-        indicators.appendChild(dot);
-      });
-    }
-  }
-
-  function prevImage() { const a = newsArticles[currentNewsIndex]; if (a.images.length <= 1) return; currentImageIndex = (currentImageIndex - 1 + a.images.length) % a.images.length; updateImageDisplay(); }
-  function nextImage() { const a = newsArticles[currentNewsIndex]; if (a.images.length <= 1) return; currentImageIndex = (currentImageIndex + 1) % a.images.length; updateImageDisplay(); }
-  function prevNews() { currentNewsIndex = (currentNewsIndex - 1 + newsArticles.length) % newsArticles.length; openNewsModal(currentNewsIndex); }
-  function nextNews() { currentNewsIndex = (currentNewsIndex + 1) % newsArticles.length; openNewsModal(currentNewsIndex); }
-  function updateNewsNavButtons() { const p = document.getElementById('news-prev-btn'), n = document.getElementById('news-next-btn'); p.style.display = newsArticles.length > 1 ? 'flex' : 'none'; n.style.display = newsArticles.length > 1 ? 'flex' : 'none'; }
-  function closeNewsModal() { document.getElementById('news-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
-
-  function openSocialModal(date, img, content, link, platform) {
-    document.getElementById('social-modal-img').src = img;
-    document.getElementById('social-modal-date').innerText = date;
-    document.getElementById('social-modal-platform').innerText = getPlatformIcon(platform) + ' ' + platform;
-    document.getElementById('social-modal-title').innerText = '社交媒体帖文';
-    document.getElementById('social-modal-body').innerText = content;
-    document.getElementById('social-modal-link').href = link;
-    document.getElementById('social-modal').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
-  function closeSocialModal() { document.getElementById('social-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
-
-  // ==========================================
-  // 【核心】动态加载客户故事大菜单 (Mega Menu)
-  // ==========================================
-  async function loadNavCategories() {
-    try {
-      const repo = 'kehu-1/kehu-1-website';
-      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/stories`);
-      const files = await res.json();
-      
-      const menu = document.getElementById('story-dropdown-menu');
-      if (!menu || !Array.isArray(files)) return;
-
-      // 使用对象按 category 分组
-      const groupedData = {};
-      for (let file of files) {
-        const rawRes = await fetch(file.download_url);
-        const text = await rawRes.text();
-        const parts = text.split('---');
-        const frontmatter = parts[1] || '';
-        
-        // 宽容匹配分类和标题，避免格式错误导致抓不到
-        const categoryMatch = frontmatter.match(/category:\s*(.*)/);
-        const titleMatch = frontmatter.match(/title:\s*(.*)/);
-        
-        if (categoryMatch) {
-          const category = categoryMatch[1].trim();
-          // 如果标题没填，给个默认名字，避免只有分类没子项
-          const title = titleMatch ? titleMatch[1].trim() : '查看详情'; 
-          
-          if (!groupedData[category]) groupedData[category] = [];
-          groupedData[category].push(title);
-        }
-      }
-
-      menu.innerHTML = ''; 
-      
-      // 遍历分组，渲染成大菜单结构
-      Object.keys(groupedData).forEach(cat => {
-        const groupHtml = `
-          <div class="category-group">
-            <h4>${cat}</h4>
-            ${groupedData[cat].map(title => `<a href="stories.html?category=${encodeURIComponent(cat)}">${title}</a>`).join('')}
-          </div>
-        `;
-        menu.insertAdjacentHTML('beforeend', groupHtml);
-      });
-
-      if (Object.keys(groupedData).length === 0) {
-        menu.innerHTML = '<div style="grid-column: 1/-1; text-align:center; color:#999; padding:2rem;">暂无客户故事，请在 Pages CMS 后台添加。</div>';
-      }
-
-    } catch (e) {
-      console.error('加载下拉菜单分类失败:', e);
-    }
-  }
-
-  window.addEventListener('load', () => {
-    initSlider('product-track', 'product-dots');
-    initSlider('solution-track', 'solution-dots');
-    loadNews();   
-    loadSocial(); 
-    loadNavCategories(); // 加载大菜单
-  });
-</script>
-</body>
-</html>
+        const rawRes
