@@ -20,9 +20,15 @@
     body { font-family: 'Inter', -apple-system, "Segoe UI", sans-serif; color: var(--text-main); line-height: 1.6; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    .header-container, .section-container, .footer-inner, .news-grid, .vision-inner, .top-news-inner { max-width: 1340px; margin: 0 auto; padding: 0 2rem; width: 100%; }
+    /* ===== 统一对齐容器（宽度 1340px） ===== */
+    .header-container, .section-container, .footer-inner, .news-grid, .vision-inner, .top-news-inner {
+      max-width: 1340px;
+      margin: 0 auto;    
+      padding: 0 2rem;   
+      width: 100%;
+    }
 
-    /* 导航栏 */
+    /* ===== 西门子双层导航栏 ===== */
     header { position: fixed; top: 0; width: 100%; background: var(--dark-bg); z-index: 1000; }
     .header-top { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; }
     .header-top .logo { font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
@@ -31,13 +37,47 @@
     .header-top .tools a:hover { color: var(--tech-green); }
     .header-bottom { border-top: 1px solid rgba(255,255,255,0.05); }
     .header-bottom .nav-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
-    .header-bottom nav a { color: #CBD5E1; font-size: 1rem; margin-right: 1.5rem; font-weight: 500; }
-    .header-bottom nav a:first-child { margin-left: 1.5rem; } 
-    .header-bottom nav a:hover, .header-bottom nav a.active { color: var(--tech-green); }
-    .header-bottom .search-wrapper { color: #CBD5E1; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; }
+    
+    .header-bottom nav { display: flex; align-items: center; }
+    .header-bottom nav > a { color: #CBD5E1; font-size: 1rem; margin-right: 1.5rem; font-weight: 500; padding-bottom: 0.5rem; }
+    .header-bottom nav > a:first-child { margin-left: 1.5rem; } 
+    .header-bottom nav > a:hover, .header-bottom nav > a.active { color: var(--tech-green); }
+    
+    /* 【新增】导航栏下拉菜单 */
+    .nav-dropdown { position: relative; display: inline-block; }
+    .nav-dropdown > a { color: #CBD5E1; font-size: 1rem; font-weight: 500; padding-bottom: 0.5rem; display: block; cursor: pointer; }
+    .nav-dropdown > a:hover { color: var(--tech-green); }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--dark-bg);
+      min-width: 220px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      border-radius: 4px;
+      padding: 0.5rem 0;
+      z-index: 1001;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.8rem 1.5rem;
+      color: #CBD5E1;
+      font-size: 0.95rem;
+      margin: 0 !important;
+      transition: 0.3s;
+    }
+    .dropdown-menu a:hover {
+      background: rgba(255,255,255,0.05);
+      color: var(--tech-green);
+    }
+    .nav-dropdown:hover .dropdown-menu { display: block; }
+
+    .header-bottom .search-wrapper { color: #CBD5E1; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin-left: 1rem; }
     .header-bottom .search-wrapper:hover { color: var(--tech-green); }
 
-    /* 轮播图 */
+    /* ===== 主轮播图 ===== */
     .hero { position: relative; height: calc(100vh - 120px); margin-top: 120px; overflow: hidden; background: var(--dark-bg); }
     .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s; display: flex; align-items: center; }
     .slide.active { opacity: 1; z-index: 1; }
@@ -47,13 +87,14 @@
     .slide-content p { font-size: 1.2rem; font-weight: 300; color: #CBD5E1; margin-bottom: 2.5rem; }
     .btn { display: inline-block; padding: 1rem 3rem; background: var(--tech-green); color: #000; font-weight: 700; transition: 0.3s; border: none; cursor: pointer; font-size: 1rem; }
     .btn:hover { background: var(--tech-green-hover); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,255,185,0.2); }
+    
     .hero-indicator-wrapper { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 10; }
     .hero-indicator { display: flex; align-items: center; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(8px); border-radius: 50px; padding: 0.5rem 1rem; gap: 0.8rem; }
     .hero-indicator .play-btn { background: #fff; color: var(--dark-bg); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; }
     .hero-indicator .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
     .hero-indicator .dot.active { width: 28px; border-radius: 4px; background: #fff; }
 
-    /* 顶部新闻条 */
+    /* ===== 轮播图下方新闻条 ===== */
     .top-news-section { background: #fff; border-bottom: 1px solid #E5E7EB; padding: 1rem 0; }
     .top-news-inner { display: flex; align-items: center; gap: 1rem; }
     .top-news-inner img { width: 120px; height: 75px; object-fit: cover; }
@@ -63,7 +104,7 @@
     .btn-outline { padding: 0.6rem 1.5rem; border: 2px solid var(--text-main); color: var(--text-main); font-weight: 700; white-space: nowrap; background: transparent; cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
     .btn-outline:hover { background: var(--text-main); color: var(--tech-green); }
 
-    /* 客户故事区 */
+    /* ===== 客户故事区 ===== */
     .story-section { padding: 4rem 0; } 
     .story-grid { display: grid; grid-template-columns: 300px 1fr 340px; gap: 1rem; align-items: start; } 
     .story-tabs { display: flex; flex-direction: column; position: sticky; top: 140px; border-left: 2px solid #E5E7EB; }
@@ -85,7 +126,7 @@
     .story-card.light .link { color: var(--text-main); }
     .story-card.light .link:hover { color: var(--tech-green); }
 
-    /* 通用滑块 */
+    /* ===== 通用横滑区块 ===== */
     .slider-section { padding: 4rem 0; background: #fff; overflow: hidden; }
     .slider-section.gray-bg { background: #F8FAFC; }
     .slider-section .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; }
@@ -103,6 +144,7 @@
     .slider-dot.active { width: 24px; border-radius: 4px; background: var(--dark-bg); }
     .slider-container { position: relative; width: 100%; overflow: hidden; }
     .slider-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); gap: 1rem; } 
+    
     .slider-card { flex: 0 0 calc((100% - 2rem) / 3); background: #fff; display: flex; flex-direction: column; transition: 0.3s; border-radius: 4px; overflow: hidden; border: 1px solid #E5E7EB; cursor: pointer; }
     .slider-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
     .slider-card img { width: 100%; height: 260px; object-fit: cover; }
@@ -139,11 +181,68 @@
     .social-tab { font-size: 1rem; font-weight: 500; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 0.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid transparent; }
     .social-tab.active { color: var(--text-main); border-bottom-color: var(--text-main); font-weight: 700; }
 
-    /* TikTok 独立区块（EmbedSocial 区域） */
-    #tiktok-container { display: none; width: 100%; min-height: 200px; background: #F8FAFC; border-radius: 4px; padding: 1rem; }
-    #tiktok-container p { text-align: center; color: #999; }
+    .social-card-b2b { 
+      flex: 0 0 calc((100% - 2rem) / 3); 
+      background: #fff; 
+      border: 1px solid #E5E7EB; 
+      padding: 1.5rem; 
+      display: flex; 
+      flex-direction: column; 
+      cursor: pointer; 
+      transition: 0.3s;
+      height: 100%;
+    }
+    .social-card-b2b:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.05); transform: translateY(-5px); }
+    .social-card-header { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center;
+      color: var(--text-muted); 
+      font-size: 0.9rem; 
+      margin-bottom: 1rem; 
+    }
+    .social-card-header .platform-icon { font-size: 1.2rem; color: #0ea5e9; font-weight: 700; }
+    .social-card-text { 
+      font-size: 1rem; 
+      color: var(--text-main); 
+      line-height: 1.6; 
+      margin-bottom: 1.5rem; 
+      flex-grow: 1; 
+      display: -webkit-box; 
+      -webkit-line-clamp: 4; 
+      -webkit-box-orient: vertical; 
+      overflow: hidden; 
+    }
+    .social-card-img-wrapper { 
+      position: relative; 
+      height: 240px; 
+      width: 100%; 
+      background: #000; 
+      overflow: hidden;
+    }
+    .social-card-img-wrapper img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+    }
+    .social-card-play-btn { 
+      position: absolute; 
+      top: 50%; 
+      left: 50%; 
+      transform: translate(-50%, -50%); 
+      width: 50px; 
+      height: 50px; 
+      background: rgba(255,255,255,0.8); 
+      border-radius: 50%; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      color: #000; 
+      font-size: 1.2rem; 
+      z-index: 2;
+    }
 
-    /* 弹窗（预览） */
+    /* 弹窗 */
     .news-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); z-index: 3000; justify-content: center; align-items: center; }
     .news-modal-content { position: relative; width: 90vw; height: 90vh; display: flex; background: #fff; border-radius: 4px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); }
     .news-modal-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 2.5rem; color: #111827; cursor: pointer; z-index: 10; line-height: 1; background: rgba(255,255,255,0.8); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
@@ -181,15 +280,16 @@
     @media (max-width: 900px) {
       .header-top { flex-direction: column; gap: 1rem; }
       .header-bottom .nav-wrapper { flex-direction: column; gap: 1rem; }
-      .header-bottom nav a { margin-right: 1rem; font-size: 0.9rem; }
-      .header-bottom nav a:first-child { margin-left: 0; }
+      .header-bottom nav { flex-wrap: wrap; justify-content: center; }
+      .header-bottom nav > a { margin: 0.5rem; }
+      .header-bottom nav > a:first-child { margin-left: 0.5rem; }
       .slide-content h1 { font-size: 2.5rem; }
       .story-grid { grid-template-columns: 1fr; gap: 1rem; }
       .story-tabs { flex-direction: row; overflow-x: auto; padding-right: 0; border-bottom: 1px solid #E5E7EB; padding-bottom: 0.5rem; position: relative; top: 0; border-left: none; }
       .story-tab { white-space: nowrap; border-left: none; border-bottom: 3px solid transparent; padding: 0.5rem 1rem; }
       .story-tab.active { border-left: none; border-bottom-color: var(--border-dark-green); margin-left: 0; padding-left: 1rem; }
       .story-main img { height: 400px; }
-      .slider-card, .solution-card { flex: 0 0 100%; }
+      .slider-card, .solution-card, .social-card-b2b { flex: 0 0 100%; }
       .news-modal-content { width: 95vw; height: 85vh; flex-direction: column; }
       .news-modal-image { flex: none; height: 45%; padding: 1rem; }
       .news-modal-text { flex: 1; padding: 2rem 1.5rem; }
@@ -224,13 +324,15 @@
         <a href="index.html" class="active">首页</a>
         <a href="products.html">产品展示</a>
         <a href="advantages.html">生产优势</a>
-        <!-- 修改客户故事为下拉菜单 -->
+        
+        <!-- 【新增】客户故事下拉菜单 -->
         <div class="nav-dropdown">
           <a href="stories.html">客户故事 <span style="font-size:0.8em;">▼</span></a>
           <div class="dropdown-menu" id="story-dropdown-menu">
             <!-- 分类由JS自动抓取并渲染到这里 -->
           </div>
         </div>
+        
         <a href="contact.html">联系我询价</a>
         <a href="en/index.html" style="color: var(--tech-green);">English</a>
       </nav>
@@ -410,44 +512,35 @@
   </div>
 </div>
 
-<!-- 8. 社交媒体区 -->
+<!-- 8. 社交媒体区（完全按照三菱图二排版，走 CMS） -->
 <div class="social-section">
   <div class="section-container">
     <div class="section-header" style="margin-bottom: 1rem;">
       <h2 style="font-size: 2.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.5rem;">社交媒体</h2>
     </div>
-    <!-- 标签 -->
     <div class="social-tabs">
       <div class="social-tab active" onclick="filterSocial('All')">All Posts</div>
       <div class="social-tab" onclick="filterSocial('Facebook')">📘 Facebook</div>
       <div class="social-tab" onclick="filterSocial('Instagram')">📷 Instagram</div>
       <div class="social-tab" onclick="filterSocial('LinkedIn')">💼 LinkedIn</div>
       <div class="social-tab" onclick="filterSocial('TikTok')">🎵 TikTok</div>
+      <div class="social-tab" onclick="filterSocial('YouTube')">▶️ YouTube</div>
     </div>
     
-    <!-- CMS 卡片区域 -->
-    <div id="cms-social-wrapper">
-      <div class="slider-container social-slider-wrapper">
-        <div class="slider-track" id="social-track">
-          <p style="text-align:center; color:#999; width:100%; padding:2rem;">正在加载社交媒体...</p>
-        </div>
-      </div>
-      <div style="display:flex; justify-content:center; margin-top:1rem;">
-        <div class="slider-controls-capsule" id="social-controls">
-          <button onclick="slideTrack('social-track', -1, 'social-controls')">‹</button>
-          <div class="slider-dots" id="social-dots"></div>
-          <button onclick="slideTrack('social-track', 1, 'social-controls')">›</button>
-        </div>
+    <div class="slider-container social-slider-wrapper">
+      <div class="slider-track" id="social-track">
+        <p style="text-align:center; color:#999; width:100%; padding:2rem;">正在加载社交媒体...</p>
       </div>
     </div>
-
-    <!-- TikTok 独立区块（EmbedSocial 区域） -->
-    <div id="tiktok-container">
-   <!-- Elfsight Social Feed | Untitled Social Feed -->
-<script src="https://elfsightcdn.com/platform.js" async></script>
-<div class="elfsight-app-d735cf62-4728-4a74-8895-1a94eec4668d" data-elfsight-app-lazy></div>
+    <div style="display:flex; justify-content:center; margin-top:1rem;">
+      <div class="slider-controls-capsule" id="social-controls">
+        <button onclick="slideTrack('social-track', -1, 'social-controls')">‹</button>
+        <div class="slider-dots" id="social-dots"></div>
+        <button onclick="slideTrack('social-track', 1, 'social-controls')">›</button>
+      </div>
     </div>
-
+  </div>
+</div>
 
 <!-- 新闻阅读弹窗 -->
 <div id="news-modal" class="news-modal">
@@ -488,7 +581,7 @@
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-col"><h5>你的品牌名</h5><p>专业的全球B2B供应商，致力于为全球客户提供高品质产品和一站式采购解决方案。</p></div>
-      <div class="footer-col"><h5>快速导航</h5><a href="index.html">首页</a><a href="products.html">产品展示</a><a href="advantages.html">生产优势</a><a href="contact.html">联系我询价</a></div>
+      <div class="footer-col"><h5>快速导航</h5><a href="index.html">首页</a><a href="products.html">产品展示</a><a href="advantages.html">生产优势</a><a href="stories.html">客户故事</a><a href="contact.html">联系我询价</a></div>
       <div class="footer-col"><h5>联系我们</h5><p>📧 your-email@example.com</p><p>📞 +86 123 4567 8910</p><p>📍 中国 广东省 深圳市 某某区</p></div>
       <div class="footer-col"><h5>关注我们</h5><a href="#">LinkedIn</a><a href="#">WhatsApp</a><a href="#">WeChat</a><a href="#">YouTube</a></div>
     </div>
@@ -529,7 +622,7 @@
 
   function initSlider(trackId, dotsId) {
     const track = document.getElementById(trackId);
-    const cards = track.querySelectorAll('.slider-card, .solution-card');
+    const cards = track.querySelectorAll('.slider-card, .solution-card, .social-card-b2b');
     const dotsContainer = document.getElementById(dotsId);
     
     const pageSize = 3; 
@@ -546,7 +639,7 @@
   function goToPage(trackId, pageIndex) {
     const track = document.getElementById(trackId);
     const container = track.parentElement;
-    const cards = track.querySelectorAll('.slider-card, .solution-card');
+    const cards = track.querySelectorAll('.slider-card, .solution-card, .social-card-b2b');
     const pageSize = 3;
     
     if (pageIndex < 0) pageIndex = 0;
@@ -629,7 +722,6 @@
 
   // 社交媒体加载与筛选
   let socialPosts = [];
-  let currentSocialPlatform = 'All';
 
   function getPlatformIcon(platform) {
     const icons = { 'LinkedIn': 'in', 'Facebook': 'f', 'Instagram': '📷', 'TikTok': '🎵', 'YouTube': '▶' };
@@ -644,7 +736,7 @@
       if (socialPosts.length === 0) {
         document.getElementById('social-track').innerHTML = '<p style="text-align:center;color:#999;width:100%;padding:2rem;">暂无社交媒体动态。</p>'; return;
       }
-      filterSocial('All'); // 默认显示所有 CMS 内容
+      filterSocial('All'); 
     } catch (e) {
       console.error('加载社交媒体失败:', e);
       document.getElementById('social-track').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;padding:2rem;">加载社交媒体失败，请确保 /content/social.json 存在。</p>';
@@ -652,40 +744,24 @@
   }
 
   function filterSocial(platform) {
-    currentSocialPlatform = platform;
     const track = document.getElementById('social-track');
-    const cmsWrapper = document.getElementById('cms-social-wrapper');
-    const tiktokWrapper = document.getElementById('tiktok-container');
     const tabs = document.querySelectorAll('.social-tab');
     
-    // 更新标签激活状态
     tabs.forEach(tab => tab.classList.remove('active'));
-    if (platform === 'TikTok') tabs[4].classList.add('active');
-    else if (platform === 'Facebook') tabs[1].classList.add('active');
+    if (platform === 'Facebook') tabs[1].classList.add('active');
     else if (platform === 'Instagram') tabs[2].classList.add('active');
     else if (platform === 'LinkedIn') tabs[3].classList.add('active');
+    else if (platform === 'TikTok') tabs[4].classList.add('active');
+    else if (platform === 'YouTube') tabs[5].classList.add('active');
     else tabs[0].classList.add('active');
 
-    // 切换显示/隐藏
-    if (platform === 'TikTok') {
-      cmsWrapper.style.display = 'none';
-      tiktokWrapper.style.display = 'block';
-      return; 
-    } else {
-      cmsWrapper.style.display = 'block';
-      tiktokWrapper.style.display = 'none';
-    }
-
-    // 过滤数据
     let filteredPosts = socialPosts;
     if (platform !== 'All') {
       filteredPosts = socialPosts.filter(post => post.platform === platform);
     }
 
-    // 排序（根据日期倒序）
     filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    // 渲染
     track.innerHTML = '';
     if (filteredPosts.length === 0) {
       track.innerHTML = '<p style="text-align:center;color:#999;width:100%;padding:2rem;">暂无该平台内容。</p>';
@@ -693,16 +769,22 @@
     }
 
     filteredPosts.forEach((post, index) => {
+      const isVideo = post.platform === 'TikTok' || post.platform === 'YouTube';
       const cardHtml = `
-        <div class="slider-card" onclick="openSocialModal('${post.title || post.date}', '${post.img}', '${post.content.replace(/'/g, "\\'")}', '${post.link}', '${post.platform}')">
-          <img src="${post.img}" alt="Social Post" style="position:relative;">
-          <div class="social-platform-tag">${getPlatformIcon(post.platform)}</div>
-          <div class="slider-card-info">
-            <div style="font-size:0.85rem; font-weight:700; color:var(--text-muted); margin-bottom:0.5rem;">${post.date} · ${post.platform}</div>
-            <p style="flex-grow:1;">${post.content.substring(0, 80)}...</p>
-            <div class="link">查看详情 →</div>
+        <div class="social-card-b2b" onclick="openSocialModal('${post.title || post.date}', '${post.img}', '${post.content.replace(/'/g, "\\'")}', '${post.link}', '${post.platform}')">
+          <div class="social-card-header">
+            <span>${post.date}</span>
+            <span class="platform-icon">${getPlatformIcon(post.platform)}</span>
           </div>
-        </div>`;
+          <div class="social-card-text">
+            ${post.content}
+          </div>
+          <div class="social-card-img-wrapper">
+            <img src="${post.img}" alt="Social Post">
+            ${isVideo ? '<div class="social-card-play-btn">▶</div>' : ''}
+          </div>
+        </div>
+      `;
       track.insertAdjacentHTML('beforeend', cardHtml);
     });
 
@@ -756,10 +838,50 @@
   }
   function closeSocialModal() { document.getElementById('social-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
+  // ==========================================
+  // 【新增】动态加载客户故事分类到下拉菜单
+  // ==========================================
+  async function loadNavCategories() {
+    try {
+      const repo = 'kehu-1/kehu-1-website';
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/stories`);
+      const files = await res.json();
+      
+      const menu = document.getElementById('story-dropdown-menu');
+      if (!menu || !Array.isArray(files)) return;
+
+      const categories = new Set();
+      for (let file of files) {
+        const rawRes = await fetch(file.download_url);
+        const text = await rawRes.text();
+        const match = text.match(/category:\s*(.*)/);
+        if (match) categories.add(match[1].trim());
+      }
+
+      menu.innerHTML = ''; 
+      categories.forEach(cat => {
+        const link = document.createElement('a');
+        link.href = `stories.html?category=${encodeURIComponent(cat)}`; 
+        link.innerText = cat;
+        menu.appendChild(link);
+      });
+
+      if (categories.size === 0) {
+        menu.innerHTML = '<a href="stories.html" style="color:#999;">暂无分类</a>';
+      }
+
+    } catch (e) {
+      console.error('加载下拉菜单分类失败:', e);
+    }
+  }
+
+  // 初始化
   window.addEventListener('load', () => {
     initSlider('product-track', 'product-dots');
     initSlider('solution-track', 'solution-dots');
-    loadNews(); loadSocial(); 
+    loadNews();   
+    loadSocial(); 
+    loadNavCategories(); // 加载下拉菜单
   });
 </script>
 </body>
