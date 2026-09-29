@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>客户故事详情 - 你的品牌名</title>
   <style>
-    /* ===== 基础字体与全局变量 ===== */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap');
     :root {
       --tech-green: #00FFB9;       
@@ -20,97 +19,43 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', -apple-system, "Segoe UI", sans-serif; color: var(--text-main); line-height: 1.6; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
-
-    .header-container, .section-container, .footer-inner {
-      max-width: 1340px;
-      margin: 0 auto;    
-      padding: 0 2rem;   
-      width: 100%;
-    }
-
-    /* ===== 导航栏 ===== */
+    .header-container, .section-container, .footer-inner { max-width: 1340px; margin: 0 auto; padding: 0 2rem; width: 100%; }
     header { position: fixed; top: 0; width: 100%; background: var(--dark-bg); z-index: 1000; }
     .header-top { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; }
     .header-top .logo { font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
     .header-top .tools { display: flex; align-items: center; gap: 1rem; color: #fff; font-size: 0.9rem; }
     .header-top .tools a { color: #CBD5E1; display: flex; align-items: center; gap: 0.3rem; }
     .header-top .tools a:hover { color: var(--tech-green); }
-    
     .header-bottom { border-top: 1px solid rgba(255,255,255,0.05); }
     .header-bottom .nav-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
-    
     .header-bottom nav { display: flex; align-items: center; }
     .header-bottom nav > a { color: #CBD5E1; font-size: 1rem; margin-right: 1.5rem; font-weight: 500; padding-bottom: 0.5rem; }
     .header-bottom nav > a:first-child { margin-left: 1.5rem; } 
     .header-bottom nav > a:hover, .header-bottom nav > a.active { color: var(--tech-green); }
-    
     .nav-dropdown { position: relative; display: inline-block; }
     .nav-dropdown > a { color: #CBD5E1; font-size: 1rem; font-weight: 500; padding-bottom: 0.5rem; display: block; cursor: pointer; }
     .nav-dropdown > a:hover { color: var(--tech-green); }
-    
-    .dropdown-menu {
-      display: none;
-      position: fixed; 
-      top: var(--header-height); 
-      left: 0;
-      width: 100vw; 
-      background: var(--dark-bg); 
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      z-index: 1001;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
+    .dropdown-menu { display: none; position: fixed; top: var(--header-height); left: 0; width: 100vw; background: var(--dark-bg); box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 1001; border-top: 1px solid rgba(255,255,255,0.08); }
     .dropdown-menu.show { display: block; }
-    
-    .mega-menu-content {
-      max-width: 1340px; 
-      margin: 0 auto; 
-      padding: 3rem 2rem; 
-      display: grid;
-      grid-template-columns: repeat(4, 1fr); 
-      gap: 2rem 4rem;
-    }
+    .mega-menu-content { max-width: 1340px; margin: 0 auto; padding: 3rem 2rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem 4rem; }
     .dropdown-menu .category-group { display: flex; flex-direction: column; }
     .dropdown-menu .category-group h4 { color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 0.5rem; letter-spacing: 0.5px; white-space: nowrap; }
     .dropdown-menu .category-group a { color: #CBD5E1; font-size: 0.95rem; padding: 0.6rem 0; display: block; border-bottom: 1px solid rgba(255,255,255,0.03); transition: 0.3s; white-space: nowrap; }
     .dropdown-menu .category-group a:hover { color: var(--tech-green); padding-left: 0.3rem; }
-
     .header-bottom .search-wrapper { color: #CBD5E1; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin-left: 1rem; }
     .header-bottom .search-wrapper:hover { color: var(--tech-green); }
-
-    /* ===== 【图一排版】顶部 Hero 产品区 ===== */
-    .product-hero {
-      position: relative;
-      min-height: 75vh;
-      margin-top: 120px;
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      align-items: center;
-      padding: 0 5%;
-      background-color: var(--dark-bg);
-    }
-    .product-hero::before {
-      content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(to right, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.6) 50%, transparent 100%);
-      z-index: 1;
-    }
-    .product-hero-content {
-      position: relative; z-index: 2; max-width: 600px; color: #fff;
-    }
+    .product-hero { position: relative; min-height: 75vh; margin-top: 120px; background-size: cover; background-position: center; display: flex; align-items: center; padding: 0 5%; background-color: var(--dark-bg); }
+    .product-hero::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.6) 50%, transparent 100%); z-index: 1; }
+    .product-hero-content { position: relative; z-index: 2; max-width: 600px; color: #fff; }
     .product-hero-content .label { font-size: 0.9rem; font-weight: 700; color: var(--tech-green); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem; }
     .product-hero-content h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 1.5rem; }
     .product-hero-content p { font-size: 1.1rem; color: #CBD5E1; margin-bottom: 2.5rem; line-height: 1.8; }
     .hero-btns { display: flex; gap: 1rem; }
-    .hero-btns a {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 1rem 2rem; font-weight: 700; font-size: 1rem; border-radius: 4px;
-    }
+    .hero-btns a { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; font-weight: 700; font-size: 1rem; border-radius: 4px; }
     .btn-primary { background: var(--tech-green); color: #000; }
     .btn-primary:hover { background: var(--tech-green-hover); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,255,185,0.2); }
     .btn-outline-white { border: 2px solid #fff; color: #fff; }
     .btn-outline-white:hover { background: #fff; color: #000; }
-
-    /* ===== 【图二排版】下方图文案例区 ===== */
     .case-section { padding: 6rem 0; background: #fff; }
     .case-container { display: flex; gap: 4rem; align-items: flex-start; }
     .case-text { flex: 1.2; font-size: 1.05rem; line-height: 1.9; color: #374151; }
@@ -119,40 +64,20 @@
     .case-text img { max-width: 100%; height: auto; border-radius: 4px; margin: 2rem 0; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
     .case-image { flex: 1; }
     .case-image img { width: 100%; height: auto; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: sticky; top: 120px; }
-
-    /* ===== 页脚 ===== */
     footer { background: var(--dark-bg); color: #9CA3AF; padding: 4rem 0 2rem; font-size: 0.9rem; margin-top: 4rem;}
     .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; } 
     .footer-col h5 { color: #fff; font-size: 1.1rem; margin-bottom: 1rem; }
     .footer-col p, .footer-col a { color: #9CA3AF; line-height: 2; display: block; }
     .footer-col a:hover { color: var(--tech-green); }
     .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
-
-    @media (max-width: 900px) {
-      .header-top { flex-direction: column; gap: 1rem; }
-      .header-bottom .nav-wrapper { flex-direction: column; gap: 1rem; }
-      .header-bottom nav { flex-wrap: wrap; justify-content: center; }
-      .header-bottom nav > a { margin: 0.5rem; }
-      .header-bottom nav > a:first-child { margin-left: 0.5rem; }
-      .product-hero-content h1 { font-size: 2.5rem; }
-      .case-container { flex-direction: column; gap: 2rem; }
-      .case-image img { position: relative; top: 0; }
-      .mega-menu-content { grid-template-columns: 1fr; }
-      .dropdown-menu { position: absolute; top: 100%; width: 100%; } 
-    }
+    @media (max-width: 900px) { .header-top { flex-direction: column; gap: 1rem; } .header-bottom .nav-wrapper { flex-direction: column; gap: 1rem; } .header-bottom nav { flex-wrap: wrap; justify-content: center; } .header-bottom nav > a { margin: 0.5rem; } .header-bottom nav > a:first-child { margin-left: 0.5rem; } .product-hero-content h1 { font-size: 2.5rem; } .case-container { flex-direction: column; gap: 2rem; } .case-image img { position: relative; top: 0; } .mega-menu-content { grid-template-columns: 1fr; } .dropdown-menu { position: absolute; top: 100%; width: 100%; } }
   </style>
 </head>
 <body>
-
-<!-- 导航栏 -->
 <header>
   <div class="header-container header-top">
     <div class="logo">你的品牌名</div>
-    <div class="tools">
-      <a href="#">🌐 全球</a>
-      <a href="#">支持与社区</a>
-      <a href="#">👤 登录</a>
-    </div>
+    <div class="tools"><a href="#">🌐 全球</a><a href="#">支持与社区</a><a href="#">👤 登录</a></div>
   </div>
   <div class="header-bottom">
     <div class="header-container nav-wrapper">
@@ -160,14 +85,10 @@
         <a href="index.html">首页</a>
         <a href="products.html">产品展示</a>
         <a href="advantages.html">生产优势</a>
-        
         <div class="nav-dropdown">
           <a href="javascript:void(0)">客户故事 <span style="font-size:0.8em;">▼</span></a>
-          <div class="dropdown-menu" id="story-dropdown-menu">
-            <!-- 大菜单内容由 JS 渲染 -->
-          </div>
+          <div class="dropdown-menu" id="story-dropdown-menu"></div>
         </div>
-        
         <a href="contact.html">联系我询价</a>
         <a href="en/index.html" style="color: var(--tech-green);">English</a>
       </nav>
@@ -176,7 +97,6 @@
   </div>
 </header>
 
-<!-- 【图一排版】顶部 Hero 产品背景区（由 CMS 驱动） -->
 <div class="product-hero" id="product-hero">
   <div class="product-hero-content">
     <div class="label" id="hero-category">客户案例</div>
@@ -189,21 +109,13 @@
   </div>
 </div>
 
-<!-- 【图二排版】下方图文案例区 -->
 <div class="case-section section-container">
   <div class="case-container">
-    <!-- 左侧：主文章内容（由 CMS 驱动） -->
-    <div class="case-text" id="case-content">
-      正在加载案例内容...
-    </div>
-    <!-- 右侧：主图（由 CMS 驱动） -->
-    <div class="case-image">
-      <img id="case-img" src="" alt="Case Image">
-    </div>
+    <div class="case-text" id="case-content">正在加载案例内容...</div>
+    <div class="case-image"><img id="case-img" src="" alt="Case Image"></div>
   </div>
 </div>
 
-<!-- 页脚 -->
 <footer>
   <div class="footer-inner">
     <div class="footer-grid">
@@ -218,13 +130,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
-  // 加载大菜单分类（复用首页逻辑）
   async function loadNavCategories() {
     try {
       const repo = 'kehu-1/kehu-1-website';
       const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/stories`);
       const files = await res.json();
-      
       const menu = document.getElementById('story-dropdown-menu');
       if (!menu || !Array.isArray(files)) return;
 
@@ -234,10 +144,8 @@
         const text = await rawRes.text();
         const parts = text.split('---');
         const frontmatter = parts[1] || '';
-        
         const categoryMatch = frontmatter.match(/category:\s*(.*)/);
         const titleMatch = frontmatter.match(/title:\s*(.*)/);
-        
         if (categoryMatch) {
           const category = categoryMatch[1].trim();
           const title = titleMatch ? titleMatch[1].trim() : '查看详情'; 
@@ -245,23 +153,15 @@
           groupedData[category].push({ title: title, id: file.name });
         }
       }
-
       menu.innerHTML = '<div class="mega-menu-content"></div>';
       const innerContainer = menu.querySelector('.mega-menu-content');
-
       Object.keys(groupedData).forEach(cat => {
-        const groupHtml = `
-          <div class="category-group">
-            <h4>${cat}</h4>
-            ${groupedData[cat].map(item => `<a href="stories.html?id=${encodeURIComponent(item.id)}">${item.title}</a>`).join('')}
-          </div>
-        `;
+        const groupHtml = `<div class="category-group"><h4>${cat}</h4>${groupedData[cat].map(item => `<a href="stories.html?id=${encodeURIComponent(item.id)}">${item.title}</a>`).join('')}</div>`;
         innerContainer.insertAdjacentHTML('beforeend', groupHtml);
       });
     } catch (e) { console.error('加载大菜单失败:', e); }
   }
 
-  // 核心：加载客户故事数据并渲染页面（由 CMS 驱动）
   async function loadStoryDetail() {
     try {
       const repo = 'kehu-1/kehu-1-website';
@@ -269,41 +169,31 @@
       const files = await res.json();
       
       if (!Array.isArray(files) || files.length === 0) {
-        document.getElementById('hero-title').innerText = '暂无案例';
-        return;
+        document.getElementById('hero-title').innerText = '暂无案例'; return;
       }
-
       files.sort((a, b) => b.name.localeCompare(a.name));
-
       const urlParams = new URLSearchParams(window.location.search);
       const targetId = urlParams.get('id');
-      
-      let targetFile = null;
-      if (targetId) {
-        targetFile = files.find(f => f.name === targetId);
-      }
-      if (!targetFile) {
-        targetFile = files[0]; 
-      }
+      let targetFile = targetId ? files.find(f => f.name === targetId) : files[0];
+      if (!targetFile) targetFile = files[0];
 
       const rawRes = await fetch(targetFile.download_url);
       const text = await rawRes.text();
       
-      // 【核心修复】使用更准确的正则表达式提取 frontmatter 和 正文
+      // 【核心修改】使用更稳妥的 split 方法，兼容所有换行符
+      const parts = text.split('---');
       let frontmatter = '';
       let bodyContent = '';
-      
-      // 匹配开头直到第二个 --- 的部分
-      const match = text.match(/^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/);
-      if (match) {
-        frontmatter = match[1] || '';
-        bodyContent = match[2] || '';
-      } else {
-        // 如果格式不对，尝试兼容旧版
-        const parts = text.split('---');
-        if (parts.length >= 3) {
-          frontmatter = parts[1] || '';
-          bodyContent = parts.slice(2).join('---').trim();
+
+      if (parts.length >= 3) {
+        frontmatter = parts[1];
+        // 把后面所有的 --- 重新拼接回正文，防止正文里包含 --- 被截断
+        bodyContent = parts.slice(2).join('---').trim(); 
+      } else if (parts.length === 2 && text.trim().startsWith('---')) {
+        const endIndex = text.indexOf('---', 3);
+        if (endIndex !== -1) {
+          frontmatter = text.substring(3, endIndex);
+          bodyContent = text.substring(endIndex + 3).trim();
         }
       }
 
@@ -319,24 +209,17 @@
       const productDesc = getVal('product_desc') || '';
       const productImg = getVal('product_img') || 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80';
       
-      // 解析 Markdown
-      let caseContentHtml = bodyContent;
-      try {
-        caseContentHtml = marked.parse(bodyContent);
-      } catch (e) {
-        console.error('Markdown解析失败，使用原始内容', e);
-      }
+      let caseContentHtml = marked.parse(bodyContent);
 
-      // 【防错】如果正文完全为空，显示提示
+      // 【防错】如果正文为空，输出明显的提示
       if (!bodyContent || bodyContent.trim() === '') {
-        caseContentHtml = '<p style="color:#999;">（正文内容为空，请检查 CMS 后台的“案例正文”是否已填写并保存）</p>';
+        caseContentHtml = '<p style="color:#e74c39; font-weight:bold;">⚠️ 正文内容为空。请检查 GitHub 上的 .md 文件，确保 `---` 之后的正文部分不是空白的。</p>';
       }
 
       document.getElementById('product-hero').style.backgroundImage = `url('${productBgImg}')`;
       document.getElementById('hero-category').innerText = category;
       document.getElementById('hero-title').innerText = productTitle;
       document.getElementById('hero-desc').innerText = productDesc;
-
       document.getElementById('case-content').innerHTML = caseContentHtml;
       document.getElementById('case-img').src = productImg;
 
@@ -346,16 +229,11 @@
     }
   }
 
-  // 页面加载完成后执行
   window.addEventListener('load', () => {
     loadNavCategories();
     loadStoryDetail();
-
     const headerElement = document.querySelector('header');
-    if (headerElement) {
-      document.documentElement.style.setProperty('--header-height', headerElement.offsetHeight + 'px');
-    }
-
+    if (headerElement) document.documentElement.style.setProperty('--header-height', headerElement.offsetHeight + 'px');
     const navDropdown = document.querySelector('.nav-dropdown');
     const dropdownMenu = document.querySelector('.dropdown-menu');
     let hoverTimeout = null;
