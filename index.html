@@ -51,40 +51,37 @@
     
     .dropdown-menu {
       display: none;
-      position: fixed; /* 固定定位，脱离父级宽度限制 */
-      top: var(--header-height); /* 由JS计算出的高度 */
+      position: fixed; 
+      top: var(--header-height); 
       left: 0;
-      width: 100vw; /* 全屏宽度 */
-      background: var(--dark-bg); /* 深色背景 */
+      width: 100vw; 
+      background: var(--dark-bg); 
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
       z-index: 1001;
       border-top: 1px solid rgba(255,255,255,0.08);
     }
     
-    /* 使用类名控制显示，而不是纯 hover */
     .dropdown-menu.show { display: block; }
     
-    /* 大菜单内部内容容器 */
     .mega-menu-content {
-      max-width: 1340px; /* 与页面主体对齐 */
-      margin: 0 auto; /* 居中 */
-      padding: 3rem 2rem; /* 宽松的内边距 */
+      max-width: 1340px; 
+      margin: 0 auto; 
+      padding: 3rem 2rem; 
       display: grid;
-      grid-template-columns: repeat(4, 1fr); /* 固定4列，横向排版 */
+      grid-template-columns: repeat(4, 1fr); 
       gap: 2rem 4rem;
     }
     
-    /* 分类组样式 */
     .dropdown-menu .category-group { display: flex; flex-direction: column; }
     .dropdown-menu .category-group h4 { 
       color: #fff; 
       font-size: 1.1rem; 
       font-weight: 700; 
       margin-bottom: 1rem; 
-      border-bottom: 1px solid rgba(255,255,255,0.15); /* 标题下划线 */
+      border-bottom: 1px solid rgba(255,255,255,0.15); 
       padding-bottom: 0.5rem;
       letter-spacing: 0.5px;
-      white-space: nowrap; /* 防止标题换行 */
+      white-space: nowrap; 
     }
     .dropdown-menu .category-group a { 
       color: #CBD5E1; 
@@ -93,11 +90,11 @@
       display: block;
       border-bottom: 1px solid rgba(255,255,255,0.03);
       transition: 0.3s;
-      white-space: nowrap; /* 防止链接换行 */
+      white-space: nowrap; 
     }
     .dropdown-menu .category-group a:hover { 
       color: var(--tech-green); 
-      padding-left: 0.3rem; /* 悬停轻微位移 */
+      padding-left: 0.3rem; 
     }
 
     .header-bottom .search-wrapper { color: #CBD5E1; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin-left: 1rem; }
@@ -271,7 +268,7 @@
       .top-news-inner img { width: 100%; height: 200px; }
       .top-news-inner .btn-outline { width: 100%; }
       .mega-menu-content { grid-template-columns: 1fr; }
-      .dropdown-menu { position: absolute; top: 100%; width: 100%; } /* 手机端回归相对定位 */
+      .dropdown-menu { position: absolute; top: 100%; width: 100%; } 
     }
   </style>
 </head>
@@ -796,7 +793,6 @@
       const menu = document.getElementById('story-dropdown-menu');
       if (!menu || !Array.isArray(files)) return;
 
-      // 使用对象按 category 分组
       const groupedData = {};
       for (let file of files) {
         const rawRes = await fetch(file.download_url);
@@ -811,20 +807,18 @@
           const category = categoryMatch[1].trim();
           const title = titleMatch ? titleMatch[1].trim() : '查看详情'; 
           if (!groupedData[category]) groupedData[category] = [];
-          groupedData[category].push(title);
+          groupedData[category].push({ title: title, id: file.name });
         }
       }
 
-      // 先注入内部容器，限制最大宽度并居中
       menu.innerHTML = '<div class="mega-menu-content"></div>';
       const innerContainer = menu.querySelector('.mega-menu-content');
 
-      // 遍历分组，渲染成大菜单结构
       Object.keys(groupedData).forEach(cat => {
         const groupHtml = `
           <div class="category-group">
             <h4>${cat}</h4>
-            ${groupedData[cat].map(title => `<a href="stories.html?category=${encodeURIComponent(cat)}">${title}</a>`).join('')}
+            ${groupedData[cat].map(item => `<a href="stories.html?id=${encodeURIComponent(item.id)}">${item.title}</a>`).join('')}
           </div>
         `;
         innerContainer.insertAdjacentHTML('beforeend', groupHtml);
@@ -839,50 +833,40 @@
     }
   }
 
-  // 页面加载完成后执行
   window.addEventListener('load', () => {
     initSlider('product-track', 'product-dots');
     initSlider('solution-track', 'solution-dots');
     loadNews();   
     loadSocial(); 
-    loadNavCategories(); // 加载大菜单
+    loadNavCategories(); 
 
-    // 动态计算导航栏高度，确保下拉菜单准确贴合
     const headerElement = document.querySelector('header');
     if (headerElement) {
       document.documentElement.style.setProperty('--header-height', headerElement.offsetHeight + 'px');
     }
 
-    // ==========================================
-    // 【核心】防闪烁：用 JS 控制大菜单显示与隐藏
-    // ==========================================
     const navDropdown = document.querySelector('.nav-dropdown');
     const dropdownMenu = document.querySelector('.dropdown-menu');
     let hoverTimeout = null;
 
     if (navDropdown && dropdownMenu) {
-      // 1. 鼠标移入导航栏“客户故事”
       navDropdown.addEventListener('mouseenter', () => {
-        if (hoverTimeout) clearTimeout(hoverTimeout); // 清除隐藏倒计时
-        dropdownMenu.classList.add('show');          // 显示菜单
+        if (hoverTimeout) clearTimeout(hoverTimeout);
+        dropdownMenu.classList.add('show');
       });
 
-      // 2. 鼠标移出导航栏“客户故事”
       navDropdown.addEventListener('mouseleave', () => {
-        // 延迟 200 毫秒再隐藏，给鼠标留出移动到菜单的时间
         hoverTimeout = setTimeout(() => {
           dropdownMenu.classList.remove('show');
         }, 200); 
       });
 
-      // 3. 鼠标移入大菜单本身（防止鼠标在菜单内滑动时菜单消失）
       dropdownMenu.addEventListener('mouseenter', () => {
-        if (hoverTimeout) clearTimeout(hoverTimeout); // 取消隐藏倒计时
+        if (hoverTimeout) clearTimeout(hoverTimeout);
       });
 
-      // 4. 鼠标离开大菜单
       dropdownMenu.addEventListener('mouseleave', () => {
-        dropdownMenu.classList.remove('show'); // 立刻隐藏
+        dropdownMenu.classList.remove('show');
       });
     }
   });
