@@ -51,7 +51,7 @@
     
     .dropdown-menu {
       display: none;
-      position: fixed; /* 改为固定定位，脱离父级宽度限制 */
+      position: fixed; /* 固定定位，脱离父级宽度限制 */
       top: var(--header-height); /* 由JS计算出的高度 */
       left: 0;
       width: 100vw; /* 全屏宽度 */
@@ -59,11 +59,10 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
       z-index: 1001;
       border-top: 1px solid rgba(255,255,255,0.08);
-      /* 移除原来的 justify-content: center; */
     }
     
-    /* 鼠标悬停时显示 */
-    .nav-dropdown:hover .dropdown-menu { display: block; }
+    /* 使用类名控制显示，而不是纯 hover */
+    .dropdown-menu.show { display: block; }
     
     /* 大菜单内部内容容器 */
     .mega-menu-content {
@@ -840,6 +839,7 @@
     }
   }
 
+  // 页面加载完成后执行
   window.addEventListener('load', () => {
     initSlider('product-track', 'product-dots');
     initSlider('solution-track', 'solution-dots');
@@ -851,6 +851,39 @@
     const headerElement = document.querySelector('header');
     if (headerElement) {
       document.documentElement.style.setProperty('--header-height', headerElement.offsetHeight + 'px');
+    }
+
+    // ==========================================
+    // 【核心】防闪烁：用 JS 控制大菜单显示与隐藏
+    // ==========================================
+    const navDropdown = document.querySelector('.nav-dropdown');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+    let hoverTimeout = null;
+
+    if (navDropdown && dropdownMenu) {
+      // 1. 鼠标移入导航栏“客户故事”
+      navDropdown.addEventListener('mouseenter', () => {
+        if (hoverTimeout) clearTimeout(hoverTimeout); // 清除隐藏倒计时
+        dropdownMenu.classList.add('show');          // 显示菜单
+      });
+
+      // 2. 鼠标移出导航栏“客户故事”
+      navDropdown.addEventListener('mouseleave', () => {
+        // 延迟 200 毫秒再隐藏，给鼠标留出移动到菜单的时间
+        hoverTimeout = setTimeout(() => {
+          dropdownMenu.classList.remove('show');
+        }, 200); 
+      });
+
+      // 3. 鼠标移入大菜单本身（防止鼠标在菜单内滑动时菜单消失）
+      dropdownMenu.addEventListener('mouseenter', () => {
+        if (hoverTimeout) clearTimeout(hoverTimeout); // 取消隐藏倒计时
+      });
+
+      // 4. 鼠标离开大菜单
+      dropdownMenu.addEventListener('mouseleave', () => {
+        dropdownMenu.classList.remove('show'); // 立刻隐藏
+      });
     }
   });
 </script>
