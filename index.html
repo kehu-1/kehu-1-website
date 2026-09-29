@@ -224,7 +224,13 @@
         <a href="index.html" class="active">首页</a>
         <a href="products.html">产品展示</a>
         <a href="advantages.html">生产优势</a>
-        <a href="stories.html">客户故事</a>
+        <!-- 修改客户故事为下拉菜单 -->
+        <div class="nav-dropdown">
+          <a href="stories.html">客户故事 <span style="font-size:0.8em;">▼</span></a>
+          <div class="dropdown-menu" id="story-dropdown-menu">
+            <!-- 分类由JS自动抓取并渲染到这里 -->
+          </div>
+        </div>
         <a href="contact.html">联系我询价</a>
         <a href="en/index.html" style="color: var(--tech-green);">English</a>
       </nav>
