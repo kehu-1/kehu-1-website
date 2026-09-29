@@ -29,7 +29,22 @@ content:
         type: "list"
         fields:
           - { name: "date", label: "日期", type: "string" }
-          - { name: "platform", label: "平台", type: "select", options: ["Facebook", "Instagram", "LinkedIn"] }
+          - { name: "platform", label: "平台", type: "select", options: ["Facebook", "Instagram", "LinkedIn", "TikTok", "YouTube"] }
           - { name: "content", label: "文案", type: "text" }
           - { name: "link", label: "帖子链接", type: "string" }
           - { name: "img", label: "图片链接", type: "string" }
+
+  - name: "stories"
+    label: "客户故事"
+    type: "collection"
+    path: "content/stories"
+    create: true
+    delete: true
+    fields:
+      - { name: "category", label: "分类（大标题）", type: "string" }
+      - { name: "title", label: "故事标题", type: "string" }
+      - { name: "date", label: "日期", type: "date" }
+      - { name: "product_title", label: "产品标题", type: "string" }
+      - { name: "product_desc", label: "产品描述", type: "text" }
+      - { name: "product_img", label: "产品图片链接", type: "string" }
+      - { name: "case_content", label: "案例正文", type: "rich-text", options: { media: { name: "uploads", input: "images/uploads", output: "/images/uploads", categories: [image], extensions: [jpg, jpeg, png, gif, webp, svg], rename: safe } } }
