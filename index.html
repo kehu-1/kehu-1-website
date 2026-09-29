@@ -636,4 +636,215 @@
       const latestFiles = files.slice(0, 6);
       for (let i = 0; i < latestFiles.length; i++) {
         const file = latestFiles[i];
-        const rawRes
+        const rawRes = await fetch(file.download_url);
+        const text = await rawRes.text();
+        const parts = text.split('---');
+        const frontmatter = parts[1] || '';
+        let bodyContent = parts.slice(2).join('---').trim();
+        const titleMatch = frontmatter.match(/title:\s*(.*)/);
+        const dateMatch = frontmatter.match(/date:\s*(.*)/);
+        const title = titleMatch ? titleMatch[1].trim() : '无标题';
+        const date = dateMatch ? dateMatch[1].trim() : '';
+        let htmlBody = marked.parse(bodyContent);
+        const imgRegex = /<img[^>]+src="([^">]+)"/g; let matches; let images = [];
+        while ((matches = imgRegex.exec(htmlBody)) !== null) images.push(matches[1]);
+        if (images.length === 0) images.push('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80');
+        htmlBody = htmlBody.replace(/<img[^>]*>/g, '');
+        const plainText = htmlBody.replace(/<[^>]+>/g, '').trim();
+        const summary = plainText.length > 80 ? plainText.substring(0, 80) + '...' : plainText;
+        newsArticles.push({ title, date, body: htmlBody, images });
+        const cardHtml = `
+          <div class="slider-card" onclick="openNewsModal(${i})">
+            <img src="${images[0]}" alt="${title}">
+            <div class="slider-card-info">
+              <div class="category" style="font-size:0.85rem; font-weight:700; color:var(--tech-green); text-transform:uppercase; margin-bottom:0.5rem; letter-spacing:1px;">${date}</div>
+              <h4>${title}</h4><p>${summary}</p><div class="link">阅读全文 →</div>
+            </div>
+          </div>`;
+        track.insertAdjacentHTML('beforeend', cardHtml);
+        if (i === 0) {
+          latestContainer.innerHTML = `<img src="${images[0]}" alt="${title}"><div class="top-news-text"><h4>${title}</h4><p>${summary}</p></div><button class="btn-outline" onclick="openNewsModal(0)">阅读更多 →</button>`;
+        }
+      }
+      initSlider('news-track', 'news-dots'); updateNewsNavButtons();
+    } catch (e) { 
+      console.error(e); 
+      document.getElementById('news-track').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;padding:2rem;">加载新闻失败，请刷新。</p>'; 
+      document.getElementById('latest-news-container').innerHTML = '<p style="color:#e74c39;text-align:center;width:100%;">加载失败</p>';
+    }
+  }
+
+  let socialPosts = [];
+
+  function getPlatformIcon(platform) {
+    const icons = { 'LinkedIn': 'in', 'Facebook': 'f', 'Instagram': '📷', 'TikTok': '🎵', 'YouTube': '▶' };
+    return icons[platform] || '🔗';
+  }
+
+  async function loadSocial() {
+    try {
+      const res = await fetch('/content/social.json'); 
+      const data = await res.json();
+      socialPosts = data.posts || [];
+      if (socialPosts.length === 0) {
+        document.getElementById('social-track').innerHTML = '<p style="text-align:center;color:#999;width:100%;padding:2rem;">暂无社交媒体动态。</p>'; return;
+      }
+      filterSocial('All'); 
+    } catch (e) {
+      console.error('加载社交媒体失败:', e);
+      document.getElementById('social-track').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;padding:2rem;">加载社交媒体失败，请确保 /content/social.json 存在。</p>';
+    }
+  }
+
+  function filterSocial(platform) {
+    const track = document.getElementById('social-track');
+    const tabs = document.querySelectorAll('.social-tab');
+    tabs.forEach(tab => tab.classList.remove('active'));
+    if (platform === 'Facebook') tabs[1].classList.add('active');
+    else if (platform === 'Instagram') tabs[2].classList.add('active');
+    else if (platform === 'LinkedIn') tabs[3].classList.add('active');
+    else if (platform === 'TikTok') tabs[4].classList.add('active');
+    else if (platform === 'YouTube') tabs[5].classList.add('active');
+    else tabs[0].classList.add('active');
+
+    let filteredPosts = socialPosts;
+    if (platform !== 'All') {
+      filteredPosts = socialPosts.filter(post => post.platform === platform);
+    }
+    filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    track.innerHTML = '';
+    if (filteredPosts.length === 0) {
+      track.innerHTML = '<p style="text-align:center;color:#999;width:100%;padding:2rem;">暂无该平台内容。</p>';
+      document.getElementById('social-dots').innerHTML = ''; return;
+    }
+    filteredPosts.forEach((post, index) => {
+      const isVideo = post.platform === 'TikTok' || post.platform === 'YouTube';
+      const cardHtml = `
+        <div class="social-card-b2b" onclick="openSocialModal('${post.title || post.date}', '${post.img}', '${post.content.replace(/'/g, "\\'")}', '${post.link}', '${post.platform}')">
+          <div class="social-card-header">
+            <span>${post.date}</span>
+            <span class="platform-icon">${getPlatformIcon(post.platform)}</span>
+          </div>
+          <div class="social-card-text">${post.content}</div>
+          <div class="social-card-img-wrapper">
+            <img src="${post.img}" alt="Social Post">
+            ${isVideo ? '<div class="social-card-play-btn">▶</div>' : ''}
+          </div>
+        </div>
+      `;
+      track.insertAdjacentHTML('beforeend', cardHtml);
+    });
+    initSlider('social-track', 'social-dots');
+  }
+
+  function openNewsModal(index) {
+    const article = newsArticles[index]; if (!article) return;
+    currentNewsIndex = index; currentImageIndex = 0;
+    document.getElementById('news-modal-date').innerText = article.date;
+    document.getElementById('news-modal-title').innerText = article.title;
+    document.getElementById('news-modal-body').innerHTML = article.body;
+    updateImageDisplay();
+    document.getElementById('news-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function updateImageDisplay() {
+    const article = newsArticles[currentNewsIndex];
+    document.getElementById('news-modal-img').src = article.images[currentImageIndex];
+    document.getElementById('img-prev-btn').style.display = article.images.length > 1 ? 'flex' : 'none';
+    document.getElementById('img-next-btn').style.display = article.images.length > 1 ? 'flex' : 'none';
+    const indicators = document.getElementById('img-indicators'); indicators.innerHTML = '';
+    if (article.images.length > 1) {
+      article.images.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.className = 'img-dot' + (i === currentImageIndex ? ' active' : '');
+        dot.onclick = () => { currentImageIndex = i; updateImageDisplay(); };
+        indicators.appendChild(dot);
+      });
+    }
+  }
+
+  function prevImage() { const a = newsArticles[currentNewsIndex]; if (a.images.length <= 1) return; currentImageIndex = (currentImageIndex - 1 + a.images.length) % a.images.length; updateImageDisplay(); }
+  function nextImage() { const a = newsArticles[currentNewsIndex]; if (a.images.length <= 1) return; currentImageIndex = (currentImageIndex + 1) % a.images.length; updateImageDisplay(); }
+  function prevNews() { currentNewsIndex = (currentNewsIndex - 1 + newsArticles.length) % newsArticles.length; openNewsModal(currentNewsIndex); }
+  function nextNews() { currentNewsIndex = (currentNewsIndex + 1) % newsArticles.length; openNewsModal(currentNewsIndex); }
+  function updateNewsNavButtons() { const p = document.getElementById('news-prev-btn'), n = document.getElementById('news-next-btn'); p.style.display = newsArticles.length > 1 ? 'flex' : 'none'; n.style.display = newsArticles.length > 1 ? 'flex' : 'none'; }
+  function closeNewsModal() { document.getElementById('news-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+  function openSocialModal(date, img, content, link, platform) {
+    document.getElementById('social-modal-img').src = img;
+    document.getElementById('social-modal-date').innerText = date;
+    document.getElementById('social-modal-platform').innerText = getPlatformIcon(platform) + ' ' + platform;
+    document.getElementById('social-modal-title').innerText = '社交媒体帖文';
+    document.getElementById('social-modal-body').innerText = content;
+    document.getElementById('social-modal-link').href = link;
+    document.getElementById('social-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSocialModal() { document.getElementById('social-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+  // ==========================================
+  // 【核心】动态加载客户故事大菜单 (Mega Menu)
+  // ==========================================
+  async function loadNavCategories() {
+    try {
+      const repo = 'kehu-1/kehu-1-website';
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/stories`);
+      const files = await res.json();
+      
+      const menu = document.getElementById('story-dropdown-menu');
+      if (!menu || !Array.isArray(files)) return;
+
+      // 使用对象按 category 分组
+      const groupedData = {};
+      for (let file of files) {
+        const rawRes = await fetch(file.download_url);
+        const text = await rawRes.text();
+        const parts = text.split('---');
+        const frontmatter = parts[1] || '';
+        
+        const categoryMatch = frontmatter.match(/category:\s*(.*)/);
+        const titleMatch = frontmatter.match(/title:\s*(.*)/);
+        
+        if (categoryMatch) {
+          const category = categoryMatch[1].trim();
+          const title = titleMatch ? titleMatch[1].trim() : '查看详情'; 
+          if (!groupedData[category]) groupedData[category] = [];
+          groupedData[category].push(title);
+        }
+      }
+
+      // 先注入内部容器，限制最大宽度并居中
+      menu.innerHTML = '<div class="mega-menu-content"></div>';
+      const innerContainer = menu.querySelector('.mega-menu-content');
+
+      // 遍历分组，渲染成大菜单结构
+      Object.keys(groupedData).forEach(cat => {
+        const groupHtml = `
+          <div class="category-group">
+            <h4>${cat}</h4>
+            ${groupedData[cat].map(title => `<a href="stories.html?category=${encodeURIComponent(cat)}">${title}</a>`).join('')}
+          </div>
+        `;
+        innerContainer.insertAdjacentHTML('beforeend', groupHtml);
+      });
+
+      if (Object.keys(groupedData).length === 0) {
+        innerContainer.innerHTML = '<div style="grid-column: 1/-1; text-align:center; color:#999; padding:2rem;">暂无客户故事，请在 Pages CMS 后台添加。</div>';
+      }
+
+    } catch (e) {
+      console.error('加载下拉菜单分类失败:', e);
+    }
+  }
+
+  window.addEventListener('load', () => {
+    initSlider('product-track', 'product-dots');
+    initSlider('solution-track', 'solution-dots');
+    loadNews();   
+    loadSocial(); 
+    loadNavCategories(); // 加载大菜单
+  });
+</script>
+</body>
+</html>
