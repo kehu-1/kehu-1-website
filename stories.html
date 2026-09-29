@@ -189,7 +189,7 @@
   </div>
 </div>
 
-<!-- 【图二排版】下方图文案例区（已删除返回按钮） -->
+<!-- 【图二排版】下方图文案例区 -->
 <div class="case-section section-container">
   <div class="case-container">
     <!-- 左侧：主文章内容（由 CMS 驱动） -->
@@ -289,20 +289,21 @@
       const rawRes = await fetch(targetFile.download_url);
       const text = await rawRes.text();
       
-      // 强化：兼容多种 Markdown 头部格式
+      // 【核心修复】使用更准确的正则表达式提取 frontmatter 和 正文
       let frontmatter = '';
-      let bodyContent = text;
+      let bodyContent = '';
       
-      const parts = text.split('---');
-      if (parts.length >= 3) {
-        frontmatter = parts[1] || '';
-        bodyContent = parts.slice(2).join('---').trim();
-      } else if (text.trim().startsWith('---')) {
-        // 兼容只有一对 --- 的情况
-        const endIndex = text.indexOf('---', 3);
-        if (endIndex !== -1) {
-          frontmatter = text.substring(3, endIndex);
-          bodyContent = text.substring(endIndex + 3).trim();
+      // 匹配开头直到第二个 --- 的部分
+      const match = text.match(/^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/);
+      if (match) {
+        frontmatter = match[1] || '';
+        bodyContent = match[2] || '';
+      } else {
+        // 如果格式不对，尝试兼容旧版
+        const parts = text.split('---');
+        if (parts.length >= 3) {
+          frontmatter = parts[1] || '';
+          bodyContent = parts.slice(2).join('---').trim();
         }
       }
 
@@ -318,12 +319,17 @@
       const productDesc = getVal('product_desc') || '';
       const productImg = getVal('product_img') || 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80';
       
-      // 尝试解析 Markdown，如果报错就直接用原始文本
+      // 解析 Markdown
       let caseContentHtml = bodyContent;
       try {
         caseContentHtml = marked.parse(bodyContent);
       } catch (e) {
         console.error('Markdown解析失败，使用原始内容', e);
+      }
+
+      // 【防错】如果正文完全为空，显示提示
+      if (!bodyContent || bodyContent.trim() === '') {
+        caseContentHtml = '<p style="color:#999;">（正文内容为空，请检查 CMS 后台的“案例正文”是否已填写并保存）</p>';
       }
 
       document.getElementById('product-hero').style.backgroundImage = `url('${productBgImg}')`;
