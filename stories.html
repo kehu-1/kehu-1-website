@@ -87,7 +87,7 @@
       display: flex;
       align-items: center;
       padding: 0 5%;
-      background-color: var(--dark-bg); /* 图片加载失败时的兜底颜色 */
+      background-color: var(--dark-bg);
     }
     .product-hero::before {
       content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -119,11 +119,6 @@
     .case-text img { max-width: 100%; height: auto; border-radius: 4px; margin: 2rem 0; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
     .case-image { flex: 1; }
     .case-image img { width: 100%; height: auto; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: sticky; top: 120px; }
-
-    /* ===== 返回按钮 ===== */
-    .back-btn-wrap { padding: 2rem 0 0; }
-    .back-btn { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700; color: var(--text-main); cursor: pointer; transition: 0.3s; }
-    .back-btn:hover { color: var(--tech-green); }
 
     /* ===== 页脚 ===== */
     footer { background: var(--dark-bg); color: #9CA3AF; padding: 4rem 0 2rem; font-size: 0.9rem; margin-top: 4rem;}
@@ -194,13 +189,9 @@
   </div>
 </div>
 
-<!-- 【图二排版】下方图文案例区 -->
+<!-- 【图二排版】下方图文案例区（已删除返回按钮） -->
 <div class="case-section section-container">
-  <div class="back-btn-wrap">
-    <div class="back-btn" onclick="window.location.href='stories.html'">← 返回客户故事</div>
-  </div>
-  
-  <div class="case-container" style="margin-top: 2rem;">
+  <div class="case-container">
     <!-- 左侧：主文章内容（由 CMS 驱动） -->
     <div class="case-text" id="case-content">
       正在加载案例内容...
@@ -282,10 +273,8 @@
         return;
       }
 
-      // 按日期倒序排序（文件名包含日期）
       files.sort((a, b) => b.name.localeCompare(a.name));
 
-      // 获取 URL 中的 ID 参数
       const urlParams = new URLSearchParams(window.location.search);
       const targetId = urlParams.get('id');
       
@@ -293,17 +282,29 @@
       if (targetId) {
         targetFile = files.find(f => f.name === targetId);
       }
-      // 如果没有传 id 或者找不到，默认展示最新的一篇
       if (!targetFile) {
         targetFile = files[0]; 
       }
 
-      // 读取指定文件的内容
       const rawRes = await fetch(targetFile.download_url);
       const text = await rawRes.text();
+      
+      // 强化：兼容多种 Markdown 头部格式
+      let frontmatter = '';
+      let bodyContent = text;
+      
       const parts = text.split('---');
-      const frontmatter = parts[1] || '';
-      const bodyContent = parts.slice(2).join('---').trim();
+      if (parts.length >= 3) {
+        frontmatter = parts[1] || '';
+        bodyContent = parts.slice(2).join('---').trim();
+      } else if (text.trim().startsWith('---')) {
+        // 兼容只有一对 --- 的情况
+        const endIndex = text.indexOf('---', 3);
+        if (endIndex !== -1) {
+          frontmatter = text.substring(3, endIndex);
+          bodyContent = text.substring(endIndex + 3).trim();
+        }
+      }
 
       const getVal = (key) => {
         const match = frontmatter.match(new RegExp(`${key}:\\s*(.*)`));
@@ -312,22 +313,24 @@
 
       const category = getVal('category');
       const title = getVal('title');
-      const date = getVal('date');
       const productBgImg = getVal('product_bg_img') || 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80';
       const productTitle = getVal('product_title') || title; 
       const productDesc = getVal('product_desc') || '';
       const productImg = getVal('product_img') || 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80';
       
-      // 将 Markdown 正文转为 HTML
-      const caseContentHtml = marked.parse(bodyContent);
+      // 尝试解析 Markdown，如果报错就直接用原始文本
+      let caseContentHtml = bodyContent;
+      try {
+        caseContentHtml = marked.parse(bodyContent);
+      } catch (e) {
+        console.error('Markdown解析失败，使用原始内容', e);
+      }
 
-      // 渲染图一：顶部 Hero 区
       document.getElementById('product-hero').style.backgroundImage = `url('${productBgImg}')`;
       document.getElementById('hero-category').innerText = category;
       document.getElementById('hero-title').innerText = productTitle;
       document.getElementById('hero-desc').innerText = productDesc;
 
-      // 渲染图二：下方图文案例区
       document.getElementById('case-content').innerHTML = caseContentHtml;
       document.getElementById('case-img').src = productImg;
 
@@ -342,13 +345,11 @@
     loadNavCategories();
     loadStoryDetail();
 
-    // 动态计算导航栏高度
     const headerElement = document.querySelector('header');
     if (headerElement) {
       document.documentElement.style.setProperty('--header-height', headerElement.offsetHeight + 'px');
     }
 
-    // 防闪烁：用 JS 控制大菜单显示与隐藏
     const navDropdown = document.querySelector('.nav-dropdown');
     const dropdownMenu = document.querySelector('.dropdown-menu');
     let hoverTimeout = null;
