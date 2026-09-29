@@ -35,7 +35,7 @@
     .header-top .tools a { color: #CBD5E1; display: flex; align-items: center; gap: 0.3rem; }
     .header-top .tools a:hover { color: var(--tech-green); }
     
-    /* 导航栏底部容器，作为 Mega Menu 的定位基准 */
+    /* 导航栏底部容器，作为 Mega Menu 的定位锚点 */
     .header-bottom { border-top: 1px solid rgba(255,255,255,0.05); position: relative; }
     .header-bottom .nav-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
     
@@ -54,7 +54,7 @@
       position: absolute;
       top: 100%;
       left: 0;
-      width: 100%; /* 相对于父级 header 全宽 */
+      width: 100vw; /* 关键：全屏宽度 */
       background: var(--dark-bg); /* 深色背景 */
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
       z-index: 1001;
@@ -62,7 +62,7 @@
       justify-content: center; /* 内部内容居中 */
     }
     
-    /* 鼠标悬停时显示，并以 flex 方式布局内部内容 */
+    /* 鼠标悬停时显示，并用 flex 居中内部内容 */
     .nav-dropdown:hover .dropdown-menu { display: flex; }
     
     /* 大菜单内部内容容器 */
@@ -71,7 +71,7 @@
       width: 100%;
       padding: 3rem 2rem; /* 宽松的内边距 */
       display: grid;
-      grid-template-columns: repeat(4, 1fr); /* 固定4列，复刻西门子 */
+      grid-template-columns: repeat(4, 1fr); /* 关键：固定4列，横向排版 */
       gap: 2rem 4rem;
     }
     
@@ -85,6 +85,7 @@
       border-bottom: 1px solid rgba(255,255,255,0.15); /* 标题下划线 */
       padding-bottom: 0.5rem;
       letter-spacing: 0.5px;
+      white-space: nowrap; /* 防止标题换行 */
     }
     .dropdown-menu .category-group a { 
       color: #CBD5E1; 
@@ -93,6 +94,7 @@
       display: block;
       border-bottom: 1px solid rgba(255,255,255,0.03);
       transition: 0.3s;
+      white-space: nowrap; /* 防止链接换行 */
     }
     .dropdown-menu .category-group a:hover { 
       color: var(--tech-green); 
