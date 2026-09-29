@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>客户故事 - 你的品牌名</title>
+  <title>客户故事详情 - 你的品牌名</title>
   <style>
     /* ===== 基础字体与全局变量 ===== */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap');
@@ -15,12 +15,12 @@
       --text-main: #111827;        
       --text-muted: #6B7280;       
       --border-dark-green: #059669; 
+      --header-height: 122px; 
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', -apple-system, "Segoe UI", sans-serif; color: var(--text-main); line-height: 1.6; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* ===== 统一对齐容器（宽度 1340px） ===== */
     .header-container, .section-container, .footer-inner {
       max-width: 1340px;
       margin: 0 auto;    
@@ -28,13 +28,14 @@
       width: 100%;
     }
 
-    /* ===== 导航栏（与首页完全一致，包含下拉菜单） ===== */
+    /* ===== 导航栏 ===== */
     header { position: fixed; top: 0; width: 100%; background: var(--dark-bg); z-index: 1000; }
     .header-top { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; }
     .header-top .logo { font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
     .header-top .tools { display: flex; align-items: center; gap: 1rem; color: #fff; font-size: 0.9rem; }
     .header-top .tools a { color: #CBD5E1; display: flex; align-items: center; gap: 0.3rem; }
     .header-top .tools a:hover { color: var(--tech-green); }
+    
     .header-bottom { border-top: 1px solid rgba(255,255,255,0.05); }
     .header-bottom .nav-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
     
@@ -46,94 +47,83 @@
     .nav-dropdown { position: relative; display: inline-block; }
     .nav-dropdown > a { color: #CBD5E1; font-size: 1rem; font-weight: 500; padding-bottom: 0.5rem; display: block; cursor: pointer; }
     .nav-dropdown > a:hover { color: var(--tech-green); }
+    
     .dropdown-menu {
       display: none;
-      position: absolute;
-      top: 100%;
+      position: fixed; 
+      top: var(--header-height); 
       left: 0;
-      background: var(--dark-bg);
-      min-width: 220px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      border-radius: 4px;
-      padding: 0.5rem 0;
+      width: 100vw; 
+      background: var(--dark-bg); 
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
       z-index: 1001;
-      border: 1px solid rgba(255,255,255,0.08);
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
-    .dropdown-menu a {
-      display: block;
-      padding: 0.8rem 1.5rem;
-      color: #CBD5E1;
-      font-size: 0.95rem;
-      margin: 0 !important;
-      transition: 0.3s;
+    .dropdown-menu.show { display: block; }
+    
+    .mega-menu-content {
+      max-width: 1340px; 
+      margin: 0 auto; 
+      padding: 3rem 2rem; 
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); 
+      gap: 2rem 4rem;
     }
-    .dropdown-menu a:hover {
-      background: rgba(255,255,255,0.05);
-      color: var(--tech-green);
-    }
-    .nav-dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-menu .category-group { display: flex; flex-direction: column; }
+    .dropdown-menu .category-group h4 { color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 0.5rem; letter-spacing: 0.5px; white-space: nowrap; }
+    .dropdown-menu .category-group a { color: #CBD5E1; font-size: 0.95rem; padding: 0.6rem 0; display: block; border-bottom: 1px solid rgba(255,255,255,0.03); transition: 0.3s; white-space: nowrap; }
+    .dropdown-menu .category-group a:hover { color: var(--tech-green); padding-left: 0.3rem; }
 
     .header-bottom .search-wrapper { color: #CBD5E1; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin-left: 1rem; }
     .header-bottom .search-wrapper:hover { color: var(--tech-green); }
 
-    /* ===== 主内容区 ===== */
-    .stories-section { padding: 8rem 0 4rem; background: #fff; }
-    
-    .stories-hero { text-align: center; margin-bottom: 4rem; }
-    .stories-hero h1 { font-size: 3rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem; }
-    .stories-hero p { font-size: 1.1rem; color: var(--text-muted); }
-
-    /* 故事卡片网格 */
-    .stories-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
+    /* ===== 【图一排版】顶部 Hero 产品区 ===== */
+    .product-hero {
+      position: relative;
+      min-height: 75vh;
+      margin-top: 120px;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      padding: 0 5%;
+      background-color: var(--dark-bg); /* 图片加载失败时的兜底颜色 */
     }
-    .story-card {
-      background: #fff;
-      border: 1px solid #E5E7EB;
-      border-radius: 4px;
-      overflow: hidden;
-      transition: 0.3s;
-      cursor: pointer;
+    .product-hero::before {
+      content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to right, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.6) 50%, transparent 100%);
+      z-index: 1;
     }
-    .story-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-    .story-card-img { width: 100%; height: 220px; object-fit: cover; }
-    .story-card-body { padding: 2rem; }
-    .story-card-body .category-tag { font-size: 0.85rem; font-weight: 700; color: var(--tech-green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
-    .story-card-body h3 { font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 1rem; line-height: 1.4; }
-    .story-card-body .date { font-size: 0.9rem; color: var(--text-muted); }
-
-    /* ===== 故事详情 ===== */
-    .story-detail-page { display: none; padding: 8rem 0 4rem; background: #fff; }
-    .story-detail-header { text-align: center; margin-bottom: 4rem; }
-    .story-detail-header h2 { font-size: 2.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem; }
-    .story-detail-header p { color: var(--text-muted); font-size: 1.1rem; }
-    
-    .product-block { display: flex; align-items: center; gap: 4rem; margin-bottom: 5rem; background: #F8FAFC; padding: 3rem; border-radius: 4px; }
-    .product-block .product-img { flex: 1; height: 350px; object-fit: cover; border-radius: 4px; }
-    .product-block .product-info { flex: 1; }
-    .product-block .product-info h3 { font-size: 2rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem; }
-    .product-block .product-info p { font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; }
-
-    .case-block { max-width: 900px; margin: 0 auto; }
-    .case-block .case-content { font-size: 1.1rem; line-height: 2; color: #374151; }
-    .case-block .case-content img { max-width: 100%; height: auto; border-radius: 4px; margin: 2rem 0; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
-    .case-block .case-content h4 { font-size: 1.5rem; font-weight: 700; color: var(--text-main); margin: 2rem 0 1rem; }
-    .case-block .case-content p { margin-bottom: 1.5rem; }
-    
-    .back-btn {
-      display: inline-block;
-      padding: 0.8rem 2rem;
-      border: 2px solid var(--text-main);
-      color: var(--text-main);
-      font-weight: 700;
-      margin-bottom: 3rem;
-      cursor: pointer;
-      transition: 0.3s;
-      font-size: 0.95rem;
+    .product-hero-content {
+      position: relative; z-index: 2; max-width: 600px; color: #fff;
     }
-    .back-btn:hover { background: var(--text-main); color: var(--tech-green); }
+    .product-hero-content .label { font-size: 0.9rem; font-weight: 700; color: var(--tech-green); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem; }
+    .product-hero-content h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 1.5rem; }
+    .product-hero-content p { font-size: 1.1rem; color: #CBD5E1; margin-bottom: 2.5rem; line-height: 1.8; }
+    .hero-btns { display: flex; gap: 1rem; }
+    .hero-btns a {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 1rem 2rem; font-weight: 700; font-size: 1rem; border-radius: 4px;
+    }
+    .btn-primary { background: var(--tech-green); color: #000; }
+    .btn-primary:hover { background: var(--tech-green-hover); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,255,185,0.2); }
+    .btn-outline-white { border: 2px solid #fff; color: #fff; }
+    .btn-outline-white:hover { background: #fff; color: #000; }
+
+    /* ===== 【图二排版】下方图文案例区 ===== */
+    .case-section { padding: 6rem 0; background: #fff; }
+    .case-container { display: flex; gap: 4rem; align-items: flex-start; }
+    .case-text { flex: 1.2; font-size: 1.05rem; line-height: 1.9; color: #374151; }
+    .case-text h4 { font-size: 1.5rem; font-weight: 700; color: var(--text-main); margin: 2rem 0 1rem; }
+    .case-text p { margin-bottom: 1.5rem; }
+    .case-text img { max-width: 100%; height: auto; border-radius: 4px; margin: 2rem 0; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+    .case-image { flex: 1; }
+    .case-image img { width: 100%; height: auto; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: sticky; top: 120px; }
+
+    /* ===== 返回按钮 ===== */
+    .back-btn-wrap { padding: 2rem 0 0; }
+    .back-btn { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700; color: var(--text-main); cursor: pointer; transition: 0.3s; }
+    .back-btn:hover { color: var(--tech-green); }
 
     /* ===== 页脚 ===== */
     footer { background: var(--dark-bg); color: #9CA3AF; padding: 4rem 0 2rem; font-size: 0.9rem; margin-top: 4rem;}
@@ -149,17 +139,17 @@
       .header-bottom nav { flex-wrap: wrap; justify-content: center; }
       .header-bottom nav > a { margin: 0.5rem; }
       .header-bottom nav > a:first-child { margin-left: 0.5rem; }
-      .stories-hero h1 { font-size: 2.5rem; }
-      .stories-grid { grid-template-columns: 1fr; }
-      .product-block { flex-direction: column; gap: 2rem; padding: 1.5rem; }
-      .product-block .product-img { width: 100%; height: 250px; }
-      .footer-grid { grid-template-columns: 1fr; }
+      .product-hero-content h1 { font-size: 2.5rem; }
+      .case-container { flex-direction: column; gap: 2rem; }
+      .case-image img { position: relative; top: 0; }
+      .mega-menu-content { grid-template-columns: 1fr; }
+      .dropdown-menu { position: absolute; top: 100%; width: 100%; } 
     }
   </style>
 </head>
 <body>
 
-<!-- 导航栏（包含客户故事下拉菜单） -->
+<!-- 导航栏 -->
 <header>
   <div class="header-container header-top">
     <div class="logo">你的品牌名</div>
@@ -175,12 +165,14 @@
         <a href="index.html">首页</a>
         <a href="products.html">产品展示</a>
         <a href="advantages.html">生产优势</a>
+        
         <div class="nav-dropdown">
-          <a href="stories.html" class="active">客户故事 <span style="font-size:0.8em;">▼</span></a>
+          <a href="javascript:void(0)">客户故事 <span style="font-size:0.8em;">▼</span></a>
           <div class="dropdown-menu" id="story-dropdown-menu">
-            <!-- 分类由 JS 自动生成 -->
+            <!-- 大菜单内容由 JS 渲染 -->
           </div>
         </div>
+        
         <a href="contact.html">联系我询价</a>
         <a href="en/index.html" style="color: var(--tech-green);">English</a>
       </nav>
@@ -189,36 +181,33 @@
   </div>
 </header>
 
-<!-- 主视图：故事列表 -->
-<div id="stories-list-view" class="stories-section">
-  <div class="section-container">
-    <div class="stories-hero">
-      <h1 id="list-title">全部客户故事</h1>
-      <p>探索我们如何帮助不同行业的客户实现数字化转型</p>
-    </div>
-    <div id="stories-grid" class="stories-grid">
-      <!-- 故事卡片由 JS 动态生成 -->
+<!-- 【图一排版】顶部 Hero 产品背景区（由 CMS 驱动） -->
+<div class="product-hero" id="product-hero">
+  <div class="product-hero-content">
+    <div class="label" id="hero-category">客户案例</div>
+    <h1 id="hero-title">加载中...</h1>
+    <p id="hero-desc"></p>
+    <div class="hero-btns">
+      <a href="products.html" class="btn-primary">了解产品更多 →</a>
+      <a href="contact.html" class="btn-outline-white">联系我们 →</a>
     </div>
   </div>
 </div>
 
-<!-- 详情视图：单独界面（上方产品，下方图文案例） -->
-<div id="story-detail-view" class="story-detail-page">
-  <div class="section-container">
-    <div class="back-btn" onclick="showListView()">← 返回故事列表</div>
-    <div class="story-detail-header">
-      <h2 id="detail-title"></h2>
-      <p id="detail-date"></p>
+<!-- 【图二排版】下方图文案例区 -->
+<div class="case-section section-container">
+  <div class="back-btn-wrap">
+    <div class="back-btn" onclick="window.location.href='stories.html'">← 返回客户故事</div>
+  </div>
+  
+  <div class="case-container" style="margin-top: 2rem;">
+    <!-- 左侧：主文章内容（由 CMS 驱动） -->
+    <div class="case-text" id="case-content">
+      正在加载案例内容...
     </div>
-    <div class="product-block">
-      <img id="detail-product-img" class="product-img" src="" alt="Product Image">
-      <div class="product-info">
-        <h3 id="detail-product-title"></h3>
-        <p id="detail-product-desc"></p>
-      </div>
-    </div>
-    <div class="case-block">
-      <div id="detail-case-content" class="case-content"></div>
+    <!-- 右侧：主图（由 CMS 驱动） -->
+    <div class="case-image">
+      <img id="case-img" src="" alt="Case Image">
     </div>
   </div>
 </div>
@@ -238,150 +227,138 @@
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
-  let allStories = [];
-
-  // 1. 加载 CMS 中的所有故事数据
-  async function loadStories() {
+  // 加载大菜单分类（复用首页逻辑）
+  async function loadNavCategories() {
     try {
       const repo = 'kehu-1/kehu-1-website';
       const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/stories`);
       const files = await res.json();
       
-      if (!Array.isArray(files)) {
-        document.getElementById('stories-grid').innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#999;">暂无客户故事，请在 Pages CMS 后台添加。</p>';
-        return;
-      }
+      const menu = document.getElementById('story-dropdown-menu');
+      if (!menu || !Array.isArray(files)) return;
 
-      allStories = [];
+      const groupedData = {};
       for (let file of files) {
         const rawRes = await fetch(file.download_url);
         const text = await rawRes.text();
         const parts = text.split('---');
         const frontmatter = parts[1] || '';
-        const bodyContent = parts.slice(2).join('---').trim();
-
+        
         const categoryMatch = frontmatter.match(/category:\s*(.*)/);
         const titleMatch = frontmatter.match(/title:\s*(.*)/);
-        const dateMatch = frontmatter.match(/date:\s*(.*)/);
-        const productTitleMatch = frontmatter.match(/product_title:\s*(.*)/);
-        const productDescMatch = frontmatter.match(/product_desc:\s*(.*)/);
-        const productImgMatch = frontmatter.match(/product_img:\s*(.*)/);
-
-        allStories.push({
-          category: categoryMatch ? categoryMatch[1].trim() : '未分类',
-          title: titleMatch ? titleMatch[1].trim() : '无标题',
-          date: dateMatch ? dateMatch[1].trim() : '',
-          productTitle: productTitleMatch ? productTitleMatch[1].trim() : '',
-          productDesc: productDescMatch ? productDescMatch[1].trim() : '',
-          productImg: productImgMatch ? productImgMatch[1].trim() : 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80',
-          caseContent: marked.parse(bodyContent) // 将 Markdown 转为 HTML
-        });
+        
+        if (categoryMatch) {
+          const category = categoryMatch[1].trim();
+          const title = titleMatch ? titleMatch[1].trim() : '查看详情'; 
+          if (!groupedData[category]) groupedData[category] = [];
+          groupedData[category].push({ title: title, id: file.name });
+        }
       }
 
-      // 按日期倒序排序
-      allStories.sort((a, b) => new Date(b.date) - new Date(a.date));
+      menu.innerHTML = '<div class="mega-menu-content"></div>';
+      const innerContainer = menu.querySelector('.mega-menu-content');
 
-      // 2. 从 URL 获取分类参数，并渲染页面
-      const urlParams = new URLSearchParams(window.location.search);
-      const selectedCategory = urlParams.get('category');
-
-      if (selectedCategory) {
-        document.getElementById('list-title').innerText = selectedCategory;
-        const filteredStories = allStories.filter(s => s.category === selectedCategory);
-        renderStories(filteredStories);
-      } else {
-        document.getElementById('list-title').innerText = '全部客户故事';
-        renderStories(allStories);
-      }
-
-      // 3. 同时加载导航栏的下拉菜单（分类）
-      loadNavCategories();
-
-    } catch (e) {
-      console.error('加载故事失败:', e);
-      document.getElementById('stories-grid').innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#e74c39;">加载故事失败，请刷新重试。</p>';
-    }
+      Object.keys(groupedData).forEach(cat => {
+        const groupHtml = `
+          <div class="category-group">
+            <h4>${cat}</h4>
+            ${groupedData[cat].map(item => `<a href="stories.html?id=${encodeURIComponent(item.id)}">${item.title}</a>`).join('')}
+          </div>
+        `;
+        innerContainer.insertAdjacentHTML('beforeend', groupHtml);
+      });
+    } catch (e) { console.error('加载大菜单失败:', e); }
   }
 
-  // 4. 渲染故事卡片
-  function renderStories(stories) {
-    const grid = document.getElementById('stories-grid');
-    grid.innerHTML = '';
-    
-    if (stories.length === 0) {
-      grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#999;">该分类下暂无故事。</p>';
-      return;
-    }
-
-    stories.forEach((story) => {
-      const card = document.createElement('div');
-      card.className = 'story-card';
-      card.onclick = () => showDetailView(story);
-      card.innerHTML = `
-        <img class="story-card-img" src="${story.productImg}" alt="${story.title}">
-        <div class="story-card-body">
-          <div class="category-tag">${story.category}</div>
-          <h3>${story.title}</h3>
-          <div class="date">${story.date}</div>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
-  }
-
-  // 5. 显示详情视图
-  function showDetailView(story) {
-    document.getElementById('stories-list-view').style.display = 'none';
-    document.getElementById('story-detail-view').style.display = 'block';
-    
-    document.getElementById('detail-title').innerText = story.title;
-    document.getElementById('detail-date').innerText = story.date;
-    
-    document.getElementById('detail-product-title').innerText = story.productTitle;
-    document.getElementById('detail-product-desc').innerText = story.productDesc;
-    document.getElementById('detail-product-img').src = story.productImg;
-    
-    document.getElementById('detail-case-content').innerHTML = story.caseContent;
-    
-    window.scrollTo(0, 0); // 滚动到顶部
-  }
-
-  // 6. 返回列表视图
-  function showListView() {
-    document.getElementById('stories-list-view').style.display = 'block';
-    document.getElementById('story-detail-view').style.display = 'none';
-    window.scrollTo(0, 0);
-  }
-
-  // 7. 动态加载客户故事分类到导航栏下拉菜单
-  async function loadNavCategories() {
+  // 核心：加载客户故事数据并渲染页面（由 CMS 驱动）
+  async function loadStoryDetail() {
     try {
-      const menu = document.getElementById('story-dropdown-menu');
-      if (!menu) return;
-
-      const categories = new Set();
-      allStories.forEach(story => {
-        if (story.category !== '未分类') categories.add(story.category);
-      });
-
-      menu.innerHTML = ''; 
-      categories.forEach(cat => {
-        const link = document.createElement('a');
-        link.href = `stories.html?category=${encodeURIComponent(cat)}`; 
-        link.innerText = cat;
-        menu.appendChild(link);
-      });
-
-      if (categories.size === 0) {
-        menu.innerHTML = '<a href="stories.html" style="color:#999;">暂无分类</a>';
+      const repo = 'kehu-1/kehu-1-website';
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/stories`);
+      const files = await res.json();
+      
+      if (!Array.isArray(files) || files.length === 0) {
+        document.getElementById('hero-title').innerText = '暂无案例';
+        return;
       }
+
+      // 按日期倒序排序（文件名包含日期）
+      files.sort((a, b) => b.name.localeCompare(a.name));
+
+      // 获取 URL 中的 ID 参数
+      const urlParams = new URLSearchParams(window.location.search);
+      const targetId = urlParams.get('id');
+      
+      let targetFile = null;
+      if (targetId) {
+        targetFile = files.find(f => f.name === targetId);
+      }
+      // 如果没有传 id 或者找不到，默认展示最新的一篇
+      if (!targetFile) {
+        targetFile = files[0]; 
+      }
+
+      // 读取指定文件的内容
+      const rawRes = await fetch(targetFile.download_url);
+      const text = await rawRes.text();
+      const parts = text.split('---');
+      const frontmatter = parts[1] || '';
+      const bodyContent = parts.slice(2).join('---').trim();
+
+      const getVal = (key) => {
+        const match = frontmatter.match(new RegExp(`${key}:\\s*(.*)`));
+        return match ? match[1].trim() : '';
+      };
+
+      const category = getVal('category');
+      const title = getVal('title');
+      const date = getVal('date');
+      const productBgImg = getVal('product_bg_img') || 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80';
+      const productTitle = getVal('product_title') || title; 
+      const productDesc = getVal('product_desc') || '';
+      const productImg = getVal('product_img') || 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80';
+      
+      // 将 Markdown 正文转为 HTML
+      const caseContentHtml = marked.parse(bodyContent);
+
+      // 渲染图一：顶部 Hero 区
+      document.getElementById('product-hero').style.backgroundImage = `url('${productBgImg}')`;
+      document.getElementById('hero-category').innerText = category;
+      document.getElementById('hero-title').innerText = productTitle;
+      document.getElementById('hero-desc').innerText = productDesc;
+
+      // 渲染图二：下方图文案例区
+      document.getElementById('case-content').innerHTML = caseContentHtml;
+      document.getElementById('case-img').src = productImg;
+
     } catch (e) {
-      console.error('加载下拉菜单分类失败:', e);
+      console.error('加载详情失败:', e);
+      document.getElementById('hero-title').innerText = '加载失败，请刷新重试';
     }
   }
 
   // 页面加载完成后执行
-  window.addEventListener('load', loadStories);
+  window.addEventListener('load', () => {
+    loadNavCategories();
+    loadStoryDetail();
+
+    // 动态计算导航栏高度
+    const headerElement = document.querySelector('header');
+    if (headerElement) {
+      document.documentElement.style.setProperty('--header-height', headerElement.offsetHeight + 'px');
+    }
+
+    // 防闪烁：用 JS 控制大菜单显示与隐藏
+    const navDropdown = document.querySelector('.nav-dropdown');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+    let hoverTimeout = null;
+    if (navDropdown && dropdownMenu) {
+      navDropdown.addEventListener('mouseenter', () => { if (hoverTimeout) clearTimeout(hoverTimeout); dropdownMenu.classList.add('show'); });
+      navDropdown.addEventListener('mouseleave', () => { hoverTimeout = setTimeout(() => { dropdownMenu.classList.remove('show'); }, 200); });
+      dropdownMenu.addEventListener('mouseenter', () => { if (hoverTimeout) clearTimeout(hoverTimeout); });
+      dropdownMenu.addEventListener('mouseleave', () => { dropdownMenu.classList.remove('show'); });
+    }
+  });
 </script>
 </body>
 </html>
