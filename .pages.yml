@@ -1,3 +1,55 @@
+media:
+  - name: "uploads"
+    label: "图片"
+    input: "images/uploads"
+    output: "/images/uploads"
+    categories: [image]
+    extensions: [jpg, jpeg, png, gif, webp, svg]
+    rename: safe
+
+content:
+  - name: "news"
+    label: "新闻动态"
+    type: "collection"
+    path: "content/news"
+    create: true
+    delete: true
+    fields:
+      - { name: "title", label: "标题", type: "string" }
+      - { name: "date", label: "日期", type: "date" }
+      - { name: "body", label: "正文", type: "rich-text", options: { media: { name: "uploads", input: "images/uploads", output: "/images/uploads", categories: [image], extensions: [jpg, jpeg, png, gif, webp, svg], rename: safe } } }
+
+  - name: "social"
+    label: "社交媒体"
+    type: "file"
+    path: "content/social.json"
+    fields:
+      - name: "posts"
+        label: "帖子列表"
+        type: "list"
+        fields:
+          - { name: "date", label: "日期", type: "string" }
+          - { name: "platform", label: "平台", type: "select", options: ["Facebook", "Instagram", "LinkedIn", "TikTok", "YouTube"] }
+          - { name: "content", label: "文案", type: "text" }
+          - { name: "link", label: "帖子链接", type: "string" }
+          - { name: "img", label: "图片链接", type: "string" }
+
+  - name: "stories"
+    label: "客户故事"
+    type: "collection"
+    path: "content/stories"
+    create: true
+    delete: true
+    fields:
+      - { name: "category", label: "分类（大标题）", type: "string" }
+      - { name: "title", label: "故事标题", type: "string" }
+      - { name: "date", label: "日期", type: "date" }
+      - { name: "product_bg_img", label: "顶部产品背景图片（Hero大图）", type: "image" }
+      - { name: "product_title", label: "产品名称", type: "string" }
+      - { name: "product_desc", label: "简短介绍", type: "text" }
+      - { name: "product_img", label: "案例主图（下方图）", type: "image" }
+      - { name: "case_content", label: "案例正文", type: "rich-text", options: { media: { name: "uploads", input: "images/uploads", output: "/images/uploads", categories: [image], extensions: [jpg, jpeg, png, gif, webp, svg], rename: safe } } }
+
   - name: "homepage_stories"
     label: "首页客户故事区"
     type: "file"
