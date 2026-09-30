@@ -5,11 +5,11 @@
       "image": "",
       "text": "",
       "card1_title": "客户故事",
-      "card1_desc": "这里填右上框的描述",
-      "card1_link": "#",
+      "card1_desc": "",
+      "card1_link": "",
       "card2_title": "产品聚焦",
-      "card2_desc": "这里填右下框的描述",
-      "card2_link": "#"
+      "card2_desc": "",
+      "card2_link": ""
     }
   ]
 }
