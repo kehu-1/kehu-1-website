@@ -3,13 +3,13 @@
     {
       "title": "最新",
       "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
-      "text": "这里是大图下方的文字示例",
-      "card1_title": "右上框标题",
-      "card1_desc": "右上框文字示例",
-      "card1_link": "#",
-      "card2_title": "右下框标题",
-      "card2_desc": "右下框文字示例",
-      "card2_link": "#"
+      "text": "这里是大图下方的文字介绍。",
+      "card1_title": "客户故事",
+      "card1_desc": "点击阅读完整故事详情。",
+      "card1_link": "stories.html?id=2026-09-29-9.md",
+      "card2_title": "产品聚焦",
+      "card2_desc": "查看我们的核心产品线。",
+      "card2_link": "products.html"
     }
   ]
 }
