@@ -50,4 +50,22 @@ content:
       - { name: "product_img", label: "案例主图（下方图）", type: "image" }
       - { name: "case_content", label: "案例正文", type: "rich-text", options: { media: { name: "uploads", input: "images/uploads", output: "/images/uploads", categories: [image], extensions: [jpg, jpeg, png, gif, webp, svg], rename: safe } } }
 
- 
+   - name: "homepage_stories"
+    label: "首页客户故事区"
+    type: "object"
+    path: "content/homepage_stories.json"
+    fields:
+      - name: "tabs"
+        label: "左侧大标题"
+        type: "list"
+        max: 6
+        fields:
+          - { name: "title", label: "大标题名称", type: "string" }
+          - { name: "image", label: "中间大图", type: "image" }
+          - { name: "text", label: "大图下方文字", type: "rich-text" }
+          - { name: "card1_title", label: "右上框标题", type: "string" }
+          - { name: "card1_desc", label: "右上框文字", type: "text" }
+          - { name: "card1_link", label: "右上框跳转链接", type: "string" }
+          - { name: "card2_title", label: "右下框标题", type: "string" }
+          - { name: "card2_desc", label: "右下框文字", type: "text" }
+          - { name: "card2_link", label: "右下框跳转链接", type: "string" }
