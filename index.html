@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>你的品牌名 - 专业B2B供应商</title>
   <style>
-    /* ===== 基础字体与全局变量 ===== */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap');
     :root {
       --tech-green: #00FFB9;       
@@ -15,92 +14,42 @@
       --text-main: #111827;        
       --text-muted: #6B7280;       
       --border-dark-green: #059669; 
-      --header-height: 122px; /* 默认导航栏高度，由JS动态修正 */
+      --header-height: 122px; 
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', -apple-system, "Segoe UI", sans-serif; color: var(--text-main); line-height: 1.6; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    .header-container, .section-container, .footer-inner, .news-grid, .vision-inner, .top-news-inner {
-      max-width: 1340px;
-      margin: 0 auto;    
-      padding: 0 2rem;   
-      width: 100%;
-    }
+    .header-container, .section-container, .footer-inner, .news-grid, .vision-inner, .top-news-inner { max-width: 1340px; margin: 0 auto; padding: 0 2rem; width: 100%; }
 
-    /* ===== 导航栏 ===== */
+    /* 导航栏 */
     header { position: fixed; top: 0; width: 100%; background: var(--dark-bg); z-index: 1000; }
     .header-top { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; }
     .header-top .logo { font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
     .header-top .tools { display: flex; align-items: center; gap: 1rem; color: #fff; font-size: 0.9rem; }
     .header-top .tools a { color: #CBD5E1; display: flex; align-items: center; gap: 0.3rem; }
     .header-top .tools a:hover { color: var(--tech-green); }
-    
     .header-bottom { border-top: 1px solid rgba(255,255,255,0.05); }
     .header-bottom .nav-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
-    
     .header-bottom nav { display: flex; align-items: center; }
     .header-bottom nav > a { color: #CBD5E1; font-size: 1rem; margin-right: 1.5rem; font-weight: 500; padding-bottom: 0.5rem; }
     .header-bottom nav > a:first-child { margin-left: 1.5rem; } 
     .header-bottom nav > a:hover, .header-bottom nav > a.active { color: var(--tech-green); }
     
-    /* 【大菜单 Mega Menu】 */
     .nav-dropdown { position: relative; display: inline-block; }
     .nav-dropdown > a { color: #CBD5E1; font-size: 1rem; font-weight: 500; padding-bottom: 0.5rem; display: block; cursor: pointer; }
     .nav-dropdown > a:hover { color: var(--tech-green); }
-    
-    .dropdown-menu {
-      display: none;
-      position: fixed; 
-      top: var(--header-height); 
-      left: 0;
-      width: 100vw; 
-      background: var(--dark-bg); 
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      z-index: 1001;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-    
+    .dropdown-menu { display: none; position: fixed; top: var(--header-height); left: 0; width: 100vw; background: var(--dark-bg); box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 1001; border-top: 1px solid rgba(255,255,255,0.08); }
     .dropdown-menu.show { display: block; }
-    
-    .mega-menu-content {
-      max-width: 1340px; 
-      margin: 0 auto; 
-      padding: 3rem 2rem; 
-      display: grid;
-      grid-template-columns: repeat(4, 1fr); 
-      gap: 2rem 4rem;
-    }
-    
+    .mega-menu-content { max-width: 1340px; margin: 0 auto; padding: 3rem 2rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem 4rem; }
     .dropdown-menu .category-group { display: flex; flex-direction: column; }
-    .dropdown-menu .category-group h4 { 
-      color: #fff; 
-      font-size: 1.1rem; 
-      font-weight: 700; 
-      margin-bottom: 1rem; 
-      border-bottom: 1px solid rgba(255,255,255,0.15); 
-      padding-bottom: 0.5rem;
-      letter-spacing: 0.5px;
-      white-space: nowrap; 
-    }
-    .dropdown-menu .category-group a { 
-      color: #CBD5E1; 
-      font-size: 0.95rem; 
-      padding: 0.6rem 0;
-      display: block;
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-      transition: 0.3s;
-      white-space: nowrap; 
-    }
-    .dropdown-menu .category-group a:hover { 
-      color: var(--tech-green); 
-      padding-left: 0.3rem; 
-    }
-
+    .dropdown-menu .category-group h4 { color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 0.5rem; letter-spacing: 0.5px; white-space: nowrap; }
+    .dropdown-menu .category-group a { color: #CBD5E1; font-size: 0.95rem; padding: 0.6rem 0; display: block; border-bottom: 1px solid rgba(255,255,255,0.03); transition: 0.3s; white-space: nowrap; }
+    .dropdown-menu .category-group a:hover { color: var(--tech-green); padding-left: 0.3rem; }
     .header-bottom .search-wrapper { color: #CBD5E1; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin-left: 1rem; }
     .header-bottom .search-wrapper:hover { color: var(--tech-green); }
 
-    /* ===== 主体内容 ===== */
+    /* 轮播图 */
     .hero { position: relative; height: calc(100vh - 120px); margin-top: 120px; overflow: hidden; background: var(--dark-bg); }
     .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s; display: flex; align-items: center; }
     .slide.active { opacity: 1; z-index: 1; }
@@ -125,16 +74,24 @@
     .btn-outline { padding: 0.6rem 1.5rem; border: 2px solid var(--text-main); color: var(--text-main); font-weight: 700; white-space: nowrap; background: transparent; cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
     .btn-outline:hover { background: var(--text-main); color: var(--tech-green); }
 
+    /* 【重构】客户故事区（图2/3 + 文本1/3） */
     .story-section { padding: 4rem 0; } 
     .story-grid { display: grid; grid-template-columns: 300px 1fr 340px; gap: 1rem; align-items: start; } 
+    
+    /* 左侧选择栏 */
     .story-tabs { display: flex; flex-direction: column; position: sticky; top: 140px; border-left: 2px solid #E5E7EB; }
     .story-tab { padding: 0.7rem 0; padding-left: 1.5rem; font-size: 1.15rem; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: 0.3s; }
     .story-tab:hover { color: var(--text-main); background: #F3F4F6; }
     .story-tab.active { color: var(--text-main); background: var(--tech-green-light); border-left: 4px solid var(--border-dark-green); margin-left: -2px; padding-left: calc(1.5rem - 2px); font-weight: 700; }
+    
+    /* 中间大图 + 下方文本 */
     .story-main { display: flex; flex-direction: column; overflow: hidden; }
-    .story-main img { width: 100%; height: 480px; object-fit: cover; }
+    .story-main img { width: 100%; height: 320px; object-fit: cover; transition: opacity 0.3s; } /* 高度砍掉1/3，约为320px */
+    .story-main .story-text { padding: 1.5rem; background: #F8FAFC; border: 1px solid #E2E8F0; border-top: none; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; min-height: 140px; }
     .story-link { display: inline-block; margin-top: 1.5rem; color: var(--text-main); font-weight: 700; font-size: 1rem; border-bottom: 2px solid var(--tech-green); padding-bottom: 2px; width: fit-content; }
     .story-link:hover { color: var(--tech-green); }
+    
+    /* 右侧上下两框 */
     .story-side { display: flex; flex-direction: column; gap: 1rem; } 
     .story-card { background: var(--dark-bg); color: #fff; padding: 2.2rem; } 
     .story-card h4 { font-size: 1.4rem; margin-bottom: 1rem; font-weight: 700; } 
@@ -154,7 +111,6 @@
     .section-label { font-size: 0.9rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem; display: block; text-transform: uppercase; }
     .market-btn { display: inline-block; padding: 0.8rem 2rem; border: 2px solid var(--text-main); color: var(--text-main); font-weight: 700; margin-top: 1.5rem; transition: 0.3s; }
     .market-btn:hover { background: var(--text-main); color: var(--tech-green); }
-
     .slider-controls-capsule { display: flex; align-items: center; justify-content: center; gap: 1rem; background: #E5E7EB; padding: 0.6rem 1.5rem; border-radius: 50px; }
     .slider-controls-capsule button { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); transition: 0.3s; line-height: 1; }
     .slider-controls-capsule button:hover { color: var(--text-main); }
@@ -163,7 +119,6 @@
     .slider-dot.active { width: 24px; border-radius: 4px; background: var(--dark-bg); }
     .slider-container { position: relative; width: 100%; overflow: hidden; }
     .slider-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); gap: 1rem; } 
-    
     .slider-card { flex: 0 0 calc((100% - 2rem) / 3); background: #fff; display: flex; flex-direction: column; transition: 0.3s; border-radius: 4px; overflow: hidden; border: 1px solid #E5E7EB; cursor: pointer; }
     .slider-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
     .slider-card img { width: 100%; height: 260px; object-fit: cover; }
@@ -198,7 +153,6 @@
     .social-tabs { display: flex; gap: 1rem; border-bottom: 1px solid #E5E7EB; padding-bottom: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
     .social-tab { font-size: 1rem; font-weight: 500; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 0.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid transparent; }
     .social-tab.active { color: var(--text-main); border-bottom-color: var(--text-main); font-weight: 700; }
-
     .social-card-b2b { flex: 0 0 calc((100% - 2rem) / 3); background: #fff; border: 1px solid #E5E7EB; padding: 1.5rem; display: flex; flex-direction: column; cursor: pointer; transition: 0.3s; height: 100%; }
     .social-card-b2b:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.05); transform: translateY(-5px); }
     .social-card-header { display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; }
@@ -292,7 +246,7 @@
         <a href="advantages.html">生产优势</a>
         
         <div class="nav-dropdown">
-          <a href="javascript:void(0)">客户故事 
+          <a href="javascript:void(0)">客户故事</a>
           <div class="dropdown-menu" id="story-dropdown-menu">
             <!-- 大菜单内容由 JS 渲染 -->
           </div>
@@ -338,30 +292,29 @@
   </div>
 </div>
 
-<!-- 3. 客户故事区 -->
+<!-- 3. 客户故事区（由CMS驱动） -->
 <div class="story-section">
   <div class="section-container story-grid">
-    <div class="story-tabs">
-      <div class="story-tab active" onclick="switchStory(0)">人工智能</div>
-      <div class="story-tab" onclick="switchStory(1)">数字孪生</div>
-      <div class="story-tab" onclick="switchStory(2)">数字化制造</div>
-      <div class="story-tab" onclick="switchStory(3)">软件定义自动化</div>
-      <div class="story-tab" onclick="switchStory(4)">可持续性</div>
+    <div class="story-tabs" id="story-tabs-container">
+      <!-- 左侧标签由 JS 动态生成，最多6个 -->
+      <p style="color:#999; padding:1rem;">正在加载...</p>
     </div>
     <div class="story-main">
-      <img id="story-image" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Story Image">
-      <a href="#" class="story-link" id="story-link">阅读客户故事 →</a>
+      <img id="story-image" src="" alt="Story Image">
+      <div class="story-text" id="story-main-text">
+        正在加载文本...
+      </div>
     </div>
     <div class="story-side">
       <div class="story-card">
-        <h4>客户故事</h4>
-        <p id="story-title">家族农场的人工智能帮助机器人采摘草莓</p>
-        <a href="#" class="link">阅读更多 →</a>
+        <h4 id="story-card1-title">加载中...</h4>
+        <p id="story-card1-desc"></p>
+        <a href="#" id="story-card1-link" class="link">阅读更多 →</a>
       </div>
       <div class="story-card light">
-        <h4 style="color: var(--text-main);">产品聚焦</h4>
-        <p id="story-focus">TIA门户的Eigen工程代理</p>
-        <a href="#" class="link" style="color: var(--text-main);">了解更多 →</a>
+        <h4 id="story-card2-title" style="color: var(--text-main);">加载中...</h4>
+        <p id="story-card2-desc"></p>
+        <a href="#" id="story-card2-link" class="link" style="color: var(--text-main);">了解更多 →</a>
       </div>
     </div>
   </div>
@@ -566,21 +519,6 @@
   function resetInterval() { clearInterval(slideInterval); autoPlay(); }
   autoPlay();
 
-  const storyData = [
-    { img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80', title: '家族农场的人工智能帮助机器人采摘草莓', focus: 'TIA门户的Eigen工程代理' },
-    { img: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80', title: '数字孪生技术优化生产流程', focus: 'Simcenter 仿真软件' },
-    { img: 'https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=800&q=80', title: '数字化制造推动工业升级', focus: 'NX 一体化设计平台' },
-    { img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80', title: '软件定义自动化提高灵活性', focus: 'Simatic 自动化系统' },
-    { img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80', title: '可持续性驱动绿色制造', focus: '碳足迹管理方案' }
-  ];
-  function switchStory(index) {
-    document.querySelectorAll('.story-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.story-tab')[index].classList.add('active');
-    document.getElementById('story-image').src = storyData[index].img;
-    document.getElementById('story-title').innerText = storyData[index].title;
-    document.getElementById('story-focus').innerText = storyData[index].focus;
-  }
-
   const sliderStates = { 'product-track': { current: 0 }, 'solution-track': { current: 0 }, 'news-track': { current: 0 }, 'social-track': { current: 0 } };
 
   function initSlider(trackId, dotsId) {
@@ -616,6 +554,66 @@
     goToPage(trackId, state.current + direction);
   }
 
+  // ==========================================
+  // 【核心】加载首页客户故事区（CMS 驱动）
+  // ==========================================
+  async function loadHomepageStories() {
+    try {
+      const res = await fetch('/content/homepage_stories.json');
+      const data = await res.json();
+      const tabs = data.tabs || [];
+
+      if (tabs.length === 0) {
+        document.getElementById('story-tabs-container').innerHTML = '<p style="color:#999; padding:1rem;">暂无数据，请在CMS里添加</p>';
+        return;
+      }
+
+      // 限制最多6个
+      const limitedTabs = tabs.slice(0, 6);
+      const tabsContainer = document.getElementById('story-tabs-container');
+      tabsContainer.innerHTML = '';
+
+      // 渲染标签
+      limitedTabs.forEach((tab, index) => {
+        const tabElement = document.createElement('div');
+        tabElement.className = 'story-tab' + (index === 0 ? ' active' : '');
+        tabElement.innerText = tab.title;
+        tabElement.onclick = () => {
+          // 更新左侧激活状态
+          document.querySelectorAll('.story-tab').forEach(t => t.classList.remove('active'));
+          tabElement.classList.add('active');
+          // 更新中间图文、右侧卡片
+          renderStoryContent(tab);
+        };
+        tabsContainer.appendChild(tabElement);
+      });
+
+      // 默认渲染第一个标签的内容
+      renderStoryContent(limitedTabs[0]);
+
+    } catch (e) {
+      console.error('加载首页客户故事失败:', e);
+      document.getElementById('story-tabs-container').innerHTML = '<p style="color:#e74c39; padding:1rem;">加载失败，请确保 /content/homepage_stories.json 存在</p>';
+    }
+  }
+
+  // 渲染中间图文 + 右侧两框
+  function renderStoryContent(tab) {
+    document.getElementById('story-image').src = tab.image || 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80';
+    document.getElementById('story-main-text').innerHTML = tab.text || '暂无文本介绍';
+    
+    document.getElementById('story-card1-title').innerText = tab.card1_title || '客户故事';
+    document.getElementById('story-card1-desc').innerText = tab.card1_desc || '';
+    document.getElementById('story-card1-link').href = tab.card1_link || '#';
+
+    document.getElementById('story-card2-title').innerText = tab.card2_title || '产品聚焦';
+    document.getElementById('story-card2-desc').innerText = tab.card2_desc || '';
+    document.getElementById('story-card2-link').href = tab.card2_link || '#';
+  }
+
+  // ==========================================
+  // 新闻加载
+  // ==========================================
   let newsArticles = []; let currentNewsIndex = 0; let currentImageIndex = 0;
 
   async function loadNews() {
@@ -672,6 +670,9 @@
     }
   }
 
+  // ==========================================
+  // 社交媒体加载
+  // ==========================================
   let socialPosts = [];
 
   function getPlatformIcon(platform) {
@@ -782,7 +783,7 @@
   function closeSocialModal() { document.getElementById('social-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
   // ==========================================
-  // 【核心】动态加载客户故事大菜单 (Mega Menu)
+  // 导航栏大菜单加载
   // ==========================================
   async function loadNavCategories() {
     try {
@@ -839,6 +840,7 @@
     loadNews();   
     loadSocial(); 
     loadNavCategories(); 
+    loadHomepageStories(); // 加载首页客户故事区
 
     const headerElement = document.querySelector('header');
     if (headerElement) {
@@ -850,24 +852,10 @@
     let hoverTimeout = null;
 
     if (navDropdown && dropdownMenu) {
-      navDropdown.addEventListener('mouseenter', () => {
-        if (hoverTimeout) clearTimeout(hoverTimeout);
-        dropdownMenu.classList.add('show');
-      });
-
-      navDropdown.addEventListener('mouseleave', () => {
-        hoverTimeout = setTimeout(() => {
-          dropdownMenu.classList.remove('show');
-        }, 200); 
-      });
-
-      dropdownMenu.addEventListener('mouseenter', () => {
-        if (hoverTimeout) clearTimeout(hoverTimeout);
-      });
-
-      dropdownMenu.addEventListener('mouseleave', () => {
-        dropdownMenu.classList.remove('show');
-      });
+      navDropdown.addEventListener('mouseenter', () => { if (hoverTimeout) clearTimeout(hoverTimeout); dropdownMenu.classList.add('show'); });
+      navDropdown.addEventListener('mouseleave', () => { hoverTimeout = setTimeout(() => { dropdownMenu.classList.remove('show'); }, 200); });
+      dropdownMenu.addEventListener('mouseenter', () => { if (hoverTimeout) clearTimeout(hoverTimeout); });
+      dropdownMenu.addEventListener('mouseleave', () => { dropdownMenu.classList.remove('show'); });
     }
   });
 </script>
