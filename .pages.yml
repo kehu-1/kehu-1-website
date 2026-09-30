@@ -52,8 +52,8 @@ content:
 
   - name: "homepage_stories"
     label: "首页客户故事区"
-    type: "object"
-    file: "content/homepage_stories.json"
+    type: "file"
+    path: "content/homepage_stories.json"
     fields:
       - name: "tabs"
         label: "左侧大标题（最多6个）"
