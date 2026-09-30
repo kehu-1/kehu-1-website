@@ -72,7 +72,7 @@
     .btn-outline { padding: 0.6rem 1.5rem; border: 2px solid var(--text-main); color: var(--text-main); font-weight: 700; white-space: nowrap; background: transparent; cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
     .btn-outline:hover { background: var(--text-main); color: var(--tech-green); }
 
-    /* 【硬编码的首页客户故事区】 */
+    /* 【客户故事区（动态切换，白底无框文本）】 */
     .story-section { padding: 4rem 0; } 
     .story-grid { display: grid; grid-template-columns: 300px 1fr 340px; gap: 1rem; align-items: start; } 
     .story-tabs { display: flex; flex-direction: column; position: sticky; top: 140px; border-left: 2px solid #E5E7EB; }
@@ -80,8 +80,9 @@
     .story-tab:hover { color: var(--text-main); background: #F3F4F6; }
     .story-tab.active { color: var(--text-main); background: var(--tech-green-light); border-left: 4px solid var(--border-dark-green); margin-left: -2px; padding-left: calc(1.5rem - 2px); font-weight: 700; }
     .story-main { display: flex; flex-direction: column; overflow: hidden; }
-    .story-main img { width: 100%; height: 320px; object-fit: cover; } 
-    .story-main .story-text { padding: 1.5rem; background: #F8FAFC; border: 1px solid #E2E8F0; border-top: none; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; min-height: 140px; }
+    .story-main img { width: 100%; height: 320px; object-fit: cover; transition: opacity 0.3s; }
+    /* 白底无框文本 */
+    .story-main .story-text { padding: 1.5rem 0; background: transparent; border: none; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; min-height: 140px; }
     .story-side { display: flex; flex-direction: column; gap: 1rem; } 
     .story-card { background: var(--dark-bg); color: #fff; padding: 2.2rem; } 
     .story-card h4 { font-size: 1.4rem; margin-bottom: 1rem; font-weight: 700; } 
@@ -283,32 +284,28 @@
   </div>
 </div>
 
-<!-- 3. 客户故事区（硬编码版，不会崩溃） -->
+<!-- 3. 客户故事区（动态切换，由 JSON 文件驱动） -->
 <div class="story-section">
   <div class="section-container story-grid">
-    <div class="story-tabs">
-      <div class="story-tab active">人工智能</div>
-      <div class="story-tab">数字孪生</div>
-      <div class="story-tab">数字化制造</div>
-      <div class="story-tab">软件定义自动化</div>
-      <div class="story-tab">可持续性</div>
+    <div class="story-tabs" id="story-tabs-container">
+      <p style="color:#999; padding:1rem;">正在加载...</p>
     </div>
     <div class="story-main">
-      <img id="story-image" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Story Image">
+      <img id="story-image" src="" alt="Story Image">
       <div class="story-text" id="story-main-text">
-        这里是图片下方的文本介绍区。您可以把图片和文字直接写在 HTML 里，想怎么改就怎么改，绝对不会让 CMS 崩溃。
+        正在加载文本...
       </div>
     </div>
     <div class="story-side">
       <div class="story-card">
-        <h4>客户故事</h4>
-        <p>家族农场的人工智能帮助机器人采摘草莓</p>
-        <a href="stories.html" class="link">阅读更多 →</a>
+        <h4 id="story-card1-title">加载中...</h4>
+        <p id="story-card1-desc"></p>
+        <a href="#" id="story-card1-link" class="link">阅读更多 →</a>
       </div>
       <div class="story-card light">
-        <h4 style="color: var(--text-main);">产品聚焦</h4>
-        <p>TIA门户的Eigen工程代理</p>
-        <a href="products.html" class="link" style="color: var(--text-main);">了解更多 →</a>
+        <h4 id="story-card2-title" style="color: var(--text-main);">加载中...</h4>
+        <p id="story-card2-desc"></p>
+        <a href="#" id="story-card2-link" class="link" style="color: var(--text-main);">了解更多 →</a>
       </div>
     </div>
   </div>
@@ -549,6 +546,64 @@
     goToPage(trackId, state.current + direction);
   }
 
+  // ==========================================
+  // 【终极解决方案】首页客户故事区动态加载
+  // 从 content/homepage_stories.json 读取配置
+  // ==========================================
+  async function loadHomepageStories() {
+    try {
+      const res = await fetch('/content/homepage_stories.json');
+      const data = await res.json();
+      const tabs = data.tabs || [];
+
+      if (tabs.length === 0) {
+        document.getElementById('story-tabs-container').innerHTML = '<p style="color:#999; padding:1rem;">暂无数据，请在 GitHub 中配置 homepage_stories.json</p>';
+        return;
+      }
+
+      const tabsContainer = document.getElementById('story-tabs-container');
+      tabsContainer.innerHTML = '';
+
+      // 渲染左侧标签
+      tabs.forEach((tab, index) => {
+        const tabElement = document.createElement('div');
+        tabElement.className = 'story-tab' + (index === 0 ? ' active' : '');
+        tabElement.innerText = tab.title;
+        tabElement.onclick = () => {
+          document.querySelectorAll('.story-tab').forEach(t => t.classList.remove('active'));
+          tabElement.classList.add('active');
+          renderStoryContent(tab);
+        };
+        tabsContainer.appendChild(tabElement);
+      });
+
+      // 默认渲染第一个标签的内容
+      renderStoryContent(tabs[0]);
+
+    } catch (e) {
+      console.error('加载首页客户故事失败:', e);
+      document.getElementById('story-tabs-container').innerHTML = '<p style="color:#e74c39; padding:1rem;">加载失败，请确保 /content/homepage_stories.json 存在</p>';
+    }
+  }
+
+  // 根据选中的标签，切换中间图文和右侧两个卡片
+  function renderStoryContent(tab) {
+    // 中间大图
+    document.getElementById('story-image').src = tab.image || 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80';
+    // 中间下方文字
+    document.getElementById('story-main-text').innerHTML = tab.text || '暂无文本介绍';
+    
+    // 右上卡片
+    document.getElementById('story-card1-title').innerText = tab.card1_title || '客户故事';
+    document.getElementById('story-card1-desc').innerText = tab.card1_desc || '';
+    document.getElementById('story-card1-link').href = tab.card1_link || '#';
+
+    // 右下卡片
+    document.getElementById('story-card2-title').innerText = tab.card2_title || '产品聚焦';
+    document.getElementById('story-card2-desc').innerText = tab.card2_desc || '';
+    document.getElementById('story-card2-link').href = tab.card2_link || '#';
+  }
+
   // 新闻加载
   let newsArticles = []; let currentNewsIndex = 0; let currentImageIndex = 0;
 
@@ -768,6 +823,7 @@
     loadNews();   
     loadSocial(); 
     loadNavCategories(); 
+    loadHomepageStories(); // 加载首页客户故事区（由 JSON 驱动）
 
     const headerElement = document.querySelector('header');
     if (headerElement) {
