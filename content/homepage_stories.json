@@ -1,3 +1,15 @@
 {
-  "tabs": []
+  "tabs": [
+    {
+      "title": "最新",
+      "image": "",
+      "text": "",
+      "card1_title": "客户故事",
+      "card1_desc": "",
+      "card1_link": "",
+      "card2_title": "产品聚焦",
+      "card2_desc": "",
+      "card2_link": ""
+    }
+  ]
 }
