@@ -60,7 +60,13 @@ content:
       - { name: "btn2_text", label: "按钮2文字", type: "string", default: "联系我们" }
       - { name: "body", label: "产品正文", type: "rich-text" }
       - { name: "video_url", label: "产品视频链接（YouTube）", type: "string" }
+       - { name: "advantage_title", label: "优势标题", type: "string", default: "面向未来的自动化系统" }
+      - { name: "advantage_desc", label: "优势介绍（支持Markdown）", type: "text" }
+      
+      # 补上了 image 类型的图片上传字段
+      - { name: "advantage_img1", label: "上传图片1", type: "image" }
       - { name: "advantage_img1_desc", label: "图片1的描述（如：正面视图）", type: "string" }
+      - { name: "advantage_img2", label: "上传图片2", type: "image" }
       - { name: "advantage_img2_desc", label: "图片2的描述（如：侧面接口细节）", type: "string" }
+      - { name: "advantage_img3", label: "上传图片3", type: "image" }
       - { name: "advantage_img3_desc", label: "图片3的描述（如：背部散热设计）", type: "string" }
-      - { name: "whitepaper_cover", label: "白皮书视频专属封面图（选填，不填则自动用YouTube截图）", type: "image" }
