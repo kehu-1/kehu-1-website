@@ -70,3 +70,8 @@ content:
       - { name: "advantage_img2_desc", label: "图片2的描述（如：侧面接口细节）", type: "string" }
       - { name: "advantage_img3", label: "上传图片3", type: "image" }
       - { name: "advantage_img3_desc", label: "图片3的描述（如：背部散热设计）", type: "string" }
+      - { name: "whitepaper_title", label: "白皮书标题", type: "string", default: "数字服务中心 (DSC)" }
+      - { name: "whitepaper_desc", label: "白皮书介绍", type: "text" }
+      - { name: "whitepaper_btn", label: "白皮书按钮文字", type: "string", default: "获取白皮书 ⬇️" }
+      - { name: "whitepaper_link", label: "白皮书下载链接", type: "string", default: "#" }
+      - { name: "whitepaper_cover", label: "产品视频专属封面图（选填）", type: "image" }
