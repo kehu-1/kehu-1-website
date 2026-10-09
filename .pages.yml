@@ -1,77 +1,303 @@
-media: "图片"
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>产品详情 - 你的品牌名</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap');
+    :root { --tech-green: #00FFB9; --dark-bg: #0F172A; --text-main: #111827; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); line-height: 1.8; background: #fff; }
+    a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-content:
-  # 1. 新闻动态
-  - name: "news"
-    label: "新闻动态"
-    type: "collection"
-    path: "content/news"
-    create: true
-    delete: true
-    fields:
-      - { name: "title", label: "标题", type: "string" }
-      - { name: "date", label: "日期", type: "date" }
-      - { name: "body", label: "正文", type: "rich-text" }
+    /* 顶部导航与 Hero 区 */
+    header { background: var(--dark-bg); position: sticky; top: 0; z-index: 1000; }
+    .header-inner { max-width: 1340px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.6rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
+    .back-btn { color: var(--tech-green); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; }
+    .hero-product { background: var(--dark-bg); color: #fff; padding: 6rem 2rem; }
+    .hero-container { max-width: 1340px; margin: 0 auto; display: flex; gap: 4rem; align-items: center; }
+    .hero-left { flex: 1.2; }
+    .hero-right { flex: 1; display: flex; justify-content: flex-end; }
+    .hero-right img { max-width: 100%; max-height: 450px; object-fit: contain; }
+    .breadcrumb { font-size: 0.9rem; color: #9CA3AF; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+    .breadcrumb a { color: #9CA3AF; }
+    .breadcrumb .sep { color: #4B5563; }
+    .hero-product h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -1px; }
+    .hero-product .hero-desc { font-size: 1.2rem; color: #CBD5E1; margin-bottom: 2.5rem; max-width: 600px; line-height: 1.7; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { padding: 1rem 2.5rem; background: var(--tech-green); color: #000; font-weight: 700; border: none; cursor: pointer; font-size: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 4px; }
+    .btn-primary:hover { background: #00E6A6; transform: translateY(-2px); }
+    .btn-secondary { padding: 1rem 2.5rem; background: transparent; color: #fff; font-weight: 700; border: 1px solid #fff; cursor: pointer; font-size: 1rem; display: inline-block; border-radius: 4px; }
+    .btn-secondary:hover { background: #fff; color: #000; transform: translateY(-2px); }
 
-  # 2. 客户故事（就是刚才不见的那个）
-  - name: "stories"
-    label: "客户故事"
-    type: "collection"
-    path: "content/stories"
-    create: true
-    delete: true
-    fields:
-      - { name: "category", label: "分类（大标题）", type: "string" }
-      - { name: "title", label: "故事标题", type: "string" }
-      - { name: "date", label: "日期", type: "date" }
-      - { name: "image", label: "顶部产品背景图片（Hero大图）", type: "image" }
-      - { name: "card1_title", label: "产品名称", type: "string" }
-      - { name: "card1_desc", label: "简短介绍", type: "text" }
-      - { name: "card2_title", label: "案例主图（下方图）", type: "string" }
-      - { name: "body", label: "案例正文", type: "rich-text" }
+    /* 通用两栏布局 (右侧面积更大) */
+    .section-2col { display: flex; gap: 4rem; align-items: center; padding: 6rem 2rem; max-width: 1340px; margin: 0 auto; }
+    .section-2col .col-text { flex: 0.8; }
+    .section-2col .col-media { flex: 1.2; }
+    .section-2col h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 1.5rem; color: var(--text-main); }
+    .section-2col p { font-size: 1.05rem; color: #6B7280; margin-bottom: 1.5rem; line-height: 1.9; }
+    .section-2col ul { margin: 1.5rem 0 2rem 1.5rem; color: #6B7280; }
+    .section-2col li { margin-bottom: 0.8rem; }
 
-  # 3. 社交媒体
-  - name: "social"
-    label: "社交媒体"
-    type: "file"
-    path: "content/social.json"
-    fields:
-      - { name: "posts", label: "帖文列表", type: "object", list: true, fields: [
-          { name: "platform", label: "平台", type: "string" },
-          { name: "date", label: "日期", type: "date" },
-          { name: "content", label: "内容", type: "text" },
-          { name: "img", label: "图片", type: "image" },
-          { name: "link", label: "链接", type: "string" }
-        ] }
+    /* 轮播图（带描述） */
+    .carousel-wrapper { position: relative; width: 100%; overflow: hidden; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+    .carousel-track { display: flex; transition: transform 0.5s ease; }
+    .carousel-item { width: 100%; flex-shrink: 0; position: relative; }
+    .carousel-item img { width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; display: block; }
+    .carousel-caption { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(15, 23, 42, 0.75); color: #fff; padding: 0.8rem 1.5rem; font-size: 0.95rem; text-align: center; backdrop-filter: blur(4px); }
+    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: #fff; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 1.6rem; display: flex; align-items: center; justify-content: center; z-index: 2; transition: 0.3s; }
+    .carousel-btn:hover { background: var(--tech-green); color: #000; }
+    .carousel-btn.prev { left: 15px; }
+    .carousel-btn.next { right: 15px; }
 
-  # 4. 产品展示（刚刚加上的）
-  - name: "products"
-    label: "产品展示"
-    type: "collection"
-    path: "content/products"
-    create: true
-    delete: true
-    fields:
-      - { name: "category", label: "分类（大标题）", type: "string" }
-      - { name: "title", label: "产品标题", type: "string" }
-      - { name: "description", label: "简短介绍", type: "text" }
-      - { name: "image", label: "顶部产品背景图片", type: "image" }
-      - { name: "btn1_text", label: "按钮1文字", type: "string", default: "用视频介绍产品" }
-      - { name: "btn2_text", label: "按钮2文字", type: "string", default: "联系我们" }
-      - { name: "body", label: "产品正文", type: "rich-text" }
-      - { name: "video_url", label: "产品视频链接（YouTube）", type: "string" }
-       - { name: "advantage_title", label: "优势标题", type: "string", default: "面向未来的自动化系统" }
-      - { name: "advantage_desc", label: "优势介绍（支持Markdown）", type: "text" }
+    /* 视频封面点击播放 */
+    .video-preview { position: relative; width: 100%; cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+    .video-preview img { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; display: block; transition: transform 0.3s; }
+    .video-preview:hover img { transform: scale(1.03); }
+    .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 70px; height: 70px; background: var(--tech-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #000; z-index: 2; transition: 0.3s; }
+    .video-preview:hover .play-icon { background: #fff; transform: translate(-50%, -50%) scale(1.1); }
+
+    /* 视频弹窗 */
+    .video-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.85); z-index: 3000; justify-content: center; align-items: center; }
+    .video-modal-content { position: relative; width: 80vw; max-width: 1000px; aspect-ratio: 16 / 9; background: #000; }
+    .video-modal-content iframe { width: 100%; height: 100%; border: none; }
+    .video-modal-close { position: absolute; top: -45px; right: 0; font-size: 2.5rem; color: #fff; cursor: pointer; line-height: 1; }
+    
+    /* 正文区 */
+    .content-body { max-width: 1000px; margin: 0 auto; padding: 2rem 2rem 6rem; font-size: 1.05rem; color: #374151; }
+    .content-body p { margin-bottom: 1.5rem; line-height: 1.9; }
+    .content-body h2 { font-size: 2.2rem; font-weight: 800; margin: 4rem 0 1.5rem; color: var(--text-main); }
+    .content-body img { max-width: 100%; height: auto; margin: 2.5rem 0; border-radius: 8px; }
+    .layout-2col { display: flex; gap: 3rem; align-items: center; margin: 4rem 0; }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; margin: 3rem 0 5rem; }
+
+    @media (max-width: 992px) {
+      .hero-container, .section-2col { flex-direction: column; gap: 2rem; }
+      .hero-product h1 { font-size: 2.5rem; }
+      .feature-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .video-modal-content { width: 95vw; }
+      .section-2col .col-media { width: 100%; }
+      .section-2col .col-text { width: 100%; }
+    }
+    .loading { text-align: center; color: #999; padding: 8rem 2rem; font-size: 1.2rem; }
+    .error { text-align: center; color: #e74c39; padding: 8rem 2rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">你的品牌名</div>
+    <a href="index.html" class="back-btn">← 返回首页</a>
+  </div>
+</header>
+
+<div id="page-content"><div class="loading">正在加载...</div></div>
+
+<div id="video-modal" class="video-modal" onclick="closeVideoModal(event)">
+  <div class="video-modal-content" onclick="event.stopPropagation()">
+    <span class="video-modal-close" onclick="closeVideoModal()">&times;</span>
+    <iframe id="video-iframe" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  let currentVideoUrl = '';
+
+  async function loadProductDetail() {
+    const params = new URLSearchParams(window.location.search);
+    const fileId = params.get('id');
+    const pageContent = document.getElementById('page-content');
+
+    if (!fileId) {
+      pageContent.innerHTML = '<div class="error">未找到产品 ID。<br><a href="index.html">返回首页</a></div>';
+      return;
+    }
+
+    try {
+      const repo = 'kehu-1/kehu-1-website';
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/products/${fileId}`);
+      if (!res.ok) throw new Error('文件不存在');
+      const data = await res.json();
+      const rawRes = await fetch(data.download_url);
+      const text = await rawRes.text();
+
+      const parts = text.split('---');
+      const frontmatter = parts[1] || '';
+      const bodyText = parts.slice(2).join('---').trim();
+
+      const getVal = (key) => {
+        const match = frontmatter.match(new RegExp(`${key}:\\s*(.*)`));
+        return match ? match[1].trim() : '';
+      };
+
+      const title = getVal('title') || '未命名产品';
+      const category = getVal('category') || '未分类';
+      const description = getVal('description') || '';
+      const heroImage = getVal('image') || ''; 
+      const btn1Text = getVal('btn1_text') || '用视频介绍产品';
+      const btn2Text = getVal('btn2_text') || '联系我们';
       
-      # 补上了 image 类型的图片上传字段
-      - { name: "advantage_img1", label: "上传图片1", type: "image" }
-      - { name: "advantage_img1_desc", label: "图片1的描述（如：正面视图）", type: "string" }
-      - { name: "advantage_img2", label: "上传图片2", type: "image" }
-      - { name: "advantage_img2_desc", label: "图片2的描述（如：侧面接口细节）", type: "string" }
-      - { name: "advantage_img3", label: "上传图片3", type: "image" }
-      - { name: "advantage_img3_desc", label: "图片3的描述（如：背部散热设计）", type: "string" }
-      - { name: "whitepaper_title", label: "白皮书标题", type: "string", default: "数字服务中心 (DSC)" }
-      - { name: "whitepaper_desc", label: "白皮书介绍", type: "text" }
-      - { name: "whitepaper_btn", label: "白皮书按钮文字", type: "string", default: "获取白皮书 ⬇️" }
-      - { name: "whitepaper_link", label: "白皮书下载链接", type: "string", default: "#" }
-      - { name: "whitepaper_cover", label: "产品视频专属封面图（选填）", type: "image" }
+      // 提取顶部视频链接（现在也是白皮书视频链接）
+      let rawVideoUrl = getVal('video_url');
+      currentVideoUrl = rawVideoUrl.replace(/['"]/g, '');
+
+      // 1. 产品优势数据
+      const advTitle = getVal('advantage_title') || '';
+      const advDesc = getVal('advantage_desc') || '';
+      const advImages = [
+        { src: getVal('advantage_img1'), desc: getVal('advantage_img1_desc') },
+        { src: getVal('advantage_img2'), desc: getVal('advantage_img2_desc') },
+        { src: getVal('advantage_img3'), desc: getVal('advantage_img3_desc') }
+      ].filter(item => item.src);
+
+      // 2. 白皮书数据
+      const wpTitle = getVal('whitepaper_title') || '数字服务中心 (DSC)';
+      const wpDesc = getVal('whitepaper_desc') || '';
+      const wpBtn = getVal('whitepaper_btn') || '获取白皮书 ⬇️';
+      const wpLink = getVal('whitepaper_link') || '#';
+      const customCover = getVal('whitepaper_cover').replace(/['"]/g, '');
+
+      const htmlBody = marked.parse(bodyText);
+
+      let videoBtnHtml = currentVideoUrl 
+        ? `<button class="btn-primary" onclick="openVideoModal('${currentVideoUrl}')">▶ ${btn1Text}</button>`
+        : `<button class="btn-primary" onclick="alert('暂未添加视频')">▶ ${btn1Text}</button>`;
+
+      // 生成轮播图
+      let carouselHtml = '';
+      if (advImages.length > 0) {
+        carouselHtml = `
+          <div class="carousel-wrapper">
+            <div class="carousel-track" id="carousel-track">
+              ${advImages.map(item => `
+                <div class="carousel-item">
+                  <img src="${item.src}" alt="产品图">
+                  ${item.desc ? `<div class="carousel-caption">${item.desc}</div>` : ''}
+                </div>
+              `).join('')}
+            </div>
+            ${advImages.length > 1 ? `
+              <button class="carousel-btn prev" onclick="moveCarousel(-1)">‹</button>
+              <button class="carousel-btn next" onclick="moveCarousel(1)">›</button>
+            ` : ''}
+          </div>
+        `;
+      }
+
+      // 生成白皮书视频预览（直接使用 currentVideoUrl）
+      let wpVideoHtml = '';
+      if (currentVideoUrl) {
+        let thumbUrl = heroImage; 
+        if (customCover) {
+          thumbUrl = customCover;
+        } else {
+          const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+          const match = currentVideoUrl.match(regExp);
+          if (match && match[2].length === 11) {
+            thumbUrl = `https://img.youtube.com/vi/${match[2]}/maxresdefault.jpg`;
+          }
+        }
+        wpVideoHtml = `
+          <div class="video-preview" onclick="openVideoModal('${currentVideoUrl}')">
+            <img src="${thumbUrl}" alt="产品视频封面">
+            <div class="play-icon">▶</div>
+          </div>
+        `;
+      }
+
+      pageContent.innerHTML = `
+        <div class="hero-product">
+          <div class="hero-container">
+            <div class="hero-left">
+              <div class="breadcrumb">
+                <a href="index.html">首页</a> <span class="sep">›</span>
+                <a href="products.html">产品</a> <span class="sep">›</span>
+                <span>${category}</span> <span class="sep">›</span>
+                <span style="color:#fff;">${title}</span>
+              </div>
+              <h1>${title}</h1>
+              <p class="hero-desc">${description}</p>
+              <div class="hero-btns">
+                ${videoBtnHtml}
+                <a href="contact.html" class="btn-secondary">${btn2Text}</a>
+              </div>
+            </div>
+            <div class="hero-right">
+              ${heroImage ? `<img src="${heroImage}" alt="${title}">` : '<div style="color:#4B5563;">请上传产品主图</div>'}
+            </div>
+          </div>
+        </div>
+
+        <!-- 区块 1：产品优势 + 图片滑动 -->
+        <div class="section-2col">
+          <div class="col-text">
+            <h2>${advTitle}</h2>
+            <div>${marked.parse(advDesc)}</div>
+          </div>
+          <div class="col-media">
+            ${carouselHtml}
+          </div>
+        </div>
+
+        <!-- 区块 2：白皮书 + 视频预览（复用顶部视频链接） -->
+        <div class="section-2col" style="background: #F8FAFC;">
+          <div class="col-text">
+            <h2>${wpTitle}</h2>
+            <div>${marked.parse(wpDesc)}</div>
+            <a href="${wpLink}" class="btn-primary" style="margin-top: 1rem;">${wpBtn}</a>
+          </div>
+          <div class="col-media">
+            ${wpVideoHtml}
+          </div>
+        </div>
+
+        <!-- 正文区 -->
+        <div class="content-body">
+          ${htmlBody}
+        </div>
+      `;
+    } catch (e) {
+      console.error(e);
+      pageContent.innerHTML = '<div class="error">加载产品详情失败。</div>';
+    }
+  }
+
+  let carouselIndex = 0;
+  function moveCarousel(direction) {
+    const track = document.getElementById('carousel-track');
+    const items = track.querySelectorAll('.carousel-item');
+    if (items.length === 0) return;
+    
+    carouselIndex = (carouselIndex + direction + items.length) % items.length;
+    track.style.transform = `translateX(-${carouselIndex * 100}%)`;
+  }
+
+  function openVideoModal(url) {
+    if (!url) return;
+    
+    let embedUrl = url;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    if (match && match[2].length === 11) {
+      embedUrl = `https://www.youtube.com/embed/${match[2]}?autoplay=1&rel=0`;
+    }
+
+    document.getElementById('video-iframe').src = embedUrl;
+    document.getElementById('video-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeVideoModal(event) {
+    document.getElementById('video-modal').style.display = 'none';
+    document.getElementById('video-iframe').src = '';
+    document.body.style.overflow = 'auto';
+  }
+
+  window.addEventListener('load', loadProductDetail);
+</script>
+</body>
+</html>
