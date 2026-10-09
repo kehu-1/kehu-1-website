@@ -18,7 +18,20 @@ content:
       - { name: "title", label: "标题", type: "string" }
       - { name: "date", label: "日期", type: "date" }
       - { name: "body", label: "正文", type: "rich-text", options: { media: { name: "uploads", input: "images/uploads", output: "/images/uploads", categories: [image], extensions: [jpg, jpeg, png, gif, webp, svg], rename: safe } } }
-
+  - name: "products"
+    label: "产品展示"
+    type: "collection"
+    path: "content/products"
+    create: true
+    delete: true
+    fields:
+      - { name: "category", label: "分类（大标题）", type: "string" }
+      - { name: "title", label: "产品标题", type: "string" }
+      - { name: "description", label: "简短介绍", type: "text" }
+      - { name: "image", label: "顶部产品背景图片", type: "image" }
+      - { name: "btn1_text", label: "按钮1文字", type: "string", default: "探索产品" }
+      - { name: "btn2_text", label: "按钮2文字", type: "string", default: "联系我们" }
+      - { name: "body", label: "产品正文", type: "rich-text" }
   - name: "social"
     label: "社交媒体"
     type: "file"
