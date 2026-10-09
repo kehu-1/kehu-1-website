@@ -59,4 +59,4 @@ content:
       - { name: "btn1_text", label: "按钮1文字", type: "string", default: "探索产品" }
       - { name: "btn2_text", label: "按钮2文字", type: "string", default: "联系我们" }
       - { name: "body", label: "产品正文", type: "rich-text" }
-      - { name: "video_url", label: "https://youtu.be/0Z-vhBvBmUY?si=jyKfLG3G911GyKHs", type: "string" }
+      - { name: "video_url", label: "产品视频链接（YouTube）", type: "string" }
