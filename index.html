@@ -284,7 +284,7 @@
   </div>
 </div>
 
-<!-- 3. 客户故事区（动态切换，由 JSON 文件驱动） -->
+<!-- 3. 客户故事区（动态切换，由 Markdown 文件夹驱动） -->
 <div class="story-section">
   <div class="section-container story-grid">
     <div class="story-tabs" id="story-tabs-container">
@@ -502,7 +502,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
-  // 主轮播逻辑
+  // ==========================================
+  // 1. 主轮播逻辑
+  // ==========================================
   let currentSlide = 0; const slides = document.querySelectorAll('.slide'); const dots = document.querySelectorAll('.hero-indicator .dot'); let slideInterval;
   function showSlide(index) { slides.forEach(s => s.classList.remove('active')); dots.forEach(d => d.classList.remove('active')); slides[index].classList.add('active'); dots[index].classList.add('active'); currentSlide = index; }
   function goToSlide(index) { showSlide(index); resetInterval(); }
@@ -510,7 +512,9 @@
   function resetInterval() { clearInterval(slideInterval); autoPlay(); }
   autoPlay();
 
-  // 通用滑动逻辑
+  // ==========================================
+  // 2. 通用滑动逻辑
+  // ==========================================
   const sliderStates = { 'product-track': { current: 0 }, 'solution-track': { current: 0 }, 'news-track': { current: 0 }, 'social-track': { current: 0 } };
 
   function initSlider(trackId, dotsId) {
@@ -547,64 +551,98 @@
   }
 
   // ==========================================
-  // 【终极解决方案】首页客户故事区动态加载
-  // 从 content/homepage_stories.json 读取配置
+  // 3. 首页客户故事区（Markdown 驱动）
   // ==========================================
   async function loadHomepageStories() {
     try {
-      const res = await fetch('/content/homepage_stories.json');
-      const data = await res.json();
-      const tabs = data.tabs || [];
+      const repo = 'kehu-1/kehu-1-website'; // 你的仓库名
+      const folderPath = 'content/homepage_stories';
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/${folderPath}`);
+      
+      if (!res.ok) throw new Error('目录不存在');
+      const files = await res.json();
+      
+      const mdFiles = files.filter(f => f.name.endsWith('.md')).sort((a, b) => a.name.localeCompare(b.name));
+      const tabs = [];
+
+      for (let file of mdFiles) {
+        const rawRes = await fetch(file.download_url);
+        const text = await rawRes.text();
+        const parsed = parseStoryMarkdown(text);
+        if (parsed) tabs.push(parsed);
+      }
 
       if (tabs.length === 0) {
-        document.getElementById('story-tabs-container').innerHTML = '<p style="color:#999; padding:1rem;">暂无数据，请在 GitHub 中配置 homepage_stories.json</p>';
+        document.getElementById('story-tabs-container').innerHTML = '<p style="color:#999; padding:1rem;">请在上传 .md 文件到 content/homepage_stories/ 目录</p>';
         return;
       }
 
-      const tabsContainer = document.getElementById('story-tabs-container');
-      tabsContainer.innerHTML = '';
-
-      // 渲染左侧标签
-      tabs.forEach((tab, index) => {
-        const tabElement = document.createElement('div');
-        tabElement.className = 'story-tab' + (index === 0 ? ' active' : '');
-        tabElement.innerText = tab.title;
-        tabElement.onclick = () => {
-          document.querySelectorAll('.story-tab').forEach(t => t.classList.remove('active'));
-          tabElement.classList.add('active');
-          renderStoryContent(tab);
-        };
-        tabsContainer.appendChild(tabElement);
-      });
-
-      // 默认渲染第一个标签的内容
-      renderStoryContent(tabs[0]);
+      renderHomepageStories(tabs);
 
     } catch (e) {
       console.error('加载首页客户故事失败:', e);
-      document.getElementById('story-tabs-container').innerHTML = '<p style="color:#e74c39; padding:1rem;">加载失败，请确保 /content/homepage_stories.json 存在</p>';
+      document.getElementById('story-tabs-container').innerHTML = '<p style="color:#e74c39; padding:1rem;">加载失败，请确保 content/homepage_stories/ 目录下有 .md 文件</p>';
     }
   }
 
-  // 根据选中的标签，切换中间图文和右侧两个卡片
-  function renderStoryContent(tab) {
-    // 中间大图
-    document.getElementById('story-image').src = tab.image || 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80';
-    // 中间下方文字
-    document.getElementById('story-main-text').innerHTML = tab.text || '暂无文本介绍';
-    
-    // 右上卡片
-    document.getElementById('story-card1-title').innerText = tab.card1_title || '客户故事';
-    document.getElementById('story-card1-desc').innerText = tab.card1_desc || '';
-    document.getElementById('story-card1-link').href = tab.card1_link || '#';
+  function parseStoryMarkdown(mdText) {
+    const parts = mdText.split('---');
+    const frontmatter = parts[1] || '';
+    const bodyText = parts.slice(2).join('---').trim();
 
-    // 右下卡片
-    document.getElementById('story-card2-title').innerText = tab.card2_title || '产品聚焦';
-    document.getElementById('story-card2-desc').innerText = tab.card2_desc || '';
-    document.getElementById('story-card2-link').href = tab.card2_link || '#';
+    const getVal = (key) => {
+      const match = frontmatter.match(new RegExp(`${key}:\\s*(.*)`));
+      return match ? match[1].trim() : '';
+    };
+
+    return {
+      title: getVal('title') || '未命名故事',
+      image: getVal('image') || 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80',
+      text: marked.parse(bodyText) || '暂无文本介绍', 
+      card1_title: getVal('card1_title') || '客户故事',
+      card1_desc: getVal('card1_desc') || '',
+      card1_link: getVal('card1_link') || '#',
+      card2_title: getVal('card2_title') || '产品聚焦',
+      card2_desc: getVal('card2_desc') || '',
+      card2_link: getVal('card2_link') || '#'
+    };
   }
 
-  // 新闻加载
+  function renderHomepageStories(tabs) {
+    const tabsContainer = document.getElementById('story-tabs-container');
+    tabsContainer.innerHTML = '';
+
+    tabs.forEach((tab, index) => {
+      const tabElement = document.createElement('div');
+      tabElement.className = 'story-tab' + (index === 0 ? ' active' : '');
+      tabElement.innerText = tab.title;
+      tabElement.onclick = () => {
+        document.querySelectorAll('.story-tab').forEach(t => t.classList.remove('active'));
+        tabElement.classList.add('active');
+        renderStoryContent(tab);
+      };
+      tabsContainer.appendChild(tabElement);
+    });
+
+    if (tabs.length > 0) renderStoryContent(tabs[0]);
+  }
+
+  function renderStoryContent(tab) {
+    document.getElementById('story-image').src = tab.image;
+    document.getElementById('story-main-text').innerHTML = tab.text;
+    
+    document.getElementById('story-card1-title').innerText = tab.card1_title;
+    document.getElementById('story-card1-desc').innerText = tab.card1_desc;
+    document.getElementById('story-card1-link').href = tab.card1_link;
+
+    document.getElementById('story-card2-title').innerText = tab.card2_title;
+    document.getElementById('story-card2-desc').innerText = tab.card2_desc;
+    document.getElementById('story-card2-link').href = tab.card2_link;
+  }
+
+  // ==========================================
+  // 4. 新闻动态加载
+  // ==========================================
   let newsArticles = []; let currentNewsIndex = 0; let currentImageIndex = 0;
 
   async function loadNews() {
@@ -661,7 +699,9 @@
     }
   }
 
-  // 社交媒体加载
+  // ==========================================
+  // 5. 社交媒体加载
+  // ==========================================
   let socialPosts = [];
 
   function getPlatformIcon(platform) {
@@ -771,7 +811,9 @@
   }
   function closeSocialModal() { document.getElementById('social-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
-  // 导航栏大菜单加载
+  // ==========================================
+  // 6. 导航栏大菜单加载
+  // ==========================================
   async function loadNavCategories() {
     try {
       const repo = 'kehu-1/kehu-1-website';
@@ -817,13 +859,16 @@
     }
   }
 
+  // ==========================================
+  // 7. 页面加载初始化
+  // ==========================================
   window.addEventListener('load', () => {
     initSlider('product-track', 'product-dots');
     initSlider('solution-track', 'solution-dots');
     loadNews();   
     loadSocial(); 
     loadNavCategories(); 
-    loadHomepageStories(); // 加载首页客户故事区（由 JSON 驱动）
+    loadHomepageStories(); 
 
     const headerElement = document.querySelector('header');
     if (headerElement) {
