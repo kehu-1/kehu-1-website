@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>产品详情 - 你的品牌名</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap');
+    :root {
+      --tech-green: #00FFB9;
+      --dark-bg: #0F172A;
+      --text-main: #111827;
+      --text-muted: #6B7280;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, "Segoe UI", sans-serif; color: var(--text-main); line-height: 1.8; background: #fff; }
+    a { text-decoration: none; transition: 0.3s; color: inherit; }
+
+    /* ========== 顶部导航 ========== */
+    header { background: var(--dark-bg); position: sticky; top: 0; z-index: 1000; }
+    .header-inner { max-width: 1340px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.6rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
+    .back-btn { color: var(--tech-green); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; }
+    .back-btn:hover { color: #fff; }
+
+    /* ========== 深色 Hero 区域（截图1） ========== */
+    .hero-product {
+      background: var(--dark-bg);
+      color: #fff;
+      padding: 6rem 2rem;
+      position: relative;
+    }
+    .hero-product .hero-container {
+      max-width: 1340px;
+      margin: 0 auto;
+      display: flex;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-left { flex: 1.2; }
+    .hero-right { flex: 1; display: flex; justify-content: flex-end; }
+    .hero-right img { max-width: 100%; max-height: 500px; object-fit: contain; }
+
+    /* 面包屑 */
+    .breadcrumb { font-size: 0.9rem; color: #9CA3AF; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+    .breadcrumb a { color: #9CA3AF; }
+    .breadcrumb a:hover { color: var(--tech-green); }
+    .breadcrumb .sep { color: #4B5563; }
+    
+    .hero-product h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -1px; }
+    .hero-product .hero-desc { font-size: 1.2rem; color: #CBD5E1; margin-bottom: 2.5rem; max-width: 600px; line-height: 1.7; }
+    
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { padding: 1rem 2.5rem; background: var(--tech-green); color: #000; font-weight: 700; border: none; cursor: pointer; font-size: 1rem; display: inline-block; }
+    .btn-primary:hover { background: #00E6A6; transform: translateY(-2px); }
+    .btn-secondary { padding: 1rem 2.5rem; background: transparent; color: #fff; font-weight: 700; border: 1px solid #fff; cursor: pointer; font-size: 1rem; display: inline-block; }
+    .btn-secondary:hover { background: #fff; color: #000; transform: translateY(-2px); }
+
+    /* ========== 正文内容区（截图2 & 截图3 排版支持） ========== */
+    .content-body { max-width: 1000px; margin: 0 auto; padding: 5rem 2rem; font-size: 1.05rem; color: #374151; }
+    .content-body p { margin-bottom: 1.5rem; line-height: 1.9; }
+    .content-body h2 { font-size: 2.2rem; font-weight: 800; margin: 4rem 0 1.5rem; color: var(--text-main); }
+    .content-body h3 { font-size: 1.6rem; font-weight: 700; margin: 3rem 0 1rem; color: var(--text-main); }
+    .content-body img { max-width: 100%; height: auto; margin: 2.5rem 0; border-radius: 8px; }
+    .content-body ul, .content-body ol { margin: 1.5rem 0 2rem 1.5rem; }
+    .content-body li { margin-bottom: 0.8rem; }
+    
+    /* 为了完美复现截图2（左文右图），用户可以用的 HTML 结构 */
+    .layout-2col { display: flex; gap: 3rem; align-items: center; margin: 4rem 0; }
+    .layout-2col .col-text { flex: 1; }
+    .layout-2col .col-img { flex: 1; }
+    .layout-2col .col-img img { margin: 0; width: 100%; }
+    
+    /* 为了完美复现截图3（三列图标优势网格） */
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; margin: 3rem 0 5rem; }
+    .feature-item { text-align: left; }
+    .feature-item .icon-placeholder { font-size: 3rem; color: var(--tech-green); margin-bottom: 1.5rem; line-height: 1; }
+    .feature-item h4 { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-main); }
+    .feature-item p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 0; }
+
+    /* 响应式 */
+    @media (max-width: 992px) {
+      .hero-container { flex-direction: column; gap: 2rem; }
+      .hero-left h1 { font-size: 2.5rem; }
+      .hero-right img { max-height: 300px; }
+      .layout-2col { flex-direction: column; gap: 2rem; }
+      .feature-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    @media (max-width: 600px) {
+      .hero-product { padding: 3rem 1.5rem; }
+      .hero-btns { flex-direction: column; }
+      .btn-primary, .btn-secondary { text-align: center; }
+    }
+
+    /* 加载状态 */
+    .loading { text-align: center; color: #999; padding: 8rem 2rem; font-size: 1.2rem; }
+    .error { text-align: center; color: #e74c39; padding: 8rem 2rem; font-size: 1.1rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">你的品牌名</div>
+    <a href="index.html" class="back-btn">← 返回首页</a>
+  </div>
+</header>
+
+<div id="page-content">
+  <div class="loading">正在加载产品详情...</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  async function loadProductDetail() {
+    const params = new URLSearchParams(window.location.search);
+    const fileId = params.get('id');
+    const pageContent = document.getElementById('page-content');
+
+    if (!fileId) {
+      pageContent.innerHTML = '<div class="error">未找到产品 ID，请从首页点击产品进入。<br><a href="index.html" style="color:var(--tech-green);text-decoration:underline;">返回首页</a></div>';
+      return;
+    }
+
+    try {
+      const repo = 'kehu-1/kehu-1-website';
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/products/${fileId}`);
+
+      if (!res.ok) throw new Error('文件不存在');
+      const data = await res.json();
+
+      const rawRes = await fetch(data.download_url);
+      const text = await rawRes.text();
+
+      // 解析 Frontmatter 和正文
+      const parts = text.split('---');
+      const frontmatter = parts[1] || '';
+      const bodyText = parts.slice(2).join('---').trim();
+
+      const getVal = (key) => {
+        const match = frontmatter.match(new RegExp(`${key}:\\s*(.*)`));
+        return match ? match[1].trim() : '';
+      };
+
+      const title = getVal('title') || '未命名产品';
+      const category = getVal('category') || '未分类';
+      const description = getVal('description') || '';
+      const heroImage = getVal('image') || ''; 
+      const btn1Text = getVal('btn1_text') || '探索产品';
+      const btn2Text = getVal('btn2_text') || '联系我们';
+
+      const htmlBody = marked.parse(bodyText);
+
+      pageContent.innerHTML = `
+        <!-- 深色 Hero 区域（截图1） -->
+        <div class="hero-product">
+          <div class="hero-container">
+            <div class="hero-left">
+              <div class="breadcrumb">
+                <a href="index.html">首页</a>
+                <span class="sep">›</span>
+                <a href="products.html">产品</a>
+                <span class="sep">›</span>
+                <span>${category}</span>
+                <span class="sep">›</span>
+                <span style="color:#fff;">${title}</span>
+              </div>
+              <h1>${title}</h1>
+              <p class="hero-desc">${description}</p>
+              <div class="hero-btns">
+                <a href="#content" class="btn-primary">${btn1Text}</a>
+                <a href="contact.html" class="btn-secondary">${btn2Text}</a>
+              </div>
+            </div>
+            <div class="hero-right">
+              ${heroImage ? `<img src="${heroImage}" alt="${title}">` : '<div style="color:#4B5563;">请在图床添加产品主图并填入 image 字段</div>'}
+            </div>
+          </div>
+        </div>
+
+        <!-- 白色正文区（截图2、截图3 排版） -->
+        <div class="content-body" id="content">
+          ${htmlBody}
+        </div>
+      `;
+
+    } catch (e) {
+      console.error('加载产品详情失败:', e);
+      pageContent.innerHTML = '<div class="error">加载产品详情失败，请检查 GitHub 仓库中是否存在该文件。<br><a href="index.html" style="color:var(--tech-green);text-decoration:underline;">返回首页</a></div>';
+    }
+  }
+
+  window.addEventListener('load', loadProductDetail);
+</script>
+</body>
+</html>
