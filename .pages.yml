@@ -1,13 +1,7 @@
-media:
-  - name: "uploads"
-    label: "图片"
-    input: "images/uploads"
-    output: "/images/uploads"
-    categories: [image]
-    extensions: [jpg, jpeg, png, gif, webp, svg]
-    rename: safe
+media: "图片"
 
 content:
+  # 1. 新闻动态
   - name: "news"
     label: "新闻动态"
     type: "collection"
@@ -17,7 +11,40 @@ content:
     fields:
       - { name: "title", label: "标题", type: "string" }
       - { name: "date", label: "日期", type: "date" }
-      - { name: "body", label: "正文", type: "rich-text", options: { media: { name: "uploads", input: "images/uploads", output: "/images/uploads", categories: [image], extensions: [jpg, jpeg, png, gif, webp, svg], rename: safe } } }
+      - { name: "body", label: "正文", type: "rich-text" }
+
+  # 2. 客户故事（就是刚才不见的那个）
+  - name: "stories"
+    label: "客户故事"
+    type: "collection"
+    path: "content/stories"
+    create: true
+    delete: true
+    fields:
+      - { name: "category", label: "分类（大标题）", type: "string" }
+      - { name: "title", label: "故事标题", type: "string" }
+      - { name: "date", label: "日期", type: "date" }
+      - { name: "image", label: "顶部产品背景图片（Hero大图）", type: "image" }
+      - { name: "card1_title", label: "产品名称", type: "string" }
+      - { name: "card1_desc", label: "简短介绍", type: "text" }
+      - { name: "card2_title", label: "案例主图（下方图）", type: "string" }
+      - { name: "body", label: "案例正文", type: "rich-text" }
+
+  # 3. 社交媒体
+  - name: "social"
+    label: "社交媒体"
+    type: "file"
+    path: "content/social.json"
+    fields:
+      - { name: "posts", label: "帖文列表", type: "object", list: true, fields: [
+          { name: "platform", label: "平台", type: "string" },
+          { name: "date", label: "日期", type: "date" },
+          { name: "content", label: "内容", type: "text" },
+          { name: "img", label: "图片", type: "image" },
+          { name: "link", label: "链接", type: "string" }
+        ] }
+
+  # 4. 产品展示（刚刚加上的）
   - name: "products"
     label: "产品展示"
     type: "collection"
@@ -32,17 +59,3 @@ content:
       - { name: "btn1_text", label: "按钮1文字", type: "string", default: "探索产品" }
       - { name: "btn2_text", label: "按钮2文字", type: "string", default: "联系我们" }
       - { name: "body", label: "产品正文", type: "rich-text" }
-  - name: "social"
-    label: "社交媒体"
-    type: "file"
-    path: "content/social.json"
-    fields:
-      - name: "posts"
-        label: "帖子列表"
-        type: "list"
-        fields:
-          - { name: "date", label: "日期", type: "string" }
-          - { name: "platform", label: "平台", type: "select", options: ["Facebook", "Instagram", "LinkedIn", "TikTok", "YouTube"] }
-          - { name: "content", label: "文案", type: "text" }
-          - { name: "link", label: "帖子链接", type: "string" }
-          - { name: "img", label: "图片链接", type: "string" }
