@@ -6,44 +6,34 @@
   <title>产品详情 - 你的品牌名</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap');
-    :root {
-      --tech-green: #00FFB9;
-      --dark-bg: #0F172A;
-      --text-main: #111827;
-      --text-muted: #6B7280;
-    }
+    :root { --tech-green: #00FFB9; --dark-bg: #0F172A; --text-main: #111827; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', -apple-system, "Segoe UI", sans-serif; color: var(--text-main); line-height: 1.8; background: #fff; }
+    body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); line-height: 1.8; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* 顶部导航 */
     header { background: var(--dark-bg); position: sticky; top: 0; z-index: 1000; }
     .header-inner { max-width: 1340px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-size: 1.6rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
     .back-btn { color: var(--tech-green); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; }
     .back-btn:hover { color: #fff; }
 
-    /* 深色首屏区 */
     .hero-product { background: var(--dark-bg); color: #fff; padding: 6rem 2rem; }
     .hero-container { max-width: 1340px; margin: 0 auto; display: flex; gap: 4rem; align-items: center; }
     .hero-left { flex: 1.2; }
     .hero-right { flex: 1; display: flex; justify-content: flex-end; }
     .hero-right img { max-width: 100%; max-height: 450px; object-fit: contain; }
-    
     .breadcrumb { font-size: 0.9rem; color: #9CA3AF; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
     .breadcrumb a { color: #9CA3AF; }
     .breadcrumb a:hover { color: var(--tech-green); }
-    
     .hero-product h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -1px; }
     .hero-product .hero-desc { font-size: 1.2rem; color: #CBD5E1; margin-bottom: 2.5rem; max-width: 600px; line-height: 1.7; }
-    
+
     .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn-primary { padding: 1rem 2.5rem; background: var(--tech-green); color: #000; font-weight: 700; border: none; cursor: pointer; font-size: 1rem; display: inline-block; }
+    .btn-primary { padding: 1rem 2.5rem; background: var(--tech-green); color: #000; font-weight: 700; border: none; cursor: pointer; font-size: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; }
     .btn-primary:hover { background: #00E6A6; transform: translateY(-2px); }
     .btn-secondary { padding: 1rem 2.5rem; background: transparent; color: #fff; font-weight: 700; border: 1px solid #fff; cursor: pointer; font-size: 1rem; display: inline-block; }
     .btn-secondary:hover { background: #fff; color: #000; transform: translateY(-2px); }
 
-    /* 正文区 */
     .content-body { max-width: 1000px; margin: 0 auto; padding: 5rem 2rem; font-size: 1.05rem; color: #374151; }
     .content-body p { margin-bottom: 1.5rem; line-height: 1.9; }
     .content-body h2 { font-size: 2.2rem; font-weight: 800; margin: 4rem 0 1.5rem; color: var(--text-main); }
@@ -51,30 +41,28 @@
     .content-body img { max-width: 100%; height: auto; margin: 2.5rem 0; border-radius: 8px; }
     .content-body ul, .content-body ol { margin: 1.5rem 0 2rem 1.5rem; }
     .content-body li { margin-bottom: 0.8rem; }
-    
-    /* 图文左右布局支持 */
     .layout-2col { display: flex; gap: 3rem; align-items: center; margin: 4rem 0; }
     .layout-2col .col-text { flex: 1; }
     .layout-2col .col-img { flex: 1; }
     .layout-2col .col-img img { margin: 0; width: 100%; }
-    
-    /* 三列优势网格支持 */
     .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; margin: 3rem 0 5rem; }
     .feature-item { text-align: left; }
     .feature-item .icon-placeholder { font-size: 3rem; color: var(--tech-green); margin-bottom: 1.5rem; line-height: 1; }
     .feature-item h4 { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-main); }
-    .feature-item p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 0; }
+    .feature-item p { font-size: 0.95rem; color: #6B7280; line-height: 1.7; margin-bottom: 0; }
+
+    .video-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.85); z-index: 3000; justify-content: center; align-items: center; }
+    .video-modal-content { position: relative; width: 80vw; max-width: 1000px; aspect-ratio: 16 / 9; background: #000; }
+    .video-modal-content iframe { width: 100%; height: 100%; border: none; }
+    .video-modal-close { position: absolute; top: -45px; right: 0; font-size: 2.5rem; color: #fff; cursor: pointer; line-height: 1; }
+    .video-modal-close:hover { color: var(--tech-green); }
 
     @media (max-width: 992px) {
       .hero-container { flex-direction: column; gap: 2rem; }
       .hero-product h1 { font-size: 2.5rem; }
       .layout-2col { flex-direction: column; gap: 2rem; }
       .feature-grid { grid-template-columns: 1fr; gap: 2rem; }
-    }
-    @media (max-width: 600px) {
-      .hero-product { padding: 3rem 1.5rem; }
-      .hero-btns { flex-direction: column; }
-      .btn-primary, .btn-secondary { text-align: center; }
+      .video-modal-content { width: 95vw; }
     }
     .loading { text-align: center; color: #999; padding: 8rem 2rem; font-size: 1.2rem; }
     .error { text-align: center; color: #e74c39; padding: 8rem 2rem; font-size: 1.1rem; }
@@ -93,8 +81,18 @@
   <div class="loading">正在加载产品详情...</div>
 </div>
 
+<!-- 视频弹窗 -->
+<div id="video-modal" class="video-modal" onclick="closeVideoModal(event)">
+  <div class="video-modal-content" onclick="event.stopPropagation()">
+    <span class="video-modal-close" onclick="closeVideoModal()">&times;</span>
+    <iframe id="video-iframe" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
+  let currentVideoUrl = '';
+
   async function loadProductDetail() {
     const params = new URLSearchParams(window.location.search);
     const fileId = params.get('id');
@@ -108,7 +106,6 @@
     try {
       const repo = 'kehu-1/kehu-1-website';
       const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/products/${fileId}`);
-
       if (!res.ok) throw new Error('文件不存在');
       const data = await res.json();
       const rawRes = await fetch(data.download_url);
@@ -129,8 +126,21 @@
       const heroImage = getVal('image') || ''; 
       const btn1Text = getVal('btn1_text') || '用视频介绍产品';
       const btn2Text = getVal('btn2_text') || '联系我们';
+      
+      // 【关键修复】提取视频链接并去除可能存在的引号
+      let rawVideoUrl = getVal('video_url');
+      currentVideoUrl = rawVideoUrl.replace(/['"]/g, ''); // 去除所有单双引号
 
       const htmlBody = marked.parse(bodyText);
+
+      // 根据是否有视频链接，生成不同的按钮
+      let videoBtnHtml = '';
+      if (currentVideoUrl) {
+        videoBtnHtml = `<button class="btn-primary" onclick="openVideoModal()">▶ ${btn1Text}</button>`;
+      } else {
+        // 如果没有视频链接，点击按钮会提示
+        videoBtnHtml = `<button class="btn-primary" onclick="alert('暂未添加产品视频，请在 CMS 后台补充 video_url 字段')">▶ ${btn1Text}</button>`;
+      }
 
       pageContent.innerHTML = `
         <div class="hero-product">
@@ -145,7 +155,7 @@
               <h1>${title}</h1>
               <p class="hero-desc">${description}</p>
               <div class="hero-btns">
-                <a href="#content" class="btn-primary">${btn1Text}</a>
+                ${videoBtnHtml}
                 <a href="contact.html" class="btn-secondary">${btn2Text}</a>
               </div>
             </div>
@@ -162,6 +172,30 @@
       pageContent.innerHTML = '<div class="error">加载产品详情失败，请检查内容是否存在。<br><a href="index.html" style="color:var(--tech-green);text-decoration:underline;">返回首页</a></div>';
     }
   }
+
+  function openVideoModal() {
+    if (!currentVideoUrl) return;
+    
+    let embedUrl = currentVideoUrl;
+    // 正则解析 YouTube 短链接和长链接
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = currentVideoUrl.match(regExp);
+    
+    if (match && match[2].length === 11) {
+      embedUrl = `https://www.youtube.com/embed/${match[2]}?autoplay=1&rel=0`;
+    }
+
+    document.getElementById('video-iframe').src = embedUrl;
+    document.getElementById('video-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeVideoModal(event) {
+    document.getElementById('video-modal').style.display = 'none';
+    document.getElementById('video-iframe').src = ''; // 停止视频播放
+    document.body.style.overflow = 'auto';
+  }
+
   window.addEventListener('load', loadProductDetail);
 </script>
 </body>
