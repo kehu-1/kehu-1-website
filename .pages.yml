@@ -76,7 +76,7 @@ content:
       - { name: "whitepaper_desc", label: "白皮书介绍", type: "text" }
       - { name: "whitepaper_btn", label: "白皮书按钮文字", type: "string", default: "获取白皮书 ⬇️" }
       - { name: "whitepaper_link", label: "白皮书下载链接", type: "string", default: "#" }
-      - { name: "whitepaper_cover", label: "白皮书视频专属封面图（选填）", type: "image" }
+      - { name: "whitepaper_cover", label: "产品介绍视频专属封面图（选填）", type: "image" }
 
       # 正文（最下方长文本）
       - { name: "body", label: "产品正文", type: "rich-text" }
