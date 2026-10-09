@@ -38,13 +38,55 @@
     .nav-dropdown { position: relative; display: inline-block; }
     .nav-dropdown > a { color: #CBD5E1; font-size: 1rem; font-weight: 500; padding-bottom: 0.5rem; display: block; cursor: pointer; }
     .nav-dropdown > a:hover { color: var(--tech-green); }
-    .dropdown-menu { display: none; position: fixed; top: var(--header-height); left: 0; width: 100vw; background: var(--dark-bg); box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 1001; border-top: 1px solid rgba(255,255,255,0.08); }
+    .dropdown-menu { display: none; position: fixed; top: var(--header-height); left: 0; width: 100vw; background: var(--dark-bg); box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 1001; border-top: 1px solid rgba(255,255,255,0.08); max-height: calc(100vh - var(--header-height)); overflow-y: auto; }
     .dropdown-menu.show { display: block; }
+    
+    /* 客户故事下拉菜单布局 */
     .mega-menu-content { max-width: 1340px; margin: 0 auto; padding: 3rem 2rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem 4rem; }
     .dropdown-menu .category-group { display: flex; flex-direction: column; }
     .dropdown-menu .category-group h4 { color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 0.5rem; letter-spacing: 0.5px; white-space: nowrap; }
     .dropdown-menu .category-group a { color: #CBD5E1; font-size: 0.95rem; padding: 0.6rem 0; display: block; border-bottom: 1px solid rgba(255,255,255,0.03); transition: 0.3s; white-space: nowrap; }
     .dropdown-menu .category-group a:hover { color: var(--tech-green); padding-left: 0.3rem; }
+
+    /* 产品展示超级菜单布局（左侧分类，中间产品名，右侧简介） */
+    .product-mega-content {
+      max-width: 1340px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      display: grid;
+      grid-template-columns: 220px 320px 1fr;
+      gap: 1rem 3rem;
+    }
+    .product-cat {
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      white-space: nowrap;
+    }
+    .product-name {
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .product-name a {
+      color: #CBD5E1;
+      font-size: 1rem;
+      display: block;
+      transition: 0.3s;
+    }
+    .product-name a:hover {
+      color: var(--tech-green);
+      padding-left: 0.3rem;
+    }
+    .product-desc {
+      color: #9CA3AF;
+      font-size: 0.85rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      line-height: 1.5;
+    }
+
     .header-bottom .search-wrapper { color: #CBD5E1; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin-left: 1rem; }
     .header-bottom .search-wrapper:hover { color: var(--tech-green); }
 
@@ -72,7 +114,6 @@
     .btn-outline { padding: 0.6rem 1.5rem; border: 2px solid var(--text-main); color: var(--text-main); font-weight: 700; white-space: nowrap; background: transparent; cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
     .btn-outline:hover { background: var(--text-main); color: var(--tech-green); }
 
-    /* 【客户故事区（动态切换，白底无框文本）】 */
     .story-section { padding: 4rem 0; } 
     .story-grid { display: grid; grid-template-columns: 300px 1fr 340px; gap: 1rem; align-items: start; } 
     .story-tabs { display: flex; flex-direction: column; position: sticky; top: 140px; border-left: 2px solid #E5E7EB; }
@@ -81,7 +122,6 @@
     .story-tab.active { color: var(--text-main); background: var(--tech-green-light); border-left: 4px solid var(--border-dark-green); margin-left: -2px; padding-left: calc(1.5rem - 2px); font-weight: 700; }
     .story-main { display: flex; flex-direction: column; overflow: hidden; }
     .story-main img { width: 100%; height: 320px; object-fit: cover; transition: opacity 0.3s; }
-    /* 白底无框文本 */
     .story-main .story-text { padding: 1.5rem 0; background: transparent; border: none; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; min-height: 140px; }
     .story-side { display: flex; flex-direction: column; gap: 1rem; } 
     .story-card { background: var(--dark-bg); color: #fff; padding: 2.2rem; } 
@@ -215,6 +255,9 @@
       .top-news-inner .btn-outline { width: 100%; }
       .mega-menu-content { grid-template-columns: 1fr; }
       .dropdown-menu { position: absolute; top: 100%; width: 100%; } 
+      .product-mega-content { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.5rem; }
+      .product-cat { margin-top: 1rem; }
+      .product-name, .product-desc { padding-bottom: 0.5rem; }
     }
   </style>
 </head>
@@ -234,7 +277,15 @@
     <div class="header-container nav-wrapper">
       <nav>
         <a href="index.html" class="active">首页</a>
-        <a href="products.html">产品展示</a>
+        
+        <!-- 产品展示（超级菜单） -->
+        <div class="nav-dropdown">
+          <a href="products.html">产品展示</a>
+          <div class="dropdown-menu" id="product-dropdown-menu">
+            <!-- 超级菜单内容由 JS 渲染 -->
+          </div>
+        </div>
+        
         <a href="advantages.html">生产优势</a>
         
         <div class="nav-dropdown">
@@ -555,7 +606,7 @@
   // ==========================================
   async function loadHomepageStories() {
     try {
-      const repo = 'kehu-1/kehu-1-website'; // 你的仓库名
+      const repo = 'kehu-1/kehu-1-website';
       const folderPath = 'content/homepage_stories';
       const res = await fetch(`https://api.github.com/repos/${repo}/contents/${folderPath}`);
       
@@ -812,7 +863,7 @@
   function closeSocialModal() { document.getElementById('social-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
   // ==========================================
-  // 6. 导航栏大菜单加载
+  // 6. 导航栏客户故事大菜单加载
   // ==========================================
   async function loadNavCategories() {
     try {
@@ -860,7 +911,66 @@
   }
 
   // ==========================================
-  // 7. 页面加载初始化
+  // 7. 导航栏产品展示超级菜单加载
+  // ==========================================
+  async function loadProductMenu() {
+    try {
+      const repo = 'kehu-1/kehu-1-website';
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/products`);
+      const files = await res.json();
+      if (!Array.isArray(files) || files.length === 0) return;
+
+      const products = [];
+      for (let file of files) {
+        if (!file.name.endsWith('.md')) continue;
+        const rawRes = await fetch(file.download_url);
+        const text = await rawRes.text();
+        const parts = text.split('---');
+        const frontmatter = parts[1] || '';
+        
+        const catMatch = frontmatter.match(/category:\s*(.*)/);
+        const titleMatch = frontmatter.match(/title:\s*(.*)/);
+        const descMatch = frontmatter.match(/description:\s*(.*)/);
+        
+        if (catMatch && titleMatch) {
+          products.push({
+            category: catMatch[1].trim(),
+            title: titleMatch[1].trim(),
+            description: descMatch ? descMatch[1].trim() : '',
+            file: file.name
+          });
+        }
+      }
+
+      // 按分类排序，确保相同分类的产品连在一起
+      products.sort((a, b) => a.category.localeCompare(b.category));
+
+      const menu = document.getElementById('product-dropdown-menu');
+      let html = '<div class="product-mega-content">';
+      
+      let lastCategory = '';
+      products.forEach(item => {
+        // 如果是新分类，左侧大标题显示分类名，否则留空（避免重复显示）
+        const showCat = item.category !== lastCategory;
+        lastCategory = item.category;
+        
+        html += `
+          <div class="product-cat">${showCat ? item.category : ''}</div>
+          <div class="product-name"><a href="product-detail.html?id=${encodeURIComponent(item.file)}">${item.title}</a></div>
+          <div class="product-desc">${item.description}</div>
+        `;
+      });
+      html += '</div>';
+      
+      menu.innerHTML = html;
+
+    } catch (e) {
+      console.error('加载产品菜单失败:', e);
+    }
+  }
+
+  // ==========================================
+  // 8. 页面加载初始化
   // ==========================================
   window.addEventListener('load', () => {
     initSlider('product-track', 'product-dots');
@@ -869,22 +979,34 @@
     loadSocial(); 
     loadNavCategories(); 
     loadHomepageStories(); 
+    loadProductMenu(); // 加载产品超级菜单
 
     const headerElement = document.querySelector('header');
     if (headerElement) {
       document.documentElement.style.setProperty('--header-height', headerElement.offsetHeight + 'px');
     }
 
-    const navDropdown = document.querySelector('.nav-dropdown');
-    const dropdownMenu = document.querySelector('.dropdown-menu');
+    const navDropdowns = document.querySelectorAll('.nav-dropdown');
     let hoverTimeout = null;
 
-    if (navDropdown && dropdownMenu) {
-      navDropdown.addEventListener('mouseenter', () => { if (hoverTimeout) clearTimeout(hoverTimeout); dropdownMenu.classList.add('show'); });
-      navDropdown.addEventListener('mouseleave', () => { hoverTimeout = setTimeout(() => { dropdownMenu.classList.remove('show'); }, 200); });
+    navDropdowns.forEach(dropdown => {
+      const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+      if (!dropdownMenu) return;
+
+      dropdown.addEventListener('mouseenter', () => { 
+        if (hoverTimeout) clearTimeout(hoverTimeout); 
+        // 关闭其他已打开的菜单
+        document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
+        dropdownMenu.classList.add('show'); 
+      });
+      
+      dropdown.addEventListener('mouseleave', () => { 
+        hoverTimeout = setTimeout(() => { dropdownMenu.classList.remove('show'); }, 200); 
+      });
+      
       dropdownMenu.addEventListener('mouseenter', () => { if (hoverTimeout) clearTimeout(hoverTimeout); });
       dropdownMenu.addEventListener('mouseleave', () => { dropdownMenu.classList.remove('show'); });
-    }
+    });
   });
 </script>
 </body>
