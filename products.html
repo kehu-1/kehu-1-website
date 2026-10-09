@@ -3,192 +3,203 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>产品展示 - 你的品牌名</title>
+  <title>产品详情 - 你的品牌名</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap');
+    :root {
+      --tech-green: #00FFB9;
+      --dark-bg: #0F172A;
+      --text-main: #111827;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.6; background: #f8fafc; }
-    a { text-decoration: none; transition: 0.3s; }
+    body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); line-height: 1.8; background: #fff; }
+    a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* 深色磨砂导航 */
-    header { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); }
-    header .logo { font-size: 1.5rem; font-weight: bold; color: #ffffff; }
-    nav a { margin-left: 2rem; color: #cbd5e1; font-weight: 500; font-size: 0.95rem; }
-    nav a:hover, nav a.active { color: #0ea5e9; }
+    /* 顶部导航 */
+    header { background: var(--dark-bg); position: sticky; top: 0; z-index: 1000; }
+    .header-inner { max-width: 1340px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.6rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
+    .back-btn { color: var(--tech-green); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; }
+    .back-btn:hover { color: #fff; }
 
-    /* 内容区 */
-    section { padding: 10rem 8% 6rem; max-width: 1200px; margin: 0 auto; }
-    .section-title { text-align: center; margin-bottom: 5rem; }
-    .section-title h2 { font-size: 2.5rem; color: #0f172a; }
-    .section-title h2 span { color: #0ea5e9; }
-    .section-title p { color: #64748b; font-size: 1.1rem; }
+    /* 深色首屏区 */
+    .hero-product { background: var(--dark-bg); color: #fff; padding: 6rem 2rem; }
+    .hero-container { max-width: 1340px; margin: 0 auto; display: flex; gap: 4rem; align-items: center; }
+    .hero-left { flex: 1.2; }
+    .hero-right { flex: 1; display: flex; justify-content: flex-end; }
+    .hero-right img { max-width: 100%; max-height: 450px; object-fit: contain; }
 
-    /* 分类标题 */
-    .category-title { font-size: 1.8rem; color: #0f172a; margin: 4rem 0 2rem; border-left: 4px solid #0ea5e9; padding-left: 1rem; }
+    .breadcrumb { font-size: 0.9rem; color: #9CA3AF; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+    .breadcrumb a { color: #9CA3AF; }
+    .breadcrumb a:hover { color: var(--tech-green); }
+    .hero-product h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -1px; }
+    .hero-product .hero-desc { font-size: 1.2rem; color: #CBD5E1; margin-bottom: 2.5rem; max-width: 600px; line-height: 1.7; }
 
-    /* 产品网格 */
-    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-    .product-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; transition: 0.3s; }
-    .product-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.06); }
-    .product-card img { width: 100%; height: 220px; object-fit: cover; }
-    .product-info { padding: 1.5rem; display: flex; flex-direction: column; }
-    .product-info h4 { font-size: 1.2rem; color: #0f172a; margin-bottom: 0.5rem; }
-    .product-info p { font-size: 0.9rem; color: #64748b; margin-bottom: 1.2rem; flex-grow: 1; }
-    .learn-more-btn { background: #0ea5e9; color: #fff; border: none; padding: 0.8rem 1.5rem; border-radius: 6px; cursor: pointer; font-weight: 500; font-size: 0.9rem; text-align: center; transition: 0.3s; }
-    .learn-more-btn:hover { background: #0284c7; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { padding: 1rem 2.5rem; background: var(--tech-green); color: #000; font-weight: 700; border: none; cursor: pointer; font-size: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary:hover { background: #00E6A6; transform: translateY(-2px); }
+    .btn-secondary { padding: 1rem 2.5rem; background: transparent; color: #fff; font-weight: 700; border: 1px solid #fff; cursor: pointer; font-size: 1rem; display: inline-block; }
+    .btn-secondary:hover { background: #fff; color: #000; transform: translateY(-2px); }
 
-    /* 模态框 */
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; }
-    .modal-content { background: #fff; padding: 2.5rem; border-radius: 12px; max-width: 700px; width: 90%; max-height: 85vh; overflow-y: auto; position: relative; }
-    .modal-close { position: absolute; top: 1rem; right: 1.5rem; font-size: 1.8rem; cursor: pointer; color: #666; line-height: 1; }
-    .modal-close:hover { color: #000; }
-    .modal-content img { max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 1.5rem; }
-    .modal-content h4 { font-size: 1.8rem; color: #0f172a; margin-bottom: 1rem; }
-    .modal-content p { color: #475569; margin-bottom: 1rem; line-height: 1.8; }
+    /* 正文区 */
+    .content-body { max-width: 1000px; margin: 0 auto; padding: 5rem 2rem; font-size: 1.05rem; color: #374151; }
+    .content-body p { margin-bottom: 1.5rem; line-height: 1.9; }
+    .content-body h2 { font-size: 2.2rem; font-weight: 800; margin: 4rem 0 1.5rem; color: var(--text-main); }
+    .content-body h3 { font-size: 1.6rem; font-weight: 700; margin: 3rem 0 1rem; color: var(--text-main); }
+    .content-body img { max-width: 100%; height: auto; margin: 2.5rem 0; border-radius: 8px; }
+    .content-body ul, .content-body ol { margin: 1.5rem 0 2rem 1.5rem; }
+    .content-body li { margin-bottom: 0.8rem; }
+    .layout-2col { display: flex; gap: 3rem; align-items: center; margin: 4rem 0; }
+    .layout-2col .col-text { flex: 1; }
+    .layout-2col .col-img { flex: 1; }
+    .layout-2col .col-img img { margin: 0; width: 100%; }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; margin: 3rem 0 5rem; }
+    .feature-item { text-align: left; }
+    .feature-item .icon-placeholder { font-size: 3rem; color: var(--tech-green); margin-bottom: 1.5rem; line-height: 1; }
+    .feature-item h4 { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-main); }
+    .feature-item p { font-size: 0.95rem; color: #6B7280; line-height: 1.7; margin-bottom: 0; }
 
-    footer { background: #0a0f1c; color: #94a3b8; text-align: center; padding: 3rem 8%; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); }
+    /* 视频弹窗 */
+    .video-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.85); z-index: 3000; justify-content: center; align-items: center; }
+    .video-modal-content { position: relative; width: 80vw; max-width: 1000px; aspect-ratio: 16 / 9; background: #000; }
+    .video-modal-content iframe { width: 100%; height: 100%; border: none; }
+    .video-modal-close { position: absolute; top: -45px; right: 0; font-size: 2.5rem; color: #fff; cursor: pointer; line-height: 1; }
+    .video-modal-close:hover { color: var(--tech-green); }
 
-    @media (max-width: 768px) { .section-title h2 { font-size: 2rem; } }
-     /* 右下角悬浮联系按钮 */
-    .floating-contact {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: rgba(15, 23, 42, 0.85); /* 磨砂深色 */
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      color: #fff;
-      padding: 0.8rem 1.5rem;
-      border-radius: 50px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 500;
-      font-size: 0.95rem;
-      z-index: 9999;
-      transition: 0.3s ease;
-      border: 1px solid rgba(255,255,255,0.1);
+    @media (max-width: 992px) {
+      .hero-container { flex-direction: column; gap: 2rem; }
+      .hero-product h1 { font-size: 2.5rem; }
+      .layout-2col { flex-direction: column; gap: 2rem; }
+      .feature-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .video-modal-content { width: 95vw; }
     }
-    .floating-contact:hover {
-      background: #0ea5e9; /* 悬浮变蓝 */
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(14, 165, 233, 0.4);
-    }
-    /* 手机端稍微缩小一点，避免遮挡 */
-    @media (max-width: 768px) {
-      .floating-contact {
-        bottom: 1.5rem;
-        right: 1.5rem;
-        padding: 0.7rem 1.2rem;
-        font-size: 0.85rem;
-      }
-    }
+    .loading { text-align: center; color: #999; padding: 8rem 2rem; font-size: 1.2rem; }
+    .error { text-align: center; color: #e74c39; padding: 8rem 2rem; font-size: 1.1rem; }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">你的品牌名</div>
-  <nav>
-    <a href="index.html">首页</a>
-    <a href="products.html" class="active">产品展示</a>
-    <a href="advantages.html">生产优势</a>
-    <a href="contact.html">联系我们</a>
-    <a href="en/products.html" style="color: #0ea5e9;">English</a>
-  </nav>
+  <div class="header-inner">
+    <div class="logo">你的品牌名</div>
+    <a href="index.html" class="back-btn">← 返回首页</a>
+  </div>
 </header>
 
-<section>
-  <div class="section-title">
-    <h2>产品<span>展示</span></h2>
-    <p>我们提供三大类核心产品，支持定制化生产</p>
-  </div>
+<div id="page-content">
+  <div class="loading">正在加载产品详情...</div>
+</div>
 
-  <!-- 分类 1 -->
-  <h3 class="category-title">类别一：核心工业设备</h3>
-  <div class="product-grid">
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=500&q=80" alt="工业设备 A">
-      <div class="product-info">
-        <h4>工业设备 A</h4>
-        <p>高精度、耐用，适用于各种工业场景。支持深度定制。</p>
-        <button class="learn-more-btn" onclick="openProduct('工业设备 A', 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80', '这是工业设备 A 的详细说明。它采用高强度合金材料制造，具有极高的耐用性和稳定性。广泛应用于汽车制造、航空航天等精密加工领域。支持各类非标定制，可根据客户图纸进行生产。')">了解更多 →</button>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=500&q=80" alt="工业设备 B">
-      <div class="product-info">
-        <h4>工业设备 B</h4>
-        <p>高效节能，降低您的长期运营成本。已通过多项认证。</p>
-        <button class="learn-more-btn" onclick="openProduct('工业设备 B', 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80', '工业设备 B 是新一代节能产品。采用先进的变频控制技术，相比传统机型节能30%以上。非常适合需要长时间连续运行的产线环境。')">了解更多 →</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 分类 2 -->
-  <h3 class="category-title">类别二：精密加工配件</h3>
-  <div class="product-grid">
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=500&q=80" alt="精密配件 C">
-      <div class="product-info">
-        <h4>精密配件 C</h4>
-        <p>模块化设计，方便维护与升级。适用于复杂工业环境。</p>
-        <button class="learn-more-btn" onclick="openProduct('精密配件 C', 'https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=800&q=80', '精密配件 C 采用模块化架构，维修更换极其方便。所有接口均遵循国际标准，具备优异的抗腐蚀和抗磨损性能。')">了解更多 →</button>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=500&q=80" alt="精密配件 D">
-      <div class="product-info">
-        <h4>精密配件 D</h4>
-        <p>高硬度材料，超长使用寿命。接受 OEM/ODM 订单。</p>
-        <button class="learn-more-btn" onclick="openProduct('精密配件 D', 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80', '精密配件 D 专为极端工况设计，采用特殊热处理工艺，硬度达到 HRC60 以上。是重工机械的理想选择。')">了解更多 →</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 分类 3 -->
-  <h3 class="category-title">类别三：定制化解决方案</h3>
-  <div class="product-grid">
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=500&q=80" alt="定制方案 E">
-      <div class="product-info">
-        <h4>定制方案 E</h4>
-        <p>根据客户图纸与需求，提供从设计到量产的一站式服务。</p>
-        <button class="learn-more-btn" onclick="openProduct('定制方案 E', 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80', '我们拥有一支经验丰富的工程师团队，可以根据客户提供的图纸、样品或想法，进行逆向工程和正向设计。提供从原型打样到批量生产的全流程服务。')">了解更多 →</button>
-      </div>
-    </div>
-  </div>
-
-</section>
-
-<footer>
-  <p>&copy; 2026 你的品牌名. All rights reserved.</p>
-</footer>
-
-<!-- 产品详情弹窗 -->
-<div id="product-modal" class="modal">
-  <div class="modal-content">
-    <span class="modal-close" onclick="closeProductModal()">&times;</span>
-    <img id="pm-img" src="" alt="产品大图">
-    <h4 id="pm-title"></h4>
-    <p id="pm-desc"></p>
-    <a href="contact.html" class="btn" style="display:inline-block; padding:0.8rem 2rem; background:#0ea5e9; color:#fff; border-radius:6px; margin-top:1rem;">获取报价 →</a>
+<!-- 视频弹窗 -->
+<div id="video-modal" class="video-modal" onclick="closeVideoModal(event)">
+  <div class="video-modal-content" onclick="event.stopPropagation()">
+    <span class="video-modal-close" onclick="closeVideoModal()">&times;</span>
+    <iframe id="video-iframe" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
-  function openProduct(title, imgSrc, desc) {
-    document.getElementById('pm-title').innerText = title;
-    document.getElementById('pm-img').src = imgSrc;
-    document.getElementById('pm-desc').innerText = desc;
-    document.getElementById('product-modal').style.display = 'flex';
+  let currentVideoUrl = '';
+
+  async function loadProductDetail() {
+    const params = new URLSearchParams(window.location.search);
+    const fileId = params.get('id');
+    const pageContent = document.getElementById('page-content');
+
+    if (!fileId) {
+      pageContent.innerHTML = '<div class="error">未找到产品 ID，请从首页点击产品进入。<br><a href="index.html" style="color:var(--tech-green);text-decoration:underline;">返回首页</a></div>';
+      return;
+    }
+
+    try {
+      const repo = 'kehu-1/kehu-1-website';
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/products/${fileId}`);
+      if (!res.ok) throw new Error('文件不存在');
+      const data = await res.json();
+      const rawRes = await fetch(data.download_url);
+      const text = await rawRes.text();
+
+      const parts = text.split('---');
+      const frontmatter = parts[1] || '';
+      const bodyText = parts.slice(2).join('---').trim();
+
+      const getVal = (key) => {
+        const match = frontmatter.match(new RegExp(`${key}:\\s*(.*)`));
+        return match ? match[1].trim() : '';
+      };
+
+      const title = getVal('title') || '未命名产品';
+      const category = getVal('category') || '未分类';
+      const description = getVal('description') || '';
+      const heroImage = getVal('image') || ''; 
+      const btn1Text = getVal('btn1_text') || '观看视频介绍';
+      const btn2Text = getVal('btn2_text') || '联系我们';
+      const videoUrl = getVal('video_url') || ''; // 从 CMS 获取视频链接
+
+      currentVideoUrl = videoUrl; // 存到全局变量
+      const htmlBody = marked.parse(bodyText);
+
+      // 判断是否有视频链接，决定按钮行为
+      const videoBtnHtml = videoUrl 
+        ? `<button class="btn-primary" onclick="openVideoModal()">▶ ${btn1Text}</button>`
+        : `<a href="#content" class="btn-primary">${btn1Text}</a>`;
+
+      pageContent.innerHTML = `
+        <div class="hero-product">
+          <div class="hero-container">
+            <div class="hero-left">
+              <div class="breadcrumb">
+                <a href="index.html">首页</a> <span>›</span>
+                <a href="products.html">产品</a> <span>›</span>
+                <span>${category}</span> <span>›</span>
+                <span style="color:#fff;">${title}</span>
+              </div>
+              <h1>${title}</h1>
+              <p class="hero-desc">${description}</p>
+              <div class="hero-btns">
+                ${videoBtnHtml}
+                <a href="contact.html" class="btn-secondary">${btn2Text}</a>
+              </div>
+            </div>
+            <div class="hero-right">
+              ${heroImage ? `<img src="${heroImage}" alt="${title}">` : '<div style="color:#4B5563;">请上传产品主图</div>'}
+            </div>
+          </div>
+        </div>
+        <div class="content-body" id="content">
+          ${htmlBody}
+        </div>
+      `;
+    } catch (e) {
+      pageContent.innerHTML = '<div class="error">加载产品详情失败，请检查内容是否存在。<br><a href="index.html" style="color:var(--tech-green);text-decoration:underline;">返回首页</a></div>';
+    }
   }
-  function closeProductModal() {
-    document.getElementById('product-modal').style.display = 'none';
+
+  // 打开视频弹窗（利用 YouTube 的 embed 链接）
+  function openVideoModal() {
+    if (!currentVideoUrl) return;
+    
+    // 从普通 YouTube 链接中提取视频 ID，并转换为嵌入链接
+    let embedUrl = currentVideoUrl;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = currentVideoUrl.match(regExp);
+    if (match && match[2].length === 11) {
+      embedUrl = `https://www.youtube.com/embed/${match[2]}?autoplay=1&rel=0`;
+    }
+
+    document.getElementById('video-iframe').src = embedUrl;
+    document.getElementById('video-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
   }
+
+  function closeVideoModal(event) {
+    document.getElementById('video-modal').style.display = 'none';
+    document.getElementById('video-iframe').src = ''; // 停止视频播放
+    document.body.style.overflow = 'auto';
+  }
+
+  window.addEventListener('load', loadProductDetail);
 </script>
-<a href="contact.html" class="floating-contact">
-  ✉️ 联系我询价
-</a>
 </body>
 </html>
