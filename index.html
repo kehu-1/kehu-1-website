@@ -30,10 +30,9 @@
     .header-top .tools a:hover { color: var(--tech-green); }
     .header-bottom { border-top: 1px solid rgba(255,255,255,0.05); }
     .header-bottom .nav-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
-    /* 统一设置导航栏间距，直接用 gap 属性，不管是直接链接还是下拉菜单，间距都一样 */
-    .header-bottom nav { display: flex; align-items: center; gap: 2.5rem; margin-left: 1.5rem; }
     
-    /* 统一样式，涵盖直接链接和下拉菜单内部的链接 */
+    /* 【修改点1】统一导航栏间距，不管是直接链接还是下拉菜单，间距全部一致 */
+    .header-bottom nav { display: flex; align-items: center; gap: 2.5rem; margin-left: 1.5rem; }
     .header-bottom nav > a, 
     .header-bottom nav .nav-dropdown > a { 
       color: #CBD5E1; 
@@ -43,66 +42,28 @@
       display: block;
       transition: 0.3s;
     }
-    
-    /* 悬停和激活状态变色 */
     .header-bottom nav > a:hover, 
     .header-bottom nav > a.active, 
     .header-bottom nav .nav-dropdown > a:hover { 
       color: var(--tech-green); 
     }
-    .header-bottom nav > a:hover, .header-bottom nav > a.active { color: var(--tech-green); }
     
     .nav-dropdown { position: relative; display: inline-block; }
-    .nav-dropdown > a { color: #CBD5E1; font-size: 1rem; font-weight: 500; padding-bottom: 0.5rem; display: block; cursor: pointer; }
-    .nav-dropdown > a:hover { color: var(--tech-green); }
     .dropdown-menu { display: none; position: fixed; top: var(--header-height); left: 0; width: 100vw; background: var(--dark-bg); box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 1001; border-top: 1px solid rgba(255,255,255,0.08); max-height: calc(100vh - var(--header-height)); overflow-y: auto; }
     .dropdown-menu.show { display: block; }
     
-    /* 客户故事下拉菜单布局 */
     .mega-menu-content { max-width: 1340px; margin: 0 auto; padding: 3rem 2rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem 4rem; }
     .dropdown-menu .category-group { display: flex; flex-direction: column; }
     .dropdown-menu .category-group h4 { color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 0.5rem; letter-spacing: 0.5px; white-space: nowrap; }
     .dropdown-menu .category-group a { color: #CBD5E1; font-size: 0.95rem; padding: 0.6rem 0; display: block; border-bottom: 1px solid rgba(255,255,255,0.03); transition: 0.3s; white-space: nowrap; }
     .dropdown-menu .category-group a:hover { color: var(--tech-green); padding-left: 0.3rem; }
 
-    /* 产品展示超级菜单布局（左侧分类，中间产品名，右侧简介） */
-    .product-mega-content {
-      max-width: 1340px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
-      display: grid;
-      grid-template-columns: 220px 320px 1fr;
-      gap: 1rem 3rem;
-    }
-    .product-cat {
-      color: #fff;
-      font-size: 1.1rem;
-      font-weight: 700;
-      padding-bottom: 0.8rem;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      white-space: nowrap;
-    }
-    .product-name {
-      padding-bottom: 0.8rem;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    .product-name a {
-      color: #CBD5E1;
-      font-size: 1rem;
-      display: block;
-      transition: 0.3s;
-    }
-    .product-name a:hover {
-      color: var(--tech-green);
-      padding-left: 0.3rem;
-    }
-    .product-desc {
-      color: #9CA3AF;
-      font-size: 0.85rem;
-      padding-bottom: 0.8rem;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      line-height: 1.5;
-    }
+    .product-mega-content { max-width: 1340px; margin: 0 auto; padding: 3rem 2rem; display: grid; grid-template-columns: 220px 320px 1fr; gap: 1rem 3rem; }
+    .product-cat { color: #fff; font-size: 1.1rem; font-weight: 700; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.05); white-space: nowrap; }
+    .product-name { padding-bottom: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .product-name a { color: #CBD5E1; font-size: 1rem; display: block; transition: 0.3s; }
+    .product-name a:hover { color: var(--tech-green); padding-left: 0.3rem; }
+    .product-desc { color: #9CA3AF; font-size: 0.85rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.05); line-height: 1.5; }
 
     .header-bottom .search-wrapper { color: #CBD5E1; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin-left: 1rem; }
     .header-bottom .search-wrapper:hover { color: var(--tech-green); }
@@ -292,6 +253,7 @@
   </div>
   <div class="header-bottom">
     <div class="header-container nav-wrapper">
+      <!-- 【修改点2】按要求的顺序排列导航项 -->
       <nav>
         <a href="index.html" class="active">首页</a>
         
@@ -309,6 +271,11 @@
         <a href="contact.html">联系我了解更多</a>
         <a href="en/index.html" style="color: var(--tech-green);">English</a>
       </nav>
+      <div class="search-wrapper">🔍 搜索</div>
+    </div>
+  </div>
+</header>
+
 <!-- 1. 主轮播图 -->
 <div class="hero">
   <div class="slide active" style="background: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;">
@@ -341,7 +308,7 @@
   </div>
 </div>
 
-<!-- 3. 客户故事区（动态切换，由 Markdown 文件夹驱动） -->
+<!-- 3. 客户故事区 -->
 <div class="story-section">
   <div class="section-container story-grid">
     <div class="story-tabs" id="story-tabs-container">
@@ -559,9 +526,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
-  // ==========================================
   // 1. 主轮播逻辑
-  // ==========================================
   let currentSlide = 0; const slides = document.querySelectorAll('.slide'); const dots = document.querySelectorAll('.hero-indicator .dot'); let slideInterval;
   function showSlide(index) { slides.forEach(s => s.classList.remove('active')); dots.forEach(d => d.classList.remove('active')); slides[index].classList.add('active'); dots[index].classList.add('active'); currentSlide = index; }
   function goToSlide(index) { showSlide(index); resetInterval(); }
@@ -569,9 +534,7 @@
   function resetInterval() { clearInterval(slideInterval); autoPlay(); }
   autoPlay();
 
-  // ==========================================
   // 2. 通用滑动逻辑
-  // ==========================================
   const sliderStates = { 'product-track': { current: 0 }, 'solution-track': { current: 0 }, 'news-track': { current: 0 }, 'social-track': { current: 0 } };
 
   function initSlider(trackId, dotsId) {
@@ -607,9 +570,7 @@
     goToPage(trackId, state.current + direction);
   }
 
-  // ==========================================
   // 3. 首页客户故事区（Markdown 驱动）
-  // ==========================================
   async function loadHomepageStories() {
     try {
       const repo = 'kehu-1/kehu-1-website';
@@ -697,9 +658,7 @@
     document.getElementById('story-card2-link').href = tab.card2_link;
   }
 
-  // ==========================================
   // 4. 新闻动态加载
-  // ==========================================
   let newsArticles = []; let currentNewsIndex = 0; let currentImageIndex = 0;
 
   async function loadNews() {
@@ -756,9 +715,7 @@
     }
   }
 
-  // ==========================================
   // 5. 社交媒体加载
-  // ==========================================
   let socialPosts = [];
 
   function getPlatformIcon(platform) {
@@ -868,9 +825,7 @@
   }
   function closeSocialModal() { document.getElementById('social-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
-  // ==========================================
   // 6. 导航栏客户故事大菜单加载
-  // ==========================================
   async function loadNavCategories() {
     try {
       const repo = 'kehu-1/kehu-1-website';
@@ -916,9 +871,7 @@
     }
   }
 
-  // ==========================================
   // 7. 导航栏产品展示超级菜单加载
-  // ==========================================
   async function loadProductMenu() {
     try {
       const repo = 'kehu-1/kehu-1-website';
@@ -948,7 +901,6 @@
         }
       }
 
-      // 按分类排序，确保相同分类的产品连在一起
       products.sort((a, b) => a.category.localeCompare(b.category));
 
       const menu = document.getElementById('product-dropdown-menu');
@@ -956,7 +908,6 @@
       
       let lastCategory = '';
       products.forEach(item => {
-        // 如果是新分类，左侧大标题显示分类名，否则留空（避免重复显示）
         const showCat = item.category !== lastCategory;
         lastCategory = item.category;
         
@@ -975,9 +926,7 @@
     }
   }
 
-  // ==========================================
   // 8. 页面加载初始化
-  // ==========================================
   window.addEventListener('load', () => {
     initSlider('product-track', 'product-dots');
     initSlider('solution-track', 'solution-dots');
@@ -985,7 +934,7 @@
     loadSocial(); 
     loadNavCategories(); 
     loadHomepageStories(); 
-    loadProductMenu(); // 加载产品超级菜单
+    loadProductMenu();
 
     const headerElement = document.querySelector('header');
     if (headerElement) {
@@ -1001,7 +950,6 @@
 
       dropdown.addEventListener('mouseenter', () => { 
         if (hoverTimeout) clearTimeout(hoverTimeout); 
-        // 关闭其他已打开的菜单
         document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
         dropdownMenu.classList.add('show'); 
       });
