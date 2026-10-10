@@ -30,9 +30,26 @@
     .header-top .tools a:hover { color: var(--tech-green); }
     .header-bottom { border-top: 1px solid rgba(255,255,255,0.05); }
     .header-bottom .nav-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
-    .header-bottom nav { display: flex; align-items: center; }
-    .header-bottom nav > a { color: #CBD5E1; font-size: 1rem; margin-right: 1.5rem; font-weight: 500; padding-bottom: 0.5rem; }
-    .header-bottom nav > a:first-child { margin-left: 1.5rem; } 
+    /* 统一设置导航栏间距，直接用 gap 属性，不管是直接链接还是下拉菜单，间距都一样 */
+    .header-bottom nav { display: flex; align-items: center; gap: 2.5rem; margin-left: 1.5rem; }
+    
+    /* 统一样式，涵盖直接链接和下拉菜单内部的链接 */
+    .header-bottom nav > a, 
+    .header-bottom nav .nav-dropdown > a { 
+      color: #CBD5E1; 
+      font-size: 1rem; 
+      font-weight: 500; 
+      padding-bottom: 0.5rem; 
+      display: block;
+      transition: 0.3s;
+    }
+    
+    /* 悬停和激活状态变色 */
+    .header-bottom nav > a:hover, 
+    .header-bottom nav > a.active, 
+    .header-bottom nav .nav-dropdown > a:hover { 
+      color: var(--tech-green); 
+    }
     .header-bottom nav > a:hover, .header-bottom nav > a.active { color: var(--tech-green); }
     
     .nav-dropdown { position: relative; display: inline-block; }
@@ -278,31 +295,20 @@
       <nav>
         <a href="index.html" class="active">首页</a>
         
-        <!-- 产品展示（超级菜单） -->
-        <div class="nav-dropdown">
-          <a href="javascript:void(0)">产品展示</a>
-          <div class="dropdown-menu" id="product-dropdown-menu">
-            <!-- 超级菜单内容由 JS 渲染 -->
-          </div>
-        </div>
-        
-        <a href="advantages.html">生产优势</a>
-        
         <div class="nav-dropdown">
           <a href="javascript:void(0)">客户故事</a>
-          <div class="dropdown-menu" id="story-dropdown-menu">
-            <!-- 大菜单内容由 JS 渲染 -->
-          </div>
+          <div class="dropdown-menu" id="story-dropdown-menu"></div>
         </div>
         
-        <a href="contact.html">联系我询价</a>
+        <div class="nav-dropdown">
+          <a href="javascript:void(0)">产品展示</a>
+          <div class="dropdown-menu" id="product-dropdown-menu"></div>
+        </div>
+        
+        <a href="advantages.html">我的优势</a>
+        <a href="contact.html">联系我了解更多</a>
         <a href="en/index.html" style="color: var(--tech-green);">English</a>
       </nav>
-      <div class="search-wrapper">🔍 搜索</div>
-    </div>
-  </div>
-</header>
-
 <!-- 1. 主轮播图 -->
 <div class="hero">
   <div class="slide active" style="background: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;">
