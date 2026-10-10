@@ -61,15 +61,22 @@ content:
       - { name: "btn2_text", label: "按钮2文字", type: "string", default: "联系我们" }
       - { name: "video_url", label: "产品视频链接（YouTube）", type: "string" }
       
-      # 产品优势区块（三视图）
+      # 产品优势区块（三视图/细节图，支持1-6张）
       - { name: "advantage_title", label: "优势标题", type: "string", default: "面向未来的自动化系统" }
       - { name: "advantage_desc", label: "优势介绍（支持Markdown）", type: "text" }
-      - { name: "advantage_img1", label: "上传图片1", type: "image" }
-      - { name: "advantage_img1_desc", label: "图片1的描述（如：正面视图）", type: "string" }
-      - { name: "advantage_img2", label: "上传图片2", type: "image" }
-      - { name: "advantage_img2_desc", label: "图片2的描述（如：侧面接口细节）", type: "string" }
-      - { name: "advantage_img3", label: "上传图片3", type: "image" }
-      - { name: "advantage_img3_desc", label: "图片3的描述（如：背部散热设计）", type: "string" }
+      
+      - { name: "advantage_img1", label: "图片1（建议尺寸 1200x900）", type: "image" }
+      - { name: "advantage_img1_desc", label: "图片1的描述", type: "string" }
+      - { name: "advantage_img2", label: "图片2（建议尺寸 1200x900）", type: "image" }
+      - { name: "advantage_img2_desc", label: "图片2的描述", type: "string" }
+      - { name: "advantage_img3", label: "图片3（建议尺寸 1200x900）", type: "image" }
+      - { name: "advantage_img3_desc", label: "图片3的描述", type: "string" }
+      - { name: "advantage_img4", label: "图片4（建议尺寸 1200x900）", type: "image" }
+      - { name: "advantage_img4_desc", label: "图片4的描述", type: "string" }
+      - { name: "advantage_img5", label: "图片5（建议尺寸 1200x900）", type: "image" }
+      - { name: "advantage_img5_desc", label: "图片5的描述", type: "string" }
+      - { name: "advantage_img6", label: "图片6（建议尺寸 1200x900）", type: "image" }
+      - { name: "advantage_img6_desc", label: "图片6的描述", type: "string" }
 
       # 白皮书区块
       - { name: "whitepaper_title", label: "白皮书标题", type: "string", default: "数字服务中心 (DSC)" }
