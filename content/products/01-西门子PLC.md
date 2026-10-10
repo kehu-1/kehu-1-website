@@ -16,7 +16,9 @@ advantage_img3_desc: 很棒
 whitepaper_title: 数字服务中心 (DSC)
 whitepaper_desc: 超级厉害的白皮书介绍
 whitepaper_btn: 获取白皮书 ⬇️
-whitepaper_link: "#"
+whitepaper_link: "#https://assets.ctfassets.net/17si5cpawjzf/4nWwhdIjWK00y5uopd\
+  L4AJ/cdb0239aea80277e23731a7098904bac/siemens-juwi-microgrids-for-mining-whit\
+  e-paper.pdf"
 whitepaper_cover: /图片/1.jpg
 ---
 这里是产品的详细页面介绍。你点击产品后跳转的详情页，展示的就是这里的正文内容。
