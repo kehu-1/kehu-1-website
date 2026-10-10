@@ -32,7 +32,7 @@
     .btn-secondary { padding: 1rem 2.5rem; background: transparent; color: #fff; font-weight: 700; border: 1px solid #fff; cursor: pointer; font-size: 1rem; display: inline-block; border-radius: 4px; }
     .btn-secondary:hover { background: #fff; color: #000; transform: translateY(-2px); }
 
-    /* 通用两栏布局 (右侧面积更大调整: 左侧0.8, 右侧1.2) */
+    /* 通用两栏布局 (左侧文字0.8, 右侧图片1.2) */
     .section-2col { display: flex; gap: 4rem; align-items: center; padding: 6rem 2rem; max-width: 1340px; margin: 0 auto; }
     .section-2col .col-text { flex: 0.8; }
     .section-2col .col-media { flex: 1.2; }
@@ -41,23 +41,35 @@
     .section-2col ul { margin: 1.5rem 0 2rem 1.5rem; color: #6B7280; }
     .section-2col li { margin-bottom: 0.8rem; }
 
-    /* 轮播图样式（带底部半透明注释） */
+    /* 轮播图（白色半透明渐变文字背景） */
     .carousel-wrapper { position: relative; width: 100%; overflow: hidden; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
     .carousel-track { display: flex; transition: transform 0.5s ease; }
     .carousel-item { width: 100%; flex-shrink: 0; position: relative; }
     .carousel-item img { width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; display: block; }
-    .carousel-caption { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(15, 23, 42, 0.75); color: #fff; padding: 0.8rem 1.5rem; font-size: 0.95rem; text-align: center; backdrop-filter: blur(4px); }
+    
+    /* 核心修改：白底半透明渐变，文字变黑 */
+    .carousel-caption { 
+      position: absolute; 
+      bottom: 0; left: 0; right: 0; 
+      background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 100%);
+      color: #111827; /* 文字变深色 */
+      padding: 3rem 1.5rem 1rem; 
+      font-size: 0.95rem; 
+      font-weight: 600;
+      text-align: center; 
+    }
+    
     .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: #fff; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 1.6rem; display: flex; align-items: center; justify-content: center; z-index: 2; transition: 0.3s; }
     .carousel-btn:hover { background: var(--tech-green); color: #000; }
     .carousel-btn.prev { left: 15px; }
     .carousel-btn.next { right: 15px; }
 
-    /* 白皮书深色视频框（完美复刻图二风格） */
+    /* 白皮书深色视频框 */
     .video-preview-box {
       position: relative;
       width: 100%;
       aspect-ratio: 16 / 9;
-      background: #000000; /* 深色背景 */
+      background: #000000;
       border-radius: 8px;
       cursor: pointer;
       overflow: hidden;
@@ -71,7 +83,7 @@
       top: 0; left: 0;
       width: 100%; height: 100%;
       object-fit: cover;
-      opacity: 0.6; /* 让背景图稍微暗一点，凸显播放按钮 */
+      opacity: 0.6;
       transition: transform 0.3s, opacity 0.3s;
     }
     .video-preview-box:hover img { transform: scale(1.03); opacity: 0.8; }
@@ -86,10 +98,7 @@
       transition: 0.3s;
       box-shadow: 0 0 20px rgba(0,255,185,0.4);
     }
-    .video-preview-box:hover .play-icon {
-      background: #fff;
-      transform: scale(1.1);
-    }
+    .video-preview-box:hover .play-icon { background: #fff; transform: scale(1.1); }
 
     /* 视频弹窗 */
     .video-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.85); z-index: 3000; justify-content: center; align-items: center; }
@@ -173,18 +182,20 @@
       const btn1Text = getVal('btn1_text') || '用视频介绍产品';
       const btn2Text = getVal('btn2_text') || '联系我们';
       
-      // 提取视频链接
       let rawVideoUrl = getVal('video_url');
       currentVideoUrl = rawVideoUrl.replace(/['"]/g, '');
 
-      // 产品优势数据
+      // 产品优势数据（支持 1-6 张图片，自动过滤未填写的图片）
       const advTitle = getVal('advantage_title') || '';
       const advDesc = getVal('advantage_desc') || '';
       const advImages = [
         { src: getVal('advantage_img1'), desc: getVal('advantage_img1_desc') },
         { src: getVal('advantage_img2'), desc: getVal('advantage_img2_desc') },
-        { src: getVal('advantage_img3'), desc: getVal('advantage_img3_desc') }
-      ].filter(item => item.src);
+        { src: getVal('advantage_img3'), desc: getVal('advantage_img3_desc') },
+        { src: getVal('advantage_img4'), desc: getVal('advantage_img4_desc') },
+        { src: getVal('advantage_img5'), desc: getVal('advantage_img5_desc') },
+        { src: getVal('advantage_img6'), desc: getVal('advantage_img6_desc') }
+      ].filter(item => item.src); // 过滤掉没有上传的图片
 
       // 白皮书数据
       const wpTitle = getVal('whitepaper_title') || '数字服务中心 (DSC)';
@@ -199,7 +210,7 @@
         ? `<button class="btn-primary" onclick="openVideoModal('${currentVideoUrl}')">▶ ${btn1Text}</button>`
         : `<button class="btn-primary" onclick="alert('暂未添加视频')">▶ ${btn1Text}</button>`;
 
-      // 生成轮播图
+      // 生成轮播图（根据用户填写的图片数量自动生成）
       let carouselHtml = '';
       if (advImages.length > 0) {
         carouselHtml = `
@@ -207,7 +218,7 @@
             <div class="carousel-track" id="carousel-track">
               ${advImages.map(item => `
                 <div class="carousel-item">
-                  <img src="${item.src}" alt="产品图">
+                  <img src="${item.src}" alt="产品细节图">
                   ${item.desc ? `<div class="carousel-caption">${item.desc}</div>` : ''}
                 </div>
               `).join('')}
@@ -220,21 +231,19 @@
         `;
       }
 
-      // 生成白皮书视频框（只要有链接就显示，样式按照图二深色背景）
+      // 生成白皮书视频框
       let wpVideoHtml = '';
       if (currentVideoUrl) {
-        let thumbUrl = heroImage; // 默认用产品主图
+        let thumbUrl = heroImage; 
         if (customCover) {
           thumbUrl = customCover;
         } else {
-          // 如果能解析出 YouTube ID，自动抓取高清封面
           const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
           const match = currentVideoUrl.match(regExp);
           if (match && match[2].length === 11) {
             thumbUrl = `https://img.youtube.com/vi/${match[2]}/maxresdefault.jpg`;
           }
         }
-
         wpVideoHtml = `
           <div class="video-preview-box" onclick="openVideoModal('${currentVideoUrl}')">
             <img src="${thumbUrl}" alt="产品视频封面">
@@ -268,7 +277,7 @@
           </div>
         </div>
 
-        <!-- 区块 1：产品优势 + 图片滑动 -->
+        <!-- 区块 1：产品优势 + 细节图滑动 -->
         <div class="section-2col">
           <div class="col-text">
             <h2>${advTitle}</h2>
@@ -279,7 +288,7 @@
           </div>
         </div>
 
-        <!-- 区块 2：白皮书 + 视频预览（完美复刻西门子深色框） -->
+        <!-- 区块 2：白皮书 + 视频预览 -->
         <div class="section-2col" style="background: #F8FAFC;">
           <div class="col-text">
             <h2>${wpTitle}</h2>
