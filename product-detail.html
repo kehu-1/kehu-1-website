@@ -34,8 +34,8 @@
 
     /* 通用两栏布局 (右侧面积更大调整: 左侧0.8, 右侧1.2) */
     .section-2col { display: flex; gap: 4rem; align-items: center; padding: 6rem 2rem; max-width: 1340px; margin: 0 auto; }
-    .section-2col .col-text { flex: 0.8; }  /* 原来是 1.2，调小左边 */
-    .section-2col .col-media { flex: 1.2; } /* 原来是 1，调大右边 */
+    .section-2col .col-text { flex: 0.8; }
+    .section-2col .col-media { flex: 1.2; }
     .section-2col h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 1.5rem; color: var(--text-main); }
     .section-2col p { font-size: 1.05rem; color: #6B7280; margin-bottom: 1.5rem; line-height: 1.9; }
     .section-2col ul { margin: 1.5rem 0 2rem 1.5rem; color: #6B7280; }
@@ -52,12 +52,44 @@
     .carousel-btn.prev { left: 15px; }
     .carousel-btn.next { right: 15px; }
 
-    /* 视频封面点击播放 */
-    .video-preview { position: relative; width: 100%; cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
-    .video-preview img { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; display: block; transition: transform 0.3s; }
-    .video-preview:hover img { transform: scale(1.03); }
-    .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 70px; height: 70px; background: var(--tech-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #000; z-index: 2; transition: 0.3s; }
-    .video-preview:hover .play-icon { background: #fff; transform: translate(-50%, -50%) scale(1.1); }
+    /* 白皮书深色视频框（完美复刻图二风格） */
+    .video-preview-box {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000000; /* 深色背景 */
+      border-radius: 8px;
+      cursor: pointer;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    .video-preview-box img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.6; /* 让背景图稍微暗一点，凸显播放按钮 */
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .video-preview-box:hover img { transform: scale(1.03); opacity: 0.8; }
+    .video-preview-box .play-icon {
+      position: relative;
+      z-index: 2;
+      width: 80px; height: 80px;
+      background: var(--tech-green);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; color: #000;
+      transition: 0.3s;
+      box-shadow: 0 0 20px rgba(0,255,185,0.4);
+    }
+    .video-preview-box:hover .play-icon {
+      background: #fff;
+      transform: scale(1.1);
+    }
 
     /* 视频弹窗 */
     .video-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.85); z-index: 3000; justify-content: center; align-items: center; }
@@ -79,7 +111,7 @@
       .feature-grid { grid-template-columns: 1fr; gap: 2rem; }
       .video-modal-content { width: 95vw; }
       .section-2col .col-media { width: 100%; }
-      .section-2col .col-text { width: 100%; } /* 手机端占满 */
+      .section-2col .col-text { width: 100%; }
     }
     .loading { text-align: center; color: #999; padding: 8rem 2rem; font-size: 1.2rem; }
     .error { text-align: center; color: #e74c39; padding: 8rem 2rem; }
@@ -141,10 +173,11 @@
       const btn1Text = getVal('btn1_text') || '用视频介绍产品';
       const btn2Text = getVal('btn2_text') || '联系我们';
       
+      // 提取视频链接
       let rawVideoUrl = getVal('video_url');
       currentVideoUrl = rawVideoUrl.replace(/['"]/g, '');
 
-      // 1. 产品优势数据（读取三张图和对应的描述）
+      // 产品优势数据
       const advTitle = getVal('advantage_title') || '';
       const advDesc = getVal('advantage_desc') || '';
       const advImages = [
@@ -153,12 +186,11 @@
         { src: getVal('advantage_img3'), desc: getVal('advantage_img3_desc') }
       ].filter(item => item.src);
 
-      // 2. 白皮书数据
+      // 白皮书数据
       const wpTitle = getVal('whitepaper_title') || '数字服务中心 (DSC)';
       const wpDesc = getVal('whitepaper_desc') || '';
       const wpBtn = getVal('whitepaper_btn') || '获取白皮书 ⬇️';
       const wpLink = getVal('whitepaper_link') || '#';
-      let wpVideoUrl = getVal('whitepaper_video_url').replace(/['"]/g, '');
       const customCover = getVal('whitepaper_cover').replace(/['"]/g, '');
 
       const htmlBody = marked.parse(bodyText);
@@ -167,7 +199,7 @@
         ? `<button class="btn-primary" onclick="openVideoModal('${currentVideoUrl}')">▶ ${btn1Text}</button>`
         : `<button class="btn-primary" onclick="alert('暂未添加视频')">▶ ${btn1Text}</button>`;
 
-      // 生成轮播图（带描述小字）
+      // 生成轮播图
       let carouselHtml = '';
       if (advImages.length > 0) {
         carouselHtml = `
@@ -188,25 +220,29 @@
         `;
       }
 
-      // 生成白皮书视频预览
+      // 生成白皮书视频框（只要有链接就显示，样式按照图二深色背景）
       let wpVideoHtml = '';
-      if (wpVideoUrl) {
-        let thumbUrl = heroImage; 
+      if (currentVideoUrl) {
+        let thumbUrl = heroImage; // 默认用产品主图
         if (customCover) {
           thumbUrl = customCover;
         } else {
+          // 如果能解析出 YouTube ID，自动抓取高清封面
           const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-          const match = wpVideoUrl.match(regExp);
+          const match = currentVideoUrl.match(regExp);
           if (match && match[2].length === 11) {
             thumbUrl = `https://img.youtube.com/vi/${match[2]}/maxresdefault.jpg`;
           }
         }
+
         wpVideoHtml = `
-          <div class="video-preview" onclick="openVideoModal('${wpVideoUrl}')">
-            <img src="${thumbUrl}" alt="白皮书视频封面">
+          <div class="video-preview-box" onclick="openVideoModal('${currentVideoUrl}')">
+            <img src="${thumbUrl}" alt="产品视频封面">
             <div class="play-icon">▶</div>
           </div>
         `;
+      } else {
+        wpVideoHtml = `<div class="video-preview-box" style="background: #1e293b; color: #94a3b8; text-align: center; padding: 2rem;">请在 CMS 中填写产品视频链接</div>`;
       }
 
       pageContent.innerHTML = `
@@ -232,7 +268,7 @@
           </div>
         </div>
 
-        <!-- 区块 1：左侧文字（小），右侧图片滑动区（大） -->
+        <!-- 区块 1：产品优势 + 图片滑动 -->
         <div class="section-2col">
           <div class="col-text">
             <h2>${advTitle}</h2>
@@ -243,7 +279,7 @@
           </div>
         </div>
 
-        <!-- 区块 2：白皮书 + 视频预览 -->
+        <!-- 区块 2：白皮书 + 视频预览（完美复刻西门子深色框） -->
         <div class="section-2col" style="background: #F8FAFC;">
           <div class="col-text">
             <h2>${wpTitle}</h2>
