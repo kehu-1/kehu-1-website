@@ -11,27 +11,23 @@
     body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); line-height: 1.8; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* 顶部导航与 Hero 区 */
+    /* 顶部导航 */
     header { background: var(--dark-bg); position: sticky; top: 0; z-index: 1000; }
     .header-inner { max-width: 1340px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-size: 1.6rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
     .back-btn { color: var(--tech-green); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; }
     
-    /* Hero 区布局修改：动态适应右侧是否有图片 */
-    .hero-product { background: var(--dark-bg); color: #fff; padding: 6rem 2rem; }
-    .hero-container { max-width: 1340px; margin: 0 auto; display: flex; gap: 4rem; align-items: center; }
-    
-    /* 如果没有图片，文字占满；如果有，左边宽一点 */
-    .hero-left { flex: 1.2; }
-    .hero-right { flex: 1; display: flex; justify-content: flex-end; }
-    .hero-right img { max-width: 100%; max-height: 450px; object-fit: contain; }
-
-    .breadcrumb { font-size: 0.9rem; color: #9CA3AF; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+    /* =========================================
+       Hero 区：纯文字居中，绝对没有图
+       ========================================= */
+    .hero-product { background: var(--dark-bg); color: #fff; padding: 8rem 2rem; }
+    .hero-container { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .breadcrumb { font-size: 0.9rem; color: #9CA3AF; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
     .breadcrumb a { color: #9CA3AF; }
     .breadcrumb .sep { color: #4B5563; }
     .hero-product h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -1px; }
-    .hero-product .hero-desc { font-size: 1.2rem; color: #CBD5E1; margin-bottom: 2.5rem; max-width: 600px; line-height: 1.7; }
-    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero-product .hero-desc { font-size: 1.2rem; color: #CBD5E1; margin-bottom: 2.5rem; max-width: 800px; line-height: 1.7; }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
     .btn-primary { padding: 1rem 2.5rem; background: var(--tech-green); color: #000; font-weight: 700; border: none; cursor: pointer; font-size: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 4px; }
     .btn-primary:hover { background: #00E6A6; transform: translateY(-2px); }
     .btn-secondary { padding: 1rem 2.5rem; background: transparent; color: #fff; font-weight: 700; border: 1px solid #fff; cursor: pointer; font-size: 1rem; display: inline-block; border-radius: 4px; }
@@ -43,8 +39,6 @@
     .section-2col .col-media { flex: 1.2; }
     .section-2col h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 1.5rem; color: var(--text-main); }
     .section-2col p { font-size: 1.05rem; color: #6B7280; margin-bottom: 1.5rem; line-height: 1.9; }
-    .section-2col ul { margin: 1.5rem 0 2rem 1.5rem; color: #6B7280; }
-    .section-2col li { margin-bottom: 0.8rem; }
 
     /* 轮播图 */
     .carousel-wrapper { position: relative; width: 100%; overflow: hidden; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
@@ -74,15 +68,10 @@
     .content-body { max-width: 1000px; margin: 0 auto; padding: 2rem 2rem 6rem; font-size: 1.05rem; color: #374151; }
     .content-body p { margin-bottom: 1.5rem; line-height: 1.9; }
     .content-body h2 { font-size: 2.2rem; font-weight: 800; margin: 4rem 0 1.5rem; color: var(--text-main); }
-    .content-body img { max-width: 100%; height: auto; margin: 2.5rem 0; border-radius: 8px; }
-    .layout-2col { display: flex; gap: 3rem; align-items: center; margin: 4rem 0; }
-    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; margin: 3rem 0 5rem; }
 
     @media (max-width: 992px) {
-      .hero-container, .section-2col { flex-direction: column; gap: 2rem; }
+      .section-2col { flex-direction: column; gap: 2rem; }
       .hero-product h1 { font-size: 2.5rem; }
-      .feature-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .video-modal-content { width: 95vw; }
       .section-2col .col-media { width: 100%; }
       .section-2col .col-text { width: 100%; }
     }
@@ -142,10 +131,6 @@
       const title = getVal('title') || '未命名产品';
       const category = getVal('category') || '未分类';
       const description = getVal('description') || '';
-      
-      // 详情页只读取 "image" 字段，绝不读取 "homepage_image"
-      const heroImage = getVal('image') || ''; 
-      
       const btn1Text = getVal('btn1_text') || '用视频介绍产品';
       const btn2Text = getVal('btn2_text') || '联系我们';
       
@@ -198,10 +183,10 @@
         `;
       }
 
-      // 生成白皮书视频框
+      // 生成白皮书视频框（绝不使用首页短图作为封面，只抓取 YouTube 封面或你上传的专属封面）
       let wpVideoHtml = '';
       if (currentVideoUrl) {
-        let thumbUrl = heroImage; 
+        let thumbUrl = ''; 
         if (customCover) {
           thumbUrl = customCover;
         } else {
@@ -213,7 +198,7 @@
         }
         wpVideoHtml = `
           <div class="video-preview-box" onclick="openVideoModal('${currentVideoUrl}')">
-            <img src="${thumbUrl}" alt="产品视频封面">
+            ${thumbUrl ? `<img src="${thumbUrl}" alt="产品视频封面">` : ''}
             <div class="play-icon">▶</div>
           </div>
         `;
@@ -221,32 +206,22 @@
         wpVideoHtml = `<div class="video-preview-box" style="background: #1e293b; color: #94a3b8; text-align: center; padding: 2rem;">请在 CMS 中填写产品视频链接</div>`;
       }
 
-      // 【核心修改】动态判断是否有顶部图片，如果没有，就不输出右侧区域的 HTML
-      const heroRightHtml = heroImage ? `
-        <div class="hero-right">
-          <img src="${heroImage}" alt="${title}">
-        </div>
-      ` : '';
-
       pageContent.innerHTML = `
+        <!-- 首屏：极简居中纯文字，杜绝任何图片 -->
         <div class="hero-product">
           <div class="hero-container">
-            <div class="hero-left" style="${heroImage ? '' : 'flex: 1; max-width: 800px; margin: 0 auto; text-align: center;'}">
-              <div class="breadcrumb" style="${heroImage ? '' : 'justify-content: center;'}">
-                <a href="index.html">首页</a> <span class="sep">›</span>
-                <a href="products.html">产品</a> <span class="sep">›</span>
-                <span>${category}</span> <span class="sep">›</span>
-                <span style="color:#fff;">${title}</span>
-              </div>
-              <h1>${title}</h1>
-              <p class="hero-desc" style="${heroImage ? '' : 'margin: 0 auto 2.5rem;'}">${description}</p>
-              <div class="hero-btns" style="${heroImage ? '' : 'justify-content: center;'}">
-                ${videoBtnHtml}
-                <a href="contact.html" class="btn-secondary">${btn2Text}</a>
-              </div>
+            <div class="breadcrumb">
+              <a href="index.html">首页</a> <span class="sep">›</span>
+              <a href="products.html">产品</a> <span class="sep">›</span>
+              <span>${category}</span> <span class="sep">›</span>
+              <span style="color:#fff;">${title}</span>
             </div>
-            <!-- 只有在有图的时候才插入这里 -->
-            ${heroRightHtml}
+            <h1>${title}</h1>
+            <p class="hero-desc">${description}</p>
+            <div class="hero-btns">
+              ${videoBtnHtml}
+              <a href="contact.html" class="btn-secondary">${btn2Text}</a>
+            </div>
           </div>
         </div>
 
