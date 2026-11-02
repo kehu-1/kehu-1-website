@@ -16,11 +16,16 @@
     .header-inner { max-width: 1340px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-size: 1.6rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
     .back-btn { color: var(--tech-green); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; }
+    
+    /* Hero 区布局修改：动态适应右侧是否有图片 */
     .hero-product { background: var(--dark-bg); color: #fff; padding: 6rem 2rem; }
     .hero-container { max-width: 1340px; margin: 0 auto; display: flex; gap: 4rem; align-items: center; }
+    
+    /* 如果没有图片，文字占满；如果有，左边宽一点 */
     .hero-left { flex: 1.2; }
     .hero-right { flex: 1; display: flex; justify-content: flex-end; }
     .hero-right img { max-width: 100%; max-height: 450px; object-fit: contain; }
+
     .breadcrumb { font-size: 0.9rem; color: #9CA3AF; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
     .breadcrumb a { color: #9CA3AF; }
     .breadcrumb .sep { color: #4B5563; }
@@ -32,7 +37,7 @@
     .btn-secondary { padding: 1rem 2.5rem; background: transparent; color: #fff; font-weight: 700; border: 1px solid #fff; cursor: pointer; font-size: 1rem; display: inline-block; border-radius: 4px; }
     .btn-secondary:hover { background: #fff; color: #000; transform: translateY(-2px); }
 
-    /* 通用两栏布局 (左侧文字0.8, 右侧图片1.2) */
+    /* 通用两栏布局 */
     .section-2col { display: flex; gap: 4rem; align-items: center; padding: 6rem 2rem; max-width: 1340px; margin: 0 auto; }
     .section-2col .col-text { flex: 0.8; }
     .section-2col .col-media { flex: 1.2; }
@@ -41,63 +46,22 @@
     .section-2col ul { margin: 1.5rem 0 2rem 1.5rem; color: #6B7280; }
     .section-2col li { margin-bottom: 0.8rem; }
 
-    /* 轮播图（白色半透明渐变文字背景） */
+    /* 轮播图 */
     .carousel-wrapper { position: relative; width: 100%; overflow: hidden; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
     .carousel-track { display: flex; transition: transform 0.5s ease; }
     .carousel-item { width: 100%; flex-shrink: 0; position: relative; }
     .carousel-item img { width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; display: block; }
-    
-    /* 核心修改：白底半透明渐变，文字变黑 */
-    .carousel-caption { 
-      position: absolute; 
-      bottom: 0; left: 0; right: 0; 
-      background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 100%);
-      color: #111827; /* 文字变深色 */
-      padding: 3rem 1.5rem 1rem; 
-      font-size: 0.95rem; 
-      font-weight: 600;
-      text-align: center; 
-    }
-    
+    .carousel-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 100%); color: #111827; padding: 3rem 1.5rem 1rem; font-size: 0.95rem; font-weight: 600; text-align: center; }
     .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: #fff; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 1.6rem; display: flex; align-items: center; justify-content: center; z-index: 2; transition: 0.3s; }
     .carousel-btn:hover { background: var(--tech-green); color: #000; }
     .carousel-btn.prev { left: 15px; }
     .carousel-btn.next { right: 15px; }
 
-    /* 白皮书深色视频框 */
-    .video-preview-box {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: #000000;
-      border-radius: 8px;
-      cursor: pointer;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    }
-    .video-preview-box img {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      opacity: 0.6;
-      transition: transform 0.3s, opacity 0.3s;
-    }
+    /* 白皮书视频框 */
+    .video-preview-box { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000000; border-radius: 8px; cursor: pointer; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+    .video-preview-box img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: transform 0.3s, opacity 0.3s; }
     .video-preview-box:hover img { transform: scale(1.03); opacity: 0.8; }
-    .video-preview-box .play-icon {
-      position: relative;
-      z-index: 2;
-      width: 80px; height: 80px;
-      background: var(--tech-green);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.8rem; color: #000;
-      transition: 0.3s;
-      box-shadow: 0 0 20px rgba(0,255,185,0.4);
-    }
+    .video-preview-box .play-icon { position: relative; z-index: 2; width: 80px; height: 80px; background: var(--tech-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: #000; transition: 0.3s; box-shadow: 0 0 20px rgba(0,255,185,0.4); }
     .video-preview-box:hover .play-icon { background: #fff; transform: scale(1.1); }
 
     /* 视频弹窗 */
@@ -178,14 +142,17 @@
       const title = getVal('title') || '未命名产品';
       const category = getVal('category') || '未分类';
       const description = getVal('description') || '';
+      
+      // 详情页只读取 "image" 字段，绝不读取 "homepage_image"
       const heroImage = getVal('image') || ''; 
+      
       const btn1Text = getVal('btn1_text') || '用视频介绍产品';
       const btn2Text = getVal('btn2_text') || '联系我们';
       
       let rawVideoUrl = getVal('video_url');
       currentVideoUrl = rawVideoUrl.replace(/['"]/g, '');
 
-      // 产品优势数据（支持 1-6 张图片，自动过滤未填写的图片）
+      // 产品优势数据
       const advTitle = getVal('advantage_title') || '';
       const advDesc = getVal('advantage_desc') || '';
       const advImages = [
@@ -195,7 +162,7 @@
         { src: getVal('advantage_img4'), desc: getVal('advantage_img4_desc') },
         { src: getVal('advantage_img5'), desc: getVal('advantage_img5_desc') },
         { src: getVal('advantage_img6'), desc: getVal('advantage_img6_desc') }
-      ].filter(item => item.src); // 过滤掉没有上传的图片
+      ].filter(item => item.src);
 
       // 白皮书数据
       const wpTitle = getVal('whitepaper_title') || '数字服务中心 (DSC)';
@@ -210,7 +177,7 @@
         ? `<button class="btn-primary" onclick="openVideoModal('${currentVideoUrl}')">▶ ${btn1Text}</button>`
         : `<button class="btn-primary" onclick="alert('暂未添加视频')">▶ ${btn1Text}</button>`;
 
-      // 生成轮播图（根据用户填写的图片数量自动生成）
+      // 生成轮播图
       let carouselHtml = '';
       if (advImages.length > 0) {
         carouselHtml = `
@@ -254,26 +221,32 @@
         wpVideoHtml = `<div class="video-preview-box" style="background: #1e293b; color: #94a3b8; text-align: center; padding: 2rem;">请在 CMS 中填写产品视频链接</div>`;
       }
 
+      // 【核心修改】动态判断是否有顶部图片，如果没有，就不输出右侧区域的 HTML
+      const heroRightHtml = heroImage ? `
+        <div class="hero-right">
+          <img src="${heroImage}" alt="${title}">
+        </div>
+      ` : '';
+
       pageContent.innerHTML = `
         <div class="hero-product">
           <div class="hero-container">
-            <div class="hero-left">
-              <div class="breadcrumb">
+            <div class="hero-left" style="${heroImage ? '' : 'flex: 1; max-width: 800px; margin: 0 auto; text-align: center;'}">
+              <div class="breadcrumb" style="${heroImage ? '' : 'justify-content: center;'}">
                 <a href="index.html">首页</a> <span class="sep">›</span>
                 <a href="products.html">产品</a> <span class="sep">›</span>
                 <span>${category}</span> <span class="sep">›</span>
                 <span style="color:#fff;">${title}</span>
               </div>
               <h1>${title}</h1>
-              <p class="hero-desc">${description}</p>
-              <div class="hero-btns">
+              <p class="hero-desc" style="${heroImage ? '' : 'margin: 0 auto 2.5rem;'}">${description}</p>
+              <div class="hero-btns" style="${heroImage ? '' : 'justify-content: center;'}">
                 ${videoBtnHtml}
                 <a href="contact.html" class="btn-secondary">${btn2Text}</a>
               </div>
             </div>
-            <div class="hero-right">
-              ${heroImage ? `<img src="${heroImage}" alt="${title}">` : '<div style="color:#4B5563;">请上传产品主图</div>'}
-            </div>
+            <!-- 只有在有图的时候才插入这里 -->
+            ${heroRightHtml}
           </div>
         </div>
 
