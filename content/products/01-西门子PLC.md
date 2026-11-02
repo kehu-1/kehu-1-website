@@ -2,7 +2,7 @@
 category: 工业自动化
 title: SIMATIC S7-1500 控制器
 description: 用于离散自动化的高级控制器，提升生产效率。
-image: /图片/微信图片_20200814104950.jpg
+image: /图片/微信图片_20200814104950-1.jpg
 show_on_homepage: false
 btn1_text: 产品介绍视频
 btn2_text: 联系我们
