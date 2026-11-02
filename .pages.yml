@@ -65,7 +65,7 @@ content:
   # ==========================================
 
   - name: "news"
-    label: "📰 新闻动态"
+    label: "🏠 首页 - 📰 新闻动态"
     type: "collection"
     path: "content/news"
     create: true
@@ -76,7 +76,7 @@ content:
       - { name: "body", label: "正文", type: "rich-text" }
 
   - name: "social"
-    label: "📱 社交媒体"
+    label: "🏠 首页 - 📱 社交媒体"
     type: "file"
     path: "content/social.json"
     fields:
