@@ -22,6 +22,7 @@
 
     .header-container, .section-container, .footer-inner, .news-grid, .vision-inner, .top-news-inner { max-width: 1340px; margin: 0 auto; padding: 0 2rem; width: 100%; }
 
+    /* 导航栏 */
     header { position: fixed; top: 0; width: 100%; background: var(--dark-bg); z-index: 1000; }
     .header-top { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; }
     .header-top .logo { font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
@@ -31,16 +32,11 @@
     .header-bottom { border-top: 1px solid rgba(255,255,255,0.05); }
     .header-bottom .nav-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
     
-    /* 【修改点1】统一导航栏间距，不管是直接链接还是下拉菜单，间距全部一致 */
+    /* 统一导航间距 */
     .header-bottom nav { display: flex; align-items: center; gap: 2.5rem; margin-left: 1.5rem; }
     .header-bottom nav > a, 
     .header-bottom nav .nav-dropdown > a { 
-      color: #CBD5E1; 
-      font-size: 1rem; 
-      font-weight: 500; 
-      padding-bottom: 0.5rem; 
-      display: block;
-      transition: 0.3s;
+      color: #CBD5E1; font-size: 1rem; font-weight: 500; padding-bottom: 0.5rem; display: block; transition: 0.3s;
     }
     .header-bottom nav > a:hover, 
     .header-bottom nav > a.active, 
@@ -52,12 +48,14 @@
     .dropdown-menu { display: none; position: fixed; top: var(--header-height); left: 0; width: 100vw; background: var(--dark-bg); box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 1001; border-top: 1px solid rgba(255,255,255,0.08); max-height: calc(100vh - var(--header-height)); overflow-y: auto; }
     .dropdown-menu.show { display: block; }
     
+    /* 客户故事下拉菜单 */
     .mega-menu-content { max-width: 1340px; margin: 0 auto; padding: 3rem 2rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem 4rem; }
     .dropdown-menu .category-group { display: flex; flex-direction: column; }
     .dropdown-menu .category-group h4 { color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 0.5rem; letter-spacing: 0.5px; white-space: nowrap; }
     .dropdown-menu .category-group a { color: #CBD5E1; font-size: 0.95rem; padding: 0.6rem 0; display: block; border-bottom: 1px solid rgba(255,255,255,0.03); transition: 0.3s; white-space: nowrap; }
     .dropdown-menu .category-group a:hover { color: var(--tech-green); padding-left: 0.3rem; }
 
+    /* 产品展示超级菜单 */
     .product-mega-content { max-width: 1340px; margin: 0 auto; padding: 3rem 2rem; display: grid; grid-template-columns: 220px 320px 1fr; gap: 1rem 3rem; }
     .product-cat { color: #fff; font-size: 1.1rem; font-weight: 700; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.05); white-space: nowrap; }
     .product-name { padding-bottom: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
@@ -68,6 +66,7 @@
     .header-bottom .search-wrapper { color: #CBD5E1; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin-left: 1rem; }
     .header-bottom .search-wrapper:hover { color: var(--tech-green); }
 
+    /* 主轮播图 */
     .hero { position: relative; height: calc(100vh - 120px); margin-top: 120px; overflow: hidden; background: var(--dark-bg); }
     .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s; display: flex; align-items: center; }
     .slide.active { opacity: 1; z-index: 1; }
@@ -83,6 +82,7 @@
     .hero-indicator .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
     .hero-indicator .dot.active { width: 28px; border-radius: 4px; background: #fff; }
 
+    /* 顶部新闻 */
     .top-news-section { background: #fff; border-bottom: 1px solid #E5E7EB; padding: 1rem 0; }
     .top-news-inner { display: flex; align-items: center; gap: 1rem; }
     .top-news-inner img { width: 120px; height: 75px; object-fit: cover; }
@@ -92,6 +92,7 @@
     .btn-outline { padding: 0.6rem 1.5rem; border: 2px solid var(--text-main); color: var(--text-main); font-weight: 700; white-space: nowrap; background: transparent; cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
     .btn-outline:hover { background: var(--text-main); color: var(--tech-green); }
 
+    /* 客户故事区 */
     .story-section { padding: 4rem 0; } 
     .story-grid { display: grid; grid-template-columns: 300px 1fr 340px; gap: 1rem; align-items: start; } 
     .story-tabs { display: flex; flex-direction: column; position: sticky; top: 140px; border-left: 2px solid #E5E7EB; }
@@ -112,6 +113,7 @@
     .story-card.light .link { color: var(--text-main); }
     .story-card.light .link:hover { color: var(--tech-green); }
 
+    /* 通用滑动区 */
     .slider-section { padding: 4rem 0; background: #fff; overflow: hidden; }
     .slider-section.gray-bg { background: #F8FAFC; }
     .slider-section .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; }
@@ -137,6 +139,24 @@
     .slider-card-info .link { color: var(--text-main); font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
     .slider-card-info .link:hover { color: var(--tech-green); }
 
+    /* 【首页产品专属样式】 */
+    .slider-card-img-wrapper { position: relative; overflow: hidden; width: 100%; height: 260px; }
+    .product-tag {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--tech-green);
+      color: #000;
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      z-index: 10;
+      text-transform: uppercase;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* 解决方案 */
     .solution-card { position: relative; flex: 0 0 calc((100% - 2rem) / 3); height: 480px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 3rem 2rem; color: #fff; border-radius: 4px; } 
     .solution-card img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; transition: transform 0.6s ease; }
     .solution-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(transparent 20%, rgba(0,0,0,0.85) 100%); z-index: 2; }
@@ -146,11 +166,13 @@
     .solution-card .sol-content p { font-size: 1rem; color: #CBD5E1; margin-bottom: 1.5rem; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     .solution-card .sol-content .link { color: var(--tech-green); font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
 
+    /* 新闻 */
     .news-block { padding: 4rem 0; background: #fff; }
     .news-block .section-title { text-align: center; margin-bottom: 2rem; }
     .news-block .section-title h2 { font-size: 2.2rem; font-weight: 800; color: var(--text-main); }
     .news-block .section-title p { color: var(--text-muted); margin-top: 0.5rem; }
 
+    /* 愿景 */
     .vision-section { padding: 6rem 0; background: #F8FAFC; }
     .vision-inner { margin: 0 auto; display: flex; gap: 2rem; align-items: center; }
     .vision-left { flex: 1.2; }
@@ -158,11 +180,11 @@
     .vision-right { flex: 1; }
     .vision-right img { width: 100%; height: 400px; object-fit: cover; }
 
+    /* 社交媒体 */
     .social-section { padding: 4rem 0; background: #fff; }
     .social-tabs { display: flex; gap: 1rem; border-bottom: 1px solid #E5E7EB; padding-bottom: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
     .social-tab { font-size: 1rem; font-weight: 500; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 0.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid transparent; }
     .social-tab.active { color: var(--text-main); border-bottom-color: var(--text-main); font-weight: 700; }
-
     .social-card-b2b { flex: 0 0 calc((100% - 2rem) / 3); background: #fff; border: 1px solid #E5E7EB; padding: 1.5rem; display: flex; flex-direction: column; cursor: pointer; transition: 0.3s; height: 100%; }
     .social-card-b2b:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.05); transform: translateY(-5px); }
     .social-card-header { display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; }
@@ -172,6 +194,7 @@
     .social-card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
     .social-card-play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50px; height: 50px; background: rgba(255,255,255,0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-size: 1.2rem; z-index: 2; }
 
+    /* 弹窗 */
     .news-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); z-index: 3000; justify-content: center; align-items: center; }
     .news-modal-content { position: relative; width: 90vw; height: 90vh; display: flex; background: #fff; border-radius: 4px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); }
     .news-modal-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 2.5rem; color: #111827; cursor: pointer; z-index: 10; line-height: 1; background: rgba(255,255,255,0.8); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
@@ -196,6 +219,7 @@
     .news-modal-text .body a { color: #0ea5e9; text-decoration: underline; }
     .news-modal-text .original-link { margin-top: 2rem; display: inline-block; padding: 0.8rem 1.5rem; background: var(--tech-green); color: #000; font-weight: 700; border-radius: 4px; text-align: center; }
 
+    /* 页脚 */
     footer { background: var(--dark-bg); color: #9CA3AF; padding: 4rem 0 2rem; font-size: 0.9rem; }
     .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; } 
     .footer-col h5 { color: #fff; font-size: 1.1rem; margin-bottom: 1rem; }
@@ -253,15 +277,16 @@
   </div>
   <div class="header-bottom">
     <div class="header-container nav-wrapper">
-      <!-- 【修改点2】按要求的顺序排列导航项 -->
       <nav>
         <a href="index.html" class="active">首页</a>
         
+        <!-- 客户故事下拉 -->
         <div class="nav-dropdown">
           <a href="javascript:void(0)">客户故事</a>
           <div class="dropdown-menu" id="story-dropdown-menu"></div>
         </div>
         
+        <!-- 产品展示下拉 -->
         <div class="nav-dropdown">
           <a href="javascript:void(0)">产品展示</a>
           <div class="dropdown-menu" id="product-dropdown-menu"></div>
@@ -335,7 +360,7 @@
   </div>
 </div>
 
-<!-- 4. 产品滑动区 -->
+<!-- 4. 产品滑动区（动态加载） -->
 <div class="slider-section gray-bg">
   <div class="section-container">
     <div class="section-header">
@@ -347,25 +372,8 @@
       </div>
     </div>
     <div class="slider-container">
-            <div class="slider-track" id="product-track">
+      <div class="slider-track" id="product-track">
         <p style="text-align:center; color:#999; width:100%; padding:2rem;">正在加载最新产品...</p>
-      </div>
-        <div class="slider-card">
-          <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Product 1">
-          <div class="slider-card-info"><h4>Xcelerator 平台</h4><p>助力企业实现数字化转型，从设计到运营全面优化。</p><a href="products.html" class="link">了解更多 →</a></div>
-        </div>
-        <div class="slider-card">
-          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Product 2">
-          <div class="slider-card-info"><h4>电气化 X 阶段</h4><p>构建智能电网和电气化解决方案，实现可持续能源。</p><a href="products.html" class="link">了解更多 →</a></div>
-        </div>
-        <div class="slider-card">
-          <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" alt="Product 3">
-          <div class="slider-card-info"><h4>FEMAP 仿真</h4><p>高级有限元分析软件，帮助工程师预测产品性能。</p><a href="products.html" class="link">了解更多 →</a></div>
-        </div>
-        <div class="slider-card">
-          <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=800&q=80" alt="Product 4">
-          <div class="slider-card-info"><h4>工业边缘计算</h4><p>在边缘侧处理数据，降低延迟，提高生产效率。</p><a href="products.html" class="link">了解更多 →</a></div>
-        </div>
       </div>
     </div>
     <div style="display:flex; justify-content:center; margin-top:2rem;">
@@ -572,11 +580,76 @@
     goToPage(trackId, state.current + direction);
   }
 
-  // 3. 首页客户故事区（Markdown 驱动）
+  // ==========================================
+  // 3. 首页产品与服务加载（读取后台数据 + 首页标签）
+  // ==========================================
+  async function loadHomepageProducts() {
+    try {
+      const repo = 'kehu-1/kehu-1-website';
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/products`);
+      const files = await res.json();
+      const track = document.getElementById('product-track');
+      
+      if (!Array.isArray(files) || files.length === 0) return;
+
+      let html = '';
+      let count = 0;
+
+      for (let file of files) {
+        if (!file.name.endsWith('.md')) continue;
+        const rawRes = await fetch(file.download_url);
+        const text = await rawRes.text();
+        const parts = text.split('---');
+        const frontmatter = parts[1] || '';
+        
+        const getVal = (key) => {
+          const match = frontmatter.match(new RegExp(`${key}:\\s*(.*)`));
+          return match ? match[1].trim() : '';
+        };
+
+        const showOnHome = getVal('show_on_homepage').includes('true');
+        if (!showOnHome) continue; 
+
+        const title = getVal('title') || '未命名产品';
+        const desc = getVal('description') || '';
+        const tag = getVal('tag');
+        const mainImg = getVal('image');
+        const homeImg = getVal('homepage_image') || mainImg;
+        const tagHtml = tag ? `<span class="product-tag">${tag}</span>` : '';
+
+        html += `
+          <div class="slider-card">
+            <div class="slider-card-img-wrapper">
+              ${tagHtml}
+              <img src="${homeImg}" alt="${title}">
+            </div>
+            <div class="slider-card-info">
+              <h4>${title}</h4>
+              <p>${desc}</p>
+              <a href="product-detail.html?id=${encodeURIComponent(file.name)}" class="link">了解更多 →</a>
+            </div>
+          </div>
+        `;
+        count++;
+      }
+
+      if (count === 0) {
+        track.innerHTML = '<p style="text-align:center;color:#999;width:100%;padding:2rem;">暂无首页展示产品，请在后台勾选“是否展示在首页”。</p>';
+      } else {
+        track.innerHTML = html;
+        initSlider('product-track', 'product-dots');
+      }
+
+    } catch (e) {
+      console.error('加载首页产品失败:', e);
+    }
+  }
+
+  // 4. 首页客户故事区
   async function loadHomepageStories() {
     try {
       const repo = 'kehu-1/kehu-1-website';
-      const folderPath = 'content/homepage_stories';
+      const folderPath = 'content/stories'; // 自动匹配后台内容
       const res = await fetch(`https://api.github.com/repos/${repo}/contents/${folderPath}`);
       
       if (!res.ok) throw new Error('目录不存在');
@@ -593,7 +666,7 @@
       }
 
       if (tabs.length === 0) {
-        document.getElementById('story-tabs-container').innerHTML = '<p style="color:#999; padding:1rem;">请在上传 .md 文件到 content/homepage_stories/ 目录</p>';
+        document.getElementById('story-tabs-container').innerHTML = '<p style="color:#999; padding:1rem;">请在上传 .md 文件到 content/stories/ 目录</p>';
         return;
       }
 
@@ -601,7 +674,7 @@
 
     } catch (e) {
       console.error('加载首页客户故事失败:', e);
-      document.getElementById('story-tabs-container').innerHTML = '<p style="color:#e74c39; padding:1rem;">加载失败，请确保 content/homepage_stories/ 目录下有 .md 文件</p>';
+      document.getElementById('story-tabs-container').innerHTML = '<p style="color:#e74c39; padding:1rem;">加载失败，请确保 content/stories/ 目录下有 .md 文件</p>';
     }
   }
 
@@ -660,7 +733,7 @@
     document.getElementById('story-card2-link').href = tab.card2_link;
   }
 
-  // 4. 新闻动态加载
+  // 5. 新闻动态加载
   let newsArticles = []; let currentNewsIndex = 0; let currentImageIndex = 0;
 
   async function loadNews() {
@@ -717,7 +790,7 @@
     }
   }
 
-  // 5. 社交媒体加载
+  // 6. 社交媒体加载
   let socialPosts = [];
 
   function getPlatformIcon(platform) {
@@ -827,7 +900,7 @@
   }
   function closeSocialModal() { document.getElementById('social-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
-  // 6. 导航栏客户故事大菜单加载
+  // 7. 导航栏菜单加载
   async function loadNavCategories() {
     try {
       const repo = 'kehu-1/kehu-1-website';
@@ -867,13 +940,11 @@
         `;
         innerContainer.insertAdjacentHTML('beforeend', groupHtml);
       });
-
     } catch (e) {
       console.error('加载下拉菜单分类失败:', e);
     }
   }
 
-  // 7. 导航栏产品展示超级菜单加载
   async function loadProductMenu() {
     try {
       const repo = 'kehu-1/kehu-1-website';
@@ -922,7 +993,6 @@
       html += '</div>';
       
       menu.innerHTML = html;
-
     } catch (e) {
       console.error('加载产品菜单失败:', e);
     }
@@ -930,12 +1000,12 @@
 
   // 8. 页面加载初始化
   window.addEventListener('load', () => {
-    initSlider('product-track', 'product-dots');
     initSlider('solution-track', 'solution-dots');
+    loadHomepageProducts(); 
+    loadHomepageStories();
     loadNews();   
     loadSocial(); 
     loadNavCategories(); 
-    loadHomepageStories(); 
     loadProductMenu();
 
     const headerElement = document.querySelector('header');
