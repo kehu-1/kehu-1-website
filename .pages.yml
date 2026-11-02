@@ -1,7 +1,70 @@
 media: "图片"
 
 content:
-  # 1. 新闻动态
+  # ==========================================
+  # 【页标题】（你要求的第一个区块）
+  # ==========================================
+  
+  # 1. 客户故事
+  - name: "stories"
+    label: "客户故事"
+    type: "collection"
+    path: "content/stories"
+    create: true
+    delete: true
+    fields:
+      - { name: "category", label: "分类", type: "string" }
+      - { name: "title", label: "故事标题", type: "string" }
+      - { name: "date", label: "日期", type: "date" }
+      - { name: "image", label: "顶部背景图", type: "image" }
+      - { name: "card1_title", label: "产品名称", type: "string" }
+      - { name: "card1_desc", label: "简短介绍", type: "text" }
+      - { name: "card2_title", label: "主图说明", type: "string" }
+      - { name: "body", label: "故事正文", type: "rich-text" }
+
+  # 2. 品牌展示（新建）
+  - name: "brands"
+    label: "品牌展示"
+    type: "collection"
+    path: "content/brands"
+    create: true
+    delete: true
+    fields:
+      - { name: "title", label: "品牌名称", type: "string" }
+      - { name: "logo", label: "品牌Logo", type: "image" }
+      - { name: "description", label: "品牌简介", type: "text" }
+      - { name: "link", label: "跳转链接", type: "string" }
+
+  # ==========================================
+  # 【首页】（你要求的第二个区块）
+  # ==========================================
+
+  # 3. 首页 - 产品和服务（新建，用于控制首页排版）
+  - name: "homepage_products"
+    label: "首页 - 产品和服务"
+    type: "collection"
+    path: "content/homepage_products"
+    create: true
+    delete: true
+    fields:
+      - { name: "title", label: "模块标题", type: "string", default: "发现产品和服务" }
+      - { name: "subtitle", label: "模块副标题", type: "string" }
+      - { name: "btn_text", label: "按钮文字", type: "string", default: "前往市场" }
+      - { name: "btn_link", label: "按钮链接", type: "string" }
+
+  # 4. 首页 - 合作者/部门支持（新建）
+  - name: "partners"
+    label: "合作者/部门支持"
+    type: "collection"
+    path: "content/partners"
+    create: true
+    delete: true
+    fields:
+      - { name: "title", label: "合作者名称", type: "string" }
+      - { name: "logo", label: "Logo", type: "image" }
+      - { name: "description", label: "支持说明", type: "text" }
+
+  # 5. 新闻动态
   - name: "news"
     label: "新闻动态"
     type: "collection"
@@ -13,24 +76,7 @@ content:
       - { name: "date", label: "日期", type: "date" }
       - { name: "body", label: "正文", type: "rich-text" }
 
-  # 2. 客户故事
-  - name: "stories"
-    label: "客户故事"
-    type: "collection"
-    path: "content/stories"
-    create: true
-    delete: true
-    fields:
-      - { name: "category", label: "分类（大标题）", type: "string" }
-      - { name: "title", label: "故事标题", type: "string" }
-      - { name: "date", label: "日期", type: "date" }
-      - { name: "image", label: "顶部产品背景图片（Hero大图）", type: "image" }
-      - { name: "card1_title", label: "产品名称", type: "string" }
-      - { name: "card1_desc", label: "简短介绍", type: "text" }
-      - { name: "card2_title", label: "案例主图（下方图）", type: "string" }
-      - { name: "body", label: "案例正文", type: "rich-text" }
-
-  # 3. 社交媒体
+  # 6. 社交媒体
   - name: "social"
     label: "社交媒体"
     type: "file"
@@ -44,46 +90,51 @@ content:
           { name: "link", label: "链接", type: "string" }
         ] }
 
-  # 4. 产品展示
+  # ==========================================
+  # 【产品详情库】（用于产品详情页和下拉菜单）
+  # ==========================================
   - name: "products"
-    label: "产品展示"
+    label: "产品详情库"
     type: "collection"
     path: "content/products"
     create: true
     delete: true
     fields:
-      # 基础信息
       - { name: "category", label: "分类（大标题）", type: "string" }
       - { name: "title", label: "产品标题", type: "string" }
       - { name: "description", label: "简短介绍", type: "text" }
-      - { name: "image", label: "顶部产品背景图片", type: "image" }
+      - { name: "image", label: "顶部背景图片", type: "image" }
+      
+      # 【新增】首页联动相关字段
+      - { name: "show_on_homepage", label: "是否展示在首页（勾选后出现在首页滑动区）", type: "boolean", default: false }
+      - { name: "homepage_image", label: "首页短图（选填，不传默认用顶部大图）", type: "image" }
+      - { name: "tag", label: "首页小标签（如：新品、热销）", type: "string" }
+
       - { name: "btn1_text", label: "按钮1文字", type: "string", default: "用视频介绍产品" }
       - { name: "btn2_text", label: "按钮2文字", type: "string", default: "联系我们" }
       - { name: "video_url", label: "产品视频链接（YouTube）", type: "string" }
       
-      # 产品优势区块（三视图/细节图，支持1-6张）
-      - { name: "advantage_title", label: "优势标题", type: "string", default: "面向未来的自动化系统" }
-      - { name: "advantage_desc", label: "优势介绍（支持Markdown）", type: "text" }
-      
-      - { name: "advantage_img1", label: "图片1（建议尺寸 1200x900）", type: "image" }
+      # 产品优势区块
+      - { name: "advantage_title", label: "优势标题", type: "string" }
+      - { name: "advantage_desc", label: "优势介绍", type: "text" }
+      - { name: "advantage_img1", label: "上传图片1", type: "image" }
       - { name: "advantage_img1_desc", label: "图片1的描述", type: "string" }
-      - { name: "advantage_img2", label: "图片2（建议尺寸 1200x900）", type: "image" }
+      - { name: "advantage_img2", label: "上传图片2", type: "image" }
       - { name: "advantage_img2_desc", label: "图片2的描述", type: "string" }
-      - { name: "advantage_img3", label: "图片3（建议尺寸 1200x900）", type: "image" }
+      - { name: "advantage_img3", label: "上传图片3", type: "image" }
       - { name: "advantage_img3_desc", label: "图片3的描述", type: "string" }
-      - { name: "advantage_img4", label: "图片4（建议尺寸 1200x900）", type: "image" }
+      - { name: "advantage_img4", label: "上传图片4", type: "image" }
       - { name: "advantage_img4_desc", label: "图片4的描述", type: "string" }
-      - { name: "advantage_img5", label: "图片5（建议尺寸 1200x900）", type: "image" }
+      - { name: "advantage_img5", label: "上传图片5", type: "image" }
       - { name: "advantage_img5_desc", label: "图片5的描述", type: "string" }
-      - { name: "advantage_img6", label: "图片6（建议尺寸 1200x900）", type: "image" }
+      - { name: "advantage_img6", label: "上传图片6", type: "image" }
       - { name: "advantage_img6_desc", label: "图片6的描述", type: "string" }
 
       # 白皮书区块
-      - { name: "whitepaper_title", label: "白皮书标题", type: "string", default: "数字服务中心 (DSC)" }
+      - { name: "whitepaper_title", label: "白皮书标题", type: "string" }
       - { name: "whitepaper_desc", label: "白皮书介绍", type: "text" }
       - { name: "whitepaper_btn", label: "白皮书按钮文字", type: "string", default: "获取白皮书 ⬇️" }
-      - { name: "whitepaper_link", label: "白皮书下载链接", type: "string", default: "#" }
-      - { name: "whitepaper_cover", label: "产品介绍视频专属封面图（选填）", type: "image" }
+      - { name: "whitepaper_link", label: "白皮书下载链接", type: "string" }
+      - { name: "whitepaper_cover", label: "白皮书视频专属封面图", type: "image" }
 
-      # 正文（最下方长文本）
       - { name: "body", label: "产品正文", type: "rich-text" }
