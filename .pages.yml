@@ -2,12 +2,11 @@ media: "图片"
 
 content:
   # ==========================================
-  # 【页标题】（你要求的第一个区块）
+  # 【页头模块】（导航栏和全局下拉菜单相关）
   # ==========================================
   
-  # 1. 客户故事
   - name: "stories"
-    label: "客户故事"
+    label: "🖥️ 页头 - 客户故事"
     type: "collection"
     path: "content/stories"
     create: true
@@ -22,9 +21,8 @@ content:
       - { name: "card2_title", label: "主图说明", type: "string" }
       - { name: "body", label: "故事正文", type: "rich-text" }
 
-  # 2. 品牌展示（新建）
   - name: "brands"
-    label: "品牌展示"
+    label: "🖥️ 页头 - 品牌展示"
     type: "collection"
     path: "content/brands"
     create: true
@@ -36,12 +34,11 @@ content:
       - { name: "link", label: "跳转链接", type: "string" }
 
   # ==========================================
-  # 【首页】（你要求的第二个区块）
+  # 【首页模块】（首页专属排版和数据）
   # ==========================================
 
-  # 3. 首页 - 产品和服务（新建，用于控制首页排版）
   - name: "homepage_products"
-    label: "首页 - 产品和服务"
+    label: "🏠 首页 - 产品和服务"
     type: "collection"
     path: "content/homepage_products"
     create: true
@@ -52,9 +49,8 @@ content:
       - { name: "btn_text", label: "按钮文字", type: "string", default: "前往市场" }
       - { name: "btn_link", label: "按钮链接", type: "string" }
 
-  # 4. 首页 - 合作者/部门支持（新建）
   - name: "partners"
-    label: "合作者/部门支持"
+    label: "🏠 首页 - 合作者/部门支持"
     type: "collection"
     path: "content/partners"
     create: true
@@ -64,9 +60,12 @@ content:
       - { name: "logo", label: "Logo", type: "image" }
       - { name: "description", label: "支持说明", type: "text" }
 
-  # 5. 新闻动态
+  # ==========================================
+  # 【通用内容与动态】
+  # ==========================================
+
   - name: "news"
-    label: "新闻动态"
+    label: "📰 新闻动态"
     type: "collection"
     path: "content/news"
     create: true
@@ -76,9 +75,8 @@ content:
       - { name: "date", label: "日期", type: "date" }
       - { name: "body", label: "正文", type: "rich-text" }
 
-  # 6. 社交媒体
   - name: "social"
-    label: "社交媒体"
+    label: "📱 社交媒体"
     type: "file"
     path: "content/social.json"
     fields:
@@ -91,10 +89,11 @@ content:
         ] }
 
   # ==========================================
-  # 【产品详情库】（用于产品详情页和下拉菜单）
+  # 【产品数据库】（用于详情页和首页轮播）
   # ==========================================
+
   - name: "products"
-    label: "产品详情库"
+    label: "📦 产品详情库"
     type: "collection"
     path: "content/products"
     create: true
@@ -105,10 +104,10 @@ content:
       - { name: "description", label: "简短介绍", type: "text" }
       - { name: "image", label: "顶部背景图片", type: "image" }
       
-      # 【新增】首页联动相关字段
-      - { name: "show_on_homepage", label: "是否展示在首页（勾选后出现在首页滑动区）", type: "boolean", default: false }
-      - { name: "homepage_image", label: "首页短图（选填，不传默认用顶部大图）", type: "image" }
-      - { name: "tag", label: "首页小标签（如：新品、热销）", type: "string" }
+      # 首页联动字段
+      - { name: "show_on_homepage", label: "是否展示在首页", type: "boolean", default: false }
+      - { name: "homepage_image", label: "首页短图", type: "image" }
+      - { name: "tag", label: "首页小标签（如：新品）", type: "string" }
 
       - { name: "btn1_text", label: "按钮1文字", type: "string", default: "用视频介绍产品" }
       - { name: "btn2_text", label: "按钮2文字", type: "string", default: "联系我们" }
