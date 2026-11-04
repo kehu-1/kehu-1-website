@@ -553,7 +553,7 @@
   }
 
   // ==========================================
-  // 3. 首页产品与服务加载（动态判断逻辑，带自检日志）
+  // 3. 首页产品与服务加载
   // ==========================================
   async function loadHomepageProducts() {
     try {
@@ -619,7 +619,7 @@
   }
 
   // ==========================================
-  // 4. 首页合作部门动态加载（图1区域）
+  // 4. 首页合作部门动态加载
   // ==========================================
   async function loadHomepagePartners() {
     try {
@@ -1026,7 +1026,7 @@
   // 9. 页面加载初始化
   window.addEventListener('load', () => {
     loadHomepageProducts(); 
-    loadHomepagePartners(); // <--- 新增：加载合作部门
+    loadHomepagePartners(); 
     loadHomepageStories();
     loadNews();   
     loadSocial(); 
