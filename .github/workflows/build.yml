@@ -1,0 +1,31 @@
+name: Build Data
+on:
+  push:
+    paths:
+      - 'content/**'  # 只要 content 文件夹里有改动，就触发
+  workflow_dispatch:  # 允许手动点击运行
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # 强制赋予写入权限，绕过网页设置
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Run Build Script
+        run: node build.js
+        
+      - name: Commit and Push
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add data.json
+          git commit -m "自动更新 data.json" || exit 0
+          git push
