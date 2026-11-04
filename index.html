@@ -35,14 +35,10 @@
     /* 统一导航间距 */
     .header-bottom nav { display: flex; align-items: center; gap: 2.5rem; margin-left: 1.5rem; }
     .header-bottom nav > a, 
-    .header-bottom nav .nav-dropdown > a { 
-      color: #CBD5E1; font-size: 1rem; font-weight: 500; padding-bottom: 0.5rem; display: block; transition: 0.3s;
-    }
+    .header-bottom nav .nav-dropdown > a { color: #CBD5E1; font-size: 1rem; font-weight: 500; padding-bottom: 0.5rem; display: block; transition: 0.3s; }
     .header-bottom nav > a:hover, 
     .header-bottom nav > a.active, 
-    .header-bottom nav .nav-dropdown > a:hover { 
-      color: var(--tech-green); 
-    }
+    .header-bottom nav .nav-dropdown > a:hover { color: var(--tech-green); }
     
     .nav-dropdown { position: relative; display: inline-block; }
     .dropdown-menu { display: none; position: fixed; top: var(--header-height); left: 0; width: 100vw; background: var(--dark-bg); box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 1001; border-top: 1px solid rgba(255,255,255,0.08); max-height: calc(100vh - var(--header-height)); overflow-y: auto; }
@@ -581,12 +577,13 @@
   }
 
   // ==========================================
-  // 3. 首页产品与服务加载（读取后台数据 + 首页标签）
+  // 3. 首页产品与服务加载（动态判断逻辑，带自检日志）
   // ==========================================
   async function loadHomepageProducts() {
     try {
       const repo = 'kehu-1/kehu-1-website';
-      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/products`);
+      // 加时间戳，强制读取最新数据，杜绝缓存
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/products?t=${new Date().getTime()}`);
       const files = await res.json();
       const track = document.getElementById('product-track');
       
@@ -594,6 +591,8 @@
 
       let html = '';
       let count = 0;
+
+      console.log("========== 开始检查首页产品展示 ==========");
 
       for (let file of files) {
         if (!file.name.endsWith('.md')) continue;
@@ -607,11 +606,15 @@
           return match ? match[1].trim() : '';
         };
 
-        // 更宽容的判断：只要包含 true 就展示
         const showOnHome = getVal('show_on_homepage').toLowerCase();
+        const title = getVal('title') || '未命名产品';
+        
+        // 【日志输出】看控制台打印的是什么
+        console.log(`产品: ${title} | show_on_homepage 的值为: "${showOnHome}"`);
+
+        // 兼容性强判断：只要里面含有 true，就认为开启了
         if (!showOnHome.includes('true')) continue; 
 
-        const title = getVal('title') || '未命名产品';
         const desc = getVal('description') || '';
         const tag = getVal('tag');
         const mainImg = getVal('image');
@@ -634,15 +637,21 @@
         count++;
       }
 
+      console.log(`========== 检查结束，共有 ${count} 个产品将展示在首页 ==========`);
+
       if (count === 0) {
         track.innerHTML = '<p style="text-align:center;color:#999;width:100%;padding:2rem;">暂无首页展示产品，请在后台勾选“是否展示在首页”。</p>';
       } else {
         track.innerHTML = html;
-        initSlider('product-track', 'product-dots');
+        // 确保 DOM 渲染完毕后，再初始化滑动逻辑
+        setTimeout(() => {
+          initSlider('product-track', 'product-dots');
+        }, 100);
       }
 
     } catch (e) {
       console.error('加载首页产品失败:', e);
+      document.getElementById('product-track').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;padding:2rem;">加载失败。</p>';
     }
   }
 
@@ -650,8 +659,8 @@
   async function loadHomepageStories() {
     try {
       const repo = 'kehu-1/kehu-1-website';
-      const folderPath = 'content/stories'; // 自动匹配后台内容
-      const res = await fetch(`https://api.github.com/repos/${repo}/contents/${folderPath}`);
+      const folderPath = 'content/stories';
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/${folderPath}?t=${new Date().getTime()}`);
       
       if (!res.ok) throw new Error('目录不存在');
       const files = await res.json();
@@ -667,7 +676,7 @@
       }
 
       if (tabs.length === 0) {
-        document.getElementById('story-tabs-container').innerHTML = '<p style="color:#999; padding:1rem;">请在上传 .md 文件到 content/stories/ 目录</p>';
+        document.getElementById('story-tabs-container').innerHTML = '<p style="color:#999; padding:1rem;">请在后台添加客户故事</p>';
         return;
       }
 
@@ -740,7 +749,7 @@
   async function loadNews() {
     try {
       const repo = 'kehu-1/kehu-1-website';
-      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/news`);
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/news?t=${new Date().getTime()}`);
       const files = await res.json();
       const track = document.getElementById('news-track');
       const latestContainer = document.getElementById('latest-news-container');
@@ -801,7 +810,7 @@
 
   async function loadSocial() {
     try {
-      const res = await fetch('/content/social.json'); 
+      const res = await fetch(`/content/social.json?t=${new Date().getTime()}`); 
       const data = await res.json();
       socialPosts = data.posts || [];
       if (socialPosts.length === 0) {
@@ -905,7 +914,7 @@
   async function loadNavCategories() {
     try {
       const repo = 'kehu-1/kehu-1-website';
-      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/stories`);
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/stories?t=${new Date().getTime()}`);
       const files = await res.json();
       
       const menu = document.getElementById('story-dropdown-menu');
@@ -949,7 +958,7 @@
   async function loadProductMenu() {
     try {
       const repo = 'kehu-1/kehu-1-website';
-           const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/products?t=${new Date().getTime()}`);
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/products?t=${new Date().getTime()}`);
       const files = await res.json();
       if (!Array.isArray(files) || files.length === 0) return;
 
