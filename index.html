@@ -135,24 +135,15 @@
     .slider-card-info .link { color: var(--text-main); font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
     .slider-card-info .link:hover { color: var(--tech-green); }
 
-    /* 【首页产品专属样式】 */
+    /* 首页产品专属样式 */
     .slider-card-img-wrapper { position: relative; overflow: hidden; width: 100%; height: 260px; }
     .product-tag {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      background: var(--tech-green);
-      color: #000;
-      font-size: 0.8rem;
-      font-weight: 800;
-      padding: 0.3rem 0.8rem;
-      border-radius: 4px;
-      z-index: 10;
-      text-transform: uppercase;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      position: absolute; top: 1rem; left: 1rem; background: var(--tech-green); color: #000;
+      font-size: 0.8rem; font-weight: 800; padding: 0.3rem 0.8rem; border-radius: 4px;
+      z-index: 10; text-transform: uppercase; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    /* 解决方案 */
+    /* 解决方案/合作部门 */
     .solution-card { position: relative; flex: 0 0 calc((100% - 2rem) / 3); height: 480px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 3rem 2rem; color: #fff; border-radius: 4px; } 
     .solution-card img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; transition: transform 0.6s ease; }
     .solution-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(transparent 20%, rgba(0,0,0,0.85) 100%); z-index: 2; }
@@ -382,7 +373,7 @@
   </div>
 </div>
 
-<!-- 5. 解决方案滑动区 -->
+<!-- 5. 解决方案/合作部门动态加载 -->
 <div class="slider-section">
   <div class="section-container">
     <div class="section-header">
@@ -393,22 +384,7 @@
     </div>
     <div class="slider-container">
       <div class="slider-track" id="solution-track">
-        <div class="solution-card">
-          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Solution 1">
-          <div class="sol-content"><h4>汽车制造</h4><p>高度自动化的生产线，提升产能与质量。</p><a href="products.html" class="link">了解更多 →</a></div>
-        </div>
-        <div class="solution-card">
-          <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" alt="Solution 2">
-          <div class="sol-content"><h4>航空航天</h4><p>精密零部件加工，满足严苛的行业标准。</p><a href="products.html" class="link">了解更多 →</a></div>
-        </div>
-        <div class="solution-card">
-          <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=800&q=80" alt="Solution 3">
-          <div class="sol-content"><h4>新能源</h4><p>提供电池、风电等新能源领域的核心部件。</p><a href="products.html" class="link">了解更多 →</a></div>
-        </div>
-        <div class="solution-card">
-          <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Solution 4">
-          <div class="sol-content"><h4>食品与饮料</h4><p>卫生级设备与自动化包装解决方案。</p><a href="products.html" class="link">了解更多 →</a></div>
-        </div>
+        <p style="text-align:center; color:#999; width:100%; padding:2rem;">正在加载合作部门...</p>
       </div>
     </div>
     <div style="display:flex; justify-content:center; margin-top:2rem;">
@@ -582,7 +558,6 @@
   async function loadHomepageProducts() {
     try {
       const repo = 'kehu-1/kehu-1-website';
-      // 加时间戳，强制读取最新数据，杜绝缓存
       const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/products?t=${new Date().getTime()}`);
       const files = await res.json();
       const track = document.getElementById('product-track');
@@ -591,8 +566,6 @@
 
       let html = '';
       let count = 0;
-
-      console.log("========== 开始检查首页产品展示 ==========");
 
       for (let file of files) {
         if (!file.name.endsWith('.md')) continue;
@@ -607,14 +580,9 @@
         };
 
         const showOnHome = getVal('show_on_homepage').toLowerCase();
-        const title = getVal('title') || '未命名产品';
-        
-        // 【日志输出】看控制台打印的是什么
-        console.log(`产品: ${title} | show_on_homepage 的值为: "${showOnHome}"`);
-
-        // 兼容性强判断：只要里面含有 true，就认为开启了
         if (!showOnHome.includes('true')) continue; 
 
+        const title = getVal('title') || '未命名产品';
         const desc = getVal('description') || '';
         const tag = getVal('tag');
         const mainImg = getVal('image');
@@ -637,16 +605,11 @@
         count++;
       }
 
-      console.log(`========== 检查结束，共有 ${count} 个产品将展示在首页 ==========`);
-
       if (count === 0) {
         track.innerHTML = '<p style="text-align:center;color:#999;width:100%;padding:2rem;">暂无首页展示产品，请在后台勾选“是否展示在首页”。</p>';
       } else {
         track.innerHTML = html;
-        // 确保 DOM 渲染完毕后，再初始化滑动逻辑
-        setTimeout(() => {
-          initSlider('product-track', 'product-dots');
-        }, 100);
+        setTimeout(() => { initSlider('product-track', 'product-dots'); }, 100);
       }
 
     } catch (e) {
@@ -655,7 +618,59 @@
     }
   }
 
-  // 4. 首页客户故事区
+  // ==========================================
+  // 4. 首页合作部门动态加载（图1区域）
+  // ==========================================
+  async function loadHomepagePartners() {
+    try {
+      const repo = 'kehu-1/kehu-1-website';
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/partners?t=${new Date().getTime()}`);
+      const files = await res.json();
+      const track = document.getElementById('solution-track');
+      
+      if (!Array.isArray(files) || files.length === 0) {
+        track.innerHTML = '<p style="text-align:center;color:#999;width:100%;padding:2rem;">暂无合作部门数据</p>';
+        return;
+      }
+
+      let html = '';
+      for (let file of files) {
+        if (!file.name.endsWith('.md')) continue;
+        const rawRes = await fetch(file.download_url);
+        const text = await rawRes.text();
+        const parts = text.split('---');
+        const frontmatter = parts[1] || '';
+        
+        const getVal = (key) => {
+          const match = frontmatter.match(new RegExp(`${key}:\\s*(.*)`));
+          return match ? match[1].trim() : '';
+        };
+
+        const title = getVal('title') || '未命名板块';
+        const desc = getVal('description') || '';
+        const img = getVal('logo') || 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80';
+
+        html += `
+          <div class="solution-card">
+            <img src="${img}" alt="${title}">
+            <div class="sol-content">
+              <h4>${title}</h4>
+              <p>${desc}</p>
+              <a href="partner-detail.html?id=${encodeURIComponent(file.name)}" class="link">了解更多 →</a>
+            </div>
+          </div>
+        `;
+      }
+      track.innerHTML = html;
+      setTimeout(() => { initSlider('solution-track', 'solution-dots'); }, 100);
+
+    } catch (e) {
+      console.error('加载合作部门失败:', e);
+      document.getElementById('solution-track').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;padding:2rem;">加载失败。</p>';
+    }
+  }
+
+  // 5. 首页客户故事区
   async function loadHomepageStories() {
     try {
       const repo = 'kehu-1/kehu-1-website';
@@ -743,7 +758,7 @@
     document.getElementById('story-card2-link').href = tab.card2_link;
   }
 
-  // 5. 新闻动态加载
+  // 6. 新闻动态加载
   let newsArticles = []; let currentNewsIndex = 0; let currentImageIndex = 0;
 
   async function loadNews() {
@@ -800,7 +815,7 @@
     }
   }
 
-  // 6. 社交媒体加载
+  // 7. 社交媒体加载
   let socialPosts = [];
 
   function getPlatformIcon(platform) {
@@ -910,7 +925,7 @@
   }
   function closeSocialModal() { document.getElementById('social-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
-  // 7. 导航栏菜单加载
+  // 8. 导航栏菜单加载
   async function loadNavCategories() {
     try {
       const repo = 'kehu-1/kehu-1-website';
@@ -1008,10 +1023,10 @@
     }
   }
 
-  // 8. 页面加载初始化
+  // 9. 页面加载初始化
   window.addEventListener('load', () => {
-    initSlider('solution-track', 'solution-dots');
     loadHomepageProducts(); 
+    loadHomepagePartners(); // <--- 新增：加载合作部门
     loadHomepageStories();
     loadNews();   
     loadSocial(); 
