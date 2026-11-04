@@ -56,9 +56,10 @@ content:
     create: true
     delete: true
     fields:
-      - { name: "title", label: "合作者名称", type: "string" }
-      - { name: "logo", label: "Logo", type: "image" }
-      - { name: "description", label: "支持说明", type: "text" }
+      - { name: "title", label: "部门/板块名称", type: "string" }
+      - { name: "logo", label: "部门Logo或首页配图", type: "image" }
+      - { name: "description", label: "首页简短介绍", type: "text" }
+      - { name: "body", label: "详情页排版内容（支持Markdown和HTML）", type: "rich-text" }
 
   # ==========================================
   # 【通用内容与动态】
