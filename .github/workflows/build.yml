@@ -2,26 +2,28 @@ name: Build Data
 on:
   push:
     paths:
-      - 'content/**'  # 只要 content 文件夹里有改动，就触发
-  workflow_dispatch:  # 允许手动点击运行
+      - 'content/**'
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # 强制赋予写入权限，绕过网页设置
+      contents: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-        
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/checkout@v4
         with:
-          node-version: '18'
-          
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Run Build Script
         run: node build.js
-        
+
       - name: Commit and Push
         run: |
           git config --global user.name 'GitHub Action'
