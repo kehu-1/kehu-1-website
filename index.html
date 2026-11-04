@@ -607,9 +607,9 @@
           return match ? match[1].trim() : '';
         };
 
-        // 检查是否勾选了在首页展示（严格判断，只有等于 'true' 才显示）
-        const showOnHome = getVal('show_on_homepage');
-        if (showOnHome !== 'true') continue; // 没勾选或为 'false' 就跳过
+        // 更宽容的判断：只要包含 true 就展示
+        const showOnHome = getVal('show_on_homepage').toLowerCase();
+        if (!showOnHome.includes('true')) continue; 
 
         const title = getVal('title') || '未命名产品';
         const desc = getVal('description') || '';
