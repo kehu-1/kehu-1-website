@@ -607,8 +607,9 @@
           return match ? match[1].trim() : '';
         };
 
-        const showOnHome = getVal('show_on_homepage').includes('true');
-        if (!showOnHome) continue; 
+        // 检查是否勾选了在首页展示（严格判断，只有等于 'true' 才显示）
+        const showOnHome = getVal('show_on_homepage');
+        if (showOnHome !== 'true') continue; // 没勾选或为 'false' 就跳过
 
         const title = getVal('title') || '未命名产品';
         const desc = getVal('description') || '';
@@ -948,7 +949,7 @@
   async function loadProductMenu() {
     try {
       const repo = 'kehu-1/kehu-1-website';
-      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/products`);
+           const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/products?t=${new Date().getTime()}`);
       const files = await res.json();
       if (!Array.isArray(files) || files.length === 0) return;
 
