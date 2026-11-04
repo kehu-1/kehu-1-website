@@ -267,13 +267,11 @@
       <nav>
         <a href="index.html" class="active">首页</a>
         
-        <!-- 客户故事下拉 -->
         <div class="nav-dropdown">
           <a href="javascript:void(0)">客户故事</a>
           <div class="dropdown-menu" id="story-dropdown-menu"></div>
         </div>
         
-        <!-- 产品展示下拉 -->
         <div class="nav-dropdown">
           <a href="javascript:void(0)">产品展示</a>
           <div class="dropdown-menu" id="product-dropdown-menu"></div>
@@ -553,12 +551,19 @@
   }
 
   // ==========================================
-  // 3. 首页产品与服务加载（动态判断逻辑，带自检日志）
+  // 3. 首页产品与服务加载
   // ==========================================
   async function loadHomepageProducts() {
     try {
       const repo = 'kehu-1/kehu-1-website';
-      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/products?t=${new Date().getTime()}`);
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/products`);
+      
+      if (!res.ok) {
+        if (res.status === 403 || res.status === 429) throw new Error('API_LIMIT');
+        if (res.status === 404) throw new Error('NOT_FOUND');
+        throw new Error('FETCH_ERROR');
+      }
+      
       const files = await res.json();
       const track = document.getElementById('product-track');
       
@@ -606,7 +611,7 @@
       }
 
       if (count === 0) {
-        track.innerHTML = '<p style="text-align:center;color:#999;width:100%;padding:2rem;">暂无首页展示产品，请在后台勾选“是否展示在首页”。</p>';
+        track.innerHTML = '<p style="text-align:center;color:#999;width:100%;padding:2rem;">暂无首页展示产品，请在后台勾选。</p>';
       } else {
         track.innerHTML = html;
         setTimeout(() => { initSlider('product-track', 'product-dots'); }, 100);
@@ -614,17 +619,27 @@
 
     } catch (e) {
       console.error('加载首页产品失败:', e);
-      document.getElementById('product-track').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;padding:2rem;">加载失败。</p>';
+      let errorMsg = '加载失败';
+      if (e.message === 'API_LIMIT') errorMsg = '请求太频繁，被 GitHub 暂时限制。请等 1 小时后再刷新。';
+      else if (e.message === 'NOT_FOUND') errorMsg = '找不到文件。请检查 content/products/ 文件夹。';
+      document.getElementById('product-track').innerHTML = `<p style="text-align:center;color:#e74c39;width:100%;padding:2rem;">${errorMsg}</p>`;
     }
   }
 
   // ==========================================
-  // 4. 首页合作部门动态加载（图1区域）
+  // 4. 首页合作部门动态加载
   // ==========================================
   async function loadHomepagePartners() {
     try {
       const repo = 'kehu-1/kehu-1-website';
-      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/partners?t=${new Date().getTime()}`);
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/partners`);
+      
+      if (!res.ok) {
+        if (res.status === 403 || res.status === 429) throw new Error('API_LIMIT');
+        if (res.status === 404) throw new Error('NOT_FOUND');
+        throw new Error('FETCH_ERROR');
+      }
+      
       const files = await res.json();
       const track = document.getElementById('solution-track');
       
@@ -666,7 +681,10 @@
 
     } catch (e) {
       console.error('加载合作部门失败:', e);
-      document.getElementById('solution-track').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;padding:2rem;">加载失败。</p>';
+      let errorMsg = '加载失败';
+      if (e.message === 'API_LIMIT') errorMsg = '请求太频繁，被 GitHub 限制。请等 1 小时。';
+      else if (e.message === 'NOT_FOUND') errorMsg = '找不到文件。请检查 content/partners/ 文件夹。';
+      document.getElementById('solution-track').innerHTML = `<p style="text-align:center;color:#e74c39;width:100%;padding:2rem;">${errorMsg}</p>`;
     }
   }
 
@@ -675,9 +693,14 @@
     try {
       const repo = 'kehu-1/kehu-1-website';
       const folderPath = 'content/stories';
-      const res = await fetch(`https://api.github.com/repos/${repo}/contents/${folderPath}?t=${new Date().getTime()}`);
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/${folderPath}`);
       
-      if (!res.ok) throw new Error('目录不存在');
+      if (!res.ok) {
+        if (res.status === 403 || res.status === 429) throw new Error('API_LIMIT');
+        if (res.status === 404) throw new Error('NOT_FOUND');
+        throw new Error('FETCH_ERROR');
+      }
+      
       const files = await res.json();
       
       const mdFiles = files.filter(f => f.name.endsWith('.md')).sort((a, b) => a.name.localeCompare(b.name));
@@ -699,7 +722,10 @@
 
     } catch (e) {
       console.error('加载首页客户故事失败:', e);
-      document.getElementById('story-tabs-container').innerHTML = '<p style="color:#e74c39; padding:1rem;">加载失败，请确保 content/stories/ 目录下有 .md 文件</p>';
+      let errorMsg = '加载失败';
+      if (e.message === 'API_LIMIT') errorMsg = '请求太频繁，被 GitHub 限制。请等 1 小时后再刷新。';
+      else if (e.message === 'NOT_FOUND') errorMsg = '找不到文件。请检查 content/stories/ 文件夹里是否有文件。';
+      document.getElementById('story-tabs-container').innerHTML = `<p style="color:#e74c39; padding:1rem;">${errorMsg}</p>`;
     }
   }
 
@@ -764,15 +790,24 @@
   async function loadNews() {
     try {
       const repo = 'kehu-1/kehu-1-website';
-      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/news?t=${new Date().getTime()}`);
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/news`);
+      
+      if (!res.ok) {
+        if (res.status === 403 || res.status === 429) throw new Error('API_LIMIT');
+        if (res.status === 404) throw new Error('NOT_FOUND');
+        throw new Error('FETCH_ERROR');
+      }
+      
       const files = await res.json();
       const track = document.getElementById('news-track');
       const latestContainer = document.getElementById('latest-news-container');
       track.innerHTML = ''; newsArticles = [];
+      
       if (!Array.isArray(files) || files.length === 0) { 
         track.innerHTML = '<p style="text-align:center;color:#999;width:100%;padding:2rem;">暂无新闻动态。</p>'; 
         latestContainer.innerHTML = '<p style="color:#999;text-align:center;width:100%;">暂无最新新闻</p>'; return; 
       }
+      
       files.sort((a, b) => b.name.localeCompare(a.name));
       const latestFiles = files.slice(0, 6);
       for (let i = 0; i < latestFiles.length; i++) {
@@ -809,9 +844,13 @@
       }
       initSlider('news-track', 'news-dots'); updateNewsNavButtons();
     } catch (e) { 
-      console.error(e); 
-      document.getElementById('news-track').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;padding:2rem;">加载新闻失败，请刷新。</p>'; 
-      document.getElementById('latest-news-container').innerHTML = '<p style="color:#e74c39;text-align:center;width:100%;">加载失败</p>';
+      console.error('加载新闻失败:', e);
+      let errorMsg = '加载失败';
+      if (e.message === 'API_LIMIT') errorMsg = '请求太频繁，请等 1 小时。';
+      else if (e.message === 'NOT_FOUND') errorMsg = '找不到文件。请检查 content/news/ 文件夹。';
+      
+      document.getElementById('news-track').innerHTML = `<p style="text-align:center;color:#e74c39;width:100%;padding:2rem;">${errorMsg}</p>`; 
+      document.getElementById('latest-news-container').innerHTML = `<p style="color:#e74c39;text-align:center;width:100%;">${errorMsg}</p>`;
     }
   }
 
@@ -825,7 +864,10 @@
 
   async function loadSocial() {
     try {
-      const res = await fetch(`/content/social.json?t=${new Date().getTime()}`); 
+      const res = await fetch(`/content/social.json`); 
+      
+      if (!res.ok) throw new Error('FETCH_ERROR');
+      
       const data = await res.json();
       socialPosts = data.posts || [];
       if (socialPosts.length === 0) {
@@ -834,7 +876,7 @@
       filterSocial('All'); 
     } catch (e) {
       console.error('加载社交媒体失败:', e);
-      document.getElementById('social-track').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;padding:2rem;">加载社交媒体失败，请确保 /content/social.json 存在。</p>';
+      document.getElementById('social-track').innerHTML = '<p style="text-align:center;color:#e74c39;width:100%;padding:2rem;">加载失败，请确保 content/social.json 存在且格式正确。</p>';
     }
   }
 
@@ -929,7 +971,10 @@
   async function loadNavCategories() {
     try {
       const repo = 'kehu-1/kehu-1-website';
-      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/stories?t=${new Date().getTime()}`);
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/stories`);
+      
+      if (!res.ok) throw new Error('FETCH_ERROR');
+      
       const files = await res.json();
       
       const menu = document.getElementById('story-dropdown-menu');
@@ -973,7 +1018,10 @@
   async function loadProductMenu() {
     try {
       const repo = 'kehu-1/kehu-1-website';
-      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/products?t=${new Date().getTime()}`);
+      const res = await fetch(`https://api.github.com/repos/${repo}/contents/content/products`);
+      
+      if (!res.ok) throw new Error('FETCH_ERROR');
+      
       const files = await res.json();
       if (!Array.isArray(files) || files.length === 0) return;
 
@@ -1025,13 +1073,14 @@
 
   // 9. 页面加载初始化
   window.addEventListener('load', () => {
+    // 按照顺序请求，稍微延迟，防止并发触发限流
     loadHomepageProducts(); 
-    loadHomepagePartners(); // <--- 新增：加载合作部门
-    loadHomepageStories();
-    loadNews();   
-    loadSocial(); 
-    loadNavCategories(); 
-    loadProductMenu();
+    setTimeout(loadHomepagePartners, 500); 
+    setTimeout(loadHomepageStories, 1000);
+    setTimeout(loadNews, 1500);   
+    setTimeout(loadSocial, 2000); 
+    setTimeout(loadNavCategories, 2500); 
+    setTimeout(loadProductMenu, 3000);
 
     const headerElement = document.querySelector('header');
     if (headerElement) {
