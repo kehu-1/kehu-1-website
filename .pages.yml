@@ -56,10 +56,31 @@ content:
     create: true
     delete: true
     fields:
-      - { name: "title", label: "部门/板块名称", type: "string" }
-      - { name: "logo", label: "部门Logo或首页配图", type: "image" }
+      # 首页显示字段
+      - { name: "title", label: "部门/板块名称（如：SIG软件改进组）", type: "string" }
+      - { name: "logo", label: "首页封面图/Logo", type: "image" }
       - { name: "description", label: "首页简短介绍", type: "text" }
-      - { name: "body", label: "详情页排版内容（支持Markdown和HTML）", type: "rich-text" }
+      
+      # 详情页：顶部大段落 + 右侧Logo
+      - { name: "intro_text", label: "详情页顶部介绍（左侧段落）", type: "text" }
+      - { name: "detail_logo", label: "详情页右侧大Logo", type: "image" }
+      
+      # 详情页：双列列表
+      - { name: "industry_list", label: "产业列表（每行填一个，如：汽车\\n交通）", type: "text" }
+      - { name: "collab_title", label: "合作模式/运动 的标题", type: "string" }
+      - { name: "collab_text", label: "合作模式/运动 的正文介绍", type: "text" }
+      
+      # 详情页：底部产品/案例卡片（完美复刻图4-5）
+      - { name: "grid_title", label: "底部卡片区域标题（如：可用产品）", type: "string", default: "可用产品" }
+      - name: "products"
+        label: "底部产品/案例卡片"
+        type: "object"
+        list: true
+        fields:
+          - { name: "img", label: "案例图片", type: "image" }
+          - { name: "title", label: "案例标题", type: "string" }
+          - { name: "desc", label: "案例简介", type: "text" }
+          - { name: "link", label: "点击跳转链接", type: "string", default: "#" }
 
   # ==========================================
   # 【通用内容与动态】
