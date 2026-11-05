@@ -11,7 +11,7 @@
     body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); line-height: 1.8; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* --- 页面主体样式 --- */
+    /* --- 页面主体样式（保持不变） --- */
     header { background: var(--dark-bg); position: sticky; top: 0; z-index: 1000; }
     .header-inner { max-width: 1240px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-size: 1.6rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
@@ -60,15 +60,36 @@
     .modal-header h2 { font-size: 2.5rem; font-weight: 800; color: #0F172A; margin-bottom: 0.5rem; }
     .modal-header p { font-size: 1.1rem; color: #475569; }
     
-    /* 弹窗上方文字 */
-    .modal-text-content { font-size: 1.05rem; color: #334155; margin-bottom: 3rem; line-height: 2; }
-    .modal-text-content p { margin-bottom: 1.5rem; }
+    /* 1. 弹窗上方文字轮播区域 */
+    .modal-text-carousel-wrapper { 
+      position: relative; 
+      height: 120px; /* 固定高度，防止文字切换时页面乱跳 */
+      margin-bottom: 2rem; 
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .modal-text-item { 
+      position: absolute; 
+      width: 100%; 
+      font-size: 1.4rem; 
+      font-weight: 500;
+      color: #334155; 
+      line-height: 1.8;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .modal-text-item.active { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
 
-    /* 弹窗下方轮播图 */
+    /* 2. 弹窗下方轮播图 */
     .modal-carousel { position: relative; width: 100%; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
     .carousel-track { display: flex; transition: transform 0.4s ease; }
     .carousel-item { flex: 0 0 100%; position: relative; background: #f8fafc; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    .carousel-item img { width: 100%; max-height: 500px; object-fit: contain; display: block; }
+    .carousel-item img { width: 100%; max-height: 400px; object-fit: contain; display: block; }
     .carousel-caption { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(15,23,42,0.7); color: #fff; padding: 0.8rem 1.5rem; font-size: 0.95rem; text-align: center; }
     
     .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: #fff; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; z-index: 2; transition: 0.3s; }
@@ -86,6 +107,7 @@
       .page-title { font-size: 2.5rem; }
       .card-modal-content { padding: 2rem; }
       .modal-header h2 { font-size: 2rem; }
+      .modal-text-carousel-wrapper { height: 180px; }
     }
     
     .loading { text-align: center; color: #999; padding: 8rem 2rem; font-size: 1.2rem; }
@@ -112,10 +134,12 @@
       <p id="modal-card-desc"></p>
     </div>
     
-    <!-- 文字介绍区域 -->
-    <div class="modal-text-content" id="modal-card-text"></div>
+    <!-- 文字轮播区域 -->
+    <div class="modal-text-carousel-wrapper" id="modal-text-wrapper">
+      <!-- JS 会在这里注入文字 -->
+    </div>
 
-    <!-- 下方轮播图区域 -->
+    <!-- 下方图片轮播区域 -->
     <div class="modal-carousel" id="modal-carousel-wrapper" style="display: none;">
       <div class="carousel-track" id="carousel-track"></div>
       <button class="carousel-btn prev" id="carousel-prev" onclick="slideModalCarousel(-1)">‹</button>
@@ -127,6 +151,10 @@
 
 <script>
   let pageData = null;
+  let textCarouselInterval = null; // 用于清理定时器
+  let currentTextIndex = 0;
+  let modalCurrentIndex = 0;
+  let modalTotalImages = 0;
 
   async function loadPartnerDetail() {
     const params = new URLSearchParams(window.location.search);
@@ -171,30 +199,19 @@
          });
       }
 
-      // 判断是否有右侧Logo
       const introLayoutHtml = detailLogo 
         ? `<div class="intro-text"><p>${introText.replace(/\n/g, '</p><p>')}</p></div>
            <div class="intro-logo"><img src="${detailLogo}" alt="${title} Logo"></div>`
         : `<div class="intro-text" style="flex: 1; width: 100%;"><p>${introText.replace(/\n/g, '</p><p>')}</p></div>`;
 
-      // 恢复完整的页面渲染结构
       pageContent.innerHTML = `
         <div class="page-container">
           <h1 class="page-title">${title}</h1>
-          
           <div class="layout-intro">${introLayoutHtml}</div>
-
           <div class="two-col-lists">
-            <div class="list-group">
-              <h3>产业</h3>
-              <ul>${listHtml}</ul>
-            </div>
-            <div class="list-group">
-              <h3>${collabTitle}</h3>
-              <p>${collabText.replace(/\n/g, '<br>')}</p>
-            </div>
+            <div class="list-group"><h3>产业</h3><ul>${listHtml}</ul></div>
+            <div class="list-group"><h3>${collabTitle}</h3><p>${collabText.replace(/\n/g, '<br>')}</p></div>
           </div>
-
           ${gridHtml ? `
           <div class="grid-section">
             <h2>${gridTitle}</h2>
@@ -210,9 +227,6 @@
     }
   }
 
-  let modalCurrentIndex = 0;
-  let modalTotalImages = 0;
-
   // 打开弹窗
   function openCardModal(index) {
     if (!pageData || !pageData.cards || !pageData.cards[index]) return;
@@ -220,12 +234,38 @@
     
     document.getElementById('modal-card-title').innerText = card.title || '详情介绍';
     document.getElementById('modal-card-desc').innerText = card.desc || '';
-    
-    // 渲染纯文本
-    const textContent = (card.modal_text || '暂无详细文字介绍。').replace(/\n/g, '<br>');
-    document.getElementById('modal-card-text').innerHTML = textContent;
 
-    // 渲染轮播图
+    // --- 初始化文字轮播 ---
+    const textWrapper = document.getElementById('modal-text-wrapper');
+    textWrapper.innerHTML = '';
+    currentTextIndex = 0;
+
+    if (card.modal_texts && Array.isArray(card.modal_texts) && card.modal_texts.length > 0) {
+      card.modal_texts.forEach((item, i) => {
+        const textEl = document.createElement('div');
+        textEl.className = 'modal-text-item' + (i === 0 ? ' active' : '');
+        textEl.innerText = item.text;
+        textWrapper.appendChild(textEl);
+      });
+      
+      // 如果有多条文字，启动定时器，每 3 秒切换一次
+      if (card.modal_texts.length > 1) {
+        if (textCarouselInterval) clearInterval(textCarouselInterval);
+        textCarouselInterval = setInterval(() => {
+          const items = document.querySelectorAll('.modal-text-item');
+          if (items.length === 0) return;
+          
+          items[currentTextIndex].classList.remove('active');
+          currentTextIndex = (currentTextIndex + 1) % items.length;
+          items[currentTextIndex].classList.add('active');
+        }, 3000);
+      }
+    } else {
+      // 兼容以前的老数据
+      textWrapper.innerHTML = `<div class="modal-text-item active">${card.modal_text || '暂无详细文字介绍。'}</div>`;
+    }
+
+    // --- 初始化图片轮播 ---
     const carouselWrapper = document.getElementById('modal-carousel-wrapper');
     const track = document.getElementById('carousel-track');
     const dotsContainer = document.getElementById('carousel-dots');
@@ -285,6 +325,8 @@
     if (event && event.target !== event.currentTarget) return;
     document.getElementById('card-modal').classList.remove('show');
     document.body.style.overflow = 'auto';
+    // 关闭弹窗时，停止文字轮播
+    if (textCarouselInterval) clearInterval(textCarouselInterval);
   }
 
   window.addEventListener('load', loadPartnerDetail);
