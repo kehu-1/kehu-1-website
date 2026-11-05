@@ -11,7 +11,7 @@
     body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); line-height: 1.8; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* --- 页面主体样式（保持不变） --- */
+    /* --- 页面主体样式 --- */
     header { background: var(--dark-bg); position: sticky; top: 0; z-index: 1000; }
     .header-inner { max-width: 1240px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-size: 1.6rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
@@ -60,11 +60,11 @@
     .modal-header h2 { font-size: 2.5rem; font-weight: 800; color: #0F172A; margin-bottom: 0.5rem; }
     .modal-header p { font-size: 1.1rem; color: #475569; }
     
-    /* 上方文字 */
+    /* 弹窗上方文字 */
     .modal-text-content { font-size: 1.05rem; color: #334155; margin-bottom: 3rem; line-height: 2; }
     .modal-text-content p { margin-bottom: 1.5rem; }
 
-    /* 下方轮播图组件 */
+    /* 弹窗下方轮播图 */
     .modal-carousel { position: relative; width: 100%; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
     .carousel-track { display: flex; transition: transform 0.4s ease; }
     .carousel-item { flex: 0 0 100%; position: relative; background: #f8fafc; display: flex; flex-direction: column; align-items: center; justify-content: center; }
@@ -85,7 +85,11 @@
       .product-grid { grid-template-columns: 1fr; }
       .page-title { font-size: 2.5rem; }
       .card-modal-content { padding: 2rem; }
+      .modal-header h2 { font-size: 2rem; }
     }
+    
+    .loading { text-align: center; color: #999; padding: 8rem 2rem; font-size: 1.2rem; }
+    .error { text-align: center; color: #e74c39; padding: 8rem 2rem; }
   </style>
 </head>
 <body>
@@ -121,7 +125,6 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
   let pageData = null;
 
@@ -130,39 +133,80 @@
     const fileId = params.get('id');
     const pageContent = document.getElementById('page-content');
 
-    if (!fileId) return;
+    if (!fileId) {
+      pageContent.innerHTML = '<div class="error">未找到内容 ID。<br><a href="index.html">返回首页</a></div>';
+      return;
+    }
 
     try {
       const res = await fetch(`/data.json?t=${new Date().getTime()}`);
+      if (!res.ok) throw new Error('数据加载失败');
       const data = await res.json();
+
       pageData = data.partners ? data.partners.find(p => p.filename === fileId) : null;
-      if (!pageData) throw new Error('未找到数据');
+      if (!pageData) throw new Error('未找到该部门的数据');
 
-      // 渲染页面主体（这里省略部分逻辑，保留原有结构）
-      // ... (省略部分与之前相同的渲染代码)
+      const title = pageData.title || '部门介绍';
+      const introText = pageData.intro_text || '';
+      const detailLogo = pageData.detail_logo || '';
+      const industryList = pageData.industry_list || '';
+      const collabTitle = pageData.collab_title || '合作模式';
+      const collabText = pageData.collab_text || '';
+      const gridTitle = pageData.grid_title || '可用产品';
       
-      // 为了演示，我们直接渲染出卡片列表
-      const gridHtml = pageData.cards ? pageData.cards.map((p, index) => `
-        <div class="grid-card">
-          ${p.image ? `<img src="${p.image}">` : ''}
-          <h4>${p.title || ''}</h4>
-          <p>${p.desc || ''}</p>
-          <span class="link" onclick="openCardModal(${index})">了解更多</span>
-        </div>
-      `).join('') : '';
+      const listHtml = industryList.split('\n').filter(i => i.trim()).map(i => `<li>${i.trim()}</li>`).join('');
 
+      let gridHtml = '';
+      if (pageData.cards && Array.isArray(pageData.cards)) {
+         pageData.cards.forEach((p, index) => {
+           const imgHtml = p.image ? `<img src="${p.image}" alt="${p.title || ''}">` : '';
+           gridHtml += `
+            <div class="grid-card">
+              ${imgHtml}
+              <h4>${p.title || ''}</h4>
+              <p>${p.desc || ''}</p>
+              <span class="link" onclick="openCardModal(${index})">了解更多</span>
+            </div>
+           `;
+         });
+      }
+
+      // 判断是否有右侧Logo
+      const introLayoutHtml = detailLogo 
+        ? `<div class="intro-text"><p>${introText.replace(/\n/g, '</p><p>')}</p></div>
+           <div class="intro-logo"><img src="${detailLogo}" alt="${title} Logo"></div>`
+        : `<div class="intro-text" style="flex: 1; width: 100%;"><p>${introText.replace(/\n/g, '</p><p>')}</p></div>`;
+
+      // 恢复完整的页面渲染结构
       pageContent.innerHTML = `
         <div class="page-container">
-          <h1 class="page-title">${pageData.title}</h1>
+          <h1 class="page-title">${title}</h1>
+          
+          <div class="layout-intro">${introLayoutHtml}</div>
+
+          <div class="two-col-lists">
+            <div class="list-group">
+              <h3>产业</h3>
+              <ul>${listHtml}</ul>
+            </div>
+            <div class="list-group">
+              <h3>${collabTitle}</h3>
+              <p>${collabText.replace(/\n/g, '<br>')}</p>
+            </div>
+          </div>
+
+          ${gridHtml ? `
           <div class="grid-section">
-            <h2>${pageData.grid_title || '可用产品'}</h2>
+            <h2>${gridTitle}</h2>
             <div class="product-grid">${gridHtml}</div>
           </div>
+          ` : ''}
         </div>
       `;
 
     } catch (e) {
       console.error(e);
+      pageContent.innerHTML = '<div class="error">加载失败。<br><a href="index.html">返回首页</a></div>';
     }
   }
 
@@ -177,7 +221,7 @@
     document.getElementById('modal-card-title').innerText = card.title || '详情介绍';
     document.getElementById('modal-card-desc').innerText = card.desc || '';
     
-    // 渲染纯文本（支持换行）
+    // 渲染纯文本
     const textContent = (card.modal_text || '暂无详细文字介绍。').replace(/\n/g, '<br>');
     document.getElementById('modal-card-text').innerHTML = textContent;
 
@@ -194,7 +238,6 @@
       modalCurrentIndex = 0;
       
       card.modal_images.forEach((imgObj, i) => {
-        // 渲染图片
         const itemHtml = `
           <div class="carousel-item">
             <img src="${imgObj.img}" alt="图片${i+1}">
@@ -203,7 +246,6 @@
         `;
         track.insertAdjacentHTML('beforeend', itemHtml);
 
-        // 渲染指示点
         const dot = document.createElement('span');
         dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
         dot.onclick = () => goToModalSlide(i);
@@ -211,11 +253,9 @@
       });
 
       carouselWrapper.style.display = 'block';
-      // 如果只有一张图，隐藏左右箭头
       document.getElementById('carousel-prev').style.display = modalTotalImages > 1 ? 'flex' : 'none';
       document.getElementById('carousel-next').style.display = modalTotalImages > 1 ? 'flex' : 'none';
       
-      // 初始化位置
       goToModalSlide(0);
     } else {
       carouselWrapper.style.display = 'none';
@@ -225,7 +265,6 @@
     document.body.style.overflow = 'hidden';
   }
 
-  // 轮播图切换逻辑
   function goToModalSlide(index) {
     if (index < 0) index = modalTotalImages - 1;
     if (index >= modalTotalImages) index = 0;
@@ -242,7 +281,6 @@
     goToModalSlide(modalCurrentIndex + direction);
   }
 
-  // 关闭弹窗
   function closeCardModal(event) {
     if (event && event.target !== event.currentTarget) return;
     document.getElementById('card-modal').classList.remove('show');
