@@ -41,21 +41,47 @@
     .grid-card .link { color: #0ea5e9; font-weight: 700; font-size: 1rem; display: inline-block; cursor: pointer; }
     .grid-card .link:hover { text-decoration: underline; }
 
-    /* --- 弹窗高级样式 --- */
-    .card-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(5px); z-index: 3000; justify-content: center; align-items: center; }
+    /* =========================================
+       弹窗高级样式调整：加宽、灰蓝背景、图文穿插
+       ========================================= */
+    .card-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px); z-index: 3000; justify-content: center; align-items: center; }
     .card-modal.show { display: flex; }
-    .card-modal-content { background: #fff; width: 90vw; max-width: 1000px; max-height: 90vh; border-radius: 8px; overflow-y: auto; position: relative; padding: 4rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); animation: fadeIn 0.3s ease-out; }
+    
+    /* 1. 更宽的框 + 灰蓝色背景 */
+    .card-modal-content { 
+      background: #F1F5F9; /* 高级灰蓝色 */
+      width: 95vw; 
+      max-width: 1200px; /* 从 1000px 加宽到 1200px */
+      max-height: 90vh; 
+      border-radius: 12px; 
+      overflow-y: auto; 
+      position: relative; 
+      padding: 4rem; 
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); 
+      animation: fadeIn 0.3s ease-out; 
+    }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .card-modal-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 2.5rem; color: #9CA3AF; cursor: pointer; line-height: 1; transition: 0.3s; z-index: 10; }
-    .card-modal-close:hover { color: #111827; }
     
-    .modal-header { margin-bottom: 2rem; border-bottom: 2px solid #E5E7EB; padding-bottom: 1.5rem; }
-    .modal-header h2 { font-size: 2.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.5rem; }
-    .modal-header p { font-size: 1.1rem; color: #6B7280; }
+    .card-modal-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 2.5rem; color: #64748B; cursor: pointer; line-height: 1; transition: 0.3s; z-index: 10; }
+    .card-modal-close:hover { color: #0F172A; }
     
-    .modal-detail-body { font-size: 1.05rem; color: #374151; }
+    .modal-header { margin-bottom: 2rem; border-bottom: 1px solid #CBD5E1; padding-bottom: 1.5rem; }
+    .modal-header h2 { font-size: 2.5rem; font-weight: 800; color: #0F172A; margin-bottom: 0.5rem; }
+    .modal-header p { font-size: 1.1rem; color: #475569; }
+    
+    /* 2. 图文穿插排版 */
+    .modal-detail-body { font-size: 1.05rem; color: #334155; }
     .modal-detail-body p { margin-bottom: 1.5rem; line-height: 2; }
-    .modal-detail-body img { max-width: 100%; height: auto; border-radius: 4px; margin: 2rem 0; }
+    
+    /* 让插入的图片自动居中、圆角、加阴影，完美融入文字 */
+    .modal-detail-body img { 
+      max-width: 100%; 
+      height: auto; 
+      border-radius: 8px; 
+      margin: 2.5rem auto; 
+      display: block; 
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+    }
 
     @media (max-width: 992px) {
       .layout-intro { flex-direction: column-reverse; gap: 2rem; }
@@ -98,7 +124,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
-  let pageData = null; // 保存当前页面的数据，方便弹窗调用
+  let pageData = null;
 
   async function loadPartnerDetail() {
     const params = new URLSearchParams(window.location.search);
@@ -128,7 +154,6 @@
       
       const listHtml = industryList.split('\n').filter(i => i.trim()).map(i => `<li>${i.trim()}</li>`).join('');
 
-      // 渲染底部卡片，并给“了解更多”绑定弹窗事件
       let gridHtml = '';
       if (pageData.cards && Array.isArray(pageData.cards)) {
          pageData.cards.forEach((p, index) => {
@@ -138,7 +163,6 @@
               ${imgHtml}
               <h4>${p.title || ''}</h4>
               <p>${p.desc || ''}</p>
-              <!-- 重点：点击这里触发弹窗，传入当前卡片的索引 -->
               <span class="link" onclick="openCardModal(${index})">了解更多</span>
             </div>
            `;
@@ -182,7 +206,6 @@
     }
   }
 
-  // 打开弹窗
   function openCardModal(index) {
     if (!pageData || !pageData.cards || !pageData.cards[index]) return;
     const card = pageData.cards[index];
@@ -190,7 +213,6 @@
     document.getElementById('modal-card-title').innerText = card.title || '详情介绍';
     document.getElementById('modal-card-desc').innerText = card.desc || '';
     
-    // 如果后台填了 modal_content，就转成 HTML 渲染，否则显示默认提示
     const bodyHtml = card.modal_content ? marked.parse(card.modal_content) : '<p>暂无详细内容。</p>';
     document.getElementById('modal-card-body').innerHTML = bodyHtml;
 
@@ -198,7 +220,6 @@
     document.body.style.overflow = 'hidden';
   }
 
-  // 关闭弹窗
   function closeCardModal(event) {
     if (event && event.target !== event.currentTarget) return;
     document.getElementById('card-modal').classList.remove('show');
