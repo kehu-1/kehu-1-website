@@ -56,31 +56,26 @@ content:
     create: true
     delete: true
     fields:
-      # 首页显示字段
-      - { name: "title", label: "部门/板块名称（如：SIG软件改进组）", type: "string" }
-      - { name: "logo", label: "首页封面图/Logo", type: "image" }
+      - { name: "title", label: "部门名称（大标题）", type: "string" }
+      - { name: "logo", label: "首页封面图", type: "image" }
       - { name: "description", label: "首页简短介绍", type: "text" }
-      
-      # 详情页：顶部大段落 + 右侧Logo
-      - { name: "intro_text", label: "详情页顶部介绍（左侧段落）", type: "text" }
+      - { name: "intro_text", label: "详情页左侧介绍文字", type: "text" }
       - { name: "detail_logo", label: "详情页右侧大Logo", type: "image" }
-      
-      # 详情页：双列列表
-      - { name: "industry_list", label: "产业列表（每行填一个，如：汽车\\n交通）", type: "text" }
-      - { name: "collab_title", label: "合作模式/运动 的标题", type: "string" }
-      - { name: "collab_text", label: "合作模式/运动 的正文介绍", type: "text" }
-      
-      # 详情页：底部产品/案例卡片（完美复刻图4-5）
+      - { name: "industry_list", label: "产业列表（每行一个）", type: "text" }
+      - { name: "collab_title", label: "合作模式标题（如：运动）", type: "string" }
+      - { name: "collab_text", label: "合作模式正文", type: "text" }
       - { name: "grid_title", label: "底部卡片区域标题（如：可用产品）", type: "string", default: "可用产品" }
-      - name: "products"
+      
+      # 嵌套卡片列表
+      - name: "cards"
         label: "底部产品/案例卡片"
         type: "object"
         list: true
         fields:
-          - { name: "img", label: "案例图片", type: "image" }
-          - { name: "title", label: "案例标题", type: "string" }
-          - { name: "desc", label: "案例简介", type: "text" }
-          - { name: "link", label: "点击跳转链接", type: "string", default: "#" }
+          - { name: "image", label: "卡片图片", type: "image" }
+          - { name: "title", label: "卡片标题", type: "string" }
+          - { name: "desc", label: "卡片简介", type: "text" }
+          - { name: "link", label: "了解更多链接", type: "string", default: "#" }
 
   # ==========================================
   # 【通用内容与动态】
