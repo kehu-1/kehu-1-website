@@ -72,11 +72,10 @@ content:
         type: "object"
         list: true
         fields:
-          - { name: "image", label: "卡片图片", type: "image" }
+          - { name: "image", label: "卡片封面图", type: "image" }
           - { name: "title", label: "卡片标题", type: "string" }
           - { name: "desc", label: "卡片简介", type: "text" }
-          - { name: "link", label: "了解更多链接", type: "string", default: "#" }
-
+          - { name: "modal_content", label: "弹窗详细内容（支持富文本）", type: "rich-text" } 
   # ==========================================
   # 【通用内容与动态】
   # ==========================================
