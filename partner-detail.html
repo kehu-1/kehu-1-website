@@ -60,40 +60,36 @@
     .modal-header h2 { font-size: 2.5rem; font-weight: 800; color: #0F172A; margin-bottom: 0.5rem; }
     .modal-header p { font-size: 1.1rem; color: #475569; }
 
-    /* 图文幻灯片容器 */
+     /* 优化：去掉内层白框，减小边距 */
     .modal-slider-container {
       position: relative;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      overflow: hidden;
       display: flex;
       flex-direction: column;
+      /* 去掉了 background, border-radius, box-shadow */
     }
 
     .slide-text-wrapper {
-      padding: 2.5rem;
+      padding: 1rem 0 1.5rem 0; /* 减小左右内边距，去掉底部边框 */
       font-size: 1.15rem;
       color: #334155;
       line-height: 1.9;
-      min-height: 150px; /* 保证文字高度一致，防止高度跳动 */
-      border-bottom: 1px dashed #E2E8F0;
+      min-height: 100px; 
     }
 
     .slide-image-wrapper {
       position: relative;
-      background: #f8fafc;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 300px;
-      max-height: 500px;
+      width: 100%;
+      /* 去掉了背景色，让图片直接融入大背景 */
     }
     .slide-image-wrapper img {
       width: 100%;
-      max-height: 500px;
+      max-height: 550px; /* 图片高度稍微放大一点 */
       object-fit: contain;
       display: block;
+      border-radius: 8px; /* 给图片自己加个圆角，更柔和 */
     }
     .slide-caption {
       position: absolute;
@@ -122,8 +118,13 @@
       transition: 0.3s;
     }
     .slide-btn:hover { background: var(--tech-green); color: #000; }
-    .slide-btn.prev { left: 15px; }
-    .slide-btn.next { right: 15px; }
+    .slide-btn.prev { left: 10px; }
+    .slide-btn.next { right: -10px; }
+    /* 移动端保持在内侧 */
+    @media (max-width: 992px) {
+      .slide-btn.prev { left: 10px; }
+      .slide-btn.next { right: 10px; }
+    }
 
     /* 底部指示点 */
     .slide-dots {
