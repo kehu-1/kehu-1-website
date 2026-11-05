@@ -3,416 +3,360 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>生产优势 - 你的品牌名</title>
+  <title>部门介绍 - 你的品牌名</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap');
-    :root { --tech-green: #00FFB9; --dark-bg: #0F172A; --text-main: #111827; --bg-gray: #F8FAFC; }
+    :root { --tech-green: #00FFB9; --dark-bg: #0F172A; --text-main: #111827; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); line-height: 1.6; background: #fff; }
+    body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); line-height: 1.8; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* 导航栏（简略版，保持统一） */
-    header { background: #fff; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #E5E7EB; }
+    /* --- 页面主体样式 --- */
+    header { background: var(--dark-bg); position: sticky; top: 0; z-index: 1000; }
     .header-inner { max-width: 1240px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.6rem; font-weight: 800; color: var(--dark-bg); letter-spacing: 2px; }
-    .nav-links a { margin-left: 2rem; font-weight: 500; color: #4B5563; }
-    .nav-links a:hover { color: var(--tech-green); }
+    .logo { font-size: 1.6rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
+    .back-btn { color: var(--tech-green); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; }
 
-    /* 通用容器 */
-    .container { max-width: 1240px; margin: 0 auto; padding: 0 2rem; }
-    .section-title { text-align: center; margin-bottom: 4rem; }
-    .section-title .sub-label { font-size: 0.9rem; font-weight: 700; color: #10B981; text-transform: uppercase; margin-bottom: 0.5rem; display: block; letter-spacing: 1px; }
-    .section-title h2 { font-size: 2.8rem; font-weight: 700; color: var(--text-main); letter-spacing: -0.5px; }
+    .page-container { max-width: 1240px; margin: 0 auto; padding: 4rem 2rem; }
+    .page-title { font-size: 3.5rem; font-weight: 800; margin-bottom: 3rem; color: var(--text-main); letter-spacing: -1px; line-height: 1.2; }
 
-    /* 图1：深色首屏 */
-    .hero-dark { background: var(--dark-bg); color: #fff; padding: 8rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 4rem; }
-    .hero-dark .hero-text { max-width: 600px; }
-    .hero-dark h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 1.5rem; }
-    .hero-dark p { font-size: 1.2rem; color: #9CA3AF; margin-bottom: 2.5rem; }
-    .hero-dark .hero-btns { display: flex; gap: 1rem; }
-    .btn-primary { background: #10B981; color: #fff; padding: 1rem 2.5rem; border-radius: 4px; font-weight: 700; border: none; cursor: pointer; }
-    .btn-outline { border: 1px solid #fff; color: #fff; padding: 1rem 2.5rem; border-radius: 4px; font-weight: 700; background: transparent; cursor: pointer; }
-    .hero-image { flex: 1; max-width: 500px; }
-    .hero-image img { width: 100%; border-radius: 8px; object-fit: cover; }
+    .layout-intro { display: flex; gap: 5rem; align-items: flex-start; margin-bottom: 4rem; }
+    .layout-intro .intro-text { flex: 1; font-size: 1.05rem; color: #374151; }
+    .layout-intro .intro-text p { margin-bottom: 1.5rem; text-align: justify; line-height: 2; }
+    .layout-intro .intro-logo { flex: 0.6; display: flex; justify-content: flex-end; }
+    .layout-intro .intro-logo img { max-width: 100%; max-height: 180px; object-fit: contain; }
 
-    /* 图2：3x2 卡片网格 */
-    .trust-grid { padding: 6rem 0; background: var(--bg-gray); }
-    .grid-3x2 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-    .trust-card { background: #fff; padding: 2.5rem; border-radius: 8px; border: 1px solid #E5E7EB; }
-    .trust-card .icon { width: 45px; height: 45px; background: #ECFDF5; color: #10B981; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.5rem; }
-    .trust-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; }
-    .trust-card p { color: #6B7280; font-size: 1rem; margin-bottom: 2rem; }
-    .trust-card .link { color: #10B981; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+    .two-col-lists { display: flex; gap: 6rem; margin-bottom: 5rem; }
+    .two-col-lists .list-group { flex: 1; }
+    .two-col-lists h3 { font-size: 1.6rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text-main); }
+    .two-col-lists ul { list-style-type: disc; padding-left: 1.5rem; color: #111827; font-weight: 500; }
+    .two-col-lists li { margin-bottom: 0.8rem; font-size: 1.05rem; }
+    .two-col-lists p { color: #111827; font-size: 1.05rem; line-height: 2; }
 
-    /* 图3：专家团队 */
-    .experts-section { padding: 6rem 0; background: #fff; }
-    .expert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 3rem; }
-    .expert-card img { width: 100%; height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem; }
-    .expert-card p { text-align: center; font-size: 1.1rem; font-weight: 500; }
-    .expert-btns { display: flex; justify-content: center; gap: 1rem; }
+    .grid-section h2 { font-size: 2.2rem; font-weight: 700; margin-bottom: 2.5rem; color: var(--text-main); }
+    .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem 2rem; }
+    .grid-card { display: flex; flex-direction: column; }
+    .grid-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 1.5rem; border-radius: 4px; background: #f3f4f6; }
+    .grid-card h4 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--text-main); line-height: 1.4; }
+    .grid-card p { font-size: 1rem; color: #374151; line-height: 1.7; margin-bottom: 1.5rem; flex-grow: 1; }
+    .grid-card .link { color: #0ea5e9; font-weight: 700; font-size: 1rem; display: inline-block; cursor: pointer; }
+    .grid-card .link:hover { text-decoration: underline; }
 
-    /* 图4：对比表格 */
-    .compare-section { padding: 6rem 0; background: var(--bg-gray); }
-    .compare-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-    .compare-table th, .compare-table td { padding: 1.5rem; text-align: left; border-bottom: 1px solid #E5E7EB; font-size: 1rem; }
-    .compare-table th { background: var(--dark-bg); color: #fff; font-weight: 600; }
-    .compare-table tr td:last-child { background: #ECFDF5; color: #065F46; font-weight: 500; }
-    .compare-table .check { color: #10B981; margin-right: 0.5rem; }
+    /* --- 弹窗样式 --- */
+    .card-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px); z-index: 3000; justify-content: center; align-items: center; }
+    .card-modal.show { display: flex; }
+    
+    .card-modal-content { 
+      background: #F1F5F9; width: 95vw; max-width: 1000px; max-height: 90vh; 
+      border-radius: 12px; overflow-y: auto; position: relative; padding: 4rem; 
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); animation: fadeIn 0.3s ease-out; 
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .card-modal-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 2.5rem; color: #64748B; cursor: pointer; line-height: 1; transition: 0.3s; z-index: 10; }
+    .card-modal-close:hover { color: #0F172A; }
+    
+    .modal-header { margin-bottom: 2rem; border-bottom: 1px solid #CBD5E1; padding-bottom: 1.5rem; }
+    .modal-header h2 { font-size: 2.5rem; font-weight: 800; color: #0F172A; margin-bottom: 0.5rem; }
+    .modal-header p { font-size: 1.1rem; color: #475569; }
 
-    /* 图5 & 图6：全球网络 & 数据 */
-    .global-network { padding: 6rem 0; background: var(--dark-bg); color: #fff; }
-    .network-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 4rem; }
-    .network-card img { width: 100%; height: 220px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem; }
-    .network-card p { font-weight: 500; text-align: center; }
-    .stats-row { display: flex; justify-content: space-around; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 3rem; }
-    .stat-item { text-align: center; }
-    .stat-item h4 { font-size: 3rem; font-weight: 800; color: var(--tech-green); line-height: 1; }
-    .stat-item p { color: #9CA3AF; margin-top: 0.5rem; }
-    .network-btn-wrapper { text-align: center; margin-top: 3rem; }
+     /* 优化：去掉内层白框，减小边距 */
+    .modal-slider-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      /* 去掉了 background, border-radius, box-shadow */
+    }
 
-    /* 图7：4列场景卡片 */
-    .drivers-section { padding: 6rem 0; background: #fff; }
-    .grid-4col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-    .driver-card { position: relative; border-radius: 8px; overflow: hidden; background: var(--dark-bg); color: #fff; display: flex; flex-direction: column; }
-    .driver-card img { width: 100%; height: 200px; object-fit: cover; opacity: 0.8; }
-    .driver-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
-    .driver-content h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .driver-content p { font-size: 0.9rem; color: #9CA3AF; margin-bottom: 1.5rem; flex-grow: 1; }
-    .driver-content .link { color: #10B981; font-size: 0.9rem; font-weight: 600; }
+    .slide-text-wrapper {
+      padding: 1rem 0 1.5rem 0; /* 减小左右内边距，去掉底部边框 */
+      font-size: 1.15rem;
+      color: #334155;
+      line-height: 1.9;
+      min-height: 100px; 
+    }
 
-    /* 图8：FAQ */
-    .faq-section { padding: 6rem 0; background: var(--bg-gray); }
-    .faq-layout { display: flex; gap: 4rem; }
-    .faq-left { flex: 0.8; }
-    .faq-left .sub-label { color: #10B981; font-weight: 700; margin-bottom: 0.5rem; display: block; }
-    .faq-left h2 { font-size: 2.5rem; font-weight: 700; }
-    .faq-right { flex: 1.2; }
-    .faq-item { border-bottom: 1px solid #D1D5DB; margin-bottom: 1rem; }
-    .faq-question { padding: 1.5rem 0; font-size: 1.2rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; color: #4B5563; font-size: 1rem; line-height: 1.8; }
-    .faq-item.active .faq-answer { max-height: 200px; padding-bottom: 1.5rem; }
+    .slide-image-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      /* 去掉了背景色，让图片直接融入大背景 */
+    }
+    .slide-image-wrapper img {
+      width: 100%;
+      max-height: 550px; /* 图片高度稍微放大一点 */
+      object-fit: contain;
+      display: block;
+      border-radius: 8px; /* 给图片自己加个圆角，更柔和 */
+    }
+    .slide-caption {
+      position: absolute;
+      bottom: 0; left: 0; width: 100%;
+      background: rgba(15,23,42,0.7);
+      color: #fff;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.95rem;
+      text-align: center;
+    }
 
-    /* 图9：底部CTA */
-    .cta-bottom { padding: 6rem 2rem; text-align: center; background: #111827; color: #fff; border-radius: 12px; margin: 4rem 2rem; }
-    .cta-bottom h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; color: var(--tech-green); }
-    .cta-bottom p { font-size: 1.1rem; color: #9CA3AF; margin-bottom: 2rem; }
-    .cta-btns { display: flex; justify-content: center; gap: 1rem; }
+    /* 左右切换按钮 */
+    .slide-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(15, 23, 42, 0.6);
+      color: #fff;
+      border: none;
+      width: 45px; height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 10;
+      transition: 0.3s;
+    }
+    .slide-btn:hover { background: var(--tech-green); color: #000; }
+    .slide-btn.prev { left: 10px; }
+    .slide-btn.next { right: -10px; }
+    /* 移动端保持在内侧 */
+    @media (max-width: 992px) {
+      .slide-btn.prev { left: 10px; }
+      .slide-btn.next { right: 10px; }
+    }
+
+    /* 底部指示点 */
+    .slide-dots {
+      position: absolute;
+      bottom: 1rem; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 0.5rem; z-index: 10;
+    }
+    .slide-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s;
+    }
+    .slide-dot.active { background: #fff; transform: scale(1.2); }
 
     @media (max-width: 992px) {
-      .hero-dark { flex-direction: column; text-align: center; }
-      .grid-3x2, .expert-grid, .network-grid, .grid-4col { grid-template-columns: 1fr; }
-      .compare-table { display: block; overflow-x: auto; }
-      .stats-row { flex-direction: column; gap: 2rem; }
-      .faq-layout { flex-direction: column; }
+      .layout-intro, .two-col-lists { flex-direction: column; gap: 2rem; }
+      .product-grid { grid-template-columns: 1fr; }
+      .page-title { font-size: 2.5rem; }
+      .card-modal-content { padding: 2rem; }
+      .modal-header h2 { font-size: 2rem; }
+      .slide-text-wrapper { padding: 1.5rem; min-height: 120px; }
+      .slide-btn { width: 35px; height: 35px; font-size: 1.2rem; }
     }
+    
+    .loading { text-align: center; color: #999; padding: 8rem 2rem; font-size: 1.2rem; }
+    .error { text-align: center; color: #e74c39; padding: 8rem 2rem; }
   </style>
 </head>
 <body>
 
-<!-- 导航栏 -->
 <header>
   <div class="header-inner">
     <div class="logo">你的品牌名</div>
-    <div class="nav-links">
-      <a href="index.html">首页</a>
-      <a href="products.html">产品展示</a>
-      <a href="advantages.html" style="color: var(--tech-green);">生产优势</a>
-      <a href="contact.html">联系我们</a>
-    </div>
+    <a href="index.html" class="back-btn">← 返回首页</a>
   </div>
 </header>
 
-<!-- 图1：深色首屏 -->
-<div class="hero-dark">
-  <div class="hero-text">
-    <h1>为什么选择我们？<br>为未来打造的智能制造</h1>
-    <p>即时报价。AI驱动的可制造性分析。经过审核的全球网络。专家支持。一个能让你的产品快速、大规模且正确制造的生态系统。</p>
-    <div class="hero-btns">
-      <a href="contact.html" class="btn-primary">咨询制造专家 →</a>
-      <a href="contact.html" class="btn-outline">获取即时价格</a>
-    </div>
-  </div>
-  <div class="hero-image">
-    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Hero">
-  </div>
-</div>
+<div id="page-content"><div class="loading">正在加载...</div></div>
 
-<!-- 图2：3x2 卡片网格 -->
-<div class="trust-grid">
-  <div class="container">
-    <div class="section-title">
-      <h2>为什么团队信任我们</h2>
+<!-- 卡片详情弹窗 -->
+<div id="card-modal" class="card-modal" onclick="closeCardModal(event)">
+  <div class="card-modal-content" onclick="event.stopPropagation()">
+    <span class="card-modal-close" onclick="closeCardModal()">&times;</span>
+    <div class="modal-header">
+      <h2 id="modal-card-title"></h2>
+      <p id="modal-card-desc"></p>
     </div>
-    <div class="grid-3x2">
-      <div class="trust-card">
-        <div class="icon">💡</div>
-        <h3>我们的工作原理</h3>
-        <p>即时报价、AI驱动的可制造性分析，以及从首次报价到交付的真实工程师。</p>
-        <a href="#" class="link">看看它是怎么运作的 →</a>
+    
+    <!-- 图文幻灯片区域 -->
+    <div class="modal-slider-container" id="modal-slider-wrapper" style="display: none;">
+      
+      <!-- 顶部文字区 -->
+      <div class="slide-text-wrapper" id="slide-text"></div>
+      
+      <!-- 底部图片区 -->
+      <div class="slide-image-wrapper">
+        <img id="slide-image" src="" alt="">
+        <div class="slide-caption" id="slide-caption" style="display: none;"></div>
       </div>
-      <div class="trust-card">
-        <div class="icon">🛡️</div>
-        <h3>经过验证的品质</h3>
-        <p>通过 ISO 9001:2015 认证，对图纸进行检查，并具备完整的检测可追溯性。</p>
-        <a href="#" class="link">请参阅我们的质量标准 →</a>
-      </div>
-      <div class="trust-card">
-        <div class="icon">🔄</div>
-        <h3>对比优势</h3>
-        <p>我们与市场和传统制造商的详细比较。</p>
-        <a href="#" class="link">参见对比 →</a>
-      </div>
-      <div class="trust-card">
-        <div class="icon">🌐</div>
-        <h3>可扩展的全球网络</h3>
-        <p>覆盖5个地区，拥有250+经筛选的合作伙伴，因此容量从来不是瓶颈。</p>
-        <a href="#" class="link">探索网络 →</a>
-      </div>
-      <div class="trust-card">
-        <div class="icon">📚</div>
-        <h3>每个过程，一个合作伙伴</h3>
-        <p>数控、成型、钣金、3D打印等——由一个团队协调。</p>
-        <a href="#" class="link">探索功能 →</a>
-      </div>
-      <div class="trust-card">
-        <div class="icon">💻</div>
-        <h3>我们的平台</h3>
-        <p>即时报价、快速报价、Materials.AI、DDP/IoR 以及实时订单可视化。</p>
-        <a href="#" class="link">探索平台 →</a>
-      </div>
+      
+      <!-- 控制按钮 -->
+      <button class="slide-btn prev" id="slide-prev" onclick="changeSlide(-1)">‹</button>
+      <button class="slide-btn next" id="slide-next" onclick="changeSlide(1)">›</button>
+      
+      <!-- 指示点 -->
+      <div class="slide-dots" id="slide-dots"></div>
     </div>
-  </div>
-</div>
-
-<!-- 图3：专家团队 -->
-<div class="experts-section">
-  <div class="container">
-    <div class="section-title">
-      <span class="sub-label">是专家，不是传送门</span>
-      <h2>大多数平台提供软件，我们提供专家。</h2>
-      <p style="color: #6B7280; margin-top: 1rem; max-width: 700px; margin-left: auto; margin-right: auto;">从首次报价到最终交付，你都可以直接联系到熟悉你项目的制造工程师。</p>
-    </div>
-    <div class="expert-grid">
-      <div class="expert-card">
-        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" alt="Expert 1">
-        <p>专属项目管理——从零件到交付。</p>
-      </div>
-      <div class="expert-card">
-        <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=800&q=80" alt="Expert 2">
-        <p>按规格建造。你在内。</p>
-      </div>
-      <div class="expert-card">
-        <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=800&q=80" alt="Expert 3">
-        <p>你的零件，按规格制造。</p>
-      </div>
-    </div>
-    <div class="expert-btns">
-      <a href="contact.html" class="btn-primary">看看我们如何与你合作 →</a>
-      <a href="products.html" class="btn-outline" style="color: var(--text-main); border-color: var(--text-main);">探索我们的平台 →</a>
-    </div>
-  </div>
-</div>
-
-<!-- 图4：对比表格 -->
-<div class="compare-section">
-  <div class="container">
-    <div class="section-title">
-      <span class="sub-label">我们的比较</span>
-      <h2>我们如何超越竞争对手</h2>
-      <p style="color: #6B7280; margin-top: 1rem;">平台、网络和团队仍在努力建设——我们多年来一直在努力交付成果。</p>
-    </div>
-    <table class="compare-table">
-      <thead>
-        <tr>
-          <th>能力</th>
-          <th>典型的机械车间</th>
-          <th>数字市场</th>
-          <th style="color: var(--tech-green);">我们的平台</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>公差</td>
-          <td>各店不同；只有先给他们做过资格认证，你才会知道</td>
-          <td>平台驱动的规格，没有执法</td>
-          <td><span class="check">✓</span> 铣削、车削和电加工的 ±0.0001” ——保证，不依赖车间</td>
-        </tr>
-        <tr>
-          <td>容量</td>
-          <td>单一地点；突发压力影响了排程和交期</td>
-          <td>广泛但未经审核——大规模质量难以预测</td>
-          <td><span class="check">✓</span> 覆盖全球五大区域的250+经筛选合作伙伴——无需认证新供应商即可灵活调整</td>
-        </tr>
-        <tr>
-          <td>收尾</td>
-          <td>通常外包；增加了提前时间和协调开销</td>
-          <td>买方独立安排；没有协调</td>
-          <td><span class="check">✓</span> 电镀、喷粉、染色、阳极氧化、定制涂层——全部集中在一个订单下</td>
-        </tr>
-        <tr>
-          <td>汇总</td>
-          <td>有限；完整的BOM构建很罕见且难以调整比例</td>
-          <td>未提供</td>
-          <td><span class="check">✓</span> 焊接、套件组装和全物料清单（BOM）组装——从零件到成品由一个合作伙伴完成</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- 图5 & 图6：全球网络 & 数据 -->
-<div class="global-network">
-  <div class="container">
-    <div class="section-title" style="color: #fff;">
-      <span class="sub-label">全球网络</span>
-      <h2>容量能随你调整</h2>
-      <p style="color: #9CA3AF; margin-top: 1rem;">区域内制造遍布五个全球制造中心，250+个经过审核的合作伙伴，以及对每一个订单的全面供应链可视化。</p>
-    </div>
-    <div class="network-grid">
-      <div class="network-card">
-        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" alt="Global">
-        <p>全球五个制造中心的生产</p>
-      </div>
-      <div class="network-card">
-        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Partners">
-        <p>250+经审计的制造合作伙伴</p>
-      </div>
-      <div class="network-card">
-        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Visibility">
-        <p>从报价到交付的全面可见性</p>
-      </div>
-    </div>
-    <div class="stats-row">
-      <div class="stat-item"><h4>5</h4><p>全球地区</p></div>
-      <div class="stat-item"><h4>200K+</h4><p>机器工时 / 月</p></div>
-      <div class="stat-item"><h4>250+</h4><p>经过筛选的合作伙伴</p></div>
-      <div class="stat-item"><h4>5,000+</h4><p>服务团队</p></div>
-      <div class="stat-item"><h4>42岁男</h4><p>生产零件</p></div> <!-- 这个数据原图有点怪，你可以改掉 -->
-    </div>
-    <div class="network-btn-wrapper">
-      <a href="contact.html" class="btn-primary">探索我们的全球网络 →</a>
-    </div>
-  </div>
-</div>
-
-<!-- 图7：4列场景卡片 -->
-<div class="drivers-section">
-  <div class="container">
-    <div class="section-title">
-      <h2>是什么驱动着你的构建？</h2>
-      <p style="color: #6B7280; margin-top: 1rem;">四个原因让团队选择我们。从最重要的那个开始。</p>
-    </div>
-    <div class="grid-4col">
-      <div class="driver-card">
-        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" alt="Speed">
-        <div class="driver-content">
-          <span style="font-size: 0.8rem; color: var(--tech-green); font-weight: 700; margin-bottom: 0.5rem;">速度</span>
-          <h3>装备飞船速度更快</h3>
-          <p>从设计到装卸码头只需几天，而非几个月——即时报价、AI驱动的DFM，最快一天就能拆装。</p>
-          <a href="#" class="link">缩短交货时间 →</a>
-        </div>
-      </div>
-      <div class="driver-card">
-        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Consistency">
-        <div class="driver-content">
-          <span style="font-size: 0.8rem; color: var(--tech-green); font-weight: 700; margin-bottom: 0.5rem;">连贯性</span>
-          <h3>一个合作伙伴，从原型到量产</h3>
-          <p>没有重新资格。你的零件历史、DFM笔记和质量文件会从第一件产品一直保留到全面生产。</p>
-          <a href="#" class="link">无需重新资格即可量产 →</a>
-        </div>
-      </div>
-      <div class="driver-card">
-        <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=600&q=80" alt="Resilience">
-        <div class="driver-content">
-          <span style="font-size: 0.8rem; color: var(--tech-green); font-weight: 700; margin-bottom: 0.5rem;">韧性</span>
-          <h3>一条为未来而建的供应链</h3>
-          <p>资费变动和单一源故障被多区域网络吸收，并内置资费管理。</p>
-          <a href="#" class="link">降低供应链风险 →</a>
-        </div>
-      </div>
-      <div class="driver-card">
-        <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=600&q=80" alt="Compliance">
-        <div class="driver-content">
-          <span style="font-size: 0.8rem; color: var(--tech-green); font-weight: 700; margin-bottom: 0.5rem;">合规</span>
-          <h3>预审计。认证的。任务准备就绪。</h3>
-          <p>免除为期6个月的供应商审核——AS9100D、ISO 13485和Nadcap认证的合作伙伴，每笔订单均可追溯。</p>
-          <a href="#" class="link">跳过6个月的审计 →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 图8：FAQ -->
-<div class="faq-section">
-  <div class="container">
-    <div class="faq-layout">
-      <div class="faq-left">
-        <span class="sub-label">问题</span>
-        <h2>快速回答</h2>
-      </div>
-      <div class="faq-right" id="faq-container">
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">
-            <span>我能多快拿到零件？</span>
-            <span class="icon">∨</span>
-          </div>
-          <div class="faq-answer">
-            即时报价几分钟，CNC零件最快1天，3D打印零件24小时，钣金零件2天，注塑成型T1样品约10天，具体取决于几何形状和材料。
-          </div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">
-            <span>你们支持哪些质量认证？</span>
-            <span class="icon">∨</span>
-          </div>
-          <div class="faq-answer">
-            我们支持 ISO 9001、AS9100D（航空航天）、ISO 13485（医疗器械）以及各种材料的特定认证。
-          </div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">
-            <span>如何保护我的知识产权？</span>
-            <span class="icon">∨</span>
-          </div>
-          <div class="faq-answer">
-            我们与所有制造合作伙伴签署严格的保密协议（NDA），并且你的设计文件仅在需要知道的范围内共享。
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 图9：底部CTA -->
-<div class="cta-bottom">
-  <h2>准备好建造了吗？</h2>
-  <p>上传设计图以便即时定价，或者与工程师讨论你的项目。</p>
-  <div class="cta-btns">
-    <a href="contact.html" class="btn-primary">咨询制造专家 →</a>
-    <a href="contact.html" class="btn-outline">获取即时价格</a>
   </div>
 </div>
 
 <script>
-  // FAQ 手风琴逻辑
-  function toggleFaq(element) {
-    const item = element.parentElement;
-    const isActive = item.classList.contains('active');
-    
-    // 关闭所有
-    document.querySelectorAll('.faq-item').forEach(el => {
-      el.classList.remove('active');
-      el.querySelector('.icon').innerText = '∨';
-    });
+  let pageData = null;
+  let slidesData = [];
+  let currentSlideIndex = 0;
 
-    // 如果当前是关闭状态，则打开
-    if (!isActive) {
-      item.classList.add('active');
-      item.querySelector('.icon').innerText = '∧';
+  async function loadPartnerDetail() {
+    const params = new URLSearchParams(window.location.search);
+    const fileId = params.get('id');
+    const pageContent = document.getElementById('page-content');
+
+    if (!fileId) {
+      pageContent.innerHTML = '<div class="error">未找到内容 ID。<br><a href="index.html">返回首页</a></div>';
+      return;
+    }
+
+    try {
+      const res = await fetch(`/data.json?t=${new Date().getTime()}`);
+      if (!res.ok) throw new Error('数据加载失败');
+      const data = await res.json();
+
+      pageData = data.partners ? data.partners.find(p => p.filename === fileId) : null;
+      if (!pageData) throw new Error('未找到该部门的数据');
+
+      const title = pageData.title || '部门介绍';
+      const introText = pageData.intro_text || '';
+      const detailLogo = pageData.detail_logo || '';
+      const industryList = pageData.industry_list || '';
+      const collabTitle = pageData.collab_title || '合作模式';
+      const collabText = pageData.collab_text || '';
+      const gridTitle = pageData.grid_title || '可用产品';
+      
+      const listHtml = industryList.split('\n').filter(i => i.trim()).map(i => `<li>${i.trim()}</li>`).join('');
+
+      let gridHtml = '';
+      if (pageData.cards && Array.isArray(pageData.cards)) {
+         pageData.cards.forEach((p, index) => {
+           const imgHtml = p.image ? `<img src="${p.image}" alt="${p.title || ''}">` : '';
+           gridHtml += `
+            <div class="grid-card">
+              ${imgHtml}
+              <h4>${p.title || ''}</h4>
+              <p>${p.desc || ''}</p>
+              <span class="link" onclick="openCardModal(${index})">了解更多</span>
+            </div>
+           `;
+         });
+      }
+
+      const introLayoutHtml = detailLogo 
+        ? `<div class="intro-text"><p>${introText.replace(/\n/g, '</p><p>')}</p></div>
+           <div class="intro-logo"><img src="${detailLogo}" alt="${title} Logo"></div>`
+        : `<div class="intro-text" style="flex: 1; width: 100%;"><p>${introText.replace(/\n/g, '</p><p>')}</p></div>`;
+
+      pageContent.innerHTML = `
+        <div class="page-container">
+          <h1 class="page-title">${title}</h1>
+          <div class="layout-intro">${introLayoutHtml}</div>
+          <div class="two-col-lists">
+            <div class="list-group"><h3>产业</h3><ul>${listHtml}</ul></div>
+            <div class="list-group"><h3>${collabTitle}</h3><p>${collabText.replace(/\n/g, '<br>')}</p></div>
+          </div>
+          ${gridHtml ? `
+          <div class="grid-section">
+            <h2>${gridTitle}</h2>
+            <div class="product-grid">${gridHtml}</div>
+          </div>
+          ` : ''}
+        </div>
+      `;
+
+    } catch (e) {
+      console.error(e);
+      pageContent.innerHTML = '<div class="error">加载失败。<br><a href="index.html">返回首页</a></div>';
     }
   }
-</script>
 
+  // 打开弹窗
+  function openCardModal(index) {
+    if (!pageData || !pageData.cards || !pageData.cards[index]) return;
+    const card = pageData.cards[index];
+    
+    document.getElementById('modal-card-title').innerText = card.title || '详情介绍';
+    document.getElementById('modal-card-desc').innerText = card.desc || '';
+
+    // 初始化图文数据
+    slidesData = card.modal_slides || [];
+    
+    const sliderWrapper = document.getElementById('modal-slider-wrapper');
+    
+    if (slidesData.length > 0) {
+      sliderWrapper.style.display = 'block';
+      currentSlideIndex = 0;
+      renderSlide();
+    } else {
+      sliderWrapper.style.display = 'none';
+    }
+
+    document.getElementById('card-modal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // 渲染当前幻灯片的文字和图片
+  function renderSlide() {
+    if (slidesData.length === 0) return;
+    const slide = slidesData[currentSlideIndex];
+
+    // 1. 更新文字（支持换行）
+    const textEl = document.getElementById('slide-text');
+    textEl.innerHTML = (slide.text || '暂无文字介绍。').replace(/\n/g, '<br>');
+
+    // 2. 更新图片
+    const imgEl = document.getElementById('slide-image');
+    imgEl.src = slide.img || '';
+
+    // 3. 更新图片说明
+    const captionEl = document.getElementById('slide-caption');
+    if (slide.caption) {
+      captionEl.innerText = slide.caption;
+      captionEl.style.display = 'block';
+    } else {
+      captionEl.style.display = 'none';
+    }
+
+    // 4. 处理按钮和指示点
+    const prevBtn = document.getElementById('slide-prev');
+    const nextBtn = document.getElementById('slide-next');
+    const dotsContainer = document.getElementById('slide-dots');
+    
+    if (slidesData.length > 1) {
+      prevBtn.style.display = 'flex';
+      nextBtn.style.display = 'flex';
+      
+      // 重新渲染指示点
+      dotsContainer.innerHTML = '';
+      slidesData.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.className = 'slide-dot' + (i === currentSlideIndex ? ' active' : '');
+        dot.onclick = () => { currentSlideIndex = i; renderSlide(); };
+        dotsContainer.appendChild(dot);
+      });
+    } else {
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+      dotsContainer.innerHTML = '';
+    }
+  }
+
+  // 左右切换
+  function changeSlide(direction) {
+    if (slidesData.length <= 1) return;
+    currentSlideIndex += direction;
+    if (currentSlideIndex < 0) currentSlideIndex = slidesData.length - 1;
+    if (currentSlideIndex >= slidesData.length) currentSlideIndex = 0;
+    renderSlide();
+  }
+
+  function closeCardModal(event) {
+    if (event && event.target !== event.currentTarget) return;
+    document.getElementById('card-modal').classList.remove('show');
+    document.body.style.overflow = 'auto';
+  }
+
+  window.addEventListener('load', loadPartnerDetail);
+</script>
 </body>
 </html>
