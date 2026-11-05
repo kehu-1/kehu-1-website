@@ -76,6 +76,16 @@ content:
           - { name: "title", label: "卡片标题", type: "string" }
           - { name: "desc", label: "卡片简介", type: "text" }
           
+          # 弹窗轮播：图文一体化
+          - name: "modal_slides"
+            label: "弹窗图文轮播（一图配一段文字）"
+            type: "object"
+            list: true
+            fields:
+              - { name: "text", label: "本页文字介绍", type: "text" }
+              - { name: "img", label: "本页图片", type: "image" }
+              - { name: "caption", label: "图片底部说明（选填）", type: "string" }    
+          
           # 弹窗专属字段
           - name: "modal_texts"
             label: "弹窗文字轮播（每一条是一段话）"
