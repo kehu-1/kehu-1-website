@@ -13,8 +13,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -22,12 +20,12 @@ jobs:
           node-version: '20'
 
       - name: Run Build Script
-        run: node build.js
+        run: |
+          npm install js-yaml
+          node build.js
 
       - name: Commit and Push
-        run: |
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
-          git add data.json
-          git commit -m "自动更新 data.json" || exit 0
-          git push
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "自动更新 data.json"
+          file_pattern: data.json
