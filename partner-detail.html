@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>部门介绍 - 你的品牌名</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap');
+    :root { --tech-green: #00FFB9; --dark-bg: #0F172A; --text-main: #111827; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); line-height: 1.8; background: #fff; }
+    a { text-decoration: none; transition: 0.3s; color: inherit; }
+
+    header { background: var(--dark-bg); position: sticky; top: 0; z-index: 1000; }
+    .header-inner { max-width: 1340px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.6rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
+    .back-btn { color: var(--tech-green); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; }
+
+    .page-container { max-width: 1100px; margin: 0 auto; padding: 6rem 2rem; }
+    .page-title { font-size: 3.5rem; font-weight: 800; margin-bottom: 4rem; color: var(--text-main); letter-spacing: -1px; line-height: 1.2; }
+
+    .layout-intro { display: flex; gap: 4rem; align-items: flex-start; margin-bottom: 5rem; }
+    .layout-intro .intro-text { flex: 1.3; font-size: 1.05rem; color: #374151; }
+    .layout-intro .intro-text p { margin-bottom: 1.5rem; text-align: justify; }
+    .layout-intro .intro-logo { flex: 0.7; display: flex; justify-content: flex-end; padding-top: 1rem; }
+    .layout-intro .intro-logo img { max-width: 100%; max-height: 180px; object-fit: contain; }
+
+    .two-col-lists { display: flex; gap: 4rem; margin-bottom: 6rem; }
+    .two-col-lists .list-group { flex: 1; }
+    .two-col-lists h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem; color: var(--text-main); }
+    .two-col-lists ul { list-style-type: disc; padding-left: 1.5rem; color: #111827; font-weight: 500; }
+    .two-col-lists li { margin-bottom: 0.8rem; font-size: 1.05rem; }
+    .two-col-lists p { color: #111827; font-size: 1.05rem; line-height: 1.8; }
+
+    .grid-section h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 3rem; color: var(--text-main); }
+    .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+    .grid-card { display: flex; flex-direction: column; }
+    .grid-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 1.5rem; border-radius: 2px; }
+    .grid-card h4 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--text-main); line-height: 1.4; }
+    .grid-card p { font-size: 0.95rem; color: #374151; line-height: 1.6; margin-bottom: 1rem; flex-grow: 1; }
+    .grid-card a { color: #0ea5e9; font-weight: 700; font-size: 0.95rem; }
+    .grid-card a:hover { text-decoration: underline; }
+
+    @media (max-width: 992px) {
+      .layout-intro { flex-direction: column-reverse; gap: 2rem; }
+      .layout-intro .intro-logo { justify-content: flex-start; }
+      .two-col-lists { flex-direction: column; gap: 2rem; }
+      .product-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .page-title { font-size: 2.5rem; }
+    }
+    .loading { text-align: center; color: #999; padding: 8rem 2rem; font-size: 1.2rem; }
+    .error { text-align: center; color: #e74c39; padding: 8rem 2rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">你的品牌名</div>
+    <a href="index.html" class="back-btn">← 返回首页</a>
+  </div>
+</header>
+
+<div id="page-content"><div class="loading">正在加载部门详情...</div></div>
+
+<script>
+  async function loadPartnerDetail() {
+    const params = new URLSearchParams(window.location.search);
+    const fileId = params.get('id');
+    const pageContent = document.getElementById('page-content');
+
+    if (!fileId) {
+      pageContent.innerHTML = '<div class="error">未找到内容 ID。<br><a href="index.html">返回首页</a></div>';
+      return;
+    }
+
+    try {
+      // 直接读取 data.json
+      const res = await fetch(`/data.json?t=${new Date().getTime()}`);
+      if (!res.ok) throw new Error('数据加载失败');
+      const data = await res.json();
+
+      // 在 partners 数组里找到对应的文件
+      const fileData = data.partners ? data.partners.find(p => p.filename === fileId) : null;
+      
+      if (!fileData) {
+        throw new Error('未找到该部门的数据');
+      }
+
+      const title = fileData.title || '部门介绍';
+      const introText = fileData.intro_text || '';
+      const detailLogo = fileData.detail_logo || '';
+      const industryList = fileData.industry_list || '';
+      const collabTitle = fileData.collab_title || '合作模式';
+      const collabText = fileData.collab_text || '';
+      const gridTitle = fileData.grid_title || '可用产品';
+      
+      const listHtml = industryList.split('\n').filter(i => i.trim()).map(i => `<li>${i.trim()}</li>`).join('');
+
+      // 如果后台有存 JSON 格式的列表，就渲染，没有就不渲染
+      let gridHtml = '';
+      if (fileData.products_json) {
+         try {
+           const products = JSON.parse(fileData.products_json);
+           products.forEach(p => {
+             gridHtml += `
+              <div class="grid-card">
+                <img src="${p.img}" alt="${p.title}">
+                <h4>${p.title}</h4>
+                <p>${p.desc}</p>
+                <a href="${p.link || '#'}">了解更多</a>
+              </div>
+             `;
+           });
+         } catch (e) {
+           console.log('解析产品列表失败');
+         }
+      }
+
+      pageContent.innerHTML = `
+        <div class="page-container">
+          <h1 class="page-title">${title}</h1>
+          
+          <div class="layout-intro">
+            <div class="intro-text">
+              <p>${introText.replace(/\n/g, '</p><p>')}</p>
+            </div>
+            ${detailLogo ? `
+            <div class="intro-logo">
+              <img src="${detailLogo}" alt="${title} Logo">
+            </div>
+            ` : ''}
+          </div>
+
+          <div class="two-col-lists">
+            <div class="list-group">
+              <h3>产业</h3>
+              <ul>${listHtml}</ul>
+            </div>
+            <div class="list-group">
+              <h3>${collabTitle}</h3>
+              <p>${collabText.replace(/\n/g, '<br>')}</p>
+            </div>
+          </div>
+
+          ${gridHtml ? `
+          <div class="grid-section">
+            <h2>${gridTitle}</h2>
+            <div class="product-grid">
+              ${gridHtml}
+            </div>
+          </div>
+          ` : ''}
+        </div>
+      `;
+
+    } catch (e) {
+      console.error(e);
+      pageContent.innerHTML = '<div class="error">加载部门详情失败。<br><a href="index.html">返回首页</a></div>';
+    }
+  }
+
+  window.addEventListener('load', loadPartnerDetail);
+</script>
+</body>
+</html>
