@@ -11,43 +11,51 @@
     body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); line-height: 1.8; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
+    /* 顶部导航 */
     header { background: var(--dark-bg); position: sticky; top: 0; z-index: 1000; }
-    .header-inner { max-width: 1340px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .header-inner { max-width: 1240px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-size: 1.6rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
     .back-btn { color: var(--tech-green); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; }
 
-    .page-container { max-width: 1100px; margin: 0 auto; padding: 6rem 2rem; }
-    .page-title { font-size: 3.5rem; font-weight: 800; margin-bottom: 4rem; color: var(--text-main); letter-spacing: -1px; line-height: 1.2; }
+    /* 页面容器：放宽了宽度，缩小了上下边距 */
+    .page-container { max-width: 1240px; margin: 0 auto; padding: 4rem 2rem; }
+    
+    /* 大标题 */
+    .page-title { font-size: 3.5rem; font-weight: 800; margin-bottom: 3rem; color: var(--text-main); letter-spacing: -1px; line-height: 1.2; }
 
-    .layout-intro { display: flex; gap: 4rem; align-items: flex-start; margin-bottom: 5rem; }
-    .layout-intro .intro-text { flex: 1.3; font-size: 1.05rem; color: #374151; }
-    .layout-intro .intro-text p { margin-bottom: 1.5rem; text-align: justify; }
-    .layout-intro .intro-logo { flex: 0.7; display: flex; justify-content: flex-end; padding-top: 1rem; }
+    /* 区块1：左文右Logo */
+    .layout-intro { display: flex; gap: 5rem; align-items: flex-start; margin-bottom: 4rem; }
+    .layout-intro .intro-text { flex: 1; font-size: 1.05rem; color: #374151; }
+    .layout-intro .intro-text p { margin-bottom: 1.5rem; text-align: justify; line-height: 2; }
+    .layout-intro .intro-logo { flex: 0.6; display: flex; justify-content: flex-end; }
     .layout-intro .intro-logo img { max-width: 100%; max-height: 180px; object-fit: contain; }
 
-    .two-col-lists { display: flex; gap: 4rem; margin-bottom: 6rem; }
+    /* 区块2：底部双列列表 */
+    .two-col-lists { display: flex; gap: 6rem; margin-bottom: 5rem; }
     .two-col-lists .list-group { flex: 1; }
-    .two-col-lists h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem; color: var(--text-main); }
+    .two-col-lists h3 { font-size: 1.6rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text-main); }
     .two-col-lists ul { list-style-type: disc; padding-left: 1.5rem; color: #111827; font-weight: 500; }
     .two-col-lists li { margin-bottom: 0.8rem; font-size: 1.05rem; }
-    .two-col-lists p { color: #111827; font-size: 1.05rem; line-height: 1.8; }
+    .two-col-lists p { color: #111827; font-size: 1.05rem; line-height: 2; }
 
-    .grid-section h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 3rem; color: var(--text-main); }
-    .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+    /* 区块3：网格卡片 */
+    .grid-section h2 { font-size: 2.2rem; font-weight: 700; margin-bottom: 2.5rem; color: var(--text-main); }
+    .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem 2rem; }
     .grid-card { display: flex; flex-direction: column; }
-    .grid-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 1.5rem; border-radius: 2px; }
+    .grid-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 1.5rem; border-radius: 4px; background: #f3f4f6; }
     .grid-card h4 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--text-main); line-height: 1.4; }
-    .grid-card p { font-size: 0.95rem; color: #374151; line-height: 1.6; margin-bottom: 1rem; flex-grow: 1; }
-    .grid-card a { color: #0ea5e9; font-weight: 700; font-size: 0.95rem; }
+    .grid-card p { font-size: 1rem; color: #374151; line-height: 1.7; margin-bottom: 1.5rem; flex-grow: 1; }
+    .grid-card a { color: #0ea5e9; font-weight: 700; font-size: 1rem; display: inline-block; }
     .grid-card a:hover { text-decoration: underline; }
 
     @media (max-width: 992px) {
       .layout-intro { flex-direction: column-reverse; gap: 2rem; }
       .layout-intro .intro-logo { justify-content: flex-start; }
-      .two-col-lists { flex-direction: column; gap: 2rem; }
-      .product-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .two-col-lists { flex-direction: column; gap: 3rem; }
+      .product-grid { grid-template-columns: 1fr; gap: 3rem; }
       .page-title { font-size: 2.5rem; }
     }
+    
     .loading { text-align: center; color: #999; padding: 8rem 2rem; font-size: 1.2rem; }
     .error { text-align: center; color: #e74c39; padding: 8rem 2rem; }
   </style>
@@ -61,7 +69,7 @@
   </div>
 </header>
 
-<div id="page-content"><div class="loading">正在加载部门详情...</div></div>
+<div id="page-content"><div class="loading">正在加载...</div></div>
 
 <script>
   async function loadPartnerDetail() {
@@ -75,17 +83,12 @@
     }
 
     try {
-      // 直接读取 data.json
       const res = await fetch(`/data.json?t=${new Date().getTime()}`);
       if (!res.ok) throw new Error('数据加载失败');
       const data = await res.json();
 
-      // 在 partners 数组里找到对应的文件
       const fileData = data.partners ? data.partners.find(p => p.filename === fileId) : null;
-      
-      if (!fileData) {
-        throw new Error('未找到该部门的数据');
-      }
+      if (!fileData) throw new Error('未找到该部门的数据');
 
       const title = fileData.title || '部门介绍';
       const introText = fileData.intro_text || '';
@@ -97,41 +100,38 @@
       
       const listHtml = industryList.split('\n').filter(i => i.trim()).map(i => `<li>${i.trim()}</li>`).join('');
 
-      // 如果后台有存 JSON 格式的列表，就渲染，没有就不渲染
       let gridHtml = '';
-      if (fileData.products_json) {
-         try {
-           const products = JSON.parse(fileData.products_json);
-           products.forEach(p => {
-             gridHtml += `
-              <div class="grid-card">
-                <img src="${p.img}" alt="${p.title}">
-                <h4>${p.title}</h4>
-                <p>${p.desc}</p>
-                <a href="${p.link || '#'}">了解更多</a>
-              </div>
-             `;
-           });
-         } catch (e) {
-           console.log('解析产品列表失败');
-         }
+      if (fileData.cards && Array.isArray(fileData.cards)) {
+         fileData.cards.forEach(p => {
+           // 如果后台没传图片，这里就不渲染 img 标签
+           const imgHtml = p.image ? `<img src="${p.image}" alt="${p.title || ''}">` : '';
+           gridHtml += `
+            <div class="grid-card">
+              ${imgHtml}
+              <h4>${p.title || ''}</h4>
+              <p>${p.desc || ''}</p>
+              <a href="${p.link || '#'}">了解更多</a>
+            </div>
+           `;
+         });
       }
+
+      // 判断是否有右侧Logo。如果没有，就让左侧文字占满
+      const introLayoutHtml = detailLogo 
+        ? `<div class="intro-text"><p>${introText.replace(/\n/g, '</p><p>')}</p></div>
+           <div class="intro-logo"><img src="${detailLogo}" alt="${title} Logo"></div>`
+        : `<div class="intro-text" style="flex: 1; width: 100%;"><p>${introText.replace(/\n/g, '</p><p>')}</p></div>`;
 
       pageContent.innerHTML = `
         <div class="page-container">
           <h1 class="page-title">${title}</h1>
           
+          <!-- 左文右Logo -->
           <div class="layout-intro">
-            <div class="intro-text">
-              <p>${introText.replace(/\n/g, '</p><p>')}</p>
-            </div>
-            ${detailLogo ? `
-            <div class="intro-logo">
-              <img src="${detailLogo}" alt="${title} Logo">
-            </div>
-            ` : ''}
+            ${introLayoutHtml}
           </div>
 
+          <!-- 双列列表 -->
           <div class="two-col-lists">
             <div class="list-group">
               <h3>产业</h3>
@@ -143,6 +143,7 @@
             </div>
           </div>
 
+          <!-- 三列网格卡片 -->
           ${gridHtml ? `
           <div class="grid-section">
             <h2>${gridTitle}</h2>
@@ -156,7 +157,7 @@
 
     } catch (e) {
       console.error(e);
-      pageContent.innerHTML = '<div class="error">加载部门详情失败。<br><a href="index.html">返回首页</a></div>';
+      pageContent.innerHTML = '<div class="error">加载失败。<br><a href="index.html">返回首页</a></div>';
     }
   }
 
