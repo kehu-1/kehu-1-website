@@ -3,229 +3,360 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>生产优势 - 你的品牌名</title>
+  <title>部门介绍 - 你的品牌名</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap');
+    :root { --tech-green: #00FFB9; --dark-bg: #0F172A; --text-main: #111827; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.7; background: #fff; }
-    a { text-decoration: none; transition: 0.3s; }
+    body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); line-height: 1.8; background: #fff; }
+    a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    header { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); }
-    header .logo { font-size: 1.5rem; font-weight: bold; color: #ffffff; }
-    nav a { margin-left: 2rem; color: #cbd5e1; font-weight: 500; font-size: 0.95rem; }
-    nav a:hover, nav a.active { color: #0ea5e9; }
+    /* --- 页面主体样式 --- */
+    header { background: var(--dark-bg); position: sticky; top: 0; z-index: 1000; }
+    .header-inner { max-width: 1240px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.6rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
+    .back-btn { color: var(--tech-green); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; }
 
-    .page-hero { min-height: 70vh; background: linear-gradient(rgba(15,23,42,0.75), rgba(15,23,42,0.75)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 5%; margin-top: 60px; }
-    .page-hero h1 { font-size: 3.5rem; color: #fff; margin-bottom: 1rem; letter-spacing: 1px; }
-    .page-hero p { color: #cbd5e1; font-size: 1.2rem; max-width: 600px; }
+    .page-container { max-width: 1240px; margin: 0 auto; padding: 4rem 2rem; }
+    .page-title { font-size: 3.5rem; font-weight: 800; margin-bottom: 3rem; color: var(--text-main); letter-spacing: -1px; line-height: 1.2; }
 
-    .stats-section { display: flex; flex-wrap: wrap; justify-content: space-around; background: #fff; padding: 4rem 5%; box-shadow: 0 10px 30px rgba(0,0,0,0.03); position: relative; z-index: 10; margin-top: -3rem; border-radius: 12px; max-width: 1100px; margin-left: auto; margin-right: auto; }
-    .stat-item { text-align: center; padding: 1rem; min-width: 150px; }
-    .stat-item .num { font-size: 2.5rem; font-weight: 800; color: #0ea5e9; line-height: 1; margin-bottom: 0.5rem; }
-    .stat-item .label { color: #64748b; font-size: 0.95rem; }
+    .layout-intro { display: flex; gap: 5rem; align-items: flex-start; margin-bottom: 4rem; }
+    .layout-intro .intro-text { flex: 1; font-size: 1.05rem; color: #374151; }
+    .layout-intro .intro-text p { margin-bottom: 1.5rem; text-align: justify; line-height: 2; }
+    .layout-intro .intro-logo { flex: 0.6; display: flex; justify-content: flex-end; }
+    .layout-intro .intro-logo img { max-width: 100%; max-height: 180px; object-fit: contain; }
 
-    .process-section { padding: 6rem 8%; background: #f8fafc; }
-    .section-title { text-align: center; margin-bottom: 5rem; }
-    .section-title h2 { font-size: 2.5rem; color: #0f172a; margin-bottom: 1rem; }
-    .section-title h2 span { color: #0ea5e9; }
-    .section-title p { color: #64748b; font-size: 1.1rem; }
+    .two-col-lists { display: flex; gap: 6rem; margin-bottom: 5rem; }
+    .two-col-lists .list-group { flex: 1; }
+    .two-col-lists h3 { font-size: 1.6rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text-main); }
+    .two-col-lists ul { list-style-type: disc; padding-left: 1.5rem; color: #111827; font-weight: 500; }
+    .two-col-lists li { margin-bottom: 0.8rem; font-size: 1.05rem; }
+    .two-col-lists p { color: #111827; font-size: 1.05rem; line-height: 2; }
 
-    .zigzag-row { display: flex; align-items: center; gap: 4rem; margin-bottom: 6rem; }
-    .zigzag-row:last-child { margin-bottom: 0; }
-    .zigzag-row.reverse { flex-direction: row-reverse; }
-    .zigzag-text { flex: 1; }
-    .zigzag-text .step { font-size: 0.9rem; font-weight: 700; color: #0ea5e9; letter-spacing: 2px; margin-bottom: 0.5rem; display: block; }
-    .zigzag-text h3 { font-size: 2rem; color: #0f172a; margin-bottom: 1rem; line-height: 1.3; }
-    .zigzag-text p { color: #475569; font-size: 1.05rem; margin-bottom: 1.5rem; }
-    .zigzag-text ul { list-style: none; }
-    .zigzag-text ul li { margin-bottom: 0.5rem; color: #334155; display: flex; align-items: center; }
-    .zigzag-text ul li::before { content: "✓"; color: #0ea5e9; font-weight: bold; margin-right: 10px; }
-    .zigzag-image { flex: 1.2; position: relative; }
-    .zigzag-image img { width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); display: block; }
+    .grid-section h2 { font-size: 2.2rem; font-weight: 700; margin-bottom: 2.5rem; color: var(--text-main); }
+    .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem 2rem; }
+    .grid-card { display: flex; flex-direction: column; }
+    .grid-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 1.5rem; border-radius: 4px; background: #f3f4f6; }
+    .grid-card h4 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--text-main); line-height: 1.4; }
+    .grid-card p { font-size: 1rem; color: #374151; line-height: 1.7; margin-bottom: 1.5rem; flex-grow: 1; }
+    .grid-card .link { color: #0ea5e9; font-weight: 700; font-size: 1rem; display: inline-block; cursor: pointer; }
+    .grid-card .link:hover { text-decoration: underline; }
+
+    /* --- 弹窗样式 --- */
+    .card-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px); z-index: 3000; justify-content: center; align-items: center; }
+    .card-modal.show { display: flex; }
     
-    /* 新增的图片说明水印样式 */
-    .photo-caption { position: absolute; bottom: 1rem; left: 1rem; background: rgba(15,23,42,0.7); backdrop-filter: blur(6px); color: #fff; padding: 0.4rem 1rem; border-radius: 30px; font-size: 0.8rem; letter-spacing: 1px; }
-
-    /* 合作伙伴区（地球背景） */
-    .partners-section { background: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.9)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover; color: #fff; padding: 8rem 8%; position: relative; overflow: hidden; }
-    .partners-section::before { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 70%); }
-    .partners-section .section-title h2 { color: #fff; }
-    .partners-section .section-title p { color: #94a3b8; }
-    .map-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; position: relative; z-index: 2; }
-    .map-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 2rem; transition: 0.3s; }
-    .map-card:hover { background: rgba(14,165,233,0.15); border-color: rgba(14,165,233,0.6); transform: translateY(-5px); }
-    .map-card .region { font-size: 1.2rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.5rem; }
-    .map-card .countries { color: #94a3b8; font-size: 0.9rem; line-height: 1.8; }
-
-    footer { background: #0a0f1c; color: #94a3b8; text-align: center; padding: 3rem 8%; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); }
-
-    @media (max-width: 900px) {
-      .page-hero h1 { font-size: 2.5rem; }
-      .zigzag-row { flex-direction: column !important; gap: 2rem; margin-bottom: 4rem; }
-      .stats-section { flex-direction: column; gap: 2rem; margin: 2rem 5%; }
-      .stat-item { border-bottom: 1px solid #e2e8f0; padding-bottom: 1.5rem; }
-      .stat-item:last-child { border-bottom: none; }
+    .card-modal-content { 
+      background: #F1F5F9; width: 95vw; max-width: 1000px; max-height: 90vh; 
+      border-radius: 12px; overflow-y: auto; position: relative; padding: 4rem; 
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); animation: fadeIn 0.3s ease-out; 
     }
-     /* 右下角悬浮联系按钮 */
-    .floating-contact {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: rgba(15, 23, 42, 0.85); /* 磨砂深色 */
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      color: #fff;
-      padding: 0.8rem 1.5rem;
-      border-radius: 50px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .card-modal-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 2.5rem; color: #64748B; cursor: pointer; line-height: 1; transition: 0.3s; z-index: 10; }
+    .card-modal-close:hover { color: #0F172A; }
+    
+    .modal-header { margin-bottom: 2rem; border-bottom: 1px solid #CBD5E1; padding-bottom: 1.5rem; }
+    .modal-header h2 { font-size: 2.5rem; font-weight: 800; color: #0F172A; margin-bottom: 0.5rem; }
+    .modal-header p { font-size: 1.1rem; color: #475569; }
+
+     /* 优化：去掉内层白框，减小边距 */
+    .modal-slider-container {
+      position: relative;
       display: flex;
+      flex-direction: column;
+      /* 去掉了 background, border-radius, box-shadow */
+    }
+
+    .slide-text-wrapper {
+      padding: 1rem 0 1.5rem 0; /* 减小左右内边距，去掉底部边框 */
+      font-size: 1.15rem;
+      color: #334155;
+      line-height: 1.9;
+      min-height: 100px; 
+    }
+
+    .slide-image-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 0.5rem;
-      font-weight: 500;
+      width: 100%;
+      /* 去掉了背景色，让图片直接融入大背景 */
+    }
+    .slide-image-wrapper img {
+      width: 100%;
+      max-height: 550px; /* 图片高度稍微放大一点 */
+      object-fit: contain;
+      display: block;
+      border-radius: 8px; /* 给图片自己加个圆角，更柔和 */
+    }
+    .slide-caption {
+      position: absolute;
+      bottom: 0; left: 0; width: 100%;
+      background: rgba(15,23,42,0.7);
+      color: #fff;
+      padding: 0.6rem 1.5rem;
       font-size: 0.95rem;
-      z-index: 9999;
-      transition: 0.3s ease;
-      border: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
     }
-    .floating-contact:hover {
-      background: #0ea5e9; /* 悬浮变蓝 */
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(14, 165, 233, 0.4);
+
+    /* 左右切换按钮 */
+    .slide-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(15, 23, 42, 0.6);
+      color: #fff;
+      border: none;
+      width: 45px; height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 10;
+      transition: 0.3s;
     }
-    /* 手机端稍微缩小一点，避免遮挡 */
-    @media (max-width: 768px) {
-      .floating-contact {
-        bottom: 1.5rem;
-        right: 1.5rem;
-        padding: 0.7rem 1.2rem;
-        font-size: 0.85rem;
-      }
+    .slide-btn:hover { background: var(--tech-green); color: #000; }
+    .slide-btn.prev { left: 10px; }
+    .slide-btn.next { right: -10px; }
+    /* 移动端保持在内侧 */
+    @media (max-width: 992px) {
+      .slide-btn.prev { left: 10px; }
+      .slide-btn.next { right: 10px; }
     }
+
+    /* 底部指示点 */
+    .slide-dots {
+      position: absolute;
+      bottom: 1rem; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 0.5rem; z-index: 10;
+    }
+    .slide-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s;
+    }
+    .slide-dot.active { background: #fff; transform: scale(1.2); }
+
+    @media (max-width: 992px) {
+      .layout-intro, .two-col-lists { flex-direction: column; gap: 2rem; }
+      .product-grid { grid-template-columns: 1fr; }
+      .page-title { font-size: 2.5rem; }
+      .card-modal-content { padding: 2rem; }
+      .modal-header h2 { font-size: 2rem; }
+      .slide-text-wrapper { padding: 1.5rem; min-height: 120px; }
+      .slide-btn { width: 35px; height: 35px; font-size: 1.2rem; }
+    }
+    
+    .loading { text-align: center; color: #999; padding: 8rem 2rem; font-size: 1.2rem; }
+    .error { text-align: center; color: #e74c39; padding: 8rem 2rem; }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">你的品牌名</div>
-  <nav>
-    <a href="index.html">首页</a>
-    <a href="products.html">产品展示</a>
-    <a href="advantages.html" class="active">生产优势</a>
-    <a href="contact.html">联系我们</a>
-    <a href="en/advantages.html" style="color: #0ea5e9;">English</a>
-  </nav>
+  <div class="header-inner">
+    <div class="logo">你的品牌名</div>
+    <a href="index.html" class="back-btn">← 返回首页</a>
+  </div>
 </header>
 
-<div class="page-hero">
-  <h1>制造实力与全球布局</h1>
-  <p>从源头采购到全球交付，我们以严格的标准和先进的技术，为全球客户提供卓越品质。</p>
-</div>
+<div id="page-content"><div class="loading">正在加载...</div></div>
 
-<div class="stats-section">
-  <div class="stat-item"><div class="num">15+</div><div class="label">年行业经验</div></div>
-  <div class="stat-item"><div class="num">50,000<span style="font-size:1.5rem;">m²</span></div><div class="label">现代化生产基地</div></div>
-  <div class="stat-item"><div class="num">100%</div><div class="label">全检出厂合格率</div></div>
-  <div class="stat-item"><div class="num">30+</div><div class="label">产品出口国家</div></div>
-</div>
-
-<div class="process-section">
-  <div class="section-title">
-    <h2>精益生产<span>全过程</span></h2>
-    <p>从一块原材料到交付到您手中的成品，每一步都严格把控</p>
-  </div>
-
-  <!-- 流程1 -->
-  <div class="zigzag-row">
-    <div class="zigzag-text">
-      <span class="step">STEP 01</span>
-      <h3>源头把控：原材料检验</h3>
-      <p>我们建立了严格的供应商筛选体系，所有原材料入库前必须经过理化指标的多重检测。</p>
-      <ul><li>全球优质供应商战略合作</li><li>光谱分析仪等精密仪器检测</li><li>确保源头零缺陷</li></ul>
+<!-- 卡片详情弹窗 -->
+<div id="card-modal" class="card-modal" onclick="closeCardModal(event)">
+  <div class="card-modal-content" onclick="event.stopPropagation()">
+    <span class="card-modal-close" onclick="closeCardModal()">&times;</span>
+    <div class="modal-header">
+      <h2 id="modal-card-title"></h2>
+      <p id="modal-card-desc"></p>
     </div>
-    <div class="zigzag-image">
-      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="原材料检验">
-      <div class="photo-caption">2026年客户走访工厂生产线实景照片</div>
+    
+    <!-- 图文幻灯片区域 -->
+    <div class="modal-slider-container" id="modal-slider-wrapper" style="display: none;">
+      
+      <!-- 顶部文字区 -->
+      <div class="slide-text-wrapper" id="slide-text"></div>
+      
+      <!-- 底部图片区 -->
+      <div class="slide-image-wrapper">
+        <img id="slide-image" src="" alt="">
+        <div class="slide-caption" id="slide-caption" style="display: none;"></div>
+      </div>
+      
+      <!-- 控制按钮 -->
+      <button class="slide-btn prev" id="slide-prev" onclick="changeSlide(-1)">‹</button>
+      <button class="slide-btn next" id="slide-next" onclick="changeSlide(1)">›</button>
+      
+      <!-- 指示点 -->
+      <div class="slide-dots" id="slide-dots"></div>
     </div>
-  </div>
-
-  <!-- 流程2 -->
-  <div class="zigzag-row reverse">
-    <div class="zigzag-text">
-      <span class="step">STEP 02</span>
-      <h3>精密加工：自动化生产</h3>
-      <p>引进国际领先的数控加工中心和自动化流水线，在保证产能的同时，实现极高的精度一致性。</p>
-      <ul><li>全新自动化数控设备</li><li>恒温恒湿无尘车间</li><li>支持复杂定制化生产</li></ul>
-    </div>
-    <div class="zigzag-image">
-      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" alt="精密加工">
-      <div class="photo-caption">2026年客户走访工厂生产线实景照片</div>
-    </div>
-  </div>
-
-  <!-- 流程3 -->
-  <div class="zigzag-row">
-    <div class="zigzag-text">
-      <span class="step">STEP 03</span>
-      <h3>质量防线：100% 全检</h3>
-      <p>设立独立于生产部门的质量控制中心，实施首件检验、巡检、成品全检的三级质量把关体系。</p>
-      <ul><li>独立质检团队严格把关</li><li>100% 全尺寸精密测量</li><li>出具专业权威检测报告</li></ul>
-    </div>
-    <div class="zigzag-image">
-      <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=800&q=80" alt="质量检测">
-      <div class="photo-caption">2026年客户走访工厂生产线实景照片</div>
-    </div>
-  </div>
-
-  <!-- 流程4 -->
-  <div class="zigzag-row reverse">
-    <div class="zigzag-text">
-      <span class="step">STEP 04</span>
-      <h3>安全交付：全球物流</h3>
-      <p>采用高强度的定制化防护包装，并与全球顶级物流承运商合作，确保货物安全、准时地送达客户手中。</p>
-      <ul><li>防潮防震定制化包装</li><li>专业报关与国际货代团队</li><li>全程追踪物流信息</li></ul>
-    </div>
-    <div class="zigzag-image">
-      <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="全球物流">
-      <div class="photo-caption">2026年客户走访工厂生产线实景照片</div>
-    </div>
-  </div>
-
-  <!-- 新增流程5 -->
-  <div class="zigzag-row">
-    <div class="zigzag-text">
-      <span class="step">STEP 05</span>
-      <h3>持续研发与售后支持</h3>
-      <p>我们不仅提供产品，更提供持续的优化与支持。专业技术团队随时响应，解决客户的后顾之忧。</p>
-      <ul><li>年度研发投入占比超 8%</li><li>7x24小时海外技术支持</li><li>产品全生命周期跟踪服务</li></ul>
-    </div>
-    <div class="zigzag-image">
-      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="研发与支持">
-      <div class="photo-caption">2026年客户走访工厂生产线实景照片</div>
-    </div>
-  </div>
-
-</div>
-
-<!-- 合作伙伴区 -->
-<div class="partners-section">
-  <div class="section-title">
-    <h2>全球合作伙伴</h2>
-    <p>我们的产品已服务于全球 30 多个国家和地区的客户</p>
-  </div>
-  <div class="map-grid">
-    <div class="map-card"><div class="region">北美地区</div><div class="countries">美国、加拿大、墨西哥</div></div>
-    <div class="map-card"><div class="region">欧洲地区</div><div class="countries">德国、英国、法国、意大利</div></div>
-    <div class="map-card"><div class="region">亚太地区</div><div class="countries">日本、韩国、澳大利亚、新加坡</div></div>
-    <div class="map-card"><div class="region">中东地区</div><div class="countries">阿联酋、沙特阿拉伯、以色列</div></div>
-    <div class="map-card"><div class="region">南美地区</div><div class="countries">巴西、阿根廷、智利</div></div>
-    <div class="map-card"><div class="region">非洲地区</div><div class="countries">南非、埃及、尼日利亚</div></div>
   </div>
 </div>
 
-<footer>
-  <p>&copy; 2026 你的品牌名. All rights reserved.</p>
-</footer>
-<a href="contact.html" class="floating-contact">
-  ✉️ 联系我询价
-</a>
+<script>
+  let pageData = null;
+  let slidesData = [];
+  let currentSlideIndex = 0;
+
+  async function loadPartnerDetail() {
+    const params = new URLSearchParams(window.location.search);
+    const fileId = params.get('id');
+    const pageContent = document.getElementById('page-content');
+
+    if (!fileId) {
+      pageContent.innerHTML = '<div class="error">未找到内容 ID。<br><a href="index.html">返回首页</a></div>';
+      return;
+    }
+
+    try {
+      const res = await fetch(`/data.json?t=${new Date().getTime()}`);
+      if (!res.ok) throw new Error('数据加载失败');
+      const data = await res.json();
+
+      pageData = data.partners ? data.partners.find(p => p.filename === fileId) : null;
+      if (!pageData) throw new Error('未找到该部门的数据');
+
+      const title = pageData.title || '部门介绍';
+      const introText = pageData.intro_text || '';
+      const detailLogo = pageData.detail_logo || '';
+      const industryList = pageData.industry_list || '';
+      const collabTitle = pageData.collab_title || '合作模式';
+      const collabText = pageData.collab_text || '';
+      const gridTitle = pageData.grid_title || '可用产品';
+      
+      const listHtml = industryList.split('\n').filter(i => i.trim()).map(i => `<li>${i.trim()}</li>`).join('');
+
+      let gridHtml = '';
+      if (pageData.cards && Array.isArray(pageData.cards)) {
+         pageData.cards.forEach((p, index) => {
+           const imgHtml = p.image ? `<img src="${p.image}" alt="${p.title || ''}">` : '';
+           gridHtml += `
+            <div class="grid-card">
+              ${imgHtml}
+              <h4>${p.title || ''}</h4>
+              <p>${p.desc || ''}</p>
+              <span class="link" onclick="openCardModal(${index})">了解更多</span>
+            </div>
+           `;
+         });
+      }
+
+      const introLayoutHtml = detailLogo 
+        ? `<div class="intro-text"><p>${introText.replace(/\n/g, '</p><p>')}</p></div>
+           <div class="intro-logo"><img src="${detailLogo}" alt="${title} Logo"></div>`
+        : `<div class="intro-text" style="flex: 1; width: 100%;"><p>${introText.replace(/\n/g, '</p><p>')}</p></div>`;
+
+      pageContent.innerHTML = `
+        <div class="page-container">
+          <h1 class="page-title">${title}</h1>
+          <div class="layout-intro">${introLayoutHtml}</div>
+          <div class="two-col-lists">
+            <div class="list-group"><h3>产业</h3><ul>${listHtml}</ul></div>
+            <div class="list-group"><h3>${collabTitle}</h3><p>${collabText.replace(/\n/g, '<br>')}</p></div>
+          </div>
+          ${gridHtml ? `
+          <div class="grid-section">
+            <h2>${gridTitle}</h2>
+            <div class="product-grid">${gridHtml}</div>
+          </div>
+          ` : ''}
+        </div>
+      `;
+
+    } catch (e) {
+      console.error(e);
+      pageContent.innerHTML = '<div class="error">加载失败。<br><a href="index.html">返回首页</a></div>';
+    }
+  }
+
+  // 打开弹窗
+  function openCardModal(index) {
+    if (!pageData || !pageData.cards || !pageData.cards[index]) return;
+    const card = pageData.cards[index];
+    
+    document.getElementById('modal-card-title').innerText = card.title || '详情介绍';
+    document.getElementById('modal-card-desc').innerText = card.desc || '';
+
+    // 初始化图文数据
+    slidesData = card.modal_slides || [];
+    
+    const sliderWrapper = document.getElementById('modal-slider-wrapper');
+    
+    if (slidesData.length > 0) {
+      sliderWrapper.style.display = 'block';
+      currentSlideIndex = 0;
+      renderSlide();
+    } else {
+      sliderWrapper.style.display = 'none';
+    }
+
+    document.getElementById('card-modal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // 渲染当前幻灯片的文字和图片
+  function renderSlide() {
+    if (slidesData.length === 0) return;
+    const slide = slidesData[currentSlideIndex];
+
+    // 1. 更新文字（支持换行）
+    const textEl = document.getElementById('slide-text');
+    textEl.innerHTML = (slide.text || '暂无文字介绍。').replace(/\n/g, '<br>');
+
+    // 2. 更新图片
+    const imgEl = document.getElementById('slide-image');
+    imgEl.src = slide.img || '';
+
+    // 3. 更新图片说明
+    const captionEl = document.getElementById('slide-caption');
+    if (slide.caption) {
+      captionEl.innerText = slide.caption;
+      captionEl.style.display = 'block';
+    } else {
+      captionEl.style.display = 'none';
+    }
+
+    // 4. 处理按钮和指示点
+    const prevBtn = document.getElementById('slide-prev');
+    const nextBtn = document.getElementById('slide-next');
+    const dotsContainer = document.getElementById('slide-dots');
+    
+    if (slidesData.length > 1) {
+      prevBtn.style.display = 'flex';
+      nextBtn.style.display = 'flex';
+      
+      // 重新渲染指示点
+      dotsContainer.innerHTML = '';
+      slidesData.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.className = 'slide-dot' + (i === currentSlideIndex ? ' active' : '');
+        dot.onclick = () => { currentSlideIndex = i; renderSlide(); };
+        dotsContainer.appendChild(dot);
+      });
+    } else {
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+      dotsContainer.innerHTML = '';
+    }
+  }
+
+  // 左右切换
+  function changeSlide(direction) {
+    if (slidesData.length <= 1) return;
+    currentSlideIndex += direction;
+    if (currentSlideIndex < 0) currentSlideIndex = slidesData.length - 1;
+    if (currentSlideIndex >= slidesData.length) currentSlideIndex = 0;
+    renderSlide();
+  }
+
+  function closeCardModal(event) {
+    if (event && event.target !== event.currentTarget) return;
+    document.getElementById('card-modal').classList.remove('show');
+    document.body.style.overflow = 'auto';
+  }
+
+  window.addEventListener('load', loadPartnerDetail);
+</script>
 </body>
 </html>
