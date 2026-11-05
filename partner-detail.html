@@ -11,26 +11,20 @@
     body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); line-height: 1.8; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* 顶部导航 */
     header { background: var(--dark-bg); position: sticky; top: 0; z-index: 1000; }
     .header-inner { max-width: 1240px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-size: 1.6rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
     .back-btn { color: var(--tech-green); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; }
 
-    /* 页面容器：放宽了宽度，缩小了上下边距 */
     .page-container { max-width: 1240px; margin: 0 auto; padding: 4rem 2rem; }
-    
-    /* 大标题 */
     .page-title { font-size: 3.5rem; font-weight: 800; margin-bottom: 3rem; color: var(--text-main); letter-spacing: -1px; line-height: 1.2; }
 
-    /* 区块1：左文右Logo */
     .layout-intro { display: flex; gap: 5rem; align-items: flex-start; margin-bottom: 4rem; }
     .layout-intro .intro-text { flex: 1; font-size: 1.05rem; color: #374151; }
     .layout-intro .intro-text p { margin-bottom: 1.5rem; text-align: justify; line-height: 2; }
     .layout-intro .intro-logo { flex: 0.6; display: flex; justify-content: flex-end; }
     .layout-intro .intro-logo img { max-width: 100%; max-height: 180px; object-fit: contain; }
 
-    /* 区块2：底部双列列表 */
     .two-col-lists { display: flex; gap: 6rem; margin-bottom: 5rem; }
     .two-col-lists .list-group { flex: 1; }
     .two-col-lists h3 { font-size: 1.6rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text-main); }
@@ -38,15 +32,30 @@
     .two-col-lists li { margin-bottom: 0.8rem; font-size: 1.05rem; }
     .two-col-lists p { color: #111827; font-size: 1.05rem; line-height: 2; }
 
-    /* 区块3：网格卡片 */
     .grid-section h2 { font-size: 2.2rem; font-weight: 700; margin-bottom: 2.5rem; color: var(--text-main); }
     .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem 2rem; }
     .grid-card { display: flex; flex-direction: column; }
     .grid-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 1.5rem; border-radius: 4px; background: #f3f4f6; }
     .grid-card h4 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--text-main); line-height: 1.4; }
     .grid-card p { font-size: 1rem; color: #374151; line-height: 1.7; margin-bottom: 1.5rem; flex-grow: 1; }
-    .grid-card a { color: #0ea5e9; font-weight: 700; font-size: 1rem; display: inline-block; }
-    .grid-card a:hover { text-decoration: underline; }
+    .grid-card .link { color: #0ea5e9; font-weight: 700; font-size: 1rem; display: inline-block; cursor: pointer; }
+    .grid-card .link:hover { text-decoration: underline; }
+
+    /* --- 弹窗高级样式 --- */
+    .card-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(5px); z-index: 3000; justify-content: center; align-items: center; }
+    .card-modal.show { display: flex; }
+    .card-modal-content { background: #fff; width: 90vw; max-width: 1000px; max-height: 90vh; border-radius: 8px; overflow-y: auto; position: relative; padding: 4rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); animation: fadeIn 0.3s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .card-modal-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 2.5rem; color: #9CA3AF; cursor: pointer; line-height: 1; transition: 0.3s; z-index: 10; }
+    .card-modal-close:hover { color: #111827; }
+    
+    .modal-header { margin-bottom: 2rem; border-bottom: 2px solid #E5E7EB; padding-bottom: 1.5rem; }
+    .modal-header h2 { font-size: 2.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.5rem; }
+    .modal-header p { font-size: 1.1rem; color: #6B7280; }
+    
+    .modal-detail-body { font-size: 1.05rem; color: #374151; }
+    .modal-detail-body p { margin-bottom: 1.5rem; line-height: 2; }
+    .modal-detail-body img { max-width: 100%; height: auto; border-radius: 4px; margin: 2rem 0; }
 
     @media (max-width: 992px) {
       .layout-intro { flex-direction: column-reverse; gap: 2rem; }
@@ -54,6 +63,8 @@
       .two-col-lists { flex-direction: column; gap: 3rem; }
       .product-grid { grid-template-columns: 1fr; gap: 3rem; }
       .page-title { font-size: 2.5rem; }
+      .card-modal-content { padding: 2rem; }
+      .modal-header h2 { font-size: 2rem; }
     }
     
     .loading { text-align: center; color: #999; padding: 8rem 2rem; font-size: 1.2rem; }
@@ -71,7 +82,24 @@
 
 <div id="page-content"><div class="loading">正在加载...</div></div>
 
+<!-- 卡片详情弹窗 -->
+<div id="card-modal" class="card-modal" onclick="closeCardModal(event)">
+  <div class="card-modal-content" onclick="event.stopPropagation()">
+    <span class="card-modal-close" onclick="closeCardModal()">&times;</span>
+    <div class="modal-header">
+      <h2 id="modal-card-title"></h2>
+      <p id="modal-card-desc"></p>
+    </div>
+    <div class="modal-detail-body" id="modal-card-body">
+      <!-- 富文本内容在这里渲染 -->
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
+  let pageData = null; // 保存当前页面的数据，方便弹窗调用
+
   async function loadPartnerDetail() {
     const params = new URLSearchParams(window.location.search);
     const fileId = params.get('id');
@@ -87,36 +115,36 @@
       if (!res.ok) throw new Error('数据加载失败');
       const data = await res.json();
 
-      const fileData = data.partners ? data.partners.find(p => p.filename === fileId) : null;
-      if (!fileData) throw new Error('未找到该部门的数据');
+      pageData = data.partners ? data.partners.find(p => p.filename === fileId) : null;
+      if (!pageData) throw new Error('未找到该部门的数据');
 
-      const title = fileData.title || '部门介绍';
-      const introText = fileData.intro_text || '';
-      const detailLogo = fileData.detail_logo || '';
-      const industryList = fileData.industry_list || '';
-      const collabTitle = fileData.collab_title || '合作模式';
-      const collabText = fileData.collab_text || '';
-      const gridTitle = fileData.grid_title || '可用产品';
+      const title = pageData.title || '部门介绍';
+      const introText = pageData.intro_text || '';
+      const detailLogo = pageData.detail_logo || '';
+      const industryList = pageData.industry_list || '';
+      const collabTitle = pageData.collab_title || '合作模式';
+      const collabText = pageData.collab_text || '';
+      const gridTitle = pageData.grid_title || '可用产品';
       
       const listHtml = industryList.split('\n').filter(i => i.trim()).map(i => `<li>${i.trim()}</li>`).join('');
 
+      // 渲染底部卡片，并给“了解更多”绑定弹窗事件
       let gridHtml = '';
-      if (fileData.cards && Array.isArray(fileData.cards)) {
-         fileData.cards.forEach(p => {
-           // 如果后台没传图片，这里就不渲染 img 标签
+      if (pageData.cards && Array.isArray(pageData.cards)) {
+         pageData.cards.forEach((p, index) => {
            const imgHtml = p.image ? `<img src="${p.image}" alt="${p.title || ''}">` : '';
            gridHtml += `
             <div class="grid-card">
               ${imgHtml}
               <h4>${p.title || ''}</h4>
               <p>${p.desc || ''}</p>
-              <a href="${p.link || '#'}">了解更多</a>
+              <!-- 重点：点击这里触发弹窗，传入当前卡片的索引 -->
+              <span class="link" onclick="openCardModal(${index})">了解更多</span>
             </div>
            `;
          });
       }
 
-      // 判断是否有右侧Logo。如果没有，就让左侧文字占满
       const introLayoutHtml = detailLogo 
         ? `<div class="intro-text"><p>${introText.replace(/\n/g, '</p><p>')}</p></div>
            <div class="intro-logo"><img src="${detailLogo}" alt="${title} Logo"></div>`
@@ -126,12 +154,8 @@
         <div class="page-container">
           <h1 class="page-title">${title}</h1>
           
-          <!-- 左文右Logo -->
-          <div class="layout-intro">
-            ${introLayoutHtml}
-          </div>
+          <div class="layout-intro">${introLayoutHtml}</div>
 
-          <!-- 双列列表 -->
           <div class="two-col-lists">
             <div class="list-group">
               <h3>产业</h3>
@@ -143,13 +167,10 @@
             </div>
           </div>
 
-          <!-- 三列网格卡片 -->
           ${gridHtml ? `
           <div class="grid-section">
             <h2>${gridTitle}</h2>
-            <div class="product-grid">
-              ${gridHtml}
-            </div>
+            <div class="product-grid">${gridHtml}</div>
           </div>
           ` : ''}
         </div>
@@ -159,6 +180,29 @@
       console.error(e);
       pageContent.innerHTML = '<div class="error">加载失败。<br><a href="index.html">返回首页</a></div>';
     }
+  }
+
+  // 打开弹窗
+  function openCardModal(index) {
+    if (!pageData || !pageData.cards || !pageData.cards[index]) return;
+    const card = pageData.cards[index];
+    
+    document.getElementById('modal-card-title').innerText = card.title || '详情介绍';
+    document.getElementById('modal-card-desc').innerText = card.desc || '';
+    
+    // 如果后台填了 modal_content，就转成 HTML 渲染，否则显示默认提示
+    const bodyHtml = card.modal_content ? marked.parse(card.modal_content) : '<p>暂无详细内容。</p>';
+    document.getElementById('modal-card-body').innerHTML = bodyHtml;
+
+    document.getElementById('card-modal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // 关闭弹窗
+  function closeCardModal(event) {
+    if (event && event.target !== event.currentTarget) return;
+    document.getElementById('card-modal').classList.remove('show');
+    document.body.style.overflow = 'auto';
   }
 
   window.addEventListener('load', loadPartnerDetail);
