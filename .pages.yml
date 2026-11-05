@@ -66,7 +66,7 @@ content:
       - { name: "collab_text", label: "合作模式正文", type: "text" }
       - { name: "grid_title", label: "底部卡片区域标题（如：可用产品）", type: "string", default: "可用产品" }
       
-      # 嵌套卡片列表
+            # 嵌套卡片列表
       - name: "cards"
         label: "底部产品/案例卡片"
         type: "object"
@@ -75,7 +75,18 @@ content:
           - { name: "image", label: "卡片封面图", type: "image" }
           - { name: "title", label: "卡片标题", type: "string" }
           - { name: "desc", label: "卡片简介", type: "text" }
-          - { name: "modal_content", label: "弹窗详细内容（支持富文本）", type: "rich-text" } 
+          
+          # 弹窗专属字段
+          - { name: "modal_text", label: "弹窗文字介绍（支持换行）", type: "text" }
+          
+          # 弹窗轮播图列表
+          - name: "modal_images"
+            label: "弹窗轮播图片（可上传多张）"
+            type: "object"
+            list: true
+            fields:
+              - { name: "img", label: "上传图片", type: "image" }
+              - { name: "caption", label: "图片说明（选填）", type: "string" }
   # ==========================================
   # 【通用内容与动态】
   # ==========================================
