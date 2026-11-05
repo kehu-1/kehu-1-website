@@ -1,25 +1,9 @@
 const fs = require('fs');
 const path = require('path');
+const yaml = require('js-yaml');
 
 const folders = ['products', 'partners', 'stories', 'news'];
 const data = {};
-
-function parseMarkdown(content) {
-  const parts = content.split('---');
-  const frontmatter = parts[1] || '';
-  const body = parts.slice(2).join('---').trim();
-  const meta = {};
-  
-  frontmatter.split('\n').forEach(line => {
-    const match = line.match(/^([^:]+):\s*(.*)$/);
-    if (match) {
-      let key = match[1].trim();
-      let val = match[2].trim().replace(/^['"]|['"]$/g, '');
-      meta[key] = val;
-    }
-  });
-  return { meta, body };
-}
 
 folders.forEach(folder => {
   const dirPath = path.join(__dirname, 'content', folder);
@@ -31,11 +15,18 @@ folders.forEach(folder => {
       try {
         const filePath = path.join(dirPath, file);
         const content = fs.readFileSync(filePath, 'utf-8');
-        const { meta, body } = parseMarkdown(content);
+        
+        // 提取 --- 之间的 YAML 数据
+        const parts = content.split('---');
+        let meta = {};
+        if (parts.length >= 3) {
+          const frontmatter = parts[1];
+          meta = yaml.load(frontmatter) || {};
+        }
+        
         data[folder].push({
           filename: file,
-          ...meta,
-          body: body
+          ...meta
         });
       } catch (err) {
         console.error(`读取文件 ${file} 失败:`, err);
@@ -45,4 +36,4 @@ folders.forEach(folder => {
 });
 
 fs.writeFileSync(path.join(__dirname, 'data.json'), JSON.stringify(data, null, 2));
-console.log('数据打包完成！共处理文件数：', folders.reduce((acc, f) => acc + data[f].length, 0));
+console.log('数据打包完成！');
