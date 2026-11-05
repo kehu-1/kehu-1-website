@@ -11,7 +11,7 @@
     body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); line-height: 1.8; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* --- 页面主体样式（保持不变） --- */
+    /* --- 页面主体样式 --- */
     header { background: var(--dark-bg); position: sticky; top: 0; z-index: 1000; }
     .header-inner { max-width: 1240px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-size: 1.6rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
@@ -42,7 +42,7 @@
     .grid-card .link { color: #0ea5e9; font-weight: 700; font-size: 1rem; display: inline-block; cursor: pointer; }
     .grid-card .link:hover { text-decoration: underline; }
 
-    /* --- 弹窗与轮播样式 --- */
+    /* --- 弹窗样式 --- */
     .card-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px); z-index: 3000; justify-content: center; align-items: center; }
     .card-modal.show { display: flex; }
     
@@ -59,47 +59,83 @@
     .modal-header { margin-bottom: 2rem; border-bottom: 1px solid #CBD5E1; padding-bottom: 1.5rem; }
     .modal-header h2 { font-size: 2.5rem; font-weight: 800; color: #0F172A; margin-bottom: 0.5rem; }
     .modal-header p { font-size: 1.1rem; color: #475569; }
-    
-    /* 1. 弹窗上方文字轮播区域 */
-    .modal-text-carousel-wrapper { 
-      position: relative; 
-      height: 120px; /* 固定高度，防止文字切换时页面乱跳 */
-      margin-bottom: 2rem; 
+
+    /* 图文幻灯片容器 */
+    .modal-slider-container {
+      position: relative;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
       overflow: hidden;
       display: flex;
-      align-items: center;
-    }
-    .modal-text-item { 
-      position: absolute; 
-      width: 100%; 
-      font-size: 1.4rem; 
-      font-weight: 500;
-      color: #334155; 
-      line-height: 1.8;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .modal-text-item.active { 
-      opacity: 1; 
-      transform: translateY(0); 
+      flex-direction: column;
     }
 
-    /* 2. 弹窗下方轮播图 */
-    .modal-carousel { position: relative; width: 100%; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
-    .carousel-track { display: flex; transition: transform 0.4s ease; }
-    .carousel-item { flex: 0 0 100%; position: relative; background: #f8fafc; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    .carousel-item img { width: 100%; max-height: 400px; object-fit: contain; display: block; }
-    .carousel-caption { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(15,23,42,0.7); color: #fff; padding: 0.8rem 1.5rem; font-size: 0.95rem; text-align: center; }
-    
-    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: #fff; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; z-index: 2; transition: 0.3s; }
-    .carousel-btn:hover { background: var(--tech-green); color: #000; }
-    .carousel-btn.prev { left: 15px; }
-    .carousel-btn.next { right: 15px; }
-    
-    .carousel-dots { position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.5rem; z-index: 2; }
-    .carousel-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: 0.3s; }
-    .carousel-dot.active { background: #fff; transform: scale(1.2); }
+    .slide-text-wrapper {
+      padding: 2.5rem;
+      font-size: 1.15rem;
+      color: #334155;
+      line-height: 1.9;
+      min-height: 150px; /* 保证文字高度一致，防止高度跳动 */
+      border-bottom: 1px dashed #E2E8F0;
+    }
+
+    .slide-image-wrapper {
+      position: relative;
+      background: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 300px;
+      max-height: 500px;
+    }
+    .slide-image-wrapper img {
+      width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+      display: block;
+    }
+    .slide-caption {
+      position: absolute;
+      bottom: 0; left: 0; width: 100%;
+      background: rgba(15,23,42,0.7);
+      color: #fff;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    /* 左右切换按钮 */
+    .slide-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(15, 23, 42, 0.6);
+      color: #fff;
+      border: none;
+      width: 45px; height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 10;
+      transition: 0.3s;
+    }
+    .slide-btn:hover { background: var(--tech-green); color: #000; }
+    .slide-btn.prev { left: 15px; }
+    .slide-btn.next { right: 15px; }
+
+    /* 底部指示点 */
+    .slide-dots {
+      position: absolute;
+      bottom: 1rem; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 0.5rem; z-index: 10;
+    }
+    .slide-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s;
+    }
+    .slide-dot.active { background: #fff; transform: scale(1.2); }
 
     @media (max-width: 992px) {
       .layout-intro, .two-col-lists { flex-direction: column; gap: 2rem; }
@@ -107,7 +143,8 @@
       .page-title { font-size: 2.5rem; }
       .card-modal-content { padding: 2rem; }
       .modal-header h2 { font-size: 2rem; }
-      .modal-text-carousel-wrapper { height: 180px; }
+      .slide-text-wrapper { padding: 1.5rem; min-height: 120px; }
+      .slide-btn { width: 35px; height: 35px; font-size: 1.2rem; }
     }
     
     .loading { text-align: center; color: #999; padding: 8rem 2rem; font-size: 1.2rem; }
@@ -134,27 +171,32 @@
       <p id="modal-card-desc"></p>
     </div>
     
-    <!-- 文字轮播区域 -->
-    <div class="modal-text-carousel-wrapper" id="modal-text-wrapper">
-      <!-- JS 会在这里注入文字 -->
-    </div>
-
-    <!-- 下方图片轮播区域 -->
-    <div class="modal-carousel" id="modal-carousel-wrapper" style="display: none;">
-      <div class="carousel-track" id="carousel-track"></div>
-      <button class="carousel-btn prev" id="carousel-prev" onclick="slideModalCarousel(-1)">‹</button>
-      <button class="carousel-btn next" id="carousel-next" onclick="slideModalCarousel(1)">›</button>
-      <div class="carousel-dots" id="carousel-dots"></div>
+    <!-- 图文幻灯片区域 -->
+    <div class="modal-slider-container" id="modal-slider-wrapper" style="display: none;">
+      
+      <!-- 顶部文字区 -->
+      <div class="slide-text-wrapper" id="slide-text"></div>
+      
+      <!-- 底部图片区 -->
+      <div class="slide-image-wrapper">
+        <img id="slide-image" src="" alt="">
+        <div class="slide-caption" id="slide-caption" style="display: none;"></div>
+      </div>
+      
+      <!-- 控制按钮 -->
+      <button class="slide-btn prev" id="slide-prev" onclick="changeSlide(-1)">‹</button>
+      <button class="slide-btn next" id="slide-next" onclick="changeSlide(1)">›</button>
+      
+      <!-- 指示点 -->
+      <div class="slide-dots" id="slide-dots"></div>
     </div>
   </div>
 </div>
 
 <script>
   let pageData = null;
-  let textCarouselInterval = null; // 用于清理定时器
-  let currentTextIndex = 0;
-  let modalCurrentIndex = 0;
-  let modalTotalImages = 0;
+  let slidesData = [];
+  let currentSlideIndex = 0;
 
   async function loadPartnerDetail() {
     const params = new URLSearchParams(window.location.search);
@@ -235,98 +277,82 @@
     document.getElementById('modal-card-title').innerText = card.title || '详情介绍';
     document.getElementById('modal-card-desc').innerText = card.desc || '';
 
-    // --- 初始化文字轮播 ---
-    const textWrapper = document.getElementById('modal-text-wrapper');
-    textWrapper.innerHTML = '';
-    currentTextIndex = 0;
-
-    if (card.modal_texts && Array.isArray(card.modal_texts) && card.modal_texts.length > 0) {
-      card.modal_texts.forEach((item, i) => {
-        const textEl = document.createElement('div');
-        textEl.className = 'modal-text-item' + (i === 0 ? ' active' : '');
-        textEl.innerText = item.text;
-        textWrapper.appendChild(textEl);
-      });
-      
-      // 如果有多条文字，启动定时器，每 3 秒切换一次
-      if (card.modal_texts.length > 1) {
-        if (textCarouselInterval) clearInterval(textCarouselInterval);
-        textCarouselInterval = setInterval(() => {
-          const items = document.querySelectorAll('.modal-text-item');
-          if (items.length === 0) return;
-          
-          items[currentTextIndex].classList.remove('active');
-          currentTextIndex = (currentTextIndex + 1) % items.length;
-          items[currentTextIndex].classList.add('active');
-        }, 3000);
-      }
-    } else {
-      // 兼容以前的老数据
-      textWrapper.innerHTML = `<div class="modal-text-item active">${card.modal_text || '暂无详细文字介绍。'}</div>`;
-    }
-
-    // --- 初始化图片轮播 ---
-    const carouselWrapper = document.getElementById('modal-carousel-wrapper');
-    const track = document.getElementById('carousel-track');
-    const dotsContainer = document.getElementById('carousel-dots');
+    // 初始化图文数据
+    slidesData = card.modal_slides || [];
     
-    track.innerHTML = '';
-    dotsContainer.innerHTML = '';
+    const sliderWrapper = document.getElementById('modal-slider-wrapper');
     
-    if (card.modal_images && Array.isArray(card.modal_images) && card.modal_images.length > 0) {
-      modalTotalImages = card.modal_images.length;
-      modalCurrentIndex = 0;
-      
-      card.modal_images.forEach((imgObj, i) => {
-        const itemHtml = `
-          <div class="carousel-item">
-            <img src="${imgObj.img}" alt="图片${i+1}">
-            ${imgObj.caption ? `<div class="carousel-caption">${imgObj.caption}</div>` : ''}
-          </div>
-        `;
-        track.insertAdjacentHTML('beforeend', itemHtml);
-
-        const dot = document.createElement('span');
-        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-        dot.onclick = () => goToModalSlide(i);
-        dotsContainer.appendChild(dot);
-      });
-
-      carouselWrapper.style.display = 'block';
-      document.getElementById('carousel-prev').style.display = modalTotalImages > 1 ? 'flex' : 'none';
-      document.getElementById('carousel-next').style.display = modalTotalImages > 1 ? 'flex' : 'none';
-      
-      goToModalSlide(0);
+    if (slidesData.length > 0) {
+      sliderWrapper.style.display = 'block';
+      currentSlideIndex = 0;
+      renderSlide();
     } else {
-      carouselWrapper.style.display = 'none';
+      sliderWrapper.style.display = 'none';
     }
 
     document.getElementById('card-modal').classList.add('show');
     document.body.style.overflow = 'hidden';
   }
 
-  function goToModalSlide(index) {
-    if (index < 0) index = modalTotalImages - 1;
-    if (index >= modalTotalImages) index = 0;
-    modalCurrentIndex = index;
+  // 渲染当前幻灯片的文字和图片
+  function renderSlide() {
+    if (slidesData.length === 0) return;
+    const slide = slidesData[currentSlideIndex];
 
-    const track = document.getElementById('carousel-track');
-    track.style.transform = `translateX(-${index * 100}%)`;
+    // 1. 更新文字（支持换行）
+    const textEl = document.getElementById('slide-text');
+    textEl.innerHTML = (slide.text || '暂无文字介绍。').replace(/\n/g, '<br>');
 
-    const dots = document.querySelectorAll('.carousel-dot');
-    dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+    // 2. 更新图片
+    const imgEl = document.getElementById('slide-image');
+    imgEl.src = slide.img || '';
+
+    // 3. 更新图片说明
+    const captionEl = document.getElementById('slide-caption');
+    if (slide.caption) {
+      captionEl.innerText = slide.caption;
+      captionEl.style.display = 'block';
+    } else {
+      captionEl.style.display = 'none';
+    }
+
+    // 4. 处理按钮和指示点
+    const prevBtn = document.getElementById('slide-prev');
+    const nextBtn = document.getElementById('slide-next');
+    const dotsContainer = document.getElementById('slide-dots');
+    
+    if (slidesData.length > 1) {
+      prevBtn.style.display = 'flex';
+      nextBtn.style.display = 'flex';
+      
+      // 重新渲染指示点
+      dotsContainer.innerHTML = '';
+      slidesData.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.className = 'slide-dot' + (i === currentSlideIndex ? ' active' : '');
+        dot.onclick = () => { currentSlideIndex = i; renderSlide(); };
+        dotsContainer.appendChild(dot);
+      });
+    } else {
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+      dotsContainer.innerHTML = '';
+    }
   }
 
-  function slideModalCarousel(direction) {
-    goToModalSlide(modalCurrentIndex + direction);
+  // 左右切换
+  function changeSlide(direction) {
+    if (slidesData.length <= 1) return;
+    currentSlideIndex += direction;
+    if (currentSlideIndex < 0) currentSlideIndex = slidesData.length - 1;
+    if (currentSlideIndex >= slidesData.length) currentSlideIndex = 0;
+    renderSlide();
   }
 
   function closeCardModal(event) {
     if (event && event.target !== event.currentTarget) return;
     document.getElementById('card-modal').classList.remove('show');
     document.body.style.overflow = 'auto';
-    // 关闭弹窗时，停止文字轮播
-    if (textCarouselInterval) clearInterval(textCarouselInterval);
   }
 
   window.addEventListener('load', loadPartnerDetail);
