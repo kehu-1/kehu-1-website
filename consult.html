@@ -18,14 +18,12 @@
     body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); line-height: 1.6; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* 导航栏 */
     header { background: #fff; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #E5E7EB; }
     .header-inner { max-width: 1240px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-size: 1.6rem; font-weight: 800; color: var(--dark-bg); letter-spacing: 2px; }
     .nav-links a { margin-left: 2rem; font-weight: 500; color: #4B5563; }
     .nav-links a:hover { color: var(--tech-green); }
 
-    /* 顶部表单区 */
     .hero-form-section { background: var(--bg-mint); padding: 6rem 2rem; display: flex; justify-content: center; }
     .form-card { background: #fff; width: 100%; max-width: 800px; border-radius: 8px; padding: 4rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
     
@@ -33,12 +31,10 @@
     .form-header h1 { font-size: 2.5rem; font-weight: 700; color: var(--tech-green); margin-bottom: 1rem; }
     .form-header p { font-size: 1.1rem; color: var(--text-muted); }
 
-    /* 询问原因下拉 */
     .reason-select { display: flex; flex-direction: column; align-items: center; margin-bottom: 3rem; }
     .reason-select label { font-size: 1.1rem; font-weight: 500; margin-bottom: 1rem; }
     .reason-select select { width: 100%; max-width: 300px; padding: 0.8rem; font-size: 1rem; border: 1px solid #374151; border-radius: 4px; background: #fff; cursor: pointer; outline: none; }
 
-    /* 表单网格 */
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
     .form-group { display: flex; flex-direction: column; }
     .form-group.full-width { grid-column: span 2; }
@@ -49,30 +45,25 @@
     }
     input:focus, select:focus, textarea:focus { border-color: var(--tech-green); background: #fff; box-shadow: 0 0 0 3px rgba(16,185,129,0.1); }
     
-    /* 单选框 */
     .radio-group { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 0.5rem; }
     .radio-label { display: flex; align-items: center; gap: 0.5rem; font-weight: 400; font-size: 0.95rem; cursor: pointer; color: #4B5563; }
     .radio-label input[type="radio"] { width: 18px; height: 18px; accent-color: var(--tech-green); cursor: pointer; }
 
     textarea { resize: vertical; min-height: 120px; }
 
-    /* 提交按钮 */
     .submit-btn {
       width: 100%; padding: 1.2rem; background: var(--tech-green); color: #fff; font-size: 1.1rem; font-weight: 700; border: none; border-radius: 4px; cursor: pointer; transition: 0.3s; margin-top: 2rem; letter-spacing: 1px;
     }
     .submit-btn:hover { background: var(--tech-green-hover); }
 
-    /* 动态显示隐藏类 */
     .hidden { display: none !important; }
 
-    /* NDA 保证区 */
     .nda-section { background: var(--dark-bg); color: #fff; text-align: center; padding: 6rem 2rem; position: relative; overflow: hidden; }
     .nda-section h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1.5rem; position: relative; z-index: 2; }
     .nda-section p { font-size: 1.1rem; color: #D1D5DB; max-width: 800px; margin: 0 auto 2.5rem; line-height: 1.8; position: relative; z-index: 2; }
     .nda-btn { background: var(--tech-green); color: #fff; padding: 1rem 3rem; font-size: 1.1rem; font-weight: 600; border: none; border-radius: 4px; cursor: pointer; display: inline-block; position: relative; z-index: 2; }
     .nda-btn:hover { background: var(--tech-green-hover); transform: translateY(-2px); }
 
-    /* FAQ 区 */
     .faq-section { background: #fff; padding: 6rem 2rem; }
     .faq-container { max-width: 1000px; margin: 0 auto; display: flex; gap: 4rem; }
     .faq-left { flex: 0.3; display: flex; align-items: flex-start; gap: 1rem; }
@@ -98,7 +89,6 @@
 </head>
 <body>
 
-<!-- 导航栏 -->
 <header>
   <div class="header-inner">
     <div class="logo">你的品牌名</div>
@@ -111,7 +101,6 @@
   </div>
 </header>
 
-<!-- 表单区 -->
 <div class="hero-form-section">
   <div class="form-card">
     
@@ -120,7 +109,6 @@
       <p>我们的团队随时待命，随时为您提供帮助。</p>
     </div>
 
-    <!-- 下拉选择联动 -->
     <div class="reason-select">
       <label>您询问的原因</label>
       <select id="inquiry-reason" onchange="switchForm(this.value)">
@@ -131,15 +119,11 @@
       </select>
     </div>
 
-    <!-- 表单用 FormSubmit 提交 -->
+    <!-- 给表单加上 id="consult-form"，去掉原来的 action -->
     <form id="consult-form">
-      <!-- FormSubmit 隐藏配置 -->
-      <input type="hidden" name="_subject" value="官网新表单：咨询制造专家">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-
+      
       <!-- ==========================================
-           块1：销售问题 / 一般调查 (图一排版)
+           块1：销售问题 / 一般调查
            ========================================== -->
       <div id="form-standard" class="form-grid">
         <div class="form-group">
@@ -167,67 +151,45 @@
 
         <div class="form-group full-width">
           <label>国家</label>
-         <select name="Country">
-  <option value="">请选择国家/地区</option>
-  <option value="China">中国 (China)</option>
-  <option value="United States">美国 (United States)</option>
-  <option value="Hong Kong SAR">中国香港 (Hong Kong SAR)</option>
-  <option value="Macao SAR">中国澳门 (Macao SAR)</option>
-  <option value="Taiwan">中国台湾 (Taiwan)</option>
-  <option value="Japan">日本 (Japan)</option>
-  <option value="South Korea">韩国 (South Korea)</option>
-  <option value="India">印度 (India)</option>
-  <option value="Singapore">新加坡 (Singapore)</option>
-  <option value="Malaysia">马来西亚 (Malaysia)</option>
-  <option value="Thailand">泰国 (Thailand)</option>
-  <option value="Vietnam">越南 (Vietnam)</option>
-  <option value="Indonesia">印度尼西亚 (Indonesia)</option>
-  <option value="Philippines">菲律宾 (Philippines)</option>
-  
-  <option value="United Kingdom">英国 (United Kingdom)</option>
-  <option value="Germany">德国 (Germany)</option>
-  <option value="France">法国 (France)</option>
-  <option value="Italy">意大利 (Italy)</option>
-  <option value="Spain">西班牙 (Spain)</option>
-  <option value="Netherlands">荷兰 (Netherlands)</option>
-  <option value="Switzerland">瑞士 (Switzerland)</option>
-  <option value="Sweden">瑞典 (Sweden)</option>
-  <option value="Poland">波兰 (Poland)</option>
-  <option value="Russia">俄罗斯 (Russia)</option>
-  <option value="Ireland">爱尔兰 (Ireland)</option>
-  <option value="Belgium">比利时 (Belgium)</option>
-  <option value="Austria">奥地利 (Austria)</option>
-  <option value="Denmark">丹麦 (Denmark)</option>
-  <option value="Norway">挪威 (Norway)</option>
-  <option value="Finland">芬兰 (Finland)</option>
-  <option value="Portugal">葡萄牙 (Portugal)</option>
-  <option value="Greece">希腊 (Greece)</option>
-  <option value="Czech Republic">捷克 (Czech Republic)</option>
-  <option value="Ukraine">乌克兰 (Ukraine)</option>
-  <option value="Romania">罗马尼亚 (Romania)</option>
-  <option value="Hungary">匈牙利 (Hungary)</option>
-
-  <option value="Canada">加拿大 (Canada)</option>
-  <option value="Mexico">墨西哥 (Mexico)</option>
-  <option value="Brazil">巴西 (Brazil)</option>
-  <option value="Argentina">阿根廷 (Argentina)</option>
-  <option value="Chile">智利 (Chile)</option>
-  <option value="Colombia">哥伦比亚 (Colombia)</option>
-  <option value="Peru">秘鲁 (Peru)</option>
-
-  <option value="Australia">澳大利亚 (Australia)</option>
-  <option value="New Zealand">新西兰 (New Zealand)</option>
-
-  <option value="United Arab Emirates">阿联酋 (United Arab Emirates)</option>
-  <option value="Saudi Arabia">沙特阿拉伯 (Saudi Arabia)</option>
-  <option value="Israel">以色列 (Israel)</option>
-  <option value="Turkey">土耳其 (Turkey)</option>
-  <option value="Egypt">埃及 (Egypt)</option>
-  <option value="South Africa">南非 (South Africa)</option>
-  <option value="Nigeria">尼日利亚 (Nigeria)</option>
-
-  <option value="Other">其他 (Other)</option>
-</select>
+          <select name="Country">
+            <option value="">请选择国家/地区</option>
+            <option value="China">中国 (China)</option>
+            <option value="United States">美国 (United States)</option>
+            <option value="Hong Kong SAR">中国香港</option>
+            <option value="Macao SAR">中国澳门</option>
+            <option value="Taiwan">中国台湾</option>
+            <option value="Japan">日本</option>
+            <option value="South Korea">韩国</option>
+            <option value="India">印度</option>
+            <option value="Singapore">新加坡</option>
+            <option value="Malaysia">马来西亚</option>
+            <option value="Thailand">泰国</option>
+            <option value="Vietnam">越南</option>
+            <option value="Indonesia">印度尼西亚</option>
+            <option value="Philippines">菲律宾</option>
+            <option value="United Kingdom">英国</option>
+            <option value="Germany">德国</option>
+            <option value="France">法国</option>
+            <option value="Italy">意大利</option>
+            <option value="Spain">西班牙</option>
+            <option value="Netherlands">荷兰</option>
+            <option value="Switzerland">瑞士</option>
+            <option value="Sweden">瑞典</option>
+            <option value="Poland">波兰</option>
+            <option value="Russia">俄罗斯</option>
+            <option value="Canada">加拿大</option>
+            <option value="Mexico">墨西哥</option>
+            <option value="Brazil">巴西</option>
+            <option value="Argentina">阿根廷</option>
+            <option value="Chile">智利</option>
+            <option value="Australia">澳大利亚</option>
+            <option value="New Zealand">新西兰</option>
+            <option value="United Arab Emirates">阿联酋</option>
+            <option value="Saudi Arabia">沙特阿拉伯</option>
+            <option value="Israel">以色列</option>
+            <option value="Turkey">土耳其</option>
+            <option value="South Africa">南非</option>
+            <option value="Other">其他 (Other)</option>
           </select>
         </div>
 
@@ -238,7 +200,7 @@
       </div>
 
       <!-- ==========================================
-           块2：出口管制 (图二、图三排版)
+           块2：出口管制
            ========================================== -->
       <div id="form-export" class="form-grid hidden">
         <div class="form-group">
@@ -270,67 +232,44 @@
         <div class="form-group full-width">
           <label>国家</label>
           <select name="Country">
-<select name="Country">
-  <option value="">请选择国家/地区</option>
-  <option value="China">中国 (China)</option>
-  <option value="United States">美国 (United States)</option>
-  <option value="Hong Kong SAR">中国香港 (Hong Kong SAR)</option>
-  <option value="Macao SAR">中国澳门 (Macao SAR)</option>
-  <option value="Taiwan">中国台湾 (Taiwan)</option>
-  <option value="Japan">日本 (Japan)</option>
-  <option value="South Korea">韩国 (South Korea)</option>
-  <option value="India">印度 (India)</option>
-  <option value="Singapore">新加坡 (Singapore)</option>
-  <option value="Malaysia">马来西亚 (Malaysia)</option>
-  <option value="Thailand">泰国 (Thailand)</option>
-  <option value="Vietnam">越南 (Vietnam)</option>
-  <option value="Indonesia">印度尼西亚 (Indonesia)</option>
-  <option value="Philippines">菲律宾 (Philippines)</option>
-  
-  <option value="United Kingdom">英国 (United Kingdom)</option>
-  <option value="Germany">德国 (Germany)</option>
-  <option value="France">法国 (France)</option>
-  <option value="Italy">意大利 (Italy)</option>
-  <option value="Spain">西班牙 (Spain)</option>
-  <option value="Netherlands">荷兰 (Netherlands)</option>
-  <option value="Switzerland">瑞士 (Switzerland)</option>
-  <option value="Sweden">瑞典 (Sweden)</option>
-  <option value="Poland">波兰 (Poland)</option>
-  <option value="Russia">俄罗斯 (Russia)</option>
-  <option value="Ireland">爱尔兰 (Ireland)</option>
-  <option value="Belgium">比利时 (Belgium)</option>
-  <option value="Austria">奥地利 (Austria)</option>
-  <option value="Denmark">丹麦 (Denmark)</option>
-  <option value="Norway">挪威 (Norway)</option>
-  <option value="Finland">芬兰 (Finland)</option>
-  <option value="Portugal">葡萄牙 (Portugal)</option>
-  <option value="Greece">希腊 (Greece)</option>
-  <option value="Czech Republic">捷克 (Czech Republic)</option>
-  <option value="Ukraine">乌克兰 (Ukraine)</option>
-  <option value="Romania">罗马尼亚 (Romania)</option>
-  <option value="Hungary">匈牙利 (Hungary)</option>
-
-  <option value="Canada">加拿大 (Canada)</option>
-  <option value="Mexico">墨西哥 (Mexico)</option>
-  <option value="Brazil">巴西 (Brazil)</option>
-  <option value="Argentina">阿根廷 (Argentina)</option>
-  <option value="Chile">智利 (Chile)</option>
-  <option value="Colombia">哥伦比亚 (Colombia)</option>
-  <option value="Peru">秘鲁 (Peru)</option>
-
-  <option value="Australia">澳大利亚 (Australia)</option>
-  <option value="New Zealand">新西兰 (New Zealand)</option>
-
-  <option value="United Arab Emirates">阿联酋 (United Arab Emirates)</option>
-  <option value="Saudi Arabia">沙特阿拉伯 (Saudi Arabia)</option>
-  <option value="Israel">以色列 (Israel)</option>
-  <option value="Turkey">土耳其 (Turkey)</option>
-  <option value="Egypt">埃及 (Egypt)</option>
-  <option value="South Africa">南非 (South Africa)</option>
-  <option value="Nigeria">尼日利亚 (Nigeria)</option>
-
-  <option value="Other">其他 (Other)</option>
-</select>
+            <option value="">请选择国家/地区</option>
+            <option value="China">中国 (China)</option>
+            <option value="United States">美国 (United States)</option>
+            <option value="Hong Kong SAR">中国香港</option>
+            <option value="Macao SAR">中国澳门</option>
+            <option value="Taiwan">中国台湾</option>
+            <option value="Japan">日本</option>
+            <option value="South Korea">韩国</option>
+            <option value="India">印度</option>
+            <option value="Singapore">新加坡</option>
+            <option value="Malaysia">马来西亚</option>
+            <option value="Thailand">泰国</option>
+            <option value="Vietnam">越南</option>
+            <option value="Indonesia">印度尼西亚</option>
+            <option value="Philippines">菲律宾</option>
+            <option value="United Kingdom">英国</option>
+            <option value="Germany">德国</option>
+            <option value="France">法国</option>
+            <option value="Italy">意大利</option>
+            <option value="Spain">西班牙</option>
+            <option value="Netherlands">荷兰</option>
+            <option value="Switzerland">瑞士</option>
+            <option value="Sweden">瑞典</option>
+            <option value="Poland">波兰</option>
+            <option value="Russia">俄罗斯</option>
+            <option value="Canada">加拿大</option>
+            <option value="Mexico">墨西哥</option>
+            <option value="Brazil">巴西</option>
+            <option value="Argentina">阿根廷</option>
+            <option value="Chile">智利</option>
+            <option value="Australia">澳大利亚</option>
+            <option value="New Zealand">新西兰</option>
+            <option value="United Arab Emirates">阿联酋</option>
+            <option value="Saudi Arabia">沙特阿拉伯</option>
+            <option value="Israel">以色列</option>
+            <option value="Turkey">土耳其</option>
+            <option value="South Africa">南非</option>
+            <option value="Other">其他 (Other)</option>
           </select>
         </div>
 
@@ -374,7 +313,7 @@
       </div>
 
       <!-- ==========================================
-           块3：大学项目 (图四排版)
+           块3：大学项目
            ========================================== -->
       <div id="form-university" class="form-grid hidden">
         <div class="form-group">
@@ -411,67 +350,45 @@
 
         <div class="form-group full-width">
           <label>国家</label>
-<select name="Country">
-  <option value="">请选择国家/地区</option>
-  <option value="China">中国 (China)</option>
-  <option value="United States">美国 (United States)</option>
-  <option value="Hong Kong SAR">中国香港 (Hong Kong SAR)</option>
-  <option value="Macao SAR">中国澳门 (Macao SAR)</option>
-  <option value="Taiwan">中国台湾 (Taiwan)</option>
-  <option value="Japan">日本 (Japan)</option>
-  <option value="South Korea">韩国 (South Korea)</option>
-  <option value="India">印度 (India)</option>
-  <option value="Singapore">新加坡 (Singapore)</option>
-  <option value="Malaysia">马来西亚 (Malaysia)</option>
-  <option value="Thailand">泰国 (Thailand)</option>
-  <option value="Vietnam">越南 (Vietnam)</option>
-  <option value="Indonesia">印度尼西亚 (Indonesia)</option>
-  <option value="Philippines">菲律宾 (Philippines)</option>
-  
-  <option value="United Kingdom">英国 (United Kingdom)</option>
-  <option value="Germany">德国 (Germany)</option>
-  <option value="France">法国 (France)</option>
-  <option value="Italy">意大利 (Italy)</option>
-  <option value="Spain">西班牙 (Spain)</option>
-  <option value="Netherlands">荷兰 (Netherlands)</option>
-  <option value="Switzerland">瑞士 (Switzerland)</option>
-  <option value="Sweden">瑞典 (Sweden)</option>
-  <option value="Poland">波兰 (Poland)</option>
-  <option value="Russia">俄罗斯 (Russia)</option>
-  <option value="Ireland">爱尔兰 (Ireland)</option>
-  <option value="Belgium">比利时 (Belgium)</option>
-  <option value="Austria">奥地利 (Austria)</option>
-  <option value="Denmark">丹麦 (Denmark)</option>
-  <option value="Norway">挪威 (Norway)</option>
-  <option value="Finland">芬兰 (Finland)</option>
-  <option value="Portugal">葡萄牙 (Portugal)</option>
-  <option value="Greece">希腊 (Greece)</option>
-  <option value="Czech Republic">捷克 (Czech Republic)</option>
-  <option value="Ukraine">乌克兰 (Ukraine)</option>
-  <option value="Romania">罗马尼亚 (Romania)</option>
-  <option value="Hungary">匈牙利 (Hungary)</option>
-
-  <option value="Canada">加拿大 (Canada)</option>
-  <option value="Mexico">墨西哥 (Mexico)</option>
-  <option value="Brazil">巴西 (Brazil)</option>
-  <option value="Argentina">阿根廷 (Argentina)</option>
-  <option value="Chile">智利 (Chile)</option>
-  <option value="Colombia">哥伦比亚 (Colombia)</option>
-  <option value="Peru">秘鲁 (Peru)</option>
-
-  <option value="Australia">澳大利亚 (Australia)</option>
-  <option value="New Zealand">新西兰 (New Zealand)</option>
-
-  <option value="United Arab Emirates">阿联酋 (United Arab Emirates)</option>
-  <option value="Saudi Arabia">沙特阿拉伯 (Saudi Arabia)</option>
-  <option value="Israel">以色列 (Israel)</option>
-  <option value="Turkey">土耳其 (Turkey)</option>
-  <option value="Egypt">埃及 (Egypt)</option>
-  <option value="South Africa">南非 (South Africa)</option>
-  <option value="Nigeria">尼日利亚 (Nigeria)</option>
-
-  <option value="Other">其他 (Other)</option>
-</select>
+          <select name="Country">
+            <option value="">请选择国家/地区</option>
+            <option value="China">中国 (China)</option>
+            <option value="United States">美国 (United States)</option>
+            <option value="Hong Kong SAR">中国香港</option>
+            <option value="Macao SAR">中国澳门</option>
+            <option value="Taiwan">中国台湾</option>
+            <option value="Japan">日本</option>
+            <option value="South Korea">韩国</option>
+            <option value="India">印度</option>
+            <option value="Singapore">新加坡</option>
+            <option value="Malaysia">马来西亚</option>
+            <option value="Thailand">泰国</option>
+            <option value="Vietnam">越南</option>
+            <option value="Indonesia">印度尼西亚</option>
+            <option value="Philippines">菲律宾</option>
+            <option value="United Kingdom">英国</option>
+            <option value="Germany">德国</option>
+            <option value="France">法国</option>
+            <option value="Italy">意大利</option>
+            <option value="Spain">西班牙</option>
+            <option value="Netherlands">荷兰</option>
+            <option value="Switzerland">瑞士</option>
+            <option value="Sweden">瑞典</option>
+            <option value="Poland">波兰</option>
+            <option value="Russia">俄罗斯</option>
+            <option value="Canada">加拿大</option>
+            <option value="Mexico">墨西哥</option>
+            <option value="Brazil">巴西</option>
+            <option value="Argentina">阿根廷</option>
+            <option value="Chile">智利</option>
+            <option value="Australia">澳大利亚</option>
+            <option value="New Zealand">新西兰</option>
+            <option value="United Arab Emirates">阿联酋</option>
+            <option value="Saudi Arabia">沙特阿拉伯</option>
+            <option value="Israel">以色列</option>
+            <option value="Turkey">土耳其</option>
+            <option value="South Africa">南非</option>
+            <option value="Other">其他 (Other)</option>
           </select>
         </div>
 
@@ -487,14 +404,12 @@
   </div>
 </div>
 
-<!-- NDA 保证区 -->
 <div class="nda-section">
   <h2>保密协议保证</h2>
   <p>我们理解保护您的机密信息的重要性。请放心，我们乐意接受保密协议（NDA）。请在此提交咨询，我们会通过电子邮件跟进，告知下一步。</p>
   <a href="#" class="nda-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">提交咨询</a>
 </div>
 
-<!-- FAQ 区 -->
 <div class="faq-section">
   <div class="faq-container">
     <div class="faq-left">
@@ -504,33 +419,16 @@
     
     <div class="faq-right">
       <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          我该如何跟踪和管理我的订单？
-          <span class="icon">▼</span>
-        </div>
-        <div class="faq-answer">
-          你可以直接通过我们提供的专属客户后台或联系你的项目经理实时查看订单的生产进度、质检报告以及物流状态。
-        </div>
+        <div class="faq-question">我该如何跟踪和管理我的订单？<span class="icon">▼</span></div>
+        <div class="faq-answer">你可以直接通过我们提供的专属客户后台或联系你的项目经理实时查看订单的生产进度、质检报告以及物流状态。</div>
       </div>
-      
       <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          你们是如何处理知识产权/保密性的？
-          <span class="icon">▼</span>
-        </div>
-        <div class="faq-answer">
-          我们非常重视知识产权保护。在未签署具有法律效力的 NDA（保密协议）之前，绝对不会向任何第三方透露你的设计文件。
-        </div>
+        <div class="faq-question">你们是如何处理知识产权/保密性的？<span class="icon">▼</span></div>
+        <div class="faq-answer">我们非常重视知识产权保护。在未签署具有法律效力的 NDA（保密协议）之前，绝对不会向任何第三方透露你的设计文件。</div>
       </div>
-
       <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          你们支持哪些文件格式？
-          <span class="icon">▼</span>
-        </div>
-        <div class="faq-answer">
-          我们支持工业标准的三维模型格式，包括 STEP, IGES, STL, 以及二维工程图 PDF 等。
-        </div>
+        <div class="faq-question">你们支持哪些文件格式？<span class="icon">▼</span></div>
+        <div class="faq-answer">我们支持工业标准的三维模型格式，包括 STEP, IGES, STL, 以及二维工程图 PDF 等。</div>
       </div>
     </div>
   </div>
@@ -543,12 +441,10 @@
     const formExport = document.getElementById('form-export');
     const formUniv = document.getElementById('form-university');
 
-    // 先隐藏所有
     formStandard.classList.add('hidden');
     formExport.classList.add('hidden');
     formUniv.classList.add('hidden');
 
-    // 根据选择展示对应表单
     if (reason === 'sales' || reason === 'general') {
       formStandard.classList.remove('hidden');
     } else if (reason === 'export') {
@@ -558,58 +454,68 @@
     }
   }
 
-  // 初始化页面，执行一次
   document.addEventListener('DOMContentLoaded', () => {
     switchForm(document.getElementById('inquiry-reason').value);
   });
 
-  // FAQ 折叠手风琴逻辑
+  // FAQ 折叠逻辑
   function toggleFaq(element) {
     const isActive = element.classList.contains('active');
-    
-    // 关闭所有展开的项
     document.querySelectorAll('.faq-item').forEach(item => {
       item.classList.remove('active');
       item.querySelector('.icon').style.transform = 'rotate(0deg)';
     });
-
-    // 如果当前不是激活状态，则打开它
     if (!isActive) {
       element.classList.add('active');
       element.querySelector('.icon').style.transform = 'rotate(180deg)';
     }
   }
-<script>
+
+  // ==========================================
+  // 无痕提交逻辑 (重点修复区)
+  // ==========================================
   document.getElementById('consult-form').addEventListener('submit', function(e) {
-    e.preventDefault(); // 阻止页面跳转
+    e.preventDefault(); // 阻止原生跳转
     
     const submitBtn = this.querySelector('.submit-btn');
     const originalText = submitBtn.innerText;
     submitBtn.innerText = "发送中...";
     submitBtn.disabled = true;
 
-    // 收集表单数据
+    // 收集数据
     const formData = new FormData(this);
     
-    // 🚨 关键：自动过滤掉没有填写的隐藏字段，并且加上来源标记
-    formData.append('_subject', '官网新表单：咨询制造专家');
-    formData.append('_template', 'table'); 
-    formData.append('_captcha', 'false');
-    formData.append('来源页面', '咨询专家页');
+    // 过滤掉当前页面隐藏的字段，避免发给空数据
+    const dataObj = {};
+    formData.forEach((value, key) => {
+      // 只要有值就传
+      if (value && value.trim() !== "") {
+        dataObj[key] = value;
+      }
+    });
 
-    // 发送 AJAX 请求到 FormSubmit
+    dataObj['_subject'] = '官网新表单：咨询制造专家';
+    dataObj['_template'] = 'table'; 
+    dataObj['_captcha'] = 'false';
+    dataObj['来源页面'] = '咨询专家页';
+
+    // 发送请求到 FormSubmit AJAX 接口
     fetch("https://formsubmit.co/ajax/1823614640@qq.com", {
         method: "POST",
-        body: formData
+        headers: { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json' 
+        },
+        body: JSON.stringify(dataObj)
     })
     .then(response => response.json())
     .then(data => {
-        // 成功后弹窗提示，并清空表单
         alert('提交成功！我们的团队会尽快与您联系。');
         this.reset(); 
     })
     .catch(error => {
-        alert('网络错误，请稍后再试。');
+        console.error('请求失败:', error);
+        alert('发送失败，请检查网络后再试。');
     })
     .finally(() => {
         submitBtn.innerText = originalText;
