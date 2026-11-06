@@ -132,7 +132,7 @@
     </div>
 
     <!-- 表单用 FormSubmit 提交 -->
-    <form action="https://formsubmit.co/1823614640@qq.com" method="POST">
+    <form id="consult-form">
       <!-- FormSubmit 隐藏配置 -->
       <input type="hidden" name="_subject" value="官网新表单：咨询制造专家">
       <input type="hidden" name="_captcha" value="false">
@@ -579,6 +579,43 @@
       element.querySelector('.icon').style.transform = 'rotate(180deg)';
     }
   }
+<script>
+  document.getElementById('consult-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // 阻止页面跳转
+    
+    const submitBtn = this.querySelector('.submit-btn');
+    const originalText = submitBtn.innerText;
+    submitBtn.innerText = "发送中...";
+    submitBtn.disabled = true;
+
+    // 收集表单数据
+    const formData = new FormData(this);
+    
+    // 🚨 关键：自动过滤掉没有填写的隐藏字段，并且加上来源标记
+    formData.append('_subject', '官网新表单：咨询制造专家');
+    formData.append('_template', 'table'); 
+    formData.append('_captcha', 'false');
+    formData.append('来源页面', '咨询专家页');
+
+    // 发送 AJAX 请求到 FormSubmit
+    fetch("https://formsubmit.co/ajax/1823614640@qq.com", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        // 成功后弹窗提示，并清空表单
+        alert('提交成功！我们的团队会尽快与您联系。');
+        this.reset(); 
+    })
+    .catch(error => {
+        alert('网络错误，请稍后再试。');
+    })
+    .finally(() => {
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+    });
+  });
 </script>
 
 </body>
