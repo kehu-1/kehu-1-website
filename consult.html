@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>咨询制造专家 - 你的品牌名</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    :root { 
+      --tech-green: #10B981; 
+      --tech-green-hover: #059669;
+      --bg-mint: #F0FDF4; /* 浅绿背景 */
+      --dark-bg: #1A1A1A; 
+      --text-main: #111827; 
+      --text-muted: #6B7280; 
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); line-height: 1.6; background: #fff; }
+    a { text-decoration: none; transition: 0.3s; color: inherit; }
+
+    /* 导航栏（复用通用样式） */
+    header { background: #fff; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #E5E7EB; }
+    .header-inner { max-width: 1240px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.6rem; font-weight: 800; color: var(--dark-bg); letter-spacing: 2px; }
+    .nav-links a { margin-left: 2rem; font-weight: 500; color: #4B5563; }
+    .nav-links a:hover { color: var(--tech-green); }
+
+    /* 顶部表单区 */
+    .hero-form-section { background: var(--bg-mint); padding: 6rem 2rem; display: flex; justify-content: center; }
+    .form-card { background: #fff; width: 100%; max-width: 800px; border-radius: 8px; padding: 4rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+    
+    /* 头部文案 */
+    .form-header { text-align: center; margin-bottom: 3rem; }
+    .form-header h1 { font-size: 2.5rem; font-weight: 700; color: var(--tech-green); margin-bottom: 1rem; }
+    .form-header p { font-size: 1.1rem; color: var(--text-muted); }
+
+    /* 询问原因下拉 */
+    .reason-select { display: flex; flex-direction: column; align-items: center; margin-bottom: 3rem; }
+    .reason-select label { font-size: 1.1rem; font-weight: 500; margin-bottom: 1rem; }
+    .reason-select select { width: 100%; max-width: 300px; padding: 0.8rem; font-size: 1rem; border: 1px solid #374151; border-radius: 4px; background: #fff; cursor: pointer; outline: none; }
+
+    /* 表单网格 */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .form-group { display: flex; flex-direction: column; }
+    .form-group.full-width { grid-column: span 2; }
+    
+    label { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--text-main); }
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+      width: 100%; padding: 0.9rem 1rem; border: 1px solid #D1D5DB; border-radius: 4px; font-size: 1rem; font-family: inherit; outline: none; transition: 0.3s; background: #F9FAFB;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--tech-green); background: #fff; box-shadow: 0 0 0 3px rgba(16,185,129,0.1); }
+    
+    /* 单选框 */
+    .radio-group { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 0.5rem; }
+    .radio-label { display: flex; align-items: center; gap: 0.5rem; font-weight: 400; font-size: 0.95rem; cursor: pointer; color: #4B5563; }
+    .radio-label input[type="radio"] { width: 18px; height: 18px; accent-color: var(--tech-green); cursor: pointer; }
+
+    textarea { resize: vertical; min-height: 120px; }
+
+    /* 提交按钮 */
+    .submit-btn {
+      width: 100%; padding: 1.2rem; background: var(--tech-green); color: #fff; font-size: 1.1rem; font-weight: 700; border: none; border-radius: 4px; cursor: pointer; transition: 0.3s; margin-top: 2rem; letter-spacing: 1px;
+    }
+    .submit-btn:hover { background: var(--tech-green-hover); }
+
+    /* NDA 保证区 */
+    .nda-section { background: var(--dark-bg); color: #fff; text-align: center; padding: 6rem 2rem; position: relative; overflow: hidden; }
+    /* 装饰齿轮图案用 CSS 简单模拟 */
+    .nda-section::before, .nda-section::after { content: ''; position: absolute; width: 300px; height: 300px; border: 1px dashed rgba(255,255,255,0.1); border-radius: 50%; }
+    .nda-section::before { top: -100px; left: -100px; }
+    .nda-section::after { bottom: -100px; right: -100px; }
+    
+    .nda-section h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1.5rem; position: relative; z-index: 2; }
+    .nda-section p { font-size: 1.1rem; color: #D1D5DB; max-width: 800px; margin: 0 auto 2.5rem; line-height: 1.8; position: relative; z-index: 2; }
+    .nda-btn { background: var(--tech-green); color: #fff; padding: 1rem 3rem; font-size: 1.1rem; font-weight: 600; border: none; border-radius: 4px; cursor: pointer; display: inline-block; position: relative; z-index: 2; }
+    .nda-btn:hover { background: var(--tech-green-hover); transform: translateY(-2px); }
+
+    /* FAQ 区 */
+    .faq-section { background: #fff; padding: 6rem 2rem; }
+    .faq-container { max-width: 1000px; margin: 0 auto; display: flex; gap: 4rem; }
+    .faq-left { flex: 0.3; display: flex; align-items: flex-start; gap: 1rem; }
+    .faq-icon { width: 40px; height: 40px; border: 2px solid var(--tech-green); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--tech-green); font-size: 1.5rem; font-weight: 700; }
+    .faq-left h2 { font-size: 2.2rem; font-weight: 700; line-height: 1.2; color: var(--text-main); }
+    
+    .faq-right { flex: 0.7; }
+    .faq-item { border-bottom: 1px solid #E5E7EB; padding: 1.5rem 0; cursor: pointer; }
+    .faq-question { display: flex; justify-content: space-between; align-items: center; font-size: 1.15rem; font-weight: 500; color: var(--text-main); }
+    .faq-question .icon { color: var(--tech-green); transition: transform 0.3s; font-size: 1.2rem; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; color: var(--text-muted); font-size: 1rem; line-height: 1.8; }
+    .faq-item.active .faq-answer { max-height: 300px; padding-top: 1rem; }
+    .faq-item.active .icon { transform: rotate(180deg); }
+
+    @media (max-width: 900px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full-width { grid-column: span 1; }
+      .form-card { padding: 2rem; }
+      .faq-container { flex-direction: column; gap: 2rem; }
+      .form-header h1 { font-size: 2rem; }
+      .nda-section h2 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 导航栏 -->
+<header>
+  <div class="header-inner">
+    <div class="logo">你的品牌名</div>
+    <div class="nav-links">
+      <a href="index.html">首页</a>
+      <a href="products.html">产品展示</a>
+      <a href="advantages.html">生产优势</a>
+      <a href="contact.html" style="color: var(--tech-green);">联系我们</a>
+    </div>
+  </div>
+</header>
+
+<!-- 表单区 -->
+<div class="hero-form-section">
+  <div class="form-card">
+    
+    <div class="form-header">
+      <h1>与我们的团队交流</h1>
+      <p>我们的团队随时待命，随时为您提供帮助。</p>
+    </div>
+
+    <div class="reason-select">
+      <label>您询问的原因</label>
+      <select id="inquiry-reason">
+        <option value="销售问题">销售问题</option>
+        <option value="一般调查">一般调查</option>
+        <option value="大学项目">大学项目</option>
+        <option value="出口管制">出口管制</option>
+      </select>
+    </div>
+
+    <!-- 表单用 FormSubmit 提交 -->
+    <form action="https://formsubmit.co/1823614640@qq.com" method="POST">
+      <!-- FormSubmit 隐藏配置 -->
+      <input type="hidden" name="_subject" value="官网新表单：咨询制造专家">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>名字</label>
+          <input type="text" name="First Name" placeholder="名字" required>
+        </div>
+        <div class="form-group">
+          <label>姓氏</label>
+          <input type="text" name="Last Name" placeholder="姓氏" required>
+        </div>
+        
+        <div class="form-group">
+          <label>公司</label>
+          <input type="text" name="Company" placeholder="你的公司" required>
+        </div>
+        <div class="form-group">
+          <label>商务邮箱</label>
+          <input type="email" name="Company Email" placeholder="请输入您的电子邮箱" required>
+        </div>
+
+        <div class="form-group">
+          <label>职位名称</label>
+          <input type="text" name="Job Title" placeholder="职位名称">
+        </div>
+        <div class="form-group">
+          <label>电话号码</label>
+          <input type="tel" name="Phone Number" placeholder="电话号码">
+        </div>
+
+        <div class="form-group full-width">
+          <label>乡村（国家）</label>
+          <select name="Country">
+            <option value="中国">中国</option>
+            <option value="美国">美国</option>
+            <option value="其他">其他</option>
+          </select>
+        </div>
+
+        <!-- 出口管制分类 -->
+        <div class="form-group full-width">
+          <label>你的项目有出口管制分类编号吗？</label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="Export Control" value="是的"> 是的</label>
+            <label class="radio-label"><input type="radio" name="Export Control" value="不"> 不</label>
+            <label class="radio-label"><input type="radio" name="Export Control" value="我不确定"> 我不确定</label>
+          </div>
+        </div>
+        
+        <div class="form-group full-width">
+          <label>ECCN值（可选）</label>
+          <input type="text" name="ECCN" placeholder="添加ECCN">
+        </div>
+
+        <!-- 开发阶段 -->
+        <div class="form-group full-width">
+          <label>你目前的开发阶段是什么？</label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="Development Stage" value="概念设计"> 概念设计</label>
+            <label class="radio-label"><input type="radio" name="Development Stage" value="预算范围"> 预算范围</label>
+            <label class="radio-label"><input type="radio" name="Development Stage" value="测试/验证"> 测试/验证</label>
+            <label class="radio-label"><input type="radio" name="Development Stage" value="原型制作"> 原型制作</label>
+            <label class="radio-label"><input type="radio" name="Development Stage" value="全面生产"> 全面生产</label>
+            <label class="radio-label"><input type="radio" name="Development Stage" value="我不确定"> 我不确定</label>
+          </div>
+        </div>
+
+        <div class="form-group full-width">
+          <label>您希望如何被联系？</label>
+          <select name="Contact Preference">
+            <option value="电话">电话</option>
+            <option value="邮件">邮件</option>
+          </select>
+        </div>
+
+        <!-- 描述信息 -->
+        <div class="form-group full-width">
+          <label>你在建造什么，能简单介绍一下吗？（可选）</label>
+          <textarea name="Project Description" placeholder="今天我们能为您做些什么？"></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">发送消息</button>
+    </form>
+
+  </div>
+</div>
+
+<!-- NDA 保证区 -->
+<div class="nda-section">
+  <h2>保密协议保证</h2>
+  <p>我们理解保护您的机密信息的重要性。请放心，我们乐意接受保密协议（NDA）。请在此提交咨询，我们会通过电子邮件跟进，告知下一步。</p>
+  <a href="#" class="nda-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">提交咨询</a>
+</div>
+
+<!-- FAQ 区 -->
+<div class="faq-section">
+  <div class="faq-container">
+    <div class="faq-left">
+      <div class="faq-icon">?</div>
+      <h2>常见问题解答</h2>
+    </div>
+    
+    <div class="faq-right">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          我该如何跟踪和管理我的订单？
+          <span class="icon">▼</span>
+        </div>
+        <div class="faq-answer">
+          你可以直接通过我们提供的专属客户后台或联系你的项目经理实时查看订单的生产进度、质检报告以及物流状态。
+        </div>
+      </div>
+      
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          你们是如何处理知识产权/保密性的？
+          <span class="icon">▼</span>
+        </div>
+        <div class="faq-answer">
+          我们非常重视知识产权保护。在未签署具有法律效力的 NDA（保密协议）之前，绝对不会向任何第三方透露你的设计文件。我们也可以签署你方提供的标准 NDA。
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          我该如何审查和批准注塑成型 DFM 报告？
+          <span class="icon">▼</span>
+        </div>
+        <div class="faq-answer">
+          我们的工程师会生成详细的 DFM（可制造性设计）报告，列出潜在问题及改进建议。你可以直接在系统中标记同意或提出疑问，直到所有问题解决后才会进入开模阶段。
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          你们支持哪些文件格式？
+          <span class="icon">▼</span>
+        </div>
+        <div class="faq-answer">
+          我们支持工业标准的三维模型格式，包括 STEP (.step, .stp), IGES (.igs, .iges), STL (.stl), 以及二维工程图 PDF 等。
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          你们的标准制造公差是多少？
+          <span class="icon">▼</span>
+        </div>
+        <div class="faq-answer">
+          我们的标准加工公差通常为 +/- 0.005 英寸（约 +/- 0.127 毫米）。如果你有更高精度的需求，请在下单时提供详细图纸，我们会进行专门评估。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // FAQ 折叠手风琴逻辑
+  function toggleFaq(element) {
+    const isActive = element.classList.contains('active');
+    
+    // 关闭所有展开的项
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.classList.remove('active');
+      item.querySelector('.icon').style.transform = 'rotate(0deg)';
+    });
+
+    // 如果当前不是激活状态，则打开它
+    if (!isActive) {
+      element.classList.add('active');
+      element.querySelector('.icon').style.transform = 'rotate(180deg)';
+    }
+  }
+</script>
+
+</body>
+</html>
