@@ -124,7 +124,8 @@
     <div class="reason-select">
       <label>您询问的原因</label>
       <select id="inquiry-reason" onchange="switchForm(this.value)">
-        <option value="general">一般调查 / 销售问题</option>
+        <option value="sales">销售问题</option>
+        <option value="general">一般调查</option>
         <option value="export">出口管制</option>
         <option value="university">大学项目</option>
       </select>
@@ -137,8 +138,10 @@
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
 
-      <div class="form-grid">
-        <!-- ===== 基础信息（始终显示） ===== -->
+      <!-- ==========================================
+           块1：销售问题 / 一般调查 (图一排版)
+           ========================================== -->
+      <div id="form-standard" class="form-grid">
         <div class="form-group">
           <label>名字</label>
           <input type="text" name="First Name" placeholder="名字" required>
@@ -148,22 +151,18 @@
           <input type="text" name="Last Name" placeholder="姓氏" required>
         </div>
         
-        <div class="form-group">
+        <div class="form-group full-width">
           <label>公司</label>
           <input type="text" name="Company" placeholder="你的公司" required>
         </div>
-        <div class="form-group">
+        <div class="form-group full-width">
           <label>商务邮箱</label>
           <input type="email" name="Company Email" placeholder="请输入您的电子邮箱" required>
         </div>
 
-        <div class="form-group">
+        <div class="form-group full-width">
           <label>职位名称</label>
           <input type="text" name="Job Title" placeholder="职位名称">
-        </div>
-        <div class="form-group">
-          <label>电话号码</label>
-          <input type="tel" name="Phone Number" placeholder="电话号码" required>
         </div>
 
         <div class="form-group full-width">
@@ -175,8 +174,52 @@
           </select>
         </div>
 
-        <!-- ===== 出口管制专属信息 ===== -->
-        <div class="form-group full-width group-export hidden">
+        <div class="form-group full-width">
+          <label>信息</label>
+          <textarea name="Message" placeholder="今天我们能为您做些什么？"></textarea>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           块2：出口管制 (图二、图三排版)
+           ========================================== -->
+      <div id="form-export" class="form-grid hidden">
+        <div class="form-group">
+          <label>名字</label>
+          <input type="text" name="First Name" placeholder="名字">
+        </div>
+        <div class="form-group">
+          <label>姓氏</label>
+          <input type="text" name="Last Name" placeholder="姓氏">
+        </div>
+        
+        <div class="form-group full-width">
+          <label>公司</label>
+          <input type="text" name="Company" placeholder="你的公司">
+        </div>
+        <div class="form-group full-width">
+          <label>商务邮箱</label>
+          <input type="email" name="Company Email" placeholder="请输入您的电子邮箱">
+        </div>
+        <div class="form-group full-width">
+          <label>职位名称</label>
+          <input type="text" name="Job Title" placeholder="职位名称">
+        </div>
+        <div class="form-group full-width">
+          <label>电话号码</label>
+          <input type="tel" name="Phone" placeholder="电话号码">
+        </div>
+
+        <div class="form-group full-width">
+          <label>国家</label>
+          <select name="Country">
+            <option value="中国">中国</option>
+            <option value="美国">美国</option>
+            <option value="其他">其他</option>
+          </select>
+        </div>
+
+        <div class="form-group full-width">
           <label>你的项目有出口管制分类编号吗？</label>
           <div class="radio-group">
             <label class="radio-label"><input type="radio" name="Export Control" value="是的"> 是的</label>
@@ -185,26 +228,11 @@
           </div>
         </div>
         
-        <div class="form-group full-width group-export hidden">
+        <div class="form-group full-width">
           <label>ECCN值（可选）</label>
           <input type="text" name="ECCN" placeholder="添加ECCN">
         </div>
 
-        <!-- ===== 大学项目专属信息 ===== -->
-        <div class="form-group group-university hidden">
-          <label>学院或大学</label>
-          <input type="text" name="University" placeholder="学院或大学">
-        </div>
-        <div class="form-group group-university hidden">
-          <label>学生或教职工</label>
-          <input type="text" name="Role" placeholder="学生或教职工">
-        </div>
-        <div class="form-group full-width group-university hidden">
-          <label>俱乐部名称或组织名称</label>
-          <input type="text" name="Organization" placeholder="俱乐部名称或组织名称">
-        </div>
-
-        <!-- ===== 公共信息（始终显示） ===== -->
         <div class="form-group full-width">
           <label>你目前的开发阶段是什么？</label>
           <div class="radio-group">
@@ -213,7 +241,6 @@
             <label class="radio-label"><input type="radio" name="Development Stage" value="测试/验证"> 测试/验证</label>
             <label class="radio-label"><input type="radio" name="Development Stage" value="原型制作"> 原型制作</label>
             <label class="radio-label"><input type="radio" name="Development Stage" value="全面生产"> 全面生产</label>
-            <label class="radio-label"><input type="radio" name="Development Stage" value="我不确定"> 我不确定</label>
           </div>
         </div>
 
@@ -227,7 +254,58 @@
 
         <div class="form-group full-width">
           <label>你在建造什么，能简单介绍一下吗？（可选）</label>
-          <textarea name="Project Description" placeholder="今天我们能为您做些什么？"></textarea>
+          <textarea name="Message" placeholder="今天我们能为您做些什么？"></textarea>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           块3：大学项目 (图四排版)
+           ========================================== -->
+      <div id="form-university" class="form-grid hidden">
+        <div class="form-group">
+          <label>名字</label>
+          <input type="text" name="First Name" placeholder="名字">
+        </div>
+        <div class="form-group">
+          <label>电子邮箱</label>
+          <input type="email" name="Company Email" placeholder="电子邮箱">
+        </div>
+
+        <div class="form-group">
+          <label>姓氏</label>
+          <input type="text" name="Last Name" placeholder="姓氏">
+        </div>
+        <div class="form-group">
+          <label>学院或大学</label>
+          <input type="text" name="University" placeholder="学院或大学">
+        </div>
+
+        <div class="form-group">
+          <label>学生或教职工</label>
+          <input type="text" name="Role" placeholder="学生或教职工">
+        </div>
+        <div class="form-group">
+          <label>电话号码</label>
+          <input type="tel" name="Phone" placeholder="电话号码">
+        </div>
+
+        <div class="form-group full-width">
+          <label>俱乐部名称或组织名称</label>
+          <input type="text" name="Organization" placeholder="俱乐部名称或组织名称">
+        </div>
+
+        <div class="form-group full-width">
+          <label>国家</label>
+          <select name="Country">
+            <option value="中国">中国</option>
+            <option value="美国">美国</option>
+            <option value="其他">其他</option>
+          </select>
+        </div>
+
+        <div class="form-group full-width">
+          <label>信息</label>
+          <textarea name="Message" placeholder="今天我们能为您做些什么？"></textarea>
         </div>
       </div>
 
@@ -289,23 +367,26 @@
 <script>
   // 动态表单切换逻辑
   function switchForm(reason) {
-    // 获取所有动态分组的容器
-    const exportGroups = document.querySelectorAll('.group-export');
-    const universityGroups = document.querySelectorAll('.group-university');
+    const formStandard = document.getElementById('form-standard');
+    const formExport = document.getElementById('form-export');
+    const formUniv = document.getElementById('form-university');
 
-    // 先隐藏所有动态分组
-    exportGroups.forEach(el => el.classList.add('hidden'));
-    universityGroups.forEach(el => el.classList.add('hidden'));
+    // 先隐藏所有
+    formStandard.classList.add('hidden');
+    formExport.classList.add('hidden');
+    formUniv.classList.add('hidden');
 
-    // 根据选择的值，显示对应的分组
-    if (reason === 'export') {
-      exportGroups.forEach(el => el.classList.remove('hidden'));
+    // 根据选择展示对应表单
+    if (reason === 'sales' || reason === 'general') {
+      formStandard.classList.remove('hidden');
+    } else if (reason === 'export') {
+      formExport.classList.remove('hidden');
     } else if (reason === 'university') {
-      universityGroups.forEach(el => el.classList.remove('hidden'));
+      formUniv.classList.remove('hidden');
     }
   }
 
-  // 初始化页面，执行一次，确保默认状态下显示正确
+  // 初始化页面，执行一次
   document.addEventListener('DOMContentLoaded', () => {
     switchForm(document.getElementById('inquiry-reason').value);
   });
