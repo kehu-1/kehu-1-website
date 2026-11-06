@@ -119,12 +119,8 @@
       </select>
     </div>
 
-    <!-- 给表单加上 id="consult-form"，去掉原来的 action -->
     <form id="consult-form">
       
-      <!-- ==========================================
-           块1：销售问题 / 一般调查
-           ========================================== -->
       <div id="form-standard" class="form-grid">
         <div class="form-group">
           <label>名字</label>
@@ -199,9 +195,6 @@
         </div>
       </div>
 
-      <!-- ==========================================
-           块2：出口管制
-           ========================================== -->
       <div id="form-export" class="form-grid hidden">
         <div class="form-group">
           <label>名字</label>
@@ -312,9 +305,6 @@
         </div>
       </div>
 
-      <!-- ==========================================
-           块3：大学项目
-           ========================================== -->
       <div id="form-university" class="form-grid hidden">
         <div class="form-group">
           <label>名字</label>
@@ -472,50 +462,39 @@
   }
 
   // ==========================================
-  // 无痕提交逻辑 (重点修复区)
+  // Web3Forms 无痕提交逻辑
   // ==========================================
   document.getElementById('consult-form').addEventListener('submit', function(e) {
-    e.preventDefault(); // 阻止原生跳转
+    e.preventDefault(); 
     
     const submitBtn = this.querySelector('.submit-btn');
     const originalText = submitBtn.innerText;
     submitBtn.innerText = "发送中...";
     submitBtn.disabled = true;
 
-    // 收集数据
     const formData = new FormData(this);
     
-    // 过滤掉当前页面隐藏的字段，避免发给空数据
-    const dataObj = {};
-    formData.forEach((value, key) => {
-      // 只要有值就传
-      if (value && value.trim() !== "") {
-        dataObj[key] = value;
-      }
-    });
+    // 🚨 替换下面这行代码，把引号里的内容换成你刚刚复制的 Access Key
+    formData.append("access_key", "这里换成你刚刚在Web3Forms复制的AccessKey"); 
+    formData.append("subject", "官网新表单：咨询制造专家");
+    formData.append("from_name", "你的品牌名");
 
-    dataObj['_subject'] = '官网新表单：咨询制造专家';
-    dataObj['_template'] = 'table'; 
-    dataObj['_captcha'] = 'false';
-    dataObj['来源页面'] = '咨询专家页';
-
-    // 发送请求到 FormSubmit AJAX 接口
-    fetch("https://formsubmit.co/ajax/1823614640@qq.com", {
+    fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { 
-            'Accept': 'application/json',
-            'Content-Type': 'application/json' 
-        },
-        body: JSON.stringify(dataObj)
+        body: formData
     })
     .then(response => response.json())
     .then(data => {
-        alert('提交成功！我们的团队会尽快与您联系。');
-        this.reset(); 
+        if (data.success) {
+            alert('提交成功！我们的团队会尽快与您联系。');
+            this.reset(); 
+        } else {
+            alert('发送失败，请稍后再试。');
+        }
     })
     .catch(error => {
         console.error('请求失败:', error);
-        alert('发送失败，请检查网络后再试。');
+        alert('网络错误，请检查网络后再试。');
     })
     .finally(() => {
         submitBtn.innerText = originalText;
