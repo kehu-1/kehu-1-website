@@ -3,115 +3,233 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>联系我们 - 你的品牌名</title>
+  <title>联系我了解更多 - 你的品牌名</title>
   <style>
-    /* 基础样式重置 */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    :root { 
+      --tech-green: #10B981; 
+      --tech-green-hover: #059669;
+      --dark-bg: #1A1A1A; 
+      --text-main: #111827; 
+      --text-muted: #6B7280; 
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, "Segoe UI", sans-serif; color: #333; line-height: 1.6; background: #f8fafc; }
-    a { text-decoration: none; }
+    body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); line-height: 1.6; background: #fff; }
+    a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* 顶部导航栏（半透明深色玻璃质感） */
-    header { position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); z-index: 1000; padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
-    header .logo { font-size: 1.5rem; font-weight: bold; color: #ffffff; letter-spacing: 1px; }
-    nav a { margin-left: 2rem; color: #cbd5e1; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
-    nav a:hover, nav a.active { color: #0ea5e9; }
+    /* 整体布局 */
+    .contact-container { display: flex; min-height: 100vh; }
 
-    /* 内容区域 */
-    section { padding: 10rem 8% 6rem; max-width: 1200px; margin: 0 auto; display: flex; gap: 4rem; flex-wrap: wrap; }
+    /* 左侧深色区域 */
+    .left-panel { 
+      flex: 0 0 45%; 
+      background: var(--dark-bg); 
+      color: #fff; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+      align-items: center; 
+      padding: 4rem 3rem; 
+      text-align: center;
+    }
+    .left-panel .logo-placeholder { font-size: 2rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 3rem; color: #fff; }
+    .left-panel h2 { font-size: 2.2rem; font-weight: 700; color: var(--tech-green); margin-bottom: 3rem; line-height: 1.3; }
     
-    /* 左侧信息 */
-    .contact-info { flex: 1; min-width: 300px; }
-    .contact-info h2 { font-size: 2rem; color: #0f172a; margin-bottom: 2rem; }
-    .info-item { margin-bottom: 1.5rem; }
-    .info-item strong { display: block; color: #0f172a; font-size: 1.1rem; margin-bottom: 0.3rem; }
-    .info-item span { color: #64748b; font-size: 1rem; }
+    /* 客户 Logo 墙 */
+    .trust-text { font-size: 1.1rem; color: #D1D5DB; margin-bottom: 2rem; }
+    .logo-wall { 
+      display: grid; 
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 2rem; 
+      align-items: center; 
+      margin-bottom: 4rem;
+      width: 100%;
+      max-width: 500px;
+    }
+    .logo-item { font-size: 1.2rem; font-weight: 700; color: #6B7280; opacity: 0.8; }
 
-    /* 右侧表单 */
-    .contact-form { flex: 1.5; min-width: 400px; background: #fff; padding: 3rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
-    .contact-form h3 { margin-bottom: 1.5rem; color: #0f172a; font-size: 1.5rem; }
-    .form-group { margin-bottom: 1.5rem; }
-    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #0f172a; }
-    .form-group input, .form-group textarea { width: 100%; padding: 1rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem; font-family: inherit; transition: 0.3s; background: #f8fafc; }
-    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #0ea5e9; background: #fff; box-shadow: 0 0 0 3px rgba(14,165,233,0.1); }
-    .form-group textarea { height: 150px; resize: vertical; }
-    .form-group button { background: #0ea5e9; color: #fff; border: none; padding: 1rem 3rem; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s; width: 100%; }
-    .form-group button:hover { background: #0284c7; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(14,165,233,0.2); }
+    .partner-text { font-size: 1rem; color: #D1D5DB; margin-bottom: 1.5rem; }
+    .partner-logo { font-size: 2rem; font-weight: 800; letter-spacing: 1px; }
 
-    /* 页脚 */
-    footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 3rem 8%; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); }
+    /* 右侧白色表单区域 */
+    .right-panel { 
+      flex: 1; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+      align-items: center; 
+      padding: 4rem 2rem; 
+      background: #fff;
+    }
+    .form-wrapper { width: 100%; max-width: 460px; }
+    .form-header { text-align: center; margin-bottom: 2.5rem; }
+    .form-header .logo { font-size: 2rem; font-weight: 800; color: var(--tech-green); letter-spacing: 1px; }
 
-    /* 手机端适配 */
-    @media (max-width: 768px) {
-      section { flex-direction: column; gap: 3rem; }
-      .contact-form { min-width: 100%; padding: 2rem; }
+    /* 表单样式 */
+    .form-group { margin-bottom: 1.2rem; }
+    .form-row { display: flex; gap: 1rem; }
+    .form-row .form-group { flex: 1; }
+    
+    label { display: block; font-size: 0.9rem; font-weight: 500; color: var(--text-main); margin-bottom: 0.5rem; }
+    input, select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid #D1D5DB;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: 0.3s;
+      outline: none;
+      color: var(--text-main);
+    }
+    input::placeholder { color: #9CA3AF; }
+    input:focus, select:focus { border-color: var(--tech-green); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); }
+    .input-hint { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; }
+
+    /* 按钮 */
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background: var(--tech-green);
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      transition: 0.3s;
+    }
+    .submit-btn:hover { background: var(--tech-green-hover); transform: translateY(-2px); }
+
+    /* 底部信息 */
+    .form-footer { text-align: center; margin-top: 2rem; font-size: 0.9rem; color: var(--text-muted); }
+    .form-footer a { color: #2563EB; }
+    .form-footer a:hover { text-decoration: underline; }
+    .trust-note { margin-top: 0.5rem; }
+    .bottom-note { margin-top: 3rem; font-size: 0.85rem; color: var(--text-muted); text-align: center; }
+    .bottom-note a { color: #2563EB; text-decoration: underline; }
+
+    @media (max-width: 900px) {
+      .contact-container { flex-direction: column; }
+      .left-panel { padding: 3rem 1.5rem; }
+      .right-panel { padding: 3rem 1.5rem; }
+      .form-row { flex-direction: column; gap: 0; }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">你的品牌名</div>
-  <nav>
-    <a href="index.html">首页</a>
-    <a href="products.html">产品展示</a>
-    <a href="advantages.html">生产优势</a>
-    <a href="contact.html" class="active">联系我们</a>
-    <a href="en/contact.html" style="color: #0ea5e9;">English</a>
-  </nav>
-</header>
+<div class="contact-container">
+  
+  <!-- 左侧深色信任背书 -->
+  <div class="left-panel">
+    <div class="logo-placeholder">你的品牌名</div>
+    
+    <h2>定制机械零件最快一天就能交付。</h2>
+    
+    <div class="trust-text">信赖者</div>
+    
+    <div class="logo-wall">
+      <div class="logo-item">Johnson&Johnson</div>
+      <div class="logo-item">ar</div>
+      <div class="logo-item">Honeywell</div>
+      <div class="logo-item">Google</div>
+      <div class="logo-item">Medtronic</div>
+      <div class="logo-item">Ford</div>
+    </div>
 
-<section>
-  <!-- 左侧：联系信息 -->
-  <div class="contact-info">
-    <h2>联系我们</h2>
-    <div class="info-item">
-      <strong>📧 电子邮箱</strong>
-      <span>你的邮箱@example.com</span>
-    </div>
-    <div class="info-item">
-      <strong>📞 联系电话</strong>
-      <span>+86 123 4567 8910</span>
-    </div>
-    <div class="info-item">
-      <strong>📍 公司地址</strong>
-      <span>中国 广东省 深圳市 某某区某某路 123 号</span>
-    </div>
-    <div class="info-item">
-      <strong>🕒 工作时间</strong>
-      <span>周一至周五 9:00 - 18:00 (北京时间)</span>
+    <div class="partner-text">你的品牌自豪的合作伙伴，拥有60年机械零部件领域的卓越经验。</div>
+    <div class="partner-logo">MISUMI</div>
+  </div>
+
+  <!-- 右侧表单区域 -->
+  <div class="right-panel">
+    <div class="form-wrapper">
+      <div class="form-header">
+        <div class="logo">你的品牌名</div>
+      </div>
+
+      <!-- 这里替换了你的 FormSubmit 链接 -->
+      <form action="https://formsubmit.co/1823614640@qq.com" method="POST">
+        
+        <!-- FormSubmit 隐藏配置项 -->
+        <input type="hidden" name="_subject" value="来自你官网的新询盘！">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+
+        <!-- 名字与姓氏 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label>名字</label>
+            <input type="text" name="First Name" placeholder="名字" required>
+          </div>
+          <div class="form-group">
+            <label>姓氏</label>
+            <input type="text" name="Last Name" placeholder="姓氏" required>
+          </div>
+        </div>
+
+        <!-- 公司名称 -->
+        <div class="form-group">
+          <label>公司</label>
+          <input type="text" name="Company" placeholder="公司名称" required>
+        </div>
+
+        <!-- 公司邮箱 -->
+        <div class="form-group">
+          <label>公司邮箱</label>
+          <input type="email" name="Email" placeholder="name@company.com" required>
+          <div class="input-hint">使用您的公司邮箱地址，解锁我们团队的额外功能和支持。</div>
+        </div>
+
+        <!-- 密码 (注：如果你仅仅是想收集询盘，建议删掉密码这一项。这里为了遵循原图保留) -->
+        <div class="form-group">
+          <label>创建密码</label>
+          <input type="password" name="Password" placeholder="在这里输入强密码">
+          <div class="input-hint">密码必须在12-64个字符之间</div>
+        </div>
+
+        <!-- 电话与国家 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label>电话号码</label>
+            <input type="tel" name="Phone" placeholder="(123) 456-7890" required>
+          </div>
+          <div class="form-group">
+            <label>国家</label>
+            <select name="Country">
+              <option value="United States">United States</option>
+              <option value="China">China</option>
+              <option value="Europe">Europe</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 提交按钮 -->
+        <button type="submit" class="submit-btn">
+          获取即时报价 →
+        </button>
+      </form>
+
+      <!-- 底部信息 -->
+      <div class="form-footer">
+        <div>95.4%的订单按时并符合规格交付</div>
+        <div class="trust-note">已经有账号了吗？ <a href="#">登录</a></div>
+      </div>
+
+      <div class="bottom-note">
+        你的品牌拥有业内领先的知识产权保护。 <a href="#">了解更多。</a>
+      </div>
     </div>
   </div>
 
-  <!-- 右侧：询盘表单 -->
-  <div class="contact-form">
-    <h3>发送询盘</h3>
-    <form action="https://formsubmit.co/1823614640@qq.com" method="POST">
-      <div class="form-group">
-        <label>您的姓名 *</label>
-        <input type="text" name="name" placeholder="请输入您的姓名" required>
-      </div>
-      <div class="form-group">
-        <label>您的邮箱 *</label>
-        <input type="email" name="email" placeholder="请输入您的邮箱" required>
-      </div>
-      <div class="form-group">
-        <label>公司名称</label>
-        <input type="text" name="company" placeholder="请输入您的公司名称">
-      </div>
-      <div class="form-group">
-        <label>需求描述 *</label>
-        <textarea name="message" placeholder="请详细描述您的采购需求或定制要求..." required></textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit">提交询盘</button>
-      </div>
-    </form>
-  </div>
-</section>
-
-<footer>
-  <p>&copy; 2026 你的品牌名. All rights reserved.</p>
-</footer>
+</div>
 
 </body>
 </html>
