@@ -1,3 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>咨询制造专家 - 你的品牌名</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    :root { 
+      --tech-green: #10B981; 
+      --tech-green-hover: #059669;
+      --bg-mint: #F0FDF4; 
+      --dark-bg: #1A1A1A; 
+      --text-main: #111827; 
+      --text-muted: #6B7280; 
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); line-height: 1.6; background: #fff; }
+    a { text-decoration: none; transition: 0.3s; color: inherit; }
+
+    header { background: #fff; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #E5E7EB; }
+    .header-inner { max-width: 1240px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.6rem; font-weight: 800; color: var(--dark-bg); letter-spacing: 2px; }
+    .nav-links a { margin-left: 2rem; font-weight: 500; color: #4B5563; }
+    .nav-links a:hover { color: var(--tech-green); }
+
+    .hero-form-section { background: var(--bg-mint); padding: 6rem 2rem; display: flex; justify-content: center; }
+    .form-card { background: #fff; width: 100%; max-width: 800px; border-radius: 8px; padding: 4rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+    
+    .form-header { text-align: center; margin-bottom: 3rem; }
+    .form-header h1 { font-size: 2.5rem; font-weight: 700; color: var(--tech-green); margin-bottom: 1rem; }
+    .form-header p { font-size: 1.1rem; color: var(--text-muted); }
+
+    .reason-select { display: flex; flex-direction: column; align-items: center; margin-bottom: 3rem; }
+    .reason-select label { font-size: 1.1rem; font-weight: 500; margin-bottom: 1rem; }
+    .reason-select select { width: 100%; max-width: 300px; padding: 0.8rem; font-size: 1rem; border: 1px solid #374151; border-radius: 4px; background: #fff; cursor: pointer; outline: none; }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .form-group { display: flex; flex-direction: column; }
+    .form-group.full-width { grid-column: span 2; }
+    
+    label { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--text-main); }
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+      width: 100%; padding: 0.9rem 1rem; border: 1px solid #D1D5DB; border-radius: 4px; font-size: 1rem; font-family: inherit; outline: none; transition: 0.3s; background: #F9FAFB;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--tech-green); background: #fff; box-shadow: 0 0 0 3px rgba(16,185,129,0.1); }
+    
+    .radio-group { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 0.5rem; }
+    .radio-label { display: flex; align-items: center; gap: 0.5rem; font-weight: 400; font-size: 0.95rem; cursor: pointer; color: #4B5563; }
+    .radio-label input[type="radio"] { width: 18px; height: 18px; accent-color: var(--tech-green); cursor: pointer; }
+
+    textarea { resize: vertical; min-height: 120px; }
+
+    .submit-btn {
+      width: 100%; padding: 1.2rem; background: var(--tech-green); color: #fff; font-size: 1.1rem; font-weight: 700; border: none; border-radius: 4px; cursor: pointer; transition: 0.3s; margin-top: 2rem; letter-spacing: 1px;
+    }
+    .submit-btn:hover { background: var(--tech-green-hover); }
+
+    .hidden { display: none !important; }
+
+    .nda-section { background: var(--dark-bg); color: #fff; text-align: center; padding: 6rem 2rem; position: relative; overflow: hidden; }
+    .nda-section h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1.5rem; position: relative; z-index: 2; }
+    .nda-section p { font-size: 1.1rem; color: #D1D5DB; max-width: 800px; margin: 0 auto 2.5rem; line-height: 1.8; position: relative; z-index: 2; }
+    .nda-btn { background: var(--tech-green); color: #fff; padding: 1rem 3rem; font-size: 1.1rem; font-weight: 600; border: none; border-radius: 4px; cursor: pointer; display: inline-block; position: relative; z-index: 2; }
+    .nda-btn:hover { background: var(--tech-green-hover); transform: translateY(-2px); }
+
+    .faq-section { background: #fff; padding: 6rem 2rem; }
+    .faq-container { max-width: 1000px; margin: 0 auto; display: flex; gap: 4rem; }
+    .faq-left { flex: 0.3; display: flex; align-items: flex-start; gap: 1rem; }
+    .faq-icon { width: 40px; height: 40px; border: 2px solid var(--tech-green); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--tech-green); font-size: 1.5rem; font-weight: 700; }
+    .faq-left h2 { font-size: 2.2rem; font-weight: 700; line-height: 1.2; color: var(--text-main); }
+    
+    .faq-right { flex: 0.7; }
+    .faq-item { border-bottom: 1px solid #E5E7EB; padding: 1.5rem 0; cursor: pointer; }
+    .faq-question { display: flex; justify-content: space-between; align-items: center; font-size: 1.15rem; font-weight: 500; color: var(--text-main); }
+    .faq-question .icon { color: var(--tech-green); transition: transform 0.3s; font-size: 1.2rem; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; color: var(--text-muted); font-size: 1rem; line-height: 1.8; }
+    .faq-item.active .faq-answer { max-height: 300px; padding-top: 1rem; }
+    .faq-item.active .icon { transform: rotate(180deg); }
+
+    @media (max-width: 900px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full-width { grid-column: span 1; }
+      .form-card { padding: 2rem; }
+      .faq-container { flex-direction: column; gap: 2rem; }
+      .form-header h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">你的品牌名</div>
+    <div class="nav-links">
+      <a href="index.html">首页</a>
+      <a href="products.html">产品展示</a>
+      <a href="advantages.html">生产优势</a>
+      <a href="contact.html" style="color: var(--tech-green);">联系我们</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-form-section">
+  <div class="form-card">
+    
+    <div class="form-header">
+      <h1>与我们的团队交流</h1>
+      <p>我们的团队随时待命，随时为您提供帮助。</p>
+    </div>
+
+    <div class="reason-select">
+      <label>您询问的原因</label>
+      <select id="inquiry-reason" onchange="switchForm(this.value)">
+        <option value="sales">销售问题</option>
+        <option value="general">一般调查</option>
+        <option value="export">出口管制</option>
+        <option value="university">大学项目</option>
+      </select>
+    </div>
+
+    <form id="consult-form">
+      
+      <div id="form-standard" class="form-grid">
+        <div class="form-group">
+          <label>名字</label>
+          <input type="text" name="First Name" placeholder="名字" required>
+        </div>
+        <div class="form-group">
+          <label>姓氏</label>
+          <input type="text" name="Last Name" placeholder="姓氏" required>
+        </div>
+        
+        <div class="form-group full-width">
+          <label>公司</label>
+          <input type="text" name="Company" placeholder="你的公司" required>
+        </div>
+        <div class="form-group full-width">
+          <label>商务邮箱</label>
+          <input type="email" name="Company Email" placeholder="请输入您的电子邮箱" required>
+        </div>
+
+        <div class="form-group full-width">
+          <label>职位名称</label>
+          <input type="text" name="Job Title" placeholder="职位名称">
+        </div>
+
+        <div class="form-group full-width">
+          <label>国家</label>
+          <select name="Country">
+            <option value="">请选择国家/地区</option>
+            <option value="China">中国 (China)</option>
+            <option value="United States">美国 (United States)</option>
+            <option value="Hong Kong SAR">中国香港</option>
+            <option value="Macao SAR">中国澳门</option>
+            <option value="Taiwan">中国台湾</option>
+            <option value="Japan">日本</option>
+            <option value="South Korea">韩国</option>
+            <option value="India">印度</option>
+            <option value="Singapore">新加坡</option>
+            <option value="Malaysia">马来西亚</option>
+            <option value="Thailand">泰国</option>
+            <option value="Vietnam">越南</option>
+            <option value="Indonesia">印度尼西亚</option>
+            <option value="Philippines">菲律宾</option>
+            <option value="United Kingdom">英国</option>
+            <option value="Germany">德国</option>
+            <option value="France">法国</option>
+            <option value="Italy">意大利</option>
+            <option value="Spain">西班牙</option>
+            <option value="Netherlands">荷兰</option>
+            <option value="Switzerland">瑞士</option>
+            <option value="Sweden">瑞典</option>
+            <option value="Poland">波兰</option>
+            <option value="Russia">俄罗斯</option>
+            <option value="Canada">加拿大</option>
+            <option value="Mexico">墨西哥</option>
+            <option value="Brazil">巴西</option>
+            <option value="Argentina">阿根廷</option>
+            <option value="Chile">智利</option>
+            <option value="Australia">澳大利亚</option>
+            <option value="New Zealand">新西兰</option>
+            <option value="United Arab Emirates">阿联酋</option>
+            <option value="Saudi Arabia">沙特阿拉伯</option>
+            <option value="Israel">以色列</option>
+            <option value="Turkey">土耳其</option>
+            <option value="South Africa">南非</option>
+            <option value="Other">其他 (Other)</option>
+          </select>
+        </div>
+
+        <div class="form-group full-width">
+          <label>信息</label>
+          <textarea name="Message" placeholder="今天我们能为您做些什么？"></textarea>
+        </div>
+      </div>
+
+      <div id="form-export" class="form-grid hidden">
+        <div class="form-group">
+          <label>名字</label>
+          <input type="text" name="First Name" placeholder="名字">
+        </div>
+        <div class="form-group">
+          <label>姓氏</label>
+          <input type="text" name="Last Name" placeholder="姓氏">
+        </div>
+        
+        <div class="form-group full-width">
+          <label>公司</label>
+          <input type="text" name="Company" placeholder="你的公司">
+        </div>
+        <div class="form-group full-width">
+          <label>商务邮箱</label>
+          <input type="email" name="Company Email" placeholder="请输入您的电子邮箱">
+        </div>
+        <div class="form-group full-width">
+          <label>职位名称</label>
+          <input type="text" name="Job Title" placeholder="职位名称">
+        </div>
+        <div class="form-group full-width">
+          <label>电话号码</label>
+          <input type="tel" name="Phone" placeholder="电话号码">
+        </div>
+
+        <div class="form-group full-width">
+          <label>国家</label>
+          <select name="Country">
+            <option value="">请选择国家/地区</option>
+            <option value="China">中国 (China)</option>
+            <option value="United States">美国 (United States)</option>
+            <option value="Hong Kong SAR">中国香港</option>
+            <option value="Macao SAR">中国澳门</option>
+            <option value="Taiwan">中国台湾</option>
+            <option value="Japan">日本</option>
+            <option value="South Korea">韩国</option>
+            <option value="India">印度</option>
+            <option value="Singapore">新加坡</option>
+            <option value="Malaysia">马来西亚</option>
+            <option value="Thailand">泰国</option>
+            <option value="Vietnam">越南</option>
+            <option value="Indonesia">印度尼西亚</option>
+            <option value="Philippines">菲律宾</option>
+            <option value="United Kingdom">英国</option>
+            <option value="Germany">德国</option>
+            <option value="France">法国</option>
+            <option value="Italy">意大利</option>
+            <option value="Spain">西班牙</option>
+            <option value="Netherlands">荷兰</option>
+            <option value="Switzerland">瑞士</option>
+            <option value="Sweden">瑞典</option>
+            <option value="Poland">波兰</option>
+            <option value="Russia">俄罗斯</option>
+            <option value="Canada">加拿大</option>
+            <option value="Mexico">墨西哥</option>
+            <option value="Brazil">巴西</option>
+            <option value="Argentina">阿根廷</option>
+            <option value="Chile">智利</option>
+            <option value="Australia">澳大利亚</option>
+            <option value="New Zealand">新西兰</option>
+            <option value="United Arab Emirates">阿联酋</option>
+            <option value="Saudi Arabia">沙特阿拉伯</option>
+            <option value="Israel">以色列</option>
+            <option value="Turkey">土耳其</option>
+            <option value="South Africa">南非</option>
+            <option value="Other">其他 (Other)</option>
+          </select>
+        </div>
+
+        <div class="form-group full-width">
+          <label>你的项目有出口管制分类编号吗？</label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="Export Control" value="是的"> 是的</label>
+            <label class="radio-label"><input type="radio" name="Export Control" value="不"> 不</label>
+            <label class="radio-label"><input type="radio" name="Export Control" value="我不确定"> 我不确定</label>
+          </div>
+        </div>
+        
+        <div class="form-group full-width">
+          <label>ECCN值（可选）</label>
+          <input type="text" name="ECCN" placeholder="添加ECCN">
+        </div>
+
+        <div class="form-group full-width">
+          <label>你目前的开发阶段是什么？</label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="Development Stage" value="概念设计"> 概念设计</label>
+            <label class="radio-label"><input type="radio" name="Development Stage" value="预算范围"> 预算范围</label>
+            <label class="radio-label"><input type="radio" name="Development Stage" value="测试/验证"> 测试/验证</label>
+            <label class="radio-label"><input type="radio" name="Development Stage" value="原型制作"> 原型制作</label>
+            <label class="radio-label"><input type="radio" name="Development Stage" value="全面生产"> 全面生产</label>
+          </div>
+        </div>
+
+        <div class="form-group full-width">
+          <label>您希望如何被联系？</label>
+          <select name="Contact Preference">
+            <option value="电话">电话</option>
+            <option value="邮件">邮件</option>
+          </select>
+        </div>
+
+        <div class="form-group full-width">
+          <label>你在建造什么，能简单介绍一下吗？（可选）</label>
+          <textarea name="Message" placeholder="今天我们能为您做些什么？"></textarea>
+        </div>
+      </div>
+
+      <div id="form-university" class="form-grid hidden">
+        <div class="form-group">
+          <label>名字</label>
+          <input type="text" name="First Name" placeholder="名字">
+        </div>
+        <div class="form-group">
+          <label>电子邮箱</label>
+          <input type="email" name="Company Email" placeholder="电子邮箱">
+        </div>
+
+        <div class="form-group">
+          <label>姓氏</label>
+          <input type="text" name="Last Name" placeholder="姓氏">
+        </div>
+        <div class="form-group">
+          <label>学院或大学</label>
+          <input type="text" name="University" placeholder="学院或大学">
+        </div>
+
+        <div class="form-group">
+          <label>学生或教职工</label>
+          <input type="text" name="Role" placeholder="学生或教职工">
+        </div>
+        <div class="form-group">
+          <label>电话号码</label>
+          <input type="tel" name="Phone" placeholder="电话号码">
+        </div>
+
+        <div class="form-group full-width">
+          <label>俱乐部名称或组织名称</label>
+          <input type="text" name="Organization" placeholder="俱乐部名称或组织名称">
+        </div>
+
+        <div class="form-group full-width">
+          <label>国家</label>
+          <select name="Country">
+            <option value="">请选择国家/地区</option>
+            <option value="China">中国 (China)</option>
+            <option value="United States">美国 (United States)</option>
+            <option value="Hong Kong SAR">中国香港</option>
+            <option value="Macao SAR">中国澳门</option>
+            <option value="Taiwan">中国台湾</option>
+            <option value="Japan">日本</option>
+            <option value="South Korea">韩国</option>
+            <option value="India">印度</option>
+            <option value="Singapore">新加坡</option>
+            <option value="Malaysia">马来西亚</option>
+            <option value="Thailand">泰国</option>
+            <option value="Vietnam">越南</option>
+            <option value="Indonesia">印度尼西亚</option>
+            <option value="Philippines">菲律宾</option>
+            <option value="United Kingdom">英国</option>
+            <option value="Germany">德国</option>
+            <option value="France">法国</option>
+            <option value="Italy">意大利</option>
+            <option value="Spain">西班牙</option>
+            <option value="Netherlands">荷兰</option>
+            <option value="Switzerland">瑞士</option>
+            <option value="Sweden">瑞典</option>
+            <option value="Poland">波兰</option>
+            <option value="Russia">俄罗斯</option>
+            <option value="Canada">加拿大</option>
+            <option value="Mexico">墨西哥</option>
+            <option value="Brazil">巴西</option>
+            <option value="Argentina">阿根廷</option>
+            <option value="Chile">智利</option>
+            <option value="Australia">澳大利亚</option>
+            <option value="New Zealand">新西兰</option>
+            <option value="United Arab Emirates">阿联酋</option>
+            <option value="Saudi Arabia">沙特阿拉伯</option>
+            <option value="Israel">以色列</option>
+            <option value="Turkey">土耳其</option>
+            <option value="South Africa">南非</option>
+            <option value="Other">其他 (Other)</option>
+          </select>
+        </div>
+
+        <div class="form-group full-width">
+          <label>信息</label>
+          <textarea name="Message" placeholder="今天我们能为您做些什么？"></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">发送消息</button>
+    </form>
+
+  </div>
+</div>
+
+<div class="nda-section">
+  <h2>保密协议保证</h2>
+  <p>我们理解保护您的机密信息的重要性。请放心，我们乐意接受保密协议（NDA）。请在此提交咨询，我们会通过电子邮件跟进，告知下一步。</p>
+  <a href="#" class="nda-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">提交咨询</a>
+</div>
+
+<div class="faq-section">
+  <div class="faq-container">
+    <div class="faq-left">
+      <div class="faq-icon">?</div>
+      <h2>常见问题解答</h2>
+    </div>
+    
+    <div class="faq-right">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">我该如何跟踪和管理我的订单？<span class="icon">▼</span></div>
+        <div class="faq-answer">你可以直接通过我们提供的专属客户后台或联系你的项目经理实时查看订单的生产进度、质检报告以及物流状态。</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">你们是如何处理知识产权/保密性的？<span class="icon">▼</span></div>
+        <div class="faq-answer">我们非常重视知识产权保护。在未签署具有法律效力的 NDA（保密协议）之前，绝对不会向任何第三方透露你的设计文件。</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">你们支持哪些文件格式？<span class="icon">▼</span></div>
+        <div class="faq-answer">我们支持工业标准的三维模型格式，包括 STEP, IGES, STL, 以及二维工程图 PDF 等。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 动态表单切换逻辑
+  function switchForm(reason) {
+    const formStandard = document.getElementById('form-standard');
+    const formExport = document.getElementById('form-export');
+    const formUniv = document.getElementById('form-university');
+
+    formStandard.classList.add('hidden');
+    formExport.classList.add('hidden');
+    formUniv.classList.add('hidden');
+
+    if (reason === 'sales' || reason === 'general') {
+      formStandard.classList.remove('hidden');
+    } else if (reason === 'export') {
+      formExport.classList.remove('hidden');
+    } else if (reason === 'university') {
+      formUniv.classList.remove('hidden');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    switchForm(document.getElementById('inquiry-reason').value);
+  });
+
+  // FAQ 折叠逻辑
+  function toggleFaq(element) {
+    const isActive = element.classList.contains('active');
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.classList.remove('active');
+      item.querySelector('.icon').style.transform = 'rotate(0deg)';
+    });
+    if (!isActive) {
+      element.classList.add('active');
+      element.querySelector('.icon').style.transform = 'rotate(180deg)';
+    }
+  }
+
+  // Web3Forms 无痕提交逻辑
   document.getElementById('consult-form').addEventListener('submit', function(e) {
     e.preventDefault(); 
     
@@ -9,19 +473,18 @@
     const formData = new FormData(this);
     const dataObj = {};
     
-    // 把数据转成普通对象，过滤掉空值
     formData.forEach((value, key) => {
       if (value && value.trim() !== "") {
         dataObj[key] = value;
       }
     });
 
-    // 🚨 这里填入你真实的 Access Key
+    // 🚨 请把下面引号里的中文，换成你真实的 Web3Forms Access Key
     dataObj["access_key"] = "a1b2c3d4-e5f6-7890-abcd-ef1234567890"; 
+    
     dataObj["subject"] = "官网新表单：咨询制造专家";
     dataObj["from_name"] = "你的品牌名";
 
-    // 用 JSON 格式发送
     fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { 
@@ -30,21 +493,16 @@
         },
         body: JSON.stringify(dataObj)
     })
-    .then(response => {
-        return response.json();
-    })
+    .then(response => response.json())
     .then(data => {
         if (data.success) {
             alert('提交成功！我们的团队会尽快与您联系。');
             this.reset(); 
         } else {
-            // 如果还是报错，这里会弹出具体原因
-            console.error("Web3Forms报错详情:", data);
             alert('发送失败: ' + data.message);
         }
     })
     .catch(error => {
-        console.error('请求失败:', error);
         alert('网络错误，请稍后再试。');
     })
     .finally(() => {
@@ -52,3 +510,7 @@
         submitBtn.disabled = false;
     });
   });
+</script>
+
+</body>
+</html>
