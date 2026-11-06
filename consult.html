@@ -9,7 +9,7 @@
     :root { 
       --tech-green: #10B981; 
       --tech-green-hover: #059669;
-      --bg-mint: #F0FDF4; /* 浅绿背景 */
+      --bg-mint: #F0FDF4; 
       --dark-bg: #1A1A1A; 
       --text-main: #111827; 
       --text-muted: #6B7280; 
@@ -18,7 +18,7 @@
     body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); line-height: 1.6; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* 导航栏（复用通用样式） */
+    /* 导航栏 */
     header { background: #fff; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #E5E7EB; }
     .header-inner { max-width: 1240px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-size: 1.6rem; font-weight: 800; color: var(--dark-bg); letter-spacing: 2px; }
@@ -29,7 +29,6 @@
     .hero-form-section { background: var(--bg-mint); padding: 6rem 2rem; display: flex; justify-content: center; }
     .form-card { background: #fff; width: 100%; max-width: 800px; border-radius: 8px; padding: 4rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
     
-    /* 头部文案 */
     .form-header { text-align: center; margin-bottom: 3rem; }
     .form-header h1 { font-size: 2.5rem; font-weight: 700; color: var(--tech-green); margin-bottom: 1rem; }
     .form-header p { font-size: 1.1rem; color: var(--text-muted); }
@@ -63,13 +62,11 @@
     }
     .submit-btn:hover { background: var(--tech-green-hover); }
 
+    /* 动态显示隐藏类 */
+    .hidden { display: none !important; }
+
     /* NDA 保证区 */
     .nda-section { background: var(--dark-bg); color: #fff; text-align: center; padding: 6rem 2rem; position: relative; overflow: hidden; }
-    /* 装饰齿轮图案用 CSS 简单模拟 */
-    .nda-section::before, .nda-section::after { content: ''; position: absolute; width: 300px; height: 300px; border: 1px dashed rgba(255,255,255,0.1); border-radius: 50%; }
-    .nda-section::before { top: -100px; left: -100px; }
-    .nda-section::after { bottom: -100px; right: -100px; }
-    
     .nda-section h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1.5rem; position: relative; z-index: 2; }
     .nda-section p { font-size: 1.1rem; color: #D1D5DB; max-width: 800px; margin: 0 auto 2.5rem; line-height: 1.8; position: relative; z-index: 2; }
     .nda-btn { background: var(--tech-green); color: #fff; padding: 1rem 3rem; font-size: 1.1rem; font-weight: 600; border: none; border-radius: 4px; cursor: pointer; display: inline-block; position: relative; z-index: 2; }
@@ -96,7 +93,6 @@
       .form-card { padding: 2rem; }
       .faq-container { flex-direction: column; gap: 2rem; }
       .form-header h1 { font-size: 2rem; }
-      .nda-section h2 { font-size: 2rem; }
     }
   </style>
 </head>
@@ -124,13 +120,13 @@
       <p>我们的团队随时待命，随时为您提供帮助。</p>
     </div>
 
+    <!-- 下拉选择联动 -->
     <div class="reason-select">
       <label>您询问的原因</label>
-      <select id="inquiry-reason">
-        <option value="销售问题">销售问题</option>
-        <option value="一般调查">一般调查</option>
-        <option value="大学项目">大学项目</option>
-        <option value="出口管制">出口管制</option>
+      <select id="inquiry-reason" onchange="switchForm(this.value)">
+        <option value="general">一般调查 / 销售问题</option>
+        <option value="export">出口管制</option>
+        <option value="university">大学项目</option>
       </select>
     </div>
 
@@ -142,6 +138,7 @@
       <input type="hidden" name="_template" value="table">
 
       <div class="form-grid">
+        <!-- ===== 基础信息（始终显示） ===== -->
         <div class="form-group">
           <label>名字</label>
           <input type="text" name="First Name" placeholder="名字" required>
@@ -166,11 +163,11 @@
         </div>
         <div class="form-group">
           <label>电话号码</label>
-          <input type="tel" name="Phone Number" placeholder="电话号码">
+          <input type="tel" name="Phone Number" placeholder="电话号码" required>
         </div>
 
         <div class="form-group full-width">
-          <label>乡村（国家）</label>
+          <label>国家</label>
           <select name="Country">
             <option value="中国">中国</option>
             <option value="美国">美国</option>
@@ -178,8 +175,8 @@
           </select>
         </div>
 
-        <!-- 出口管制分类 -->
-        <div class="form-group full-width">
+        <!-- ===== 出口管制专属信息 ===== -->
+        <div class="form-group full-width group-export hidden">
           <label>你的项目有出口管制分类编号吗？</label>
           <div class="radio-group">
             <label class="radio-label"><input type="radio" name="Export Control" value="是的"> 是的</label>
@@ -188,12 +185,26 @@
           </div>
         </div>
         
-        <div class="form-group full-width">
+        <div class="form-group full-width group-export hidden">
           <label>ECCN值（可选）</label>
           <input type="text" name="ECCN" placeholder="添加ECCN">
         </div>
 
-        <!-- 开发阶段 -->
+        <!-- ===== 大学项目专属信息 ===== -->
+        <div class="form-group group-university hidden">
+          <label>学院或大学</label>
+          <input type="text" name="University" placeholder="学院或大学">
+        </div>
+        <div class="form-group group-university hidden">
+          <label>学生或教职工</label>
+          <input type="text" name="Role" placeholder="学生或教职工">
+        </div>
+        <div class="form-group full-width group-university hidden">
+          <label>俱乐部名称或组织名称</label>
+          <input type="text" name="Organization" placeholder="俱乐部名称或组织名称">
+        </div>
+
+        <!-- ===== 公共信息（始终显示） ===== -->
         <div class="form-group full-width">
           <label>你目前的开发阶段是什么？</label>
           <div class="radio-group">
@@ -214,7 +225,6 @@
           </select>
         </div>
 
-        <!-- 描述信息 -->
         <div class="form-group full-width">
           <label>你在建造什么，能简单介绍一下吗？（可选）</label>
           <textarea name="Project Description" placeholder="今天我们能为您做些什么？"></textarea>
@@ -259,17 +269,7 @@
           <span class="icon">▼</span>
         </div>
         <div class="faq-answer">
-          我们非常重视知识产权保护。在未签署具有法律效力的 NDA（保密协议）之前，绝对不会向任何第三方透露你的设计文件。我们也可以签署你方提供的标准 NDA。
-        </div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          我该如何审查和批准注塑成型 DFM 报告？
-          <span class="icon">▼</span>
-        </div>
-        <div class="faq-answer">
-          我们的工程师会生成详细的 DFM（可制造性设计）报告，列出潜在问题及改进建议。你可以直接在系统中标记同意或提出疑问，直到所有问题解决后才会进入开模阶段。
+          我们非常重视知识产权保护。在未签署具有法律效力的 NDA（保密协议）之前，绝对不会向任何第三方透露你的设计文件。
         </div>
       </div>
 
@@ -279,17 +279,7 @@
           <span class="icon">▼</span>
         </div>
         <div class="faq-answer">
-          我们支持工业标准的三维模型格式，包括 STEP (.step, .stp), IGES (.igs, .iges), STL (.stl), 以及二维工程图 PDF 等。
-        </div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          你们的标准制造公差是多少？
-          <span class="icon">▼</span>
-        </div>
-        <div class="faq-answer">
-          我们的标准加工公差通常为 +/- 0.005 英寸（约 +/- 0.127 毫米）。如果你有更高精度的需求，请在下单时提供详细图纸，我们会进行专门评估。
+          我们支持工业标准的三维模型格式，包括 STEP, IGES, STL, 以及二维工程图 PDF 等。
         </div>
       </div>
     </div>
@@ -297,6 +287,29 @@
 </div>
 
 <script>
+  // 动态表单切换逻辑
+  function switchForm(reason) {
+    // 获取所有动态分组的容器
+    const exportGroups = document.querySelectorAll('.group-export');
+    const universityGroups = document.querySelectorAll('.group-university');
+
+    // 先隐藏所有动态分组
+    exportGroups.forEach(el => el.classList.add('hidden'));
+    universityGroups.forEach(el => el.classList.add('hidden'));
+
+    // 根据选择的值，显示对应的分组
+    if (reason === 'export') {
+      exportGroups.forEach(el => el.classList.remove('hidden'));
+    } else if (reason === 'university') {
+      universityGroups.forEach(el => el.classList.remove('hidden'));
+    }
+  }
+
+  // 初始化页面，执行一次，确保默认状态下显示正确
+  document.addEventListener('DOMContentLoaded', () => {
+    switchForm(document.getElementById('inquiry-reason').value);
+  });
+
   // FAQ 折叠手风琴逻辑
   function toggleFaq(element) {
     const isActive = element.classList.contains('active');
