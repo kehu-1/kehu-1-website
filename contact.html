@@ -110,51 +110,41 @@
         <div class="logo">你的品牌名</div>
       </div>
 
-      <!-- 注意这里加了 id="contact-form" -->
       <form id="contact-form">
         
-        <div class="form-row">
-          <div class="form-group">
-            <label>名字</label>
-            <input type="text" name="First Name" placeholder="名字" required>
-          </div>
-          <div class="form-group">
-            <label>姓氏</label>
-            <input type="text" name="Last Name" placeholder="姓氏" required>
-          </div>
+        <!-- 姓名合并为一个大框 -->
+        <div class="form-group">
+          <label>姓名</label>
+          <input type="text" name="姓名" placeholder="请输入您的姓名" required>
         </div>
 
         <div class="form-group">
           <label>公司</label>
-          <input type="text" name="Company" placeholder="公司名称" required>
+          <input type="text" name="公司" placeholder="公司名称" required>
         </div>
 
         <div class="form-group">
           <label>公司邮箱</label>
-          <input type="email" name="Company Email" placeholder="name@company.com" required>
+          <input type="email" name="邮箱" placeholder="name@company.com" required>
           <div class="input-hint">使用您的公司邮箱地址，解锁我们团队的额外功能和支持。</div>
         </div>
 
-        <div class="form-group">
-          <label>创建密码</label>
-          <input type="password" name="Password" placeholder="在这里输入强密码">
-          <div class="input-hint">密码必须在12-64个字符之间</div>
-        </div>
+        <!-- 删除了密码框 -->
 
         <div class="form-row">
           <div class="form-group">
             <label>电话号码</label>
-            <input type="tel" name="Phone" placeholder="(123) 456-7890" required>
+            <input type="tel" name="电话" placeholder="(123) 456-7890" required>
           </div>
           <div class="form-group">
             <label>国家</label>
-            <select name="Country">
-              <option value="China">China</option>
-              <option value="United States">United States</option>
-              <option value="Japan">Japan</option>
-              <option value="Germany">Germany</option>
-              <option value="United Kingdom">United Kingdom</option>
-              <option value="Other">Other</option>
+            <select name="国家">
+              <option value="中国">中国</option>
+              <option value="美国">美国</option>
+              <option value="日本">日本</option>
+              <option value="德国">德国</option>
+              <option value="英国">英国</option>
+              <option value="其他">其他</option>
             </select>
           </div>
         </div>
@@ -177,7 +167,7 @@
 </div>
 
 <script>
-  // 无痕提交逻辑 (复用你的专属 Web3Forms Key)
+  // 无痕提交逻辑
   document.getElementById('contact-form').addEventListener('submit', function(e) {
     e.preventDefault(); 
     
@@ -195,9 +185,10 @@
       }
     });
 
-    // 🚨 你的 Web3Forms 专属 Key
+    // 你的 Web3Forms 专属 Key
     dataObj["access_key"] = "d5d0f55d-a072-4c17-b475-bba9063d8649"; 
-    // 设置不同的邮件标题，方便你在邮箱里区分来源
+    
+    // 设置邮件标题（方便你在邮箱里区分）
     dataObj["subject"] = "官网新表单：主页联系我们";
     dataObj["from_name"] = "你的品牌名";
 
