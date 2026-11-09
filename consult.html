@@ -44,7 +44,8 @@
       width: 100%; padding: 0.9rem 1rem; border: 1px solid #D1D5DB; border-radius: 4px; font-size: 1rem; font-family: inherit; outline: none; transition: 0.3s; background: #F9FAFB;
     }
     input:focus, select:focus, textarea:focus { border-color: var(--tech-green); background: #fff; box-shadow: 0 0 0 3px rgba(16,185,129,0.1); }
-    
+    .input-hint { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; line-height: 1.5; }
+
     .radio-group { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 0.5rem; }
     .radio-label { display: flex; align-items: center; gap: 0.5rem; font-weight: 400; font-size: 0.95rem; cursor: pointer; color: #4B5563; }
     .radio-label input[type="radio"] { width: 18px; height: 18px; accent-color: var(--tech-green); cursor: pointer; }
@@ -121,71 +122,44 @@
 
     <form id="consult-form">
       
-      <!-- ==========================================
-           块1：销售问题 / 一般调查
-           ========================================== -->
+      <!-- 块1：销售/一般 -->
       <div id="form-standard" class="form-grid">
-        <div class="form-group full-width">
-          <label>姓名</label>
-          <input type="text" name="姓名" placeholder="请输入您的姓名" required>
-        </div>
+        <div class="form-group full-width"><label>姓名</label><input type="text" name="姓名" placeholder="请输入您的姓名" required></div>
+        <div class="form-group full-width"><label>公司</label><input type="text" name="公司" placeholder="你的公司" required></div>
+        <div class="form-group full-width"><label>商务邮箱</label><input type="email" name="邮箱" placeholder="请输入您的电子邮箱" required></div>
         
+        <!-- 新增 WhatsApp -->
         <div class="form-group full-width">
-          <label>公司</label>
-          <input type="text" name="公司" placeholder="你的公司" required>
-        </div>
-        <div class="form-group full-width">
-          <label>商务邮箱</label>
-          <input type="email" name="邮箱" placeholder="请输入您的电子邮箱" required>
+          <label>WhatsApp 号码</label>
+          <input type="text" name="WhatsApp" placeholder="+86 123 4567 8900" required>
+          <div class="input-hint">填写你的WhatsApp让我更快联系你，了解你的需求并制定方案。大约1小时以内就会有工程师添加你。绝不会透露你的个人信息。</div>
         </div>
 
-        <div class="form-group full-width">
-          <label>职位名称</label>
-          <input type="text" name="职位" placeholder="职位名称">
-        </div>
-
+        <div class="form-group full-width"><label>职位名称</label><input type="text" name="职位" placeholder="职位名称"></div>
         <div class="form-group full-width">
           <label>国家</label>
           <select name="国家">
             <option value="中国">中国 (China)</option>
             <option value="美国">美国 (United States)</option>
-            <option value="日本">日本 (Japan)</option>
-            <option value="德国">德国 (Germany)</option>
-            <option value="英国">英国 (United Kingdom)</option>
             <option value="其他">其他 (Other)</option>
           </select>
         </div>
-
-        <div class="form-group full-width">
-          <label>留言信息</label>
-          <textarea name="留言信息" placeholder="今天我们能为您做些什么？"></textarea>
-        </div>
+        <div class="form-group full-width"><label>留言信息</label><textarea name="留言信息" placeholder="今天我们能为您做些什么？"></textarea></div>
       </div>
 
-      <!-- ==========================================
-           块2：出口管制
-           ========================================== -->
+      <!-- 块2：出口管制 -->
       <div id="form-export" class="form-grid hidden">
+        <div class="form-group full-width"><label>姓名</label><input type="text" name="姓名" placeholder="请输入您的姓名"></div>
+        <div class="form-group full-width"><label>公司</label><input type="text" name="公司" placeholder="你的公司"></div>
+        <div class="form-group full-width"><label>商务邮箱</label><input type="email" name="邮箱" placeholder="请输入您的电子邮箱"></div>
+        <div class="form-group full-width"><label>职位名称</label><input type="text" name="职位" placeholder="职位名称"></div>
+        <div class="form-group full-width"><label>电话号码</label><input type="tel" name="电话" placeholder="电话号码"></div>
+
+        <!-- 新增 WhatsApp -->
         <div class="form-group full-width">
-          <label>姓名</label>
-          <input type="text" name="姓名" placeholder="请输入您的姓名">
-        </div>
-        
-        <div class="form-group full-width">
-          <label>公司</label>
-          <input type="text" name="公司" placeholder="你的公司">
-        </div>
-        <div class="form-group full-width">
-          <label>商务邮箱</label>
-          <input type="email" name="邮箱" placeholder="请输入您的电子邮箱">
-        </div>
-        <div class="form-group full-width">
-          <label>职位名称</label>
-          <input type="text" name="职位" placeholder="职位名称">
-        </div>
-        <div class="form-group full-width">
-          <label>电话号码</label>
-          <input type="tel" name="电话" placeholder="电话号码">
+          <label>WhatsApp 号码</label>
+          <input type="text" name="WhatsApp" placeholder="+86 123 4567 8900">
+          <div class="input-hint">填写你的WhatsApp让我更快联系你，了解你的需求并制定方案。大约1小时以内就会有工程师添加你。绝不会透露你的个人信息。</div>
         </div>
 
         <div class="form-group full-width">
@@ -196,7 +170,6 @@
             <option value="其他">其他 (Other)</option>
           </select>
         </div>
-
         <div class="form-group full-width">
           <label>你的项目有出口管制分类编号吗？</label>
           <div class="radio-group">
@@ -205,82 +178,42 @@
             <label class="radio-label"><input type="radio" name="出口管制编号" value="我不确定"> 我不确定</label>
           </div>
         </div>
-        
-        <div class="form-group full-width">
-          <label>ECCN值（可选）</label>
-          <input type="text" name="ECCN" placeholder="添加ECCN">
-        </div>
-
+        <div class="form-group full-width"><label>ECCN值（可选）</label><input type="text" name="ECCN" placeholder="添加ECCN"></div>
         <div class="form-group full-width">
           <label>你目前的开发阶段是什么？</label>
           <div class="radio-group">
             <label class="radio-label"><input type="radio" name="开发阶段" value="概念设计"> 概念设计</label>
-            <label class="radio-label"><input type="radio" name="开发阶段" value="预算范围"> 预算范围</label>
-            <label class="radio-label"><input type="radio" name="开发阶段" value="测试/验证"> 测试/验证</label>
-            <label class="radio-label"><input type="radio" name="开发阶段" value="原型制作"> 原型制作</label>
             <label class="radio-label"><input type="radio" name="开发阶段" value="全面生产"> 全面生产</label>
           </div>
         </div>
-
         <div class="form-group full-width">
           <label>您希望如何被联系？</label>
-          <select name="联系方式">
-            <option value="电话">电话</option>
-            <option value="邮件">邮件</option>
-          </select>
+          <select name="联系方式"><option value="电话">电话</option><option value="邮件">邮件</option></select>
         </div>
-
-        <div class="form-group full-width">
-          <label>你在建造什么，能简单介绍一下吗？（可选）</label>
-          <textarea name="项目描述" placeholder="今天我们能为您做些什么？"></textarea>
-        </div>
+        <div class="form-group full-width"><label>你在建造什么，能简单介绍一下吗？（可选）</label><textarea name="项目描述" placeholder="今天我们能为您做些什么？"></textarea></div>
       </div>
 
-      <!-- ==========================================
-           块3：大学项目
-           ========================================== -->
+      <!-- 块3：大学项目 -->
       <div id="form-university" class="form-grid hidden">
+        <div class="form-group full-width"><label>姓名</label><input type="text" name="姓名" placeholder="请输入您的姓名"></div>
+        <div class="form-group full-width"><label>电子邮箱</label><input type="email" name="邮箱" placeholder="电子邮箱"></div>
+        <div class="form-group full-width"><label>学院或大学</label><input type="text" name="学校" placeholder="学院或大学"></div>
+        <div class="form-group"><label>身份</label><input type="text" name="身份" placeholder="学生或教职工"></div>
+        <div class="form-group"><label>电话号码</label><input type="tel" name="电话" placeholder="电话号码"></div>
+
+        <!-- 新增 WhatsApp -->
         <div class="form-group full-width">
-          <label>姓名</label>
-          <input type="text" name="姓名" placeholder="请输入您的姓名">
-        </div>
-        <div class="form-group full-width">
-          <label>电子邮箱</label>
-          <input type="email" name="邮箱" placeholder="电子邮箱">
+          <label>WhatsApp 号码</label>
+          <input type="text" name="WhatsApp" placeholder="+86 123 4567 8900">
+          <div class="input-hint">填写你的WhatsApp让我更快联系你，了解你的需求并制定方案。大约1小时以内就会有工程师添加你。绝不会透露你的个人信息。</div>
         </div>
 
-        <div class="form-group full-width">
-          <label>学院或大学</label>
-          <input type="text" name="学校" placeholder="学院或大学">
-        </div>
-
-        <div class="form-group">
-          <label>身份</label>
-          <input type="text" name="身份" placeholder="学生或教职工">
-        </div>
-        <div class="form-group">
-          <label>电话号码</label>
-          <input type="tel" name="电话" placeholder="电话号码">
-        </div>
-
-        <div class="form-group full-width">
-          <label>俱乐部名称或组织名称</label>
-          <input type="text" name="组织" placeholder="俱乐部名称或组织名称">
-        </div>
-
+        <div class="form-group full-width"><label>俱乐部名称或组织名称</label><input type="text" name="组织" placeholder="俱乐部名称或组织名称"></div>
         <div class="form-group full-width">
           <label>国家</label>
-          <select name="国家">
-            <option value="中国">中国 (China)</option>
-            <option value="美国">美国 (United States)</option>
-            <option value="其他">其他 (Other)</option>
-          </select>
+          <select name="国家"><option value="中国">中国 (China)</option><option value="其他">其他 (Other)</option></select>
         </div>
-
-        <div class="form-group full-width">
-          <label>留言信息</label>
-          <textarea name="留言信息" placeholder="今天我们能为您做些什么？"></textarea>
-        </div>
+        <div class="form-group full-width"><label>留言信息</label><textarea name="留言信息" placeholder="今天我们能为您做些什么？"></textarea></div>
       </div>
 
       <button type="submit" class="submit-btn">发送消息</button>
@@ -301,7 +234,6 @@
       <div class="faq-icon">?</div>
       <h2>常见问题解答</h2>
     </div>
-    
     <div class="faq-right">
       <div class="faq-item" onclick="toggleFaq(this)">
         <div class="faq-question">我该如何跟踪和管理我的订单？<span class="icon">▼</span></div>
@@ -320,7 +252,6 @@
 </div>
 
 <script>
-  // 动态表单切换逻辑
   function switchForm(reason) {
     const formStandard = document.getElementById('form-standard');
     const formExport = document.getElementById('form-export');
@@ -343,7 +274,6 @@
     switchForm(document.getElementById('inquiry-reason').value);
   });
 
-  // FAQ 折叠逻辑
   function toggleFaq(element) {
     const isActive = element.classList.contains('active');
     document.querySelectorAll('.faq-item').forEach(item => {
@@ -356,7 +286,6 @@
     }
   }
 
-  // Web3Forms 无痕提交逻辑
   document.getElementById('consult-form').addEventListener('submit', function(e) {
     e.preventDefault(); 
     
@@ -368,17 +297,18 @@
     const formData = new FormData(this);
     const dataObj = {};
     
-    // 提取所有有值的字段
+    // 把来源提示放在第一位，方便你邮件一眼看到
+    dataObj["【业务提示】"] = "客户来源小溪官网→生产优势→咨询制造专家板块，请及时联系客户。";
+
     formData.forEach((value, key) => {
       if (value && value.trim() !== "") {
         dataObj[key] = value;
       }
     });
 
-    // 🚨 你的 Web3Forms 专属 Key
     dataObj["access_key"] = "d5d0f55d-a072-4c17-b475-bba9063d8649"; 
-    dataObj["subject"] = "官网新表单：咨询制造专家";
-    dataObj["from_name"] = "你的品牌名";
+    dataObj["subject"] = "官网来客户消息啦~快及时查收";
+    dataObj["from_name"] = "小溪官网";
 
     fetch("https://api.web3forms.com/submit", {
         method: "POST",
