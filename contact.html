@@ -17,34 +17,21 @@
     body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); line-height: 1.6; background: #fff; }
     a { text-decoration: none; transition: 0.3s; color: inherit; }
 
-    /* 整体布局 */
     .contact-container { display: flex; min-height: 100vh; }
 
     /* 左侧深色区域 */
     .left-panel { 
-      flex: 0 0 45%; 
-      background: var(--dark-bg); 
-      color: #fff; 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: center; 
-      align-items: center; 
-      padding: 4rem 3rem; 
-      text-align: center;
+      flex: 0 0 45%; background: var(--dark-bg); color: #fff; 
+      display: flex; flex-direction: column; justify-content: center; align-items: center; 
+      padding: 4rem 3rem; text-align: center;
     }
     .left-panel .logo-placeholder { font-size: 2rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 3rem; color: #fff; }
     .left-panel h2 { font-size: 2.2rem; font-weight: 700; color: var(--tech-green); margin-bottom: 3rem; line-height: 1.3; }
     
-    /* 客户 Logo 墙 */
     .trust-text { font-size: 1.1rem; color: #D1D5DB; margin-bottom: 2rem; }
     .logo-wall { 
-      display: grid; 
-      grid-template-columns: repeat(3, 1fr); 
-      gap: 2rem; 
-      align-items: center; 
-      margin-bottom: 4rem;
-      width: 100%;
-      max-width: 500px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; 
+      align-items: center; margin-bottom: 4rem; width: 100%; max-width: 500px;
     }
     .logo-item { font-size: 1.2rem; font-weight: 700; color: #6B7280; opacity: 0.8; }
 
@@ -53,13 +40,8 @@
 
     /* 右侧白色表单区域 */
     .right-panel { 
-      flex: 1; 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: center; 
-      align-items: center; 
-      padding: 4rem 2rem; 
-      background: #fff;
+      flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; 
+      padding: 4rem 2rem; background: #fff;
     }
     .form-wrapper { width: 100%; max-width: 460px; }
     .form-header { text-align: center; margin-bottom: 2.5rem; }
@@ -72,15 +54,8 @@
     
     label { display: block; font-size: 0.9rem; font-weight: 500; color: var(--text-main); margin-bottom: 0.5rem; }
     input, select {
-      width: 100%;
-      padding: 0.8rem 1rem;
-      border: 1px solid #D1D5DB;
-      border-radius: 4px;
-      font-size: 1rem;
-      font-family: inherit;
-      transition: 0.3s;
-      outline: none;
-      color: var(--text-main);
+      width: 100%; padding: 0.8rem 1rem; border: 1px solid #D1D5DB; border-radius: 4px; 
+      font-size: 1rem; font-family: inherit; transition: 0.3s; outline: none; color: var(--text-main); background: #fff;
     }
     input::placeholder { color: #9CA3AF; }
     input:focus, select:focus { border-color: var(--tech-green); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); }
@@ -88,31 +63,16 @@
 
     /* 按钮 */
     .submit-btn {
-      width: 100%;
-      padding: 1rem;
-      background: var(--tech-green);
-      color: #fff;
-      font-size: 1.1rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-top: 1.5rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-      transition: 0.3s;
+      width: 100%; padding: 1rem; background: var(--tech-green); color: #fff; font-size: 1.1rem; font-weight: 600;
+      border: none; border-radius: 4px; cursor: pointer; margin-top: 1.5rem; display: flex; justify-content: center; align-items: center; gap: 0.5rem; transition: 0.3s;
     }
     .submit-btn:hover { background: var(--tech-green-hover); transform: translateY(-2px); }
 
     /* 底部信息 */
     .form-footer { text-align: center; margin-top: 2rem; font-size: 0.9rem; color: var(--text-muted); }
     .form-footer a { color: #2563EB; }
-    .form-footer a:hover { text-decoration: underline; }
     .trust-note { margin-top: 0.5rem; }
     .bottom-note { margin-top: 3rem; font-size: 0.85rem; color: var(--text-muted); text-align: center; }
-    .bottom-note a { color: #2563EB; text-decoration: underline; }
 
     @media (max-width: 900px) {
       .contact-container { flex-direction: column; }
@@ -129,11 +89,8 @@
   <!-- 左侧深色信任背书 -->
   <div class="left-panel">
     <div class="logo-placeholder">你的品牌名</div>
-    
     <h2>定制机械零件最快一天就能交付。</h2>
-    
     <div class="trust-text">信赖者</div>
-    
     <div class="logo-wall">
       <div class="logo-item">Johnson&Johnson</div>
       <div class="logo-item">ar</div>
@@ -142,7 +99,6 @@
       <div class="logo-item">Medtronic</div>
       <div class="logo-item">Ford</div>
     </div>
-
     <div class="partner-text">你的品牌自豪的合作伙伴，拥有60年机械零部件领域的卓越经验。</div>
     <div class="partner-logo">MISUMI</div>
   </div>
@@ -154,15 +110,9 @@
         <div class="logo">你的品牌名</div>
       </div>
 
-      <!-- 这里替换了你的 FormSubmit 链接 -->
-      <form action="https://formsubmit.co/1823614640@qq.com" method="POST">
+      <!-- 注意这里加了 id="contact-form" -->
+      <form id="contact-form">
         
-        <!-- FormSubmit 隐藏配置项 -->
-        <input type="hidden" name="_subject" value="来自你官网的新询盘！">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="table">
-
-        <!-- 名字与姓氏 -->
         <div class="form-row">
           <div class="form-group">
             <label>名字</label>
@@ -174,27 +124,23 @@
           </div>
         </div>
 
-        <!-- 公司名称 -->
         <div class="form-group">
           <label>公司</label>
           <input type="text" name="Company" placeholder="公司名称" required>
         </div>
 
-        <!-- 公司邮箱 -->
         <div class="form-group">
           <label>公司邮箱</label>
-          <input type="email" name="Email" placeholder="name@company.com" required>
+          <input type="email" name="Company Email" placeholder="name@company.com" required>
           <div class="input-hint">使用您的公司邮箱地址，解锁我们团队的额外功能和支持。</div>
         </div>
 
-        <!-- 密码 (注：如果你仅仅是想收集询盘，建议删掉密码这一项。这里为了遵循原图保留) -->
         <div class="form-group">
           <label>创建密码</label>
           <input type="password" name="Password" placeholder="在这里输入强密码">
           <div class="input-hint">密码必须在12-64个字符之间</div>
         </div>
 
-        <!-- 电话与国家 -->
         <div class="form-row">
           <div class="form-group">
             <label>电话号码</label>
@@ -203,21 +149,21 @@
           <div class="form-group">
             <label>国家</label>
             <select name="Country">
-              <option value="United States">United States</option>
               <option value="China">China</option>
-              <option value="Europe">Europe</option>
+              <option value="United States">United States</option>
+              <option value="Japan">Japan</option>
+              <option value="Germany">Germany</option>
+              <option value="United Kingdom">United Kingdom</option>
               <option value="Other">Other</option>
             </select>
           </div>
         </div>
 
-        <!-- 提交按钮 -->
         <button type="submit" class="submit-btn">
           获取即时报价 →
         </button>
       </form>
 
-      <!-- 底部信息 -->
       <div class="form-footer">
         <div>95.4%的订单按时并符合规格交付</div>
         <div class="trust-note">已经有账号了吗？ <a href="#">登录</a></div>
@@ -228,8 +174,58 @@
       </div>
     </div>
   </div>
-
 </div>
 
+<script>
+  // 无痕提交逻辑 (复用你的专属 Web3Forms Key)
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault(); 
+    
+    const submitBtn = this.querySelector('.submit-btn');
+    const originalText = submitBtn.innerText;
+    submitBtn.innerText = "发送中...";
+    submitBtn.disabled = true;
+
+    const formData = new FormData(this);
+    const dataObj = {};
+    
+    formData.forEach((value, key) => {
+      if (value && value.trim() !== "") {
+        dataObj[key] = value;
+      }
+    });
+
+    // 🚨 你的 Web3Forms 专属 Key
+    dataObj["access_key"] = "d5d0f55d-a072-4c17-b475-bba9063d8649"; 
+    // 设置不同的邮件标题，方便你在邮箱里区分来源
+    dataObj["subject"] = "官网新表单：主页联系我们";
+    dataObj["from_name"] = "你的品牌名";
+
+    fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(dataObj)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('提交成功！我们的团队会尽快与您联系。');
+            this.reset(); 
+        } else {
+            alert('发送失败: ' + data.message);
+        }
+    })
+    .catch(error => {
+        alert('网络错误，请稍后再试。');
+    })
+    .finally(() => {
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+    });
+  });
+</script>
 </body>
 </html>
