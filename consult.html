@@ -121,151 +121,45 @@
 
     <form id="consult-form">
       
+      <!-- 表单1：标准 -->
       <div id="form-standard" class="form-grid">
-        <div class="form-group">
-          <label>名字</label>
-          <input type="text" name="First Name" placeholder="名字" required>
-        </div>
-        <div class="form-group">
-          <label>姓氏</label>
-          <input type="text" name="Last Name" placeholder="姓氏" required>
-        </div>
-        
-        <div class="form-group full-width">
-          <label>公司</label>
-          <input type="text" name="Company" placeholder="你的公司" required>
-        </div>
-        <div class="form-group full-width">
-          <label>商务邮箱</label>
-          <input type="email" name="Company Email" placeholder="请输入您的电子邮箱" required>
-        </div>
-
-        <div class="form-group full-width">
-          <label>职位名称</label>
-          <input type="text" name="Job Title" placeholder="职位名称">
-        </div>
-
+        <div class="form-group"><label>名字</label><input type="text" name="First Name" placeholder="名字" required></div>
+        <div class="form-group"><label>姓氏</label><input type="text" name="Last Name" placeholder="姓氏" required></div>
+        <div class="form-group full-width"><label>公司</label><input type="text" name="Company" placeholder="你的公司" required></div>
+        <div class="form-group full-width"><label>商务邮箱</label><input type="email" name="Company Email" placeholder="请输入您的电子邮箱" required></div>
+        <div class="form-group full-width"><label>职位名称</label><input type="text" name="Job Title" placeholder="职位名称"></div>
         <div class="form-group full-width">
           <label>国家</label>
           <select name="Country">
             <option value="">请选择国家/地区</option>
             <option value="China">中国 (China)</option>
             <option value="United States">美国 (United States)</option>
-            <option value="Hong Kong SAR">中国香港</option>
-            <option value="Macao SAR">中国澳门</option>
-            <option value="Taiwan">中国台湾</option>
-            <option value="Japan">日本</option>
-            <option value="South Korea">韩国</option>
-            <option value="India">印度</option>
-            <option value="Singapore">新加坡</option>
-            <option value="Malaysia">马来西亚</option>
-            <option value="Thailand">泰国</option>
-            <option value="Vietnam">越南</option>
-            <option value="Indonesia">印度尼西亚</option>
-            <option value="Philippines">菲律宾</option>
-            <option value="United Kingdom">英国</option>
-            <option value="Germany">德国</option>
-            <option value="France">法国</option>
-            <option value="Italy">意大利</option>
-            <option value="Spain">西班牙</option>
-            <option value="Netherlands">荷兰</option>
-            <option value="Switzerland">瑞士</option>
-            <option value="Sweden">瑞典</option>
-            <option value="Poland">波兰</option>
-            <option value="Russia">俄罗斯</option>
-            <option value="Canada">加拿大</option>
-            <option value="Mexico">墨西哥</option>
-            <option value="Brazil">巴西</option>
-            <option value="Argentina">阿根廷</option>
-            <option value="Chile">智利</option>
-            <option value="Australia">澳大利亚</option>
-            <option value="New Zealand">新西兰</option>
-            <option value="United Arab Emirates">阿联酋</option>
-            <option value="Saudi Arabia">沙特阿拉伯</option>
-            <option value="Israel">以色列</option>
-            <option value="Turkey">土耳其</option>
-            <option value="South Africa">南非</option>
+            <option value="Japan">日本 (Japan)</option>
+            <option value="Germany">德国 (Germany)</option>
+            <option value="United Kingdom">英国 (United Kingdom)</option>
             <option value="Other">其他 (Other)</option>
           </select>
         </div>
-
-        <div class="form-group full-width">
-          <label>信息</label>
-          <textarea name="Message" placeholder="今天我们能为您做些什么？"></textarea>
-        </div>
+        <div class="form-group full-width"><label>信息</label><textarea name="Message" placeholder="今天我们能为您做些什么？"></textarea></div>
       </div>
 
+      <!-- 表单2：出口管制 -->
       <div id="form-export" class="form-grid hidden">
-        <div class="form-group">
-          <label>名字</label>
-          <input type="text" name="First Name" placeholder="名字">
-        </div>
-        <div class="form-group">
-          <label>姓氏</label>
-          <input type="text" name="Last Name" placeholder="姓氏">
-        </div>
-        
-        <div class="form-group full-width">
-          <label>公司</label>
-          <input type="text" name="Company" placeholder="你的公司">
-        </div>
-        <div class="form-group full-width">
-          <label>商务邮箱</label>
-          <input type="email" name="Company Email" placeholder="请输入您的电子邮箱">
-        </div>
-        <div class="form-group full-width">
-          <label>职位名称</label>
-          <input type="text" name="Job Title" placeholder="职位名称">
-        </div>
-        <div class="form-group full-width">
-          <label>电话号码</label>
-          <input type="tel" name="Phone" placeholder="电话号码">
-        </div>
-
+        <div class="form-group"><label>名字</label><input type="text" name="First Name" placeholder="名字"></div>
+        <div class="form-group"><label>姓氏</label><input type="text" name="Last Name" placeholder="姓氏"></div>
+        <div class="form-group full-width"><label>公司</label><input type="text" name="Company" placeholder="你的公司"></div>
+        <div class="form-group full-width"><label>商务邮箱</label><input type="email" name="Company Email" placeholder="请输入您的电子邮箱"></div>
+        <div class="form-group full-width"><label>职位名称</label><input type="text" name="Job Title" placeholder="职位名称"></div>
+        <div class="form-group full-width"><label>电话号码</label><input type="tel" name="Phone" placeholder="电话号码"></div>
         <div class="form-group full-width">
           <label>国家</label>
           <select name="Country">
             <option value="">请选择国家/地区</option>
             <option value="China">中国 (China)</option>
             <option value="United States">美国 (United States)</option>
-            <option value="Hong Kong SAR">中国香港</option>
-            <option value="Macao SAR">中国澳门</option>
-            <option value="Taiwan">中国台湾</option>
-            <option value="Japan">日本</option>
-            <option value="South Korea">韩国</option>
-            <option value="India">印度</option>
-            <option value="Singapore">新加坡</option>
-            <option value="Malaysia">马来西亚</option>
-            <option value="Thailand">泰国</option>
-            <option value="Vietnam">越南</option>
-            <option value="Indonesia">印度尼西亚</option>
-            <option value="Philippines">菲律宾</option>
-            <option value="United Kingdom">英国</option>
-            <option value="Germany">德国</option>
-            <option value="France">法国</option>
-            <option value="Italy">意大利</option>
-            <option value="Spain">西班牙</option>
-            <option value="Netherlands">荷兰</option>
-            <option value="Switzerland">瑞士</option>
-            <option value="Sweden">瑞典</option>
-            <option value="Poland">波兰</option>
-            <option value="Russia">俄罗斯</option>
-            <option value="Canada">加拿大</option>
-            <option value="Mexico">墨西哥</option>
-            <option value="Brazil">巴西</option>
-            <option value="Argentina">阿根廷</option>
-            <option value="Chile">智利</option>
-            <option value="Australia">澳大利亚</option>
-            <option value="New Zealand">新西兰</option>
-            <option value="United Arab Emirates">阿联酋</option>
-            <option value="Saudi Arabia">沙特阿拉伯</option>
-            <option value="Israel">以色列</option>
-            <option value="Turkey">土耳其</option>
-            <option value="South Africa">南非</option>
             <option value="Other">其他 (Other)</option>
           </select>
         </div>
-
         <div class="form-group full-width">
           <label>你的项目有出口管制分类编号吗？</label>
           <div class="radio-group">
@@ -274,118 +168,36 @@
             <label class="radio-label"><input type="radio" name="Export Control" value="我不确定"> 我不确定</label>
           </div>
         </div>
-        
-        <div class="form-group full-width">
-          <label>ECCN值（可选）</label>
-          <input type="text" name="ECCN" placeholder="添加ECCN">
-        </div>
-
+        <div class="form-group full-width"><label>ECCN值（可选）</label><input type="text" name="ECCN" placeholder="添加ECCN"></div>
         <div class="form-group full-width">
           <label>你目前的开发阶段是什么？</label>
           <div class="radio-group">
             <label class="radio-label"><input type="radio" name="Development Stage" value="概念设计"> 概念设计</label>
-            <label class="radio-label"><input type="radio" name="Development Stage" value="预算范围"> 预算范围</label>
-            <label class="radio-label"><input type="radio" name="Development Stage" value="测试/验证"> 测试/验证</label>
             <label class="radio-label"><input type="radio" name="Development Stage" value="原型制作"> 原型制作</label>
             <label class="radio-label"><input type="radio" name="Development Stage" value="全面生产"> 全面生产</label>
           </div>
         </div>
-
         <div class="form-group full-width">
           <label>您希望如何被联系？</label>
-          <select name="Contact Preference">
-            <option value="电话">电话</option>
-            <option value="邮件">邮件</option>
-          </select>
+          <select name="Contact Preference"><option value="电话">电话</option><option value="邮件">邮件</option></select>
         </div>
-
-        <div class="form-group full-width">
-          <label>你在建造什么，能简单介绍一下吗？（可选）</label>
-          <textarea name="Message" placeholder="今天我们能为您做些什么？"></textarea>
-        </div>
+        <div class="form-group full-width"><label>你在建造什么，能简单介绍一下吗？（可选）</label><textarea name="Message" placeholder="今天我们能为您做些什么？"></textarea></div>
       </div>
 
+      <!-- 表单3：大学项目 -->
       <div id="form-university" class="form-grid hidden">
-        <div class="form-group">
-          <label>名字</label>
-          <input type="text" name="First Name" placeholder="名字">
-        </div>
-        <div class="form-group">
-          <label>电子邮箱</label>
-          <input type="email" name="Company Email" placeholder="电子邮箱">
-        </div>
-
-        <div class="form-group">
-          <label>姓氏</label>
-          <input type="text" name="Last Name" placeholder="姓氏">
-        </div>
-        <div class="form-group">
-          <label>学院或大学</label>
-          <input type="text" name="University" placeholder="学院或大学">
-        </div>
-
-        <div class="form-group">
-          <label>学生或教职工</label>
-          <input type="text" name="Role" placeholder="学生或教职工">
-        </div>
-        <div class="form-group">
-          <label>电话号码</label>
-          <input type="tel" name="Phone" placeholder="电话号码">
-        </div>
-
-        <div class="form-group full-width">
-          <label>俱乐部名称或组织名称</label>
-          <input type="text" name="Organization" placeholder="俱乐部名称或组织名称">
-        </div>
-
+        <div class="form-group"><label>名字</label><input type="text" name="First Name" placeholder="名字"></div>
+        <div class="form-group"><label>电子邮箱</label><input type="email" name="Company Email" placeholder="电子邮箱"></div>
+        <div class="form-group"><label>姓氏</label><input type="text" name="Last Name" placeholder="姓氏"></div>
+        <div class="form-group"><label>学院或大学</label><input type="text" name="University" placeholder="学院或大学"></div>
+        <div class="form-group"><label>学生或教职工</label><input type="text" name="Role" placeholder="学生或教职工"></div>
+        <div class="form-group"><label>电话号码</label><input type="tel" name="Phone" placeholder="电话号码"></div>
+        <div class="form-group full-width"><label>俱乐部名称或组织名称</label><input type="text" name="Organization" placeholder="俱乐部名称或组织名称"></div>
         <div class="form-group full-width">
           <label>国家</label>
-          <select name="Country">
-            <option value="">请选择国家/地区</option>
-            <option value="China">中国 (China)</option>
-            <option value="United States">美国 (United States)</option>
-            <option value="Hong Kong SAR">中国香港</option>
-            <option value="Macao SAR">中国澳门</option>
-            <option value="Taiwan">中国台湾</option>
-            <option value="Japan">日本</option>
-            <option value="South Korea">韩国</option>
-            <option value="India">印度</option>
-            <option value="Singapore">新加坡</option>
-            <option value="Malaysia">马来西亚</option>
-            <option value="Thailand">泰国</option>
-            <option value="Vietnam">越南</option>
-            <option value="Indonesia">印度尼西亚</option>
-            <option value="Philippines">菲律宾</option>
-            <option value="United Kingdom">英国</option>
-            <option value="Germany">德国</option>
-            <option value="France">法国</option>
-            <option value="Italy">意大利</option>
-            <option value="Spain">西班牙</option>
-            <option value="Netherlands">荷兰</option>
-            <option value="Switzerland">瑞士</option>
-            <option value="Sweden">瑞典</option>
-            <option value="Poland">波兰</option>
-            <option value="Russia">俄罗斯</option>
-            <option value="Canada">加拿大</option>
-            <option value="Mexico">墨西哥</option>
-            <option value="Brazil">巴西</option>
-            <option value="Argentina">阿根廷</option>
-            <option value="Chile">智利</option>
-            <option value="Australia">澳大利亚</option>
-            <option value="New Zealand">新西兰</option>
-            <option value="United Arab Emirates">阿联酋</option>
-            <option value="Saudi Arabia">沙特阿拉伯</option>
-            <option value="Israel">以色列</option>
-            <option value="Turkey">土耳其</option>
-            <option value="South Africa">南非</option>
-            <option value="Other">其他 (Other)</option>
-          </select>
+          <select name="Country"><option value="China">中国 (China)</option><option value="United States">美国 (United States)</option><option value="Other">其他 (Other)</option></select>
         </div>
-
-        <div class="form-group full-width">
-          <label>信息</label>
-          <textarea name="Message" placeholder="今天我们能为您做些什么？"></textarea>
-        </div>
+        <div class="form-group full-width"><label>信息</label><textarea name="Message" placeholder="今天我们能为您做些什么？"></textarea></div>
       </div>
 
       <button type="submit" class="submit-btn">发送消息</button>
@@ -406,7 +218,6 @@
       <div class="faq-icon">?</div>
       <h2>常见问题解答</h2>
     </div>
-    
     <div class="faq-right">
       <div class="faq-item" onclick="toggleFaq(this)">
         <div class="faq-question">我该如何跟踪和管理我的订单？<span class="icon">▼</span></div>
@@ -425,7 +236,7 @@
 </div>
 
 <script>
-  // 动态表单切换逻辑
+  // 动态表单切换
   function switchForm(reason) {
     const formStandard = document.getElementById('form-standard');
     const formExport = document.getElementById('form-export');
@@ -448,7 +259,7 @@
     switchForm(document.getElementById('inquiry-reason').value);
   });
 
-  // FAQ 折叠逻辑
+  // FAQ 折叠
   function toggleFaq(element) {
     const isActive = element.classList.contains('active');
     document.querySelectorAll('.faq-item').forEach(item => {
@@ -461,7 +272,7 @@
     }
   }
 
-  // Web3Forms 无痕提交逻辑
+  // Web3Forms 无痕提交（你的专属 Key 已经填入）
   document.getElementById('consult-form').addEventListener('submit', function(e) {
     e.preventDefault(); 
     
@@ -473,15 +284,15 @@
     const formData = new FormData(this);
     const dataObj = {};
     
+    // 收集非空数据
     formData.forEach((value, key) => {
       if (value && value.trim() !== "") {
         dataObj[key] = value;
       }
     });
 
-    // 🚨 请把下面引号里的中文，换成你真实的 Web3Forms Access Key
-    dataObj["access_key"] = "a1b2c3d4-e5f6-7890-abcd-ef1234567890"; 
-    
+    // 填入你的真实 Key
+    dataObj["access_key"] = "d5d0f55d-a072-4c17-b475-bba9063d8649"; 
     dataObj["subject"] = "官网新表单：咨询制造专家";
     dataObj["from_name"] = "你的品牌名";
 
@@ -511,6 +322,5 @@
     });
   });
 </script>
-
 </body>
 </html>
